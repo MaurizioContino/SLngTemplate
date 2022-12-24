@@ -1,14 +1,12 @@
-.layout-container {
-  display: flex;
-  flex-direction: row;
-}
 .fixed {
   padding:10px;
+
 }
 
 .extended {
   flex: 1 0 auto;
   padding:10px;
+
 }
 
 .fullscreen {
@@ -23,4 +21,13 @@
   width: 100%;
   height: 100%;
   padding:10px;
+}
+.collapsible {
+  position: absolute;
+}
+.collapsed {
+  display: none;
+}
+.expanded {
+  display: unset;
 }

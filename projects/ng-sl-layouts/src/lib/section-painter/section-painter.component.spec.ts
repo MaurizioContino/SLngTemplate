@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LayoutSComponent } from './layout-s.component';
+import { SectionPainterComponent } from './section-painter.component';
 
-describe('LayoutSComponent', () => {
-  let component: LayoutSComponent;
-  let fixture: ComponentFixture<LayoutSComponent>;
+describe('SectionPainterComponent', () => {
+  let component: SectionPainterComponent;
+  let fixture: ComponentFixture<SectionPainterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LayoutSComponent ]
+      declarations: [ SectionPainterComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LayoutSComponent);
+    fixture = TestBed.createComponent(SectionPainterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

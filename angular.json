@@ -66,12 +66,14 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+
           "configurations": {
             "production": {
               "browserTarget": "testapp:build:production"
             },
             "development": {
-              "browserTarget": "testapp:build:development"
+              "browserTarget": "testapp:build:development",
+              "verbose": true
             }
           },
           "defaultConfiguration": "development"

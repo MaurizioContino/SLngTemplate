@@ -1,4 +1,24 @@
+<div class="layout-container">
 
-Size: {{layoutService.currentScreenSize$ | async}}
-<sl-layout-m [left]="left">
-</sl-layout-m>
+      <sl-section-painter [template]="left" [section]="layoutService.sectionByName('left')">
+      </sl-section-painter>
+
+      <div class="layout-extern">
+
+        <div class="top">
+          <sl-section-painter [template]="top" [section]="layoutService.sectionByName('top')">
+          </sl-section-painter>
+        </div>
+        <div class="layout-internal">
+          <sl-section-painter  [template]="mainleft" [section]="layoutService.sectionByName('mainleft')">
+          </sl-section-painter>
+          <sl-section-painter  [template]="mainright" [section]="layoutService.sectionByName('mainright')">
+          </sl-section-painter>
+        </div>
+      </div>
+
+</div>
+<div class="bottom">
+  <sl-section-painter [template]="bottom" [section]="layoutService.sectionByName('bottom')">
+  </sl-section-painter>
+</div>

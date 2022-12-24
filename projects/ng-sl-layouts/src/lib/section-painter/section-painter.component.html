@@ -1,0 +1,32 @@
+<ng-container *ngIf="section?.view=='inline'">
+
+  <ng-container [ngSwitch]="section?.sizing">
+    <ng-container *ngSwitchCase="'extend'">
+
+      <div class="extended" *ngIf="isVisible()"
+        [ngClass]="{'collapsible': section?.collapsible,
+        'collapsed':section?.collapsible && section?.collapsed,
+        'expanded':section?.collapsible && !section?.collapsed }">
+        <ng-container *ngTemplateOutlet="template"></ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'fixed'">
+      <div class="fixed" *ngIf="isVisible()">
+        <ng-container *ngTemplateOutlet="template"></ng-container>
+      </div>
+    </ng-container>
+
+  </ng-container>
+</ng-container>
+<ng-container *ngIf="section?.view=='popup'">
+  <ng-container [ngSwitch]="section?.sizing">
+
+    <ng-container *ngSwitchCase="'fullcontainer'">
+      <ng-container *ngTemplateOutlet="template"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'fullscreen'">
+      <ng-container *ngTemplateOutlet="template"></ng-container>
+    </ng-container>
+
+  </ng-container>
+</ng-container>
