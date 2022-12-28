@@ -12,9 +12,7 @@ import {
 
 
 import { Subject, takeUntil } from 'rxjs';
-import { layoutModels } from './models/layoutmodel';
-import { layoutsection } from './models/layoutsection';
-import { SlLayoutsService } from './ng-sl-layouts.service';
+import { SlLayoutsService } from './services/ng-sl-layouts.service';
 
 @Component({
   selector: 'sl-Layouts',

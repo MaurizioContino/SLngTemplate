@@ -106,7 +106,7 @@
         }
       }
     },
-    "ngSlLayouts": {
+    "ngsllayouts": {
       "projectType": "library",
       "root": "projects/ng-sl-layouts",
       "sourceRoot": "projects/ng-sl-layouts/src",
@@ -131,39 +131,6 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/ng-sl-layouts/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
-          }
-        }
-      }
-    },
-    "NgSlMenu": {
-      "projectType": "library",
-      "root": "projects/ng-sl-menu",
-      "sourceRoot": "projects/ng-sl-menu/src",
-      "prefix": "sl",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/ng-sl-menu/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/ng-sl-menu/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/ng-sl-menu/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "tsConfig": "projects/ng-sl-menu/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

@@ -1,8 +1,8 @@
 import {Breakpoints} from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { layout, layoutModels } from './models/layoutmodel';
-import { layoutsection } from './models/layoutsection';
+import { layout, layoutModels } from '../models/layoutmodel';
+import { layoutsection } from '../models/layoutsection';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +32,15 @@ export class SlLayoutsService {
   sectionByName(name: string) {
     return this.currLayouts.sections.find((v: layoutsection)=>v.name==name);
   }
+
+  togleSectionVisibility(name: string) {
+    const section = this.currLayouts.sections.find((v: layoutsection)=>v.name==name) as layoutsection;
+    if (section.collapsed) {
+      section.collapsed = false;
+    } else {
+      section.collapsed = true;
+    }
+    this.currentScreenLayout$.next(this.currLayouts);
+  }
+
 }

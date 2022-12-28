@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NgSlMenuService } from 'NgSlMenu';
+import { NgSlMenuService } from 'ngsllayouts';
+
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent {
   title = 'testapp';
 
   constructor(mnuServ: NgSlMenuService){
-    mnuServ.update([
+    mnuServ.updateMenus([
       {label: 'ciao', children:[], url: ''}
     ])
   }

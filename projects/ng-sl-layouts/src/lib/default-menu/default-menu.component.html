@@ -1,0 +1,6 @@
+<div [ngClass]="(menuservice.floating | async) ? 'main-menu-container sl-menu floating-menu' : 'main-menu-container sl-menu'">
+    <div *ngFor="let menu of menuservice.menu$ | async" class="main-menu-item-container">
+      <i [ngClass]="menu.icon ? menu.icon : 'fa-solid fa-list-ul'"></i>
+      <a  class ="sl-menu-item" [routerLink]="[menu.url]">{{menu.label}}</a> 
+    </div>
+  </div>

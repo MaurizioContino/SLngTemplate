@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Roboto:ital,wght@0,100;0,400;0,500;1,400&display=swap');
+
+
+
+.sl-menu {
+  background-color: rgba(15, 23, 42, 1);
+    color: white;
+    font-size: 14pt;
+    height: 100%;
+    width: 300px;
+    margin: 0px;
+  }
+  
+  .sl-menu-item {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    opacity: 0.8;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+  .sl-menu-item:hover {
+    padding: 10px;
+    border-radius: 5px;    
+    background-color: rgba(68, 71, 78, 0.24);
+    color: white;
+
+
+  }
+  .sl-menu-item-current {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(107, 103, 103, 0.438);
+  }

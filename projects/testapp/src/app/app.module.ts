@@ -4,9 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { NgSlLayoutsModule } from 'ngSlLayouts';
 import { LayoutModule } from './layout/layout.module';
-import { NgSlMenuModule } from 'NgSlMenu';
+import { NgSlLayoutsModule } from 'ngsllayouts';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +16,6 @@ import { NgSlMenuModule } from 'NgSlMenu';
     BrowserModule,
     AppRoutingModule,
     NgSlLayoutsModule,
-    NgSlMenuModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
