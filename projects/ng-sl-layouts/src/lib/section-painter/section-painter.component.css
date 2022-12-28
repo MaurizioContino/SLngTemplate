@@ -1,11 +1,9 @@
 .fixed {
-  padding:10px;
 
 }
 
 .extended {
   flex: 1 0 auto;
-  padding:10px;
 
 }
 
@@ -15,12 +13,10 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  padding:10px;
 }
 .fullcontainer {
   width: 100%;
   height: 100%;
-  padding:10px;
 }
 .collapsible {
   position: absolute;
