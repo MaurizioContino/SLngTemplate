@@ -1,0 +1,21 @@
+<div class="data-list-container">
+  <div class="data-list-item" *ngFor="let item of Items" >
+    <div class="data-list-head">
+      <ng-container *ngIf="rowhead">
+        <ng-container *ngTemplateOutlet="rowhead; context: {$implicit:item}"></ng-container>
+      </ng-container>
+    </div>
+    <div class="data-list-main">
+      <ng-container *ngIf="rowmain">
+        <ng-container *ngTemplateOutlet="rowmain; context: {$implicit:item}"></ng-container>
+      </ng-container>
+    </div>
+    <div class="data-list-tail">
+
+      <ng-container *ngIf="rowtail">
+        <ng-container *ngTemplateOutlet="rowtail; context: {$implicit:item}"></ng-container>
+      </ng-container>
+
+    </div>
+  </div>
+</div>

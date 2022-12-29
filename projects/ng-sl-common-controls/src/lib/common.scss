@@ -1,3 +1,4 @@
+
 .clear-text {
   border: none;
   width: 100%;
@@ -10,4 +11,14 @@
 .light-icon {
   color: silver;
 
+}
+
+.button-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.button-accent {
+  background-color: var(--accent);
+  color: white;
 }

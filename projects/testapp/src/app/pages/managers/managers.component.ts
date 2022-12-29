@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class ManagersComponent {
 
   itemsCount = 0;
-
+  items = [{Name:'Maurizio', Surname:'Contino', }]
 }

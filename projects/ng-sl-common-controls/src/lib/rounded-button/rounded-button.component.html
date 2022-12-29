@@ -1,4 +1,5 @@
-<div class="rounded-button" [style.background_color]="Color" [style.color]="TextColor">
+<div class="rounded-button" #thebutton (click)="onclick($event)">
   <i [class]="Icon"></i>
-  {{Text}}
+  <span class="rounded-button-text">{{Text}}</span>
+
 </div>

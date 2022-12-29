@@ -1,7 +1,11 @@
 .manager-container {
   padding: 20px
 }
+.manager-master {
+  display: flex;
+  flex-direction: column;
 
+}
 .manager-master-top {
   display: flex;
   flex-direction: row;
@@ -12,7 +16,7 @@
   flex: 1 0 auto;
   margin-right:20px;
 }
-.manager-master-addbutton {
-
+.manager-master-name {
+  font-weight: bold;
 
 }

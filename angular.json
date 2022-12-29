@@ -144,7 +144,7 @@
       "projectType": "library",
       "root": "projects/ng-sl-common-controls",
       "sourceRoot": "projects/ng-sl-common-controls/src",
-      "prefix": "lib",
+      "prefix": "sl",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

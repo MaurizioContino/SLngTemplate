@@ -1,0 +1,23 @@
+.data-list-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.data-list-item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-items: stretch;
+}
+.data-list-head {
+  padding: 10px;
+}
+
+.data-list-main {
+  padding: 10px;
+  flex: 1 0 auto;
+}
+.data-list-tail {
+  padding: 10px;
+}
