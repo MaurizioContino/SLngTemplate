@@ -1,10 +1,8 @@
 .manager-container {
-  padding: 20px
 }
 .manager-master {
   display: flex;
   flex-direction: column;
-
 }
 .manager-master-top {
   display: flex;
@@ -17,6 +15,38 @@
   margin-right:20px;
 }
 .manager-master-name {
+  padding: 10px 10px 0px 0px;
   font-weight: bold;
+}
+.manager-master-icon {
+  border-radius: 50%;
+  background-color: silver;
+  padding: 20px;
+}
 
+
+.manager-master-info {
+  width: 300px !important;
+  font-family: Inter;
+}
+.manager-master-col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+.manager-master-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between ;
+  width: 100%;
+}
+
+.manager-master-commands {
+
+  padding: 40px 10px;
+}
+
+.manager-master-command {
+  cursor: pointer;
 }

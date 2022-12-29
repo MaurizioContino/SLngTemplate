@@ -1,12 +1,14 @@
 .hmd-container {
-  padding: 30px
+  padding: 20px
 }
 .hmd-title {
   font-size: 28px;
-  font-weight: bold;
+  font-family: Inter;
+    font-weight: 900;
 }
 .hmd-subtitle {
   font-size: 14px;
+  font-family: Inter;
   font-weight: bold;
   opacity: 0.6;
 }
@@ -17,8 +19,23 @@
 }
 
 .hdm-left {
-  min-width: 50%;
+  flex: 1 0 auto
 }
 .hdm-right {
-  min-width: 50%;
+  flex: 1 0 auto;
+  padding:20px;
+  border-left: 1px solid silver;
+  margin-left:20px
+}
+.hdm-left-small {
+  flex: 1 0 auto
+}
+.hdm-right-small {
+  position: absolute;
+    right: 0px;
+    width: 500px;
+    background: white;
+    z-index: 500;
+    top:68px;
+    height: calc(100% - 68px);
 }

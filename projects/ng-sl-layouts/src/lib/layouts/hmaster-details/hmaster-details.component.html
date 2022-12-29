@@ -8,11 +8,12 @@
 
 
   <div class="hdm-left-right">
-    <div class="hdm-left">
+    <div [ngClass]="{'hdm-left-small': overlapped, 'hdm-left': !overlapped }">
       <ng-container *ngTemplateOutlet="master"></ng-container>
     </div>
-    <div class="hdm-right">
-    <ng-container *ngTemplateOutlet="details"></ng-container>
+    <div [ngClass]="{'hdm-right-small shadow': overlapped, 'hdm-right': !overlapped }" *ngIf="SelectedDetail">
+
+      <ng-container  *ngTemplateOutlet="details; context: {$implicit:SelectedDetail}"></ng-container>
   </div>
   </div>
 

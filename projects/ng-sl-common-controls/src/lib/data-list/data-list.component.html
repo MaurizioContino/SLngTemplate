@@ -1,18 +1,17 @@
 <div class="data-list-container">
-  <div class="data-list-item" *ngFor="let item of Items" >
-    <div class="data-list-head">
-      <ng-container *ngIf="rowhead">
+  <div class="data-list-item" *ngFor="let item of Items"  (click)="itemclick(item)">
+    <div class="data-list-head" *ngIf="rowhead && !isSmall">
+      <ng-container>
         <ng-container *ngTemplateOutlet="rowhead; context: {$implicit:item}"></ng-container>
       </ng-container>
     </div>
-    <div class="data-list-main">
-      <ng-container *ngIf="rowmain">
+    <div class="data-list-main" *ngIf="rowmain">
+      <ng-container>
         <ng-container *ngTemplateOutlet="rowmain; context: {$implicit:item}"></ng-container>
       </ng-container>
     </div>
-    <div class="data-list-tail">
-
-      <ng-container *ngIf="rowtail">
+    <div class="data-list-tail" *ngIf="rowtail && !isSmall">
+      <ng-container>
         <ng-container *ngTemplateOutlet="rowtail; context: {$implicit:item}"></ng-container>
       </ng-container>
 

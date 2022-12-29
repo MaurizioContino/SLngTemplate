@@ -2,3 +2,13 @@
   --primary: #1e90ff;
   --accent: orangered;
 }
+.accent {
+  color: var(--accent);
+}
+.primary {
+  color: var(--primary);
+}
+.shadow {
+  -webkit-box-shadow: -3px 0px 6px -2px rgb(0 0 0 / 39%);
+  box-shadow: -3px 0px 6px -2px rgb(0 0 0 / 39%);
+}

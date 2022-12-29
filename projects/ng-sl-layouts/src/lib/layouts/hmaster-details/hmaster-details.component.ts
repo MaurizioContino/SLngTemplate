@@ -18,6 +18,7 @@ export class HMasterDetailsComponent implements OnInit, OnDestroy {
 
   @Input() Title ="Set title";
   @Input() Subtitle ="Set subtitle";
+  @Input() SelectedDetail: any = null;
   @ContentChild('hmdmaster') master: TemplateRef<any> | null = null;
   @ContentChild('hmddetails') details: TemplateRef<any> | null = null;
 

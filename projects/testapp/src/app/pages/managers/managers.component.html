@@ -1,6 +1,7 @@
 <sl-hmaster-details
 [Title]="'Managers'"
 [Subtitle]="itemsCount + ' managers'"
+[SelectedDetail]="DetailItem"
 >
 <ng-template #hmdmaster>
   <div class="manager-master">
@@ -13,23 +14,27 @@
       </div>
 
     </div>
-    <sl-data-list [Items]="items">
+    <sl-data-list [Items]="items" (SelectedChange)="SelectedChange($event)">
       <ng-template #rowhead let-row>
-        {{row}}
+        <i class="manager-master-icon fa-solid fa-user fa-2x"></i>
       </ng-template>
       <ng-template #rowmain let-row>
-        <div class="manager-master-name">{{row.Name}} {{row.Surname}}</div>
-
+        <div class="manager-master-col manager-master-info">
+          <div class="manager-master-name">{{row.Name}} {{row.Surname}}</div>
+          <div class="manager-master-row">
+            <div class="accent">Region:</div> {{row.Region}}
+            <div class="accent">Area:</div> {{row.Area}}
+          </div>
+        </div>
       </ng-template>
-      <ng-template #rowtail let-row>
-
-      </ng-template>
-
     </sl-data-list>
   </div>
 </ng-template>
-<ng-template #hmddetails>
 
+
+
+<ng-template #hmddetails let-row>
+  {{row.Name}} {{row.Surname}}
 </ng-template>
 
 </sl-hmaster-details>
