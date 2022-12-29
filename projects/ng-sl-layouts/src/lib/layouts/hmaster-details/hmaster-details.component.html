@@ -1,0 +1,19 @@
+<div class="hmd-container">
+<div class="hmd-title">
+  {{Title}}
+</div>
+<div class="hmd-subtitle">
+  {{Subtitle}}
+</div>
+
+
+  <div class="hdm-left-right">
+    <div class="hdm-left">
+      <ng-container *ngTemplateOutlet="master"></ng-container>
+    </div>
+    <div class="hdm-right">
+    <ng-container *ngTemplateOutlet="details"></ng-container>
+  </div>
+  </div>
+
+</div>

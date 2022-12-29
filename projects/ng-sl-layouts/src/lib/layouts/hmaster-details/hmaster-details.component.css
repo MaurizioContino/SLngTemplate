@@ -1,0 +1,24 @@
+.hmd-container {
+  padding: 30px
+}
+.hmd-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+.hmd-subtitle {
+  font-size: 14px;
+  font-weight: bold;
+  opacity: 0.6;
+}
+.hdm-left-right {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+.hdm-left {
+  min-width: 50%;
+}
+.hdm-right {
+  min-width: 50%;
+}

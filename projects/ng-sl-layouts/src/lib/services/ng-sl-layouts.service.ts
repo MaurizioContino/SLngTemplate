@@ -1,17 +1,16 @@
 import {Breakpoints} from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { layout, layoutModels } from '../models/layoutmodel';
-import { layoutsection } from '../models/layoutsection';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class SlLayoutsService {
 
-  currLayouts: any;
+  currLayout: any;
   currentScreenSize$ = new BehaviorSubject<string>("Medium");
-  currentScreenLayout$ = new BehaviorSubject<layout|null>(layoutModels["Medium"]);
+  currentLayout$ = new BehaviorSubject<string>("default");
 
   displayNameMap = new Map([
     [Breakpoints.XSmall, 'XSmall'],
@@ -23,24 +22,15 @@ export class SlLayoutsService {
   constructor() {
   }
 
-  update( query: string ) {
+  updateSize( query: string ) {
     const SizeName = this.displayNameMap.get(query) ?? 'Medium';
     this.currentScreenSize$.next(SizeName);
-    this.currLayouts = layoutModels.get(SizeName);
-    this.currentScreenLayout$.next(this.currLayouts);
-  }
-  sectionByName(name: string) {
-    return this.currLayouts.sections.find((v: layoutsection)=>v.name==name);
+
   }
 
-  togleSectionVisibility(name: string) {
-    const section = this.currLayouts.sections.find((v: layoutsection)=>v.name==name) as layoutsection;
-    if (section.collapsed) {
-      section.collapsed = false;
-    } else {
-      section.collapsed = true;
-    }
-    this.currentScreenLayout$.next(this.currLayouts);
+  updateLayout(name: string) {
+    this.currentLayout$.next(name);
+    this.currLayout = name;
   }
 
 }

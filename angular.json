@@ -69,7 +69,8 @@
 
           "configurations": {
             "production": {
-              "browserTarget": "testapp:build:production"
+              "browserTarget": "testapp:build:production",
+              "verbose": true
             },
             "development": {
               "browserTarget": "testapp:build:development",
@@ -131,6 +132,39 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/ng-sl-layouts/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "ngslcommoncontrols": {
+      "projectType": "library",
+      "root": "projects/ng-sl-common-controls",
+      "sourceRoot": "projects/ng-sl-common-controls/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ng-sl-common-controls/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-sl-common-controls/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng-sl-common-controls/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ng-sl-common-controls/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

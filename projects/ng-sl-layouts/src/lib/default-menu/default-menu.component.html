@@ -1,6 +1,58 @@
-<div [ngClass]="(menuservice.floating | async) ? 'main-menu-container sl-menu floating-menu' : 'main-menu-container sl-menu'">
-    <div *ngFor="let menu of menuservice.menu$ | async" class="main-menu-item-container">
-      <i [ngClass]="menu.icon ? menu.icon : 'fa-solid fa-list-ul'"></i>
-      <a  class ="sl-menu-item" [routerLink]="[menu.url]">{{menu.label}}</a> 
+<div
+  class="main-menu-container-collapsed  sl-menu"
+  *ngIf="this.menuservice.collapsed$ | async; else notcollapsed"
+>
+  <div class="main-menu-title-container">
+    <img alt="logo" class="logo-box" *ngIf="menuservice.logourl" [src]="menuservice.logourl" >
+    <span class="main-menu-title">{{menuservice.title}}</span>
+    <i *ngIf="!isfloating" class="main-menu-pin fa-solid fa-unlock" (click)="collapse()"></i>
+  </div>
+  <hr class="main-menu-init-separator">
+    <div *ngFor="let menu of menuservice.menu$ | async"  class="main-menu-item-container">
+      <ng-container [ngSwitch]="menu.itemtype">
+        <ng-container *ngSwitchCase="'title'" [ngTemplateOutlet]="title" [ngTemplateOutletContext]="{ menu: menu }" ></ng-container>
+        <ng-container *ngSwitchCase="'parent'" [ngTemplateOutlet]="parent" [ngTemplateOutletContext]="{ menu: menu }" ></ng-container>
+        <ng-container *ngSwitchCase="'link'" [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ menu: menu }" ></ng-container>
+
+      </ng-container>
+  </div>
+</div>
+
+<ng-template #notcollapsed>
+  <div class="main-menu-container sl-menu">
+    <div class="main-menu-title-container">
+      <img alt="logo" class="logo-box" *ngIf="menuservice.logourl" [src]="menuservice.logourl" >
+      <span class="main-menu-title">{{menuservice.title}}</span>
+      <i *ngIf="!isfloating" class="main-menu-pin fa-solid fa-lock" (click)="collapse()"></i>
+    </div>
+    <hr class="main-menu-init-separator">
+    <div *ngFor="let menu of menuservice.menu$ | async"  class="main-menu-item-container">
+      <ng-container [ngSwitch]="menu.itemtype">
+        <ng-container *ngSwitchCase="'title'" [ngTemplateOutlet]="title" [ngTemplateOutletContext]="{ menu: menu }" ></ng-container>
+        <ng-container *ngSwitchCase="'parent'" [ngTemplateOutlet]="parent" [ngTemplateOutletContext]="{ menu: menu }" ></ng-container>
+        <ng-container *ngSwitchCase="'link'" [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ menu: menu }" ></ng-container>
+
+      </ng-container>
+
     </div>
   </div>
+</ng-template>
+
+<ng-template #title let-menu="menu">
+  <i *ngIf="menu.icon" class="menu.icon" ></i>
+  <div class="main-menu-title-item-container">
+    <span class="sl-menu-title" [routerLink]="[menu.url]">{{ menu.title }}</span>
+    <span class="sl-menu-subtitle" [routerLink]="[menu.url]">{{ menu.subtitle }}</span>
+  </div>
+</ng-template>
+<ng-template #parent let-menu="menu">
+  <i *ngIf="menu.icon" class="menu.icon" ></i>
+  <span class="sl-menu-item-internal sl-menu-item" [routerLink]="[menu.url]">{{ menu.title }}</span>
+
+</ng-template>
+<ng-template #link let-menu="menu">
+  <div class="sl-menu-item-internal sl-menu-item" (click)="navigate(menu.url)" [ngClass]="{'selected-route':selected==menu.url}">
+    <i [ngClass]="menu.icon ? menu.icon : 'fa-solid fa-list-ul fa-lg'" ></i>
+    <a class="sl-menu-link">{{ menu.title }}</a>
+  </div>
+</ng-template>

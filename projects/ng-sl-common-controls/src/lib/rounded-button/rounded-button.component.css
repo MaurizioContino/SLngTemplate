@@ -1,0 +1,9 @@
+.rounded-button {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: silver;
+  padding: 5px 10px;
+  color: black;
+}

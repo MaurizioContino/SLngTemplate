@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 
 import { Subject, takeUntil } from 'rxjs';
@@ -10,14 +11,17 @@ import { NgSlMenuService } from '../services/ng-sl-menu.service';
   styleUrls: ['./default-topbar.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefaultTopbarComponent implements OnDestroy {
+export class DefaultTopbarComponent implements OnInit, OnDestroy {
 
-  destroy$ = new Subject()
+  destroy$:Subject<any> = new Subject()
   isfloating = false;
   constructor(public layoutserv: SlLayoutsService, private mnuServ: NgSlMenuService, private cdr: ChangeDetectorRef) {
 
-    layoutserv.currentScreenSize$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
-      if (v=='XSmall' || v=='Small' ) 
+
+  }
+  ngOnInit(): void {
+    this.layoutserv.currentScreenSize$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
+      if (v=='XSmall' || v=='Small' )
       {
         this.isfloating = true;
       } else {
@@ -28,12 +32,11 @@ export class DefaultTopbarComponent implements OnDestroy {
 
   }
   ngOnDestroy(): void {
-    this.destroy$.unsubscribe();
+    this.destroy$.next(null);
     this.destroy$.complete();
   }
   FloatingMenu() {
-    this.mnuServ.toggleFloating();  
-    this.layoutserv.togleSectionVisibility("left")
+    this.mnuServ.ShowFloatingMenu(this.isfloating);
     this.cdr.detectChanges();
   }
 }

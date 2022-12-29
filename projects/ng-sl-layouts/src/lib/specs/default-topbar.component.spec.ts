@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { DefaultTopbarComponent } from '../default-topbar/default-topbar.component';
+
+describe('DefaultTopbarComponent', () => {
+  let component: DefaultTopbarComponent;
+  let fixture: ComponentFixture<DefaultTopbarComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ DefaultTopbarComponent ]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(DefaultTopbarComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

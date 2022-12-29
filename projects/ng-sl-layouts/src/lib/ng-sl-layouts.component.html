@@ -1,24 +1,7 @@
-<div class="layout-container">
 
-      <sl-section-painter [template]="left" [section]="layoutService.sectionByName('left')">
-      </sl-section-painter>
+<ng-container [ngSwitch]="layoutService.currentLayout$ | async">
+  <sl-empty-layout   [Layout]="Sections" *ngSwitchCase="'empty'"></sl-empty-layout>
+  <sl-default-layout [Layout]="Sections" *ngSwitchCase="'default'"></sl-default-layout>
+  <sl-default-layout [Layout]="Sections" *ngSwitchDefault></sl-default-layout>
+</ng-container>
 
-      <div class="layout-extern">
-
-        <div class="top">
-          <sl-section-painter [template]="top" [section]="layoutService.sectionByName('top')">
-          </sl-section-painter>
-        </div>
-        <div class="layout-internal">
-          <sl-section-painter  [template]="mainleft" [section]="layoutService.sectionByName('mainleft')">
-          </sl-section-painter>
-          <!-- <sl-section-painter  [template]="mainright" [section]="layoutService.sectionByName('mainright')">
-          </sl-section-painter> -->
-        </div>
-      </div>
-
-</div>
-<div class="bottom">
-  <sl-section-painter [template]="bottom" [section]="layoutService.sectionByName('bottom')">
-  </sl-section-painter>
-</div>

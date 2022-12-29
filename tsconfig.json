@@ -12,12 +12,12 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "ngslmenu": [
-        "dist/ng-sl-menu"
+      "ngslcommoncontrols": [
+        "dist/ng-sl-common-controls"
       ],
+
       "ngsllayouts": [
          "dist/ng-sl-layouts",
-         "dist/ng-sl-menu"
         //"projects/ng-sl-layouts/src/public-api.ts"
       ]
     },

@@ -7,16 +7,31 @@ import { menuitem } from '../models/menuitem';
 })
 export class NgSlMenuService {
 
-  private isFloating = false;
+  isFloating = false;
+  isCollapsed = false;
+  title = "Main menu";
+  logourl: string | null = null;
   menu$ = new BehaviorSubject<menuitem[]> ([]);
-  floating= new BehaviorSubject<boolean> (this.isFloating);
+  floating$= new BehaviorSubject<boolean> (this.isFloating);
+  collapsed$= new BehaviorSubject<boolean> (false);
   constructor() { }
 
-  updateMenus(menu: menuitem[]) {
+  updateMenus(title: string, logourl: string | null, menu: menuitem[]) {
+    this.logourl = logourl;
+    this.title = title;
     this.menu$.next(menu);
   }
-  toggleFloating(){
-    this.isFloating = !this.isFloating;
-    this.floating.next(this.isFloating);
+  ShowFloatingMenu(show: boolean){
+    if (show) {
+      this.collapse(false);
+    }
+    this.isFloating = show;
+    this.floating$.next(this.isFloating);
+  }
+  collapse(state: boolean){
+    if (!this.isFloating) {
+      this.isCollapsed = state;
+      this.collapsed$.next(this.isCollapsed);
+    }
   }
 }
