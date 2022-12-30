@@ -5,6 +5,7 @@ import { DataListComponent } from './data-list/data-list.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from './avatar/avatar.component';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 
 
@@ -18,7 +19,8 @@ import { AvatarComponent } from './avatar/avatar.component';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgScrollbarModule
   ],
   exports: [
     SearchBarComponent,

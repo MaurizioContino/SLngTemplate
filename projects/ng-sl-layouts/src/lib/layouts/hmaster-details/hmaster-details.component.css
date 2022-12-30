@@ -11,21 +11,16 @@
   flex: 1 0 auto
 }
 .hdm-right {
-  flex: 1 0 auto;
-  border-left: 1px solid silver;
+  position: absolute;
+  right: 0px;
   min-width: 50%;
+  background: white;
+  z-index: 500;
+  top:68px;
+  height: calc(100% - 68px);
 }
 .hdm-left-small {
   flex: 1 0 auto
-}
-.hdm-right-small {
-  position: absolute;
-    right: 0px;
-    min-width: 50%;
-    background: white;
-    z-index: 500;
-    top:68px;
-    height: calc(100% - 68px);
 }
 
 .hdm-close-button {

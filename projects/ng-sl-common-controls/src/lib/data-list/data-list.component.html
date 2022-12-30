@@ -1,4 +1,5 @@
-<div class="data-list-container">
+<div class="data-list-container" >
+  <ng-scrollbar style="height:calc(100vh - 240px)">
   <div class="data-list-item" *ngFor="let item of Items"  (click)="itemclick(item)">
     <div class="data-list-head" *ngIf="rowhead && !isSmall">
       <ng-container>
@@ -17,4 +18,5 @@
 
     </div>
   </div>
+  </ng-scrollbar>
 </div>
