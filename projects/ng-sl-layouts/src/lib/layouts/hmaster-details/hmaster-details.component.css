@@ -1,17 +1,6 @@
 .hmd-container {
   padding: 20px
 }
-.hmd-title {
-  font-size: 28px;
-  font-family: Inter;
-    font-weight: 900;
-}
-.hmd-subtitle {
-  font-size: 14px;
-  font-family: Inter;
-  font-weight: bold;
-  opacity: 0.6;
-}
 .hdm-left-right {
 
   display: flex;
@@ -24,6 +13,7 @@
 .hdm-right {
   flex: 1 0 auto;
   border-left: 1px solid silver;
+  min-width: 50%;
 }
 .hdm-left-small {
   flex: 1 0 auto
@@ -31,9 +21,26 @@
 .hdm-right-small {
   position: absolute;
     right: 0px;
-    width: 500px;
+    min-width: 50%;
     background: white;
     z-index: 500;
     top:68px;
     height: calc(100% - 68px);
+}
+
+.hdm-close-button {
+  position: absolute;
+  right: 20px;
+  top: 80px;
+  border-radius: 100%;
+  padding: 10px 15px;
+  text-align: center;
+  background-color: white;
+  opacity: 0.6;
+  color: black;
+  -webkit-box-shadow: -3px 0px 6px -2px rgb(0 0 0 / 39%);
+  box-shadow: -3px 0px 6px -2px rgb(0 0 0 / 39%);
+}
+.hdm-close-button:hover {
+  opacity: 1;
 }

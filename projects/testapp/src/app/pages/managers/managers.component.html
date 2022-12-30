@@ -1,10 +1,12 @@
-<sl-hmaster-details
-[Title]="'Managers'"
-[Subtitle]="itemsCount + ' managers'"
-[SelectedDetail]="DetailItem"
->
+<sl-hmaster-details [SelectedDetail]="DetailItem">
 <ng-template #hmdmaster>
   <div class="manager-master">
+    <div class="manager-master-title">
+      Managers
+    </div>
+    <div class="manager-master-subtitle">
+      20 managers
+    </div>
     <div class="manager-master-top">
       <div class="manager-master-search">
         <sl-search-bar></sl-search-bar>

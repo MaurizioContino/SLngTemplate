@@ -1,6 +1,40 @@
-<div class="manager-backimage">
-<img class="manager-image-center-cropped" [src]="'assets/media/backgrounds/' + current.BackgroundImage">
+<div class="manager-detail-container">
+  <img
+    alt="backimage"
+    class="manager-backimage"
+    [src]="'assets/media/backgrounds/' + current.BackgroundImage"
+  />
+  <div class="manager-avatar-container">
+    <sl-avatar
+      class="avatar-big"
+      [src]="'assets/media/avatars/' + current.Avatar"
+    ></sl-avatar>
+  </div>
+
+  <div class="manager-details-name">
+    {{ current.Name }} {{ current.Surname }}
+  </div>
+  <div class="manager-details-role">
+    {{current.Role}} {{current.Regions}}
+  </div>
+
+  <div class="accent manager-details-title">
+    Ruolo
+  </div>
+  <div class="manager-details-value">
+    {{current.Role}}
+  </div>
+  <div class="accent manager-details-title">
+    Regions
+  </div>
+  <div class="manager-details-value">
+  {{current.Regions}}
 </div>
-<div>
+  <div class="accent manager-details-title">
+    Area
+  </div>
+  <div class="manager-details-value">
+    {{current.Area}}
+  </div>
 
 </div>

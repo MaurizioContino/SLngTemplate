@@ -1,16 +1,30 @@
-.manager-container {
-}
+
 .manager-master {
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  overflow: hidden;
 }
 .manager-master-top {
   display: flex;
   flex-direction: row;
   justify-content: stretch;
   width: 100%;
+  margin-top: 20px;
 }
 .manager-master-search {
   flex: 1 0 auto;
   margin-right:20px;
+}
+.manager-master-title {
+  font-size: 28px;
+  font-family: Inter;
+  font-weight: 900;
+  opacity: 0.8;
+}
+.manager-master-subtitle {
+  font-size: 14px;
+  font-family: Inter;
+  font-weight: bold;
+  opacity: 0.6;
 }

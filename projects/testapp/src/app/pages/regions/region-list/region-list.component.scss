@@ -1,50 +1,50 @@
-.manager-master-icon {
+.regions-master-icon {
   border-radius: 50%;
   background-color: silver;
   padding: 20px;
 }
 
 
-.manager-master-col {
+.regions-master-col {
   display: flex;
   flex-direction: column;
   width: 100%;
 
 }
-.manager-master-row {
+.regions-master-row {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between ;
-  width: 100%;
+  flex-wrap: wrap;
 }
 
 
-.manager-master-name {
+.regions-master-name {
   padding: 10px 10px 0px 0px;
   font-weight: bold;
 }
 
-
-
-.manager-master-info {
-  width: 300px !important;
+.regions-master-info {
+  width: 100% !important;
   font-family: Inter;
 }
 
-.manager-master-commands {
+
+
+
+.regions-master-commands {
 
   padding: 40px 10px;
 }
 
-.manager-master-command {
+.regions-master-command {
   cursor: pointer;
 }
 
-.manager-master-subtitle {
+.regions-master-subtitle {
   background-color: transparent;
   padding-top:3px;
   font-size: 12px;
   font-family: Inter;
   font-weight: 900;
   opacity: 0.8;
+  margin-right: 10px;
 }

@@ -16,8 +16,6 @@ import { SlLayoutsService } from '../../services/ng-sl-layouts.service';
 })
 export class HMasterDetailsComponent implements OnInit, OnDestroy {
 
-  @Input() Title ="Set title";
-  @Input() Subtitle ="Set subtitle";
   @Input() SelectedDetail: any = null;
   @ContentChild('hmdmaster') master: TemplateRef<any> | null = null;
   @ContentChild('hmddetails') details: TemplateRef<any> | null = null;
@@ -41,5 +39,8 @@ export class HMasterDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(null);
     this.destroy$.complete();
+  }
+  closedetails() {
+    this.SelectedDetail = null
   }
 }

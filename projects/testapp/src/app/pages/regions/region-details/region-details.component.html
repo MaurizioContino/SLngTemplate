@@ -1,0 +1,25 @@
+<div class="region-detail-container">
+  <img
+    alt="backimage"
+    class="region-backimage"
+    [src]="'assets/media/backgrounds/' + current.BackgroundImage"
+  />
+  <div class="region-avatar-container">
+    <sl-avatar
+      class="avatar-big"
+      [src]="'assets/media/regions/' + current.Avatar"
+    ></sl-avatar>
+  </div>
+
+  <div class="region-details-name">
+    {{ current.Name }}
+  </div>
+
+  <div class="accent region-details-title">
+    Aree
+  </div>
+  <div class="region-details-value">
+    {{current.Area}}
+  </div>
+
+</div>

@@ -1,16 +1,12 @@
 
   <div class="hdm-left-right">
     <div [ngClass]="{'hdm-left-small': overlapped, 'hdm-left': !overlapped }">
-      <div class="hmd-title">
-        {{Title}}
-      </div>
-      <div class="hmd-subtitle">
-        {{Subtitle}}
-      </div>
+
       <ng-container *ngTemplateOutlet="master"></ng-container>
     </div>
     <div [ngClass]="{'hdm-right-small shadow': overlapped, 'hdm-right': !overlapped }" *ngIf="SelectedDetail">
 
       <ng-container  *ngTemplateOutlet="details; context: {$implicit:SelectedDetail}"></ng-container>
+      <i class="hdm-close-button fa-solid fa-times fa-2x" (click)="closedetails()"></i>
   </div>
   </div>
