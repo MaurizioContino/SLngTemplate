@@ -1,0 +1,14 @@
+<sl-data-list [Items]="items" (SelectedChange)="ItemSelected($event)">
+  <ng-template #rowhead let-row>
+    <sl-avatar class="avatar-small" [src]="'assets/media/avatars/' + row.Avatar"></sl-avatar>
+  </ng-template>
+  <ng-template #rowmain let-row>
+    <div class="manager-master-col manager-master-info">
+      <div class="manager-master-name">{{row.Name}} {{row.Surname}}</div>
+      <div class="manager-master-row">
+        <div class="accent">Region:</div> {{row.Region}}
+        <div class="accent">Area:</div> {{row.Area}}
+      </div>
+    </div>
+  </ng-template>
+</sl-data-list>

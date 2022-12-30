@@ -22,3 +22,21 @@
   background-color: var(--accent);
   color: white;
 }
+
+.avatar-small {
+  width: 60px !important;
+  border-radius: 60px !important;
+  border: 4px solid white;
+  overflow: hidden;
+}
+.avatar-big {
+  width: 240px !important;
+  border-radius: 120px !important;
+}
+
+.avatar {
+  width: 120px;
+  border-radius: 60px;
+  border: 4px solid white;
+  overflow: hidden;
+}

@@ -18,9 +18,9 @@ export class ManagersComponent implements OnInit {
 
   itemsCount = 0;
   items = [
-    {Name:'Maurizio', Surname:'Contino', Area:'Area 1', Region: 'Lombardia'},
-    {Name:'Davide', Surname:'Contino', Area:'Area 2', Region: 'Veneto'},
-    {Name:'Elena', Surname:'Masotti', Area:'Area 3', Region: 'Trentino Altoadige'}
+    {Name:'Maurizio', Surname:'Contino', Area:'Area 1', Region: 'Lombardia', Avatar: 'male-04.jpg', BackgroundImage: '14-640x480.jpg'},
+    {Name:'Davide', Surname:'Contino', Area:'Area 2', Region: 'Veneto', Avatar: 'male-04.jpg', BackgroundImage: '19-640x480.jpg'},
+    {Name:'Elena', Surname:'Masotti', Area:'Area 3', Region: 'Trentino Altoadige', Avatar: 'female-06.jpg', BackgroundImage: '34-640x480.jpg'}
 
 
   ]

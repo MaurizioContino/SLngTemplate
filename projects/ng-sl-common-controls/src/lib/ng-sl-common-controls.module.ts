@@ -4,6 +4,7 @@ import { RoundedButtonComponent } from './rounded-button/rounded-button.componen
 import { DataListComponent } from './data-list/data-list.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AvatarComponent } from './avatar/avatar.component';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     SearchBarComponent,
     RoundedButtonComponent,
-    DataListComponent
+    DataListComponent,
+    AvatarComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { FormsModule } from '@angular/forms';
   exports: [
     SearchBarComponent,
     RoundedButtonComponent,
-    DataListComponent
+    DataListComponent,
+    AvatarComponent
   ]
 })
 export class NgSlCommonControlsModule { }

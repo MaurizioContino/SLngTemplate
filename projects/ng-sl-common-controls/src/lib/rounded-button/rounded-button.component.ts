@@ -19,8 +19,6 @@ export class RoundedButtonComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.button);
-
     this.el.nativeElement.classList.forEach((element: any) => {
       this.button.nativeElement.classList.add(element);
     });

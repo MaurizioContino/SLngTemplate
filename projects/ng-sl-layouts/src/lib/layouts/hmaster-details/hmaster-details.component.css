@@ -13,7 +13,7 @@
   opacity: 0.6;
 }
 .hdm-left-right {
-  margin-top: 30px;
+
   display: flex;
   flex-direction: row;
 }
@@ -23,9 +23,7 @@
 }
 .hdm-right {
   flex: 1 0 auto;
-  padding:20px;
   border-left: 1px solid silver;
-  margin-left:20px
 }
 .hdm-left-small {
   flex: 1 0 auto

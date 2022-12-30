@@ -14,27 +14,14 @@
       </div>
 
     </div>
-    <sl-data-list [Items]="items" (SelectedChange)="SelectedChange($event)">
-      <ng-template #rowhead let-row>
-        <i class="manager-master-icon fa-solid fa-user fa-2x"></i>
-      </ng-template>
-      <ng-template #rowmain let-row>
-        <div class="manager-master-col manager-master-info">
-          <div class="manager-master-name">{{row.Name}} {{row.Surname}}</div>
-          <div class="manager-master-row">
-            <div class="accent">Region:</div> {{row.Region}}
-            <div class="accent">Area:</div> {{row.Area}}
-          </div>
-        </div>
-      </ng-template>
-    </sl-data-list>
+    <app-manager-list [items]="items" (SelectedChange)="SelectedChange($event)"></app-manager-list>
   </div>
 </ng-template>
 
 
 
 <ng-template #hmddetails let-row>
-  {{row.Name}} {{row.Surname}}
+  <app-manager-details [current]="row"></app-manager-details>
 </ng-template>
 
 </sl-hmaster-details>
