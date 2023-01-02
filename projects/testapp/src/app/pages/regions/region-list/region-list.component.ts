@@ -1,4 +1,4 @@
-import { Output } from '@angular/core';
+import { ChangeDetectorRef, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
@@ -13,7 +13,8 @@ import { Region } from '../../../models/Region';
 export class RegionListComponent {
 
   @Input() items: Region[] = []
-  @Output() SelectedChange = new EventEmitter();
+  @Output() SelectedChange = new EventEmitter<Region>();
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ItemSelected(row: Region){
     this.SelectedChange.emit(row);

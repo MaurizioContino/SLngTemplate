@@ -39,11 +39,6 @@ export class AppComponent implements OnInit {
   }
   beginDatabase(){
 
-      this.m.Load();
-      this.r.Load();
-
-
-
   }
 
 }

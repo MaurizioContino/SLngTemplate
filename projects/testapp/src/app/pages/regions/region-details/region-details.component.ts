@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { ChangeDetectorRef, Input } from '@angular/core';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
@@ -8,5 +8,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegionDetailsComponent {
-  @Input() current: any = null;
+  private _current: any = null;
+
+  constructor(private cdr: ChangeDetectorRef){}
+
+  @Input()
+  public get current(): any {
+    return this._current;
+  }
+  public set current(value: any) {
+    this._current = value;
+    this.cdr.detectChanges();
+  }
 }

@@ -12,6 +12,7 @@ export class Manager implements IDBModel {
   Surname: string = "";
   Role: string;
   Area: string;
+  Region: string = "";
   Avatar: string;
   BackgroundImage: string;
 

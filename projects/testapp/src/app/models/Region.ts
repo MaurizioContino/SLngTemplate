@@ -12,6 +12,7 @@ export class Region implements IDBModel {
   Name: string = "";
   BackgroundImage: string = "";
   Avatar: string = "";
+  Aree: string[] = [];
 
   constructor(Name: string,BackgroundImage: string, Avatar: string ){
     this.Name = Name;

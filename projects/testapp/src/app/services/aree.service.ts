@@ -9,10 +9,18 @@ import { Area } from '../models/Area';
 export class AreeService {
 
   store = "Aree";
+  Aree: Area[] | null = null;
   Aree$: BehaviorSubject<Area[]> = new BehaviorSubject<Area[]>([]);
   constructor(private db: NgSlDbService) {
   }
-
+  Load(reload: boolean = false) {
+    if (reload || this.Aree == null) {
+      this.db.GetAll<Area>(this.store).subscribe(v=>{
+        this.Aree = v;
+        this.Aree$.next(v);
+      })
+    }
+  }
   beginStore(): Observable<any> {
     const ret = new Subject();
     const data = [

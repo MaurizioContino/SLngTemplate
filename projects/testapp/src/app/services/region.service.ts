@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
 import { BehaviorSubject } from 'rxjs';
@@ -11,18 +12,27 @@ import { AreeService } from './aree.service';
 export class RegionService {
 
   store = "Regions";
+  Regions: Region[] | null = null
   Regions$: BehaviorSubject<Region[]> = new BehaviorSubject<Region[]>([]);
-  constructor(private db: NgSlDbService, private areeServ: AreeService) {
 
-  }
+  constructor(private db: NgSlDbService, private areeServ: AreeService) {}
 
-
-
-  Load() {
-    this.db.GetAll<Region>(this.store).subscribe(v=>{
-      this.Regions$.next(v);
+  Load(reload: boolean = false) {
+    if (reload || this.Regions==null) {
+    this.areeServ.Aree$.subscribe(aree=>{
+      this.db.GetAll<Region>(this.store).subscribe(v=>{
+        v.forEach(r=>{
+          r.Aree = aree.filter(a=>a.Region == r.Name).map(a=>a.Name);
+        })
+        this.Regions = v;
+        this.Regions$.next(v);
+      })
     })
+
+    this.areeServ.Load();
+    }
   }
+
   beginStore() {
 
     const regions = [];

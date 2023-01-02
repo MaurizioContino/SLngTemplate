@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Manager } from '../../../models/Manager';
 
 @Component({
   selector: 'app-manager-list',
@@ -8,10 +9,12 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 })
 export class ManagerListComponent {
 
-  @Input() items: any[] = []
-  @Output() SelectedChange = new EventEmitter();
+  @Input() items: Manager[] = [];
+  @Output() SelectedChange = new EventEmitter<Manager>();
 
-  ItemSelected(row: any){
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ItemSelected(row: Manager){
     this.SelectedChange.emit(row);
   }
 }

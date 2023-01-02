@@ -9,7 +9,7 @@
       <div class="regions-master-row">
 
         <div class="regions-master-subtitle accent">Aree:</div>
-        <div style="margin-left:5px">{{row.Aree.join(', ')}} </div>
+        <div style="margin-left:5px" *ngIf="row.Aree">{{row.Aree.join(', ')}} </div>
 
       </div>
     </div>

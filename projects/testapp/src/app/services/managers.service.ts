@@ -3,6 +3,7 @@ import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
 import { BehaviorSubject } from 'rxjs';
 import { Manager } from '../models/Manager';
 import { dbConfig } from '../ObjectStoreConfig';
+import { AreeService } from './aree.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +11,26 @@ import { dbConfig } from '../ObjectStoreConfig';
 export class ManagersService {
 
   store = "Managers";
+  Managers: Manager[] | null = null;
   Managers$: BehaviorSubject<Manager[]> = new BehaviorSubject<Manager[]>([]);
-  constructor(private db: NgSlDbService) {
+  constructor(private db: NgSlDbService, private areeServ: AreeService) {
 
   }
 
-  Load() {
-    this.db.GetAll<Manager>(this.store).subscribe(v=>{
-      this.Managers$.next(v);
-    })
+  Load(reload: boolean = false) {
+    if (reload || this.Managers == null) {
+      this.areeServ.Aree$.subscribe(aree=>{
+        this.db.GetAll<Manager>(this.store).subscribe(v=>{
+          v.forEach(m=>{
+            const area = aree.find(a=>a.Name == m.Area);
+            m.Region = area ? area?.Region : "";
+          })
+          this.Managers = v;
+          this.Managers$.next(v);
+        })
+      });
+    }
+    this.areeServ.Load();
   }
 
   beginStore() {
