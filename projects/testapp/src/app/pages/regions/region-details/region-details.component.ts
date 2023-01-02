@@ -1,8 +1,9 @@
 import { ChangeDetectorRef, Input } from '@angular/core';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Area } from '../../../models/Area';
 import { Region } from '../../../models/Region';
+import { RegionService } from '../../../services/region.service';
 
 @Component({
   selector: 'app-region-details',
@@ -12,7 +13,7 @@ import { Region } from '../../../models/Region';
 })
 export class RegionDetailsComponent {
   private _current: Region | null = null;
-  public AreeEdit: any[] = []
+
   @Input() EditStatus : "none" | "add" | "edit" | "delete" = "none"
 
   @Input()
@@ -25,44 +26,45 @@ export class RegionDetailsComponent {
     this.cdr.detectChanges();
   }
 
-  form = new FormGroup({
-    Name: new FormControl(''),
-    isnew: new FormControl(false),
-    updated: new FormControl(new Date()),
-    originalupdated: new FormControl(null),
-    deleted: new FormControl(false),
-    BackgroundImage: new FormControl(),
-    Avatar: new FormControl(),
-    Aree: new FormArray([]),
+  form = this.fb.group(
+    {
+
+      Name: [null, [Validators.required]],
+      isnew: [false],
+      updated: [new Date()],
+      originalupdated: [null],
+      deleted: [false],
+      BackgroundImage: [''],
+      Avatar: [''],
+      Aree: this.fb.array([])
   });
 
-  constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder){}
+  constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private regionservice: RegionService){}
 
+  createArea(v: any = null) {
+    this._current?.Aree.push(new Area(this._current.Name, ''))
+  }
+
+  activeAree() {
+    return this._current?.Aree.filter( v=> !v.deleted);
+  }
   Save() {
-
-  }
-  get aree() {
-    return this.form.get('Aree') as FormArray;
+    this.regionservice.Load
   }
 
-  editableAreas(): any[] {
-    return this.AreeEdit.filter(v=>v.status!='deleted')
+  disableSave(): boolean {
+      return this.form.invalid || this._current?.Aree.find(v=>v.Name) !=null
   }
+
 
   Edit() {
     this.EditStatus = "edit"
-    //this.AreeEdit = this._current!.Aree.map((v: any)=>{return {Name: v, original: v, status: 'none'}})
-
-     this.AreeEdit.forEach(a => {
-       this.aree.push(new FormGroup(
-       {
-        Name: new FormControl(a),
-        original: new FormControl(a),
-        status: new FormControl('none'),
-       }
-       ))
-    });
     this.form.setValue(this._current as any);
+
+    this.form.controls.Aree = this.fb.array([{
+      Name: [null, [Validators.required]]
+    }]);
+
   }
 
   Cancel() {
@@ -73,14 +75,16 @@ export class RegionDetailsComponent {
   Delete() {
     this.EditStatus = "delete"
   }
-  DeleteArea(area: any) {
-    area.status = "deleted"
+  DeleteArea(area: Area) {
+    if (area.isnew) {
+      this._current?.Aree.splice(this._current?.Aree.indexOf(area));
+    } else {
+      area.deleted = true
+    }
   }
-  AddArea() {
-    this.AreeEdit.push({Name:'', original:'', status: 'added'})
-  }
-  AreaChanged(area: any) {
-    area.status = "changed";
+
+  AreaChanged(area: Area) {
+    area.updated = new Date().toDateString();
   }
 
 }

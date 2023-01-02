@@ -11,6 +11,7 @@ export class RoundedButtonComponent implements AfterViewInit {
 
   @Input() Text: string = ""
   @Input() Icon: string = ""
+  @Input() Disabled = false;
   @Output() click  = new EventEmitter<any>();
   @ViewChild("thebutton") button: any;
 

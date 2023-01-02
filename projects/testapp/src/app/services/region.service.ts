@@ -22,7 +22,7 @@ export class RegionService {
     this.areeServ.Aree$.subscribe(aree=>{
       this.db.GetAll<Region>(this.store).subscribe(v=>{
         v.forEach(r=>{
-          r.Aree = aree.filter(a=>a.Region == r.Name).map(a=>a.Name);
+          r.Aree = aree.filter(a=>a.Region == r.Name);
         })
         this.Regions = v;
         this.Regions$.next(v);
@@ -31,6 +31,12 @@ export class RegionService {
 
     this.areeServ.Load();
     }
+  }
+
+  save(
+
+  ) {
+
   }
 
   beginStore() {

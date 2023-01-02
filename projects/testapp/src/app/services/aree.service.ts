@@ -21,6 +21,10 @@ export class AreeService {
       })
     }
   }
+  save(Area: string, newArea: string, group: string) {
+
+  }
+
   beginStore(): Observable<any> {
     const ret = new Subject();
     const data = [

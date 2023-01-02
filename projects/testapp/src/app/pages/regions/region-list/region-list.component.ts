@@ -19,4 +19,8 @@ export class RegionListComponent {
   ItemSelected(row: Region){
     this.SelectedChange.emit(row);
   }
+
+  AreeList(row: Region) {
+    return row.Aree.map(v=>v.Name).join(', ');
+  }
 }
