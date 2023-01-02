@@ -5,11 +5,11 @@
   </ng-template>
   <ng-template #rowmain let-row>
     <div class="regions-master-col regions-master-info">
-      <div class="regions-master-name">{{row.Name}} {{row.Surname}}</div>
+      <div class="regions-master-name">{{row.Name}}</div>
       <div class="regions-master-row">
 
         <div class="regions-master-subtitle accent">Aree:</div>
-        <div *ngFor="let area of row.Aree" style="margin-left:5px">{{area}} </div>
+        <div style="margin-left:5px">{{row.Aree.join(', ')}} </div>
 
       </div>
     </div>

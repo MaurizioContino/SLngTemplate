@@ -25,6 +25,12 @@
     justify-content: stretch;
     padding-left:20px
   }
+  .main-menu-item-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    padding-top: 10px
+  }
   .sl-menu-item-internal {
     flex: 1 0 auto;
     padding: 10px;

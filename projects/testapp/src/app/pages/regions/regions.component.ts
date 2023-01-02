@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SlLayoutsService } from 'projects/ng-sl-layouts/src/public-api';
-import { Regions } from '../../data.';
+import { Region } from '../../models/Region';
+import { RegionService } from '../../services/region.service';
 
 @Component({
   selector: 'app-regions',
@@ -9,18 +9,23 @@ import { Regions } from '../../data.';
 })
 export class RegionsComponent {
 
-  DetailItem:any = null;
-  constructor(private srLayout: SlLayoutsService) {
-
-  }
-  ngOnInit(): void {
-
-  }
-
   itemsCount = 0;
-  items = Regions;
+  items:Region[] = [];
+  DetailItem:any = null;
+
+  constructor(public regions: RegionService){}
+
+
+  ngOnInit(): void {
+    this.regions.Regions$.subscribe(v=>{
+      this.itemsCount = v.length;
+      this.items = v;
+    })
+  }
+  //items = regions;
   SelectedChange(row: any){
     this.DetailItem = row
+
   }
 
 }

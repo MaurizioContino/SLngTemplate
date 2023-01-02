@@ -18,8 +18,8 @@
   <div class="accent region-details-title">
     Aree
   </div>
-  <div class="region-details-value">
-    {{current.Area}}
+  <div *ngFor="let area of current.Aree" class="region-details-value">
+    {{area}}
   </div>
 
 </div>

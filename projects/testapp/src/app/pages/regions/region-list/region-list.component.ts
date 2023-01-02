@@ -2,6 +2,7 @@ import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Region } from '../../../models/Region';
 
 @Component({
   selector: 'app-region-list',
@@ -11,10 +12,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class RegionListComponent {
 
-  @Input() items: any[] = []
+  @Input() items: Region[] = []
   @Output() SelectedChange = new EventEmitter();
 
-  ItemSelected(row: any){
+  ItemSelected(row: Region){
     this.SelectedChange.emit(row);
   }
 }

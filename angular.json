@@ -172,6 +172,39 @@
           }
         }
       }
+    },
+    "ng-sl-db": {
+      "projectType": "library",
+      "root": "projects/ng-sl-db",
+      "sourceRoot": "projects/ng-sl-db/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ng-sl-db/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-sl-db/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng-sl-db/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ng-sl-db/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }

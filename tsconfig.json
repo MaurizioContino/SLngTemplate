@@ -12,6 +12,9 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
+      "ng-sl-db": [
+        "dist/ng-sl-db"
+      ],
       "ngslcommoncontrols": [
         "dist/ng-sl-common-controls"
       ],

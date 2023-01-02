@@ -24,13 +24,6 @@ const routes: Routes = [
             (m) => m.ManagersModule
           ),
       },
-
-      {
-        path: 'areas',
-        loadChildren: () =>
-          import('./pages/areas/areas.module').then((m) => m.AreasModule),
-      },
-
       {
         path: 'regions',
         loadChildren: () =>
@@ -38,6 +31,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'WeekResults', loadChildren: () => import('./pages/week-results/week-results.module').then(m => m.WeekResultsModule) },
 ];
 
 @NgModule({

@@ -40,7 +40,7 @@
 
 <ng-template #title let-menu="menu">
   <i *ngIf="menu.icon" class="menu.icon" ></i>
-  <div class="main-menu-title-item-container">
+  <div class="main-menu-item-title">
     <span class="sl-menu-title" [routerLink]="[menu.url]">{{ menu.title }}</span>
     <span class="sl-menu-subtitle" [routerLink]="[menu.url]">{{ menu.subtitle }}</span>
   </div>
