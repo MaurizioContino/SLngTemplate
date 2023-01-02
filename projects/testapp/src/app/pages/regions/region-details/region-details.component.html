@@ -2,24 +2,67 @@
   <img
     alt="backimage"
     class="region-backimage"
-    [src]="'assets/media/backgrounds/' + current.BackgroundImage"
+    [src]="'assets/media/backgrounds/' + current!.BackgroundImage"
   />
   <div class="region-avatar-container">
     <sl-avatar
       class="avatar-big"
-      [src]="'assets/media/regions/' + current.Avatar"
+      [src]="'assets/media/regions/' + current!.Avatar"
     ></sl-avatar>
   </div>
-
   <div class="region-details-name">
-    {{ current.Name }}
+    {{ current!.Name }}
   </div>
 
-  <div class="accent region-details-title">
-    Aree
+  <div class="region-details-commands">
+    <ng-container *ngIf="EditStatus=='none'">
+      <sl-rounded-button class="button-primary" (click)="Edit()" [Icon]="'fa-solid fa-pencil'" [Text]="'Edit'"></sl-rounded-button>
+      <div class="region-spacer"></div>
+      <sl-rounded-button class="button-danger" (click)="Delete()" [Icon]="'fa-solid fa-trash'" [Text]="'Delete'"></sl-rounded-button>
+    </ng-container>
+    <ng-container *ngIf="EditStatus=='edit' || EditStatus=='add'">
+      <sl-rounded-button class="button-accent" (click)="Save()" [Icon]="'fa-solid fa-save'" [Text]="'Save'"></sl-rounded-button>
+      <div class="region-spacer"></div>
+      <sl-rounded-button class="button-primary" (click)="Cancel()" [Icon]="'fa-solid fa-undo'" [Text]="'Cancel'"></sl-rounded-button>
+    </ng-container>
   </div>
-  <div *ngFor="let area of current.Aree" class="region-details-value">
-    {{area}}
-  </div>
+
+  <ng-container *ngIf="EditStatus=='none'">
+
+    <div class="accent region-details-title">
+      Aree
+    </div>
+    <div *ngFor="let area of current!.Aree" class="region-details-value">
+      {{area}}
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="EditStatus=='add' || EditStatus=='edit'">
+    <form  [formGroup]="form">
+    <div class="region-edit-form">
+      <label  class="region-edit-label"  for="region-name">Region name</label>
+      <input  class="region-edit-textbox" id="region-name" formControlName="Name">
+    </div>
+
+    <div class="accent region-details-title">
+      Aree
+    </div>
+    <div class="region-edit-form" >
+      <div *ngFor="let areaitem of aree.controls; let i=index" class="region-details-value">
+        <div class="region-area-edit">
+          <sl-rounded-button class="button-danger" [Icon]="'fa-solid fa-times'" (click)="DeleteArea(areaitem)"></sl-rounded-button>
+          <input  class="region-edit-textbox" id="area-{i}" formControlName="Name">
+          <!--<div class="region-edit-label">{{area.Name}}</div>-->
+        </div>
+
+      </div>
+      <div class="region-button" >
+      <sl-rounded-button class="button-accent" [Icon]="'fa-solid fa-plus'" (click)="AddArea()" [Text]="'Nuova area'"></sl-rounded-button>
+    </div>
+    </div>
+  </form>
+  </ng-container>
+
+
 
 </div>
