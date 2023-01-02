@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Manager } from '../models/Manager';
 import { dbConfig } from '../ObjectStoreConfig';
 import { AreeService } from './aree.service';
@@ -34,6 +34,9 @@ export class ManagersService {
   }
 
   beginStore() {
+
+    const ret = new Subject();
+
     const data = [
       new Manager('Maurizio','Contino','Area manager',
         'BELMONTE','male-04.jpg','14-640x480.jpg'),
@@ -46,9 +49,9 @@ export class ManagersService {
     this.db.BulkInsert<Manager>(this.store,data).subscribe(
         v2=>{
           console.log("Managers store:" + v2)
-
+          ret.next(null)
     });
-
+    return ret;
   }
 
 }

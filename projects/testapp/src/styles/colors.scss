@@ -1,12 +1,16 @@
 :root {
   --primary: #1e90ff;
   --accent: orangered;
+  --danger: red;
 }
 .accent {
   color: var(--accent);
 }
 .primary {
   color: var(--primary);
+}
+.danger {
+  color: var(--danger);
 }
 .shadow {
   -webkit-box-shadow: -3px 0px 6px -2px rgb(0 0 0 / 39%);

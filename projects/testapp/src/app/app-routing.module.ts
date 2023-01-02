@@ -32,6 +32,7 @@ const routes: Routes = [
     ],
   },
   { path: 'WeekResults', loadChildren: () => import('./pages/week-results/week-results.module').then(m => m.WeekResultsModule) },
+  { path: 'database', loadChildren: () => import('./pages/database/database.module').then(m => m.DatabaseModule) },
 ];
 
 @NgModule({

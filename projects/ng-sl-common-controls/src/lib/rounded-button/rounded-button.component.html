@@ -1,5 +1,5 @@
 <div class="rounded-button" #thebutton (click)="onclick($event)">
   <i [class]="Icon"></i>
-  <span class="rounded-button-text">{{Text}}</span>
+  <span *ngIf="Text" class="rounded-button-text">{{Text}}</span>
 
 </div>

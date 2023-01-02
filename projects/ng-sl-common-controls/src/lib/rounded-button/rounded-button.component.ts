@@ -27,6 +27,6 @@ export class RoundedButtonComponent implements AfterViewInit {
 
 
   onclick(e: any) {
-    this.click.emit(e);
+    //this.click.emit(e);
   }
 }

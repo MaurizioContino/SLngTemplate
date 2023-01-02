@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Area } from '../models/Area';
 import { Region } from '../models/Region';
 import { AreeService } from './aree.service';
@@ -35,7 +35,7 @@ export class RegionService {
 
   beginStore() {
 
-    const regions = [];
+    const ret = new Subject();
 
     this.db.BulkInsert<Region>(this.store, [
       new Region('LAZIO','Italia.jpg', 'Lazio.png'),
@@ -54,8 +54,9 @@ export class RegionService {
 
       ]).subscribe(v=>{
         console.log("Region store:" + v)
-
+        ret.next(null);
         })
+        return ret;
 
   }
 

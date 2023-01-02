@@ -63,3 +63,41 @@
   font-family: Inter;
   font-weight: 500;
 }
+
+.region-details-commands {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.region-edit-label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 3px;
+  margin-left:5px;
+}
+.region-edit-textbox {
+  font-size: 14px;
+  width: 200px;
+  padding:4px
+}
+.region-edit-form {
+  padding-left: 20px;
+}
+
+.region-area-edit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.region-button {
+  max-width:150px;
+  padding: 20px;
+}
+
+.region-spacer {
+  width: 10px;
+}

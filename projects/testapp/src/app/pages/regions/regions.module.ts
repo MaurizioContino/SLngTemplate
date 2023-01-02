@@ -8,6 +8,7 @@ import { RegionDetailsComponent } from './region-details/region-details.componen
 import { SharedModule } from '../../shared.module';
 
 
+
 @NgModule({
   declarations: [
     RegionsComponent,
@@ -16,7 +17,8 @@ import { SharedModule } from '../../shared.module';
   ],
   imports: [
     SharedModule,
-    RegionsRoutingModule
+    RegionsRoutingModule,
+
   ]
 })
 export class RegionsModule { }
