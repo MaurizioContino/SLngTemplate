@@ -60,9 +60,10 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -74,7 +75,10 @@
             },
             "development": {
               "browserTarget": "testapp:build:development",
-              "verbose": true
+              "verbose": true,
+              "watch": true,
+
+
             }
           },
           "defaultConfiguration": "development"

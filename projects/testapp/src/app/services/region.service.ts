@@ -1,7 +1,8 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, concat, Observable, Subject } from 'rxjs';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { Area } from '../models/Area';
 import { Region } from '../models/Region';
 import { AreeService } from './aree.service';
@@ -22,6 +23,8 @@ export class RegionService {
     this.areeServ.Aree$.subscribe(aree=>{
       this.db.GetAll<Region>(this.store).subscribe(v=>{
         v.forEach(r=>{
+          r.isnew = false;
+          r.updated = r.originalupdated;
           r.Aree = aree.filter(a=>a.Region == r.Name);
         })
         this.Regions = v;
@@ -33,11 +36,56 @@ export class RegionService {
     }
   }
 
-  save(
+  save(region: Region): Observable<any> {
+    const ret = new Subject<any>
+    const waits : any[] = [];
+    if (region.deleted) {
 
-  ) {
+      region.Aree.forEach(a=>{
+        waits.push(this.areeServ.delete(a));
+      })
+      concat(waits).subscribe(v=>{
+        this.delete(region).subscribe(r=>ret.next(null));
+      })
 
+    } else {
+      if (region.isnew) {
+
+        region.Aree.forEach(a=>{
+          waits.push(this.areeServ.add(a));
+        })
+        concat(waits).subscribe(v=>{
+          this.add(region).subscribe(r=>ret.next(null))
+        })
+
+      } else {
+        region.Aree.forEach(a=>{
+          waits.push(this.areeServ.update(a));
+        })
+        concat(waits).subscribe(v=>{
+          if (region.updated!=region.originalupdated) {
+            this.update(region).subscribe(r=>ret.next(null))
+          }
+        })
+
+      }
+    }
+    return ret;
   }
+
+
+  delete(region: Region) {
+    return this.db.Delete(this.store, region)
+  }
+
+  add(region: Region) {
+    return this.db.Insert(this.store, region)
+  }
+
+  update(region: Region) {
+    return this.db.Update(this.store, region)
+  }
+
 
   beginStore() {
 

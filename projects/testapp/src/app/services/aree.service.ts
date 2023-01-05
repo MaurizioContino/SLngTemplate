@@ -21,9 +21,39 @@ export class AreeService {
       })
     }
   }
-  save(Area: string, newArea: string, group: string) {
 
+
+
+  save(area: Area) {
+    if (area.deleted) {
+      return this.delete(area);
+    } else {
+      if (area.isnew) {
+          return this.add(area)
+      } else {
+        if (area.updated!=area.originalupdated) {
+          return this.update(area)
+        }
+        else {
+          return new BehaviorSubject(null);
+        }
+      }
+    }
   }
+
+
+  delete(area: Area) {
+    this.db.Delete(this.store, area)
+  }
+
+  add(area: Area) {
+    this.db.Insert(this.store, area)
+  }
+
+  update(area: Area) {
+    this.db.Update(this.store, area)
+  }
+
 
   beginStore(): Observable<any> {
     const ret = new Subject();

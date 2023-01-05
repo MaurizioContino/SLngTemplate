@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Input } from '@angular/core';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Area } from '../../../models/Area';
 import { Region } from '../../../models/Region';
 import { RegionService } from '../../../services/region.service';
@@ -39,31 +39,56 @@ export class RegionDetailsComponent {
       Aree: this.fb.array([])
   });
 
+  get AreeFA():FormArray{
+    return <FormArray> this.form.controls['Aree'] as FormArray;
+  }
+
   constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private regionservice: RegionService){}
 
-  createArea(v: any = null) {
-    this._current?.Aree.push(new Area(this._current.Name, ''))
-  }
 
   activeAree() {
     return this._current?.Aree.filter( v=> !v.deleted);
   }
+
+  setChanged(area: AbstractControl<any, any>, value: Area) {
+
+    value.updated = new Date().toISOString()
+    area.patchValue(value);
+    //area.controls['updated'].patchValue(new Date().toISOString());
+  }
+
+  createArea(v: any = null) {
+
+    const nArea = new Area(this._current!.Name, '');
+    this._current?.Aree.push(nArea)
+    this.AreeFA.push(this.createAreaFA(nArea));
+  }
+  createAreaFA(area: Area) {
+
+    return this.fb.group(
+      {
+
+        Name: [area.Name, [Validators.required]],
+        Region: [area.Region],
+        isnew: [false],
+        updated: [null],
+        originalupdated: [null],
+        deleted: [false],
+    });
+  }
+
   Save() {
-    this.regionservice.Load
+    this.regionservice.save(this._current!).subscribe(v=>{
+      this.EditStatus = "none"
+    })
   }
-
-  disableSave(): boolean {
-      return this.form.invalid || this._current?.Aree.find(v=>v.Name) !=null
-  }
-
-
   Edit() {
     this.EditStatus = "edit"
+    this.AreeFA.clear();
+    this._current?.Aree.forEach(a=>{
+      this.AreeFA.push(this.createAreaFA(a));
+    })
     this.form.setValue(this._current as any);
-
-    this.form.controls.Aree = this.fb.array([{
-      Name: [null, [Validators.required]]
-    }]);
 
   }
 
