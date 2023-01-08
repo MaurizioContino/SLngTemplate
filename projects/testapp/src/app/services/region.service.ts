@@ -1,8 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
-import { BehaviorSubject, concat, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, concat, Observable, Subject, tap } from 'rxjs';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+import { Observer } from 'rxjs/internal/types';
 import { Area } from '../models/Area';
 import { Region } from '../models/Region';
 import { AreeService } from './aree.service';
@@ -16,101 +18,80 @@ export class RegionService {
   Regions: Region[] | null = null
   Regions$: BehaviorSubject<Region[]> = new BehaviorSubject<Region[]>([]);
 
-  constructor(private db: NgSlDbService, private areeServ: AreeService) {}
+  constructor(private db: NgSlDbService, private areeServ: AreeService) { }
 
   Load(reload: boolean = false) {
-    if (reload || this.Regions==null) {
-    this.areeServ.Aree$.subscribe(aree=>{
-      this.db.GetAll<Region>(this.store).subscribe(v=>{
-        v.forEach(r=>{
-          r.isnew = false;
-          r.updated = r.originalupdated;
-          r.Aree = aree.filter(a=>a.Region == r.Name);
-        })
-        this.Regions = v;
-        this.Regions$.next(v);
-      })
-    })
+    if (reload || this.Regions == null) {
 
-    this.areeServ.Load();
+      this.db.GetAll<Region>(this.store)
+        .subscribe(v => {
+          v.forEach(r => {
+            r.isnew = false;
+            r.updated = r.originalupdated;
+
+          })
+          this.Regions = v;
+          this.Regions$.next(v);
+        })
+
+
+      this.areeServ.Load();
     }
   }
 
-  save(region: Region): Observable<any> {
-    const ret = new Subject<any>
-    const waits : any[] = [];
-    if (region.deleted) {
+  save(regions: Region[]): Observable<Region[]> {
 
-      region.Aree.forEach(a=>{
-        waits.push(this.areeServ.delete(a));
-      })
-      concat(waits).subscribe(v=>{
-        this.delete(region).subscribe(r=>ret.next(null));
-      })
+    const ret = new Subject<Region[]>();
+    regions.forEach(region => {
 
-    } else {
-      if (region.isnew) {
+        region.updated = new Date().toISOString()
+        this.areeServ.save(region.Aree).subscribe(areas=>{
+          regions.forEach(r=>{
+            r.Aree = areas.filter(v=>v.IdRegion==r.Id && v.deleted==false);
+          })
+          this.db.Save(this.store, regions).subscribe(v2=>{
+            this.db.GetAll<Region>(this.store).subscribe(regions=>{
 
-        region.Aree.forEach(a=>{
-          waits.push(this.areeServ.add(a));
-        })
-        concat(waits).subscribe(v=>{
-          this.add(region).subscribe(r=>ret.next(null))
-        })
+              this.Regions = regions;
+              this.Regions$.next(regions);
+              ret.next(regions)
+            })
 
-      } else {
-        region.Aree.forEach(a=>{
-          waits.push(this.areeServ.update(a));
-        })
-        concat(waits).subscribe(v=>{
-          if (region.updated!=region.originalupdated) {
-            this.update(region).subscribe(r=>ret.next(null))
-          }
+          })
         })
 
-      }
-    }
+
+    });
     return ret;
+
   }
 
-
-  delete(region: Region) {
-    return this.db.Delete(this.store, region)
+  delete(regions: Region[]): Observable<any> | null {
+    if (regions.length>0) {
+      return this.db.Delete(this.store, regions)
+    }
+    else {
+      return null;
+    }
   }
 
-  add(region: Region) {
-    return this.db.Insert(this.store, region)
+  add(regions: Region[]): Observable<any>|null {
+    if (regions.length>0) {
+      return this.db.Insert(this.store, regions)
+    }
+      else {
+      return null;
+    }
+
   }
 
-  update(region: Region) {
-    return this.db.Update(this.store, region)
-  }
-
-
-  beginStore() {
-
-    const ret = new Subject();
-
-    this.db.BulkInsert<Region>(this.store, [
-      new Region('LAZIO','Italia.jpg', 'Lazio.png'),
-      new Region('TOSCANA','Italia.jpg', 'Toscana.png'),
-      new Region('ABRUZZO/UMBRIA/MOLISE', 'Italia.jpg', 'AbruzzoUmbriaMolise.png'),
-      new Region('MARCHE', 'Italia.jpg', 'Marche.png'),
-      new Region('VENETO', 'Italia.jpg', 'Veneto.png'),
-      new Region('PUGLIA/BASILICATA', 'Italia.jpg', 'PugliaBasilicata.png'),
-      new Region('EMILIA ROMAGNA', 'Italia.jpg', 'EmiliaRomagna.png'),
-      new Region('LIGURIA', 'Italia.jpg', 'Liguria.png'),
-      new Region('SARDEGNA', 'Italia.jpg', 'Sardegna.png'),
-      new Region('PIEMONTE', 'Italia.jpg', 'Piemonte.png'),
-      new Region('CALABRIA/SICILIA', 'Italia.jpg', 'CalabriaSicilia.png'),
-      new Region('CAMPANIA', 'Italia.jpg', 'Campania.png'),
-      new Region('LOMBARDIA', 'Italia.jpg', 'Lombardia.png')
-
-      ]).subscribe(v=>{
-        console.log("Region store:" + v)
-        ret.next(null);
-        })
-        return ret;
+  update(regions: Region[]): Observable<any>|null {
+    if (regions.length>0) {
+      return this.db.Update(this.store, regions)
+    }
+    else {
+      return null;
+    }
 
   }
 

@@ -1,21 +1,16 @@
-<div class="manager-detail-container">
-  <img
-    alt="backimage"
-    class="manager-backimage"
-    [src]="'assets/media/backgrounds/' + current.BackgroundImage"
-  />
-  <div class="manager-avatar-container">
-    <sl-avatar
-      class="avatar-big"
-      [src]="'assets/media/avatars/' + current.Avatar"
-    ></sl-avatar>
-  </div>
+<div class="manager-detail-container" *ngIf="current">
+  <app-details-header
+    [current]="current"
+    [EditStatus]="EditStatus"
+    [cantSave]="this.form.invalid"
+    (Save)="Save()"
+    (Edit)="Edit()"
+    (Cancel)="Cancel()"
+    (Delete)="Delete()"
+    ></app-details-header>
 
-  <div class="manager-details-name">
-    {{ current.Name }} {{ current.Surname }}
-  </div>
   <div class="manager-details-role">
-    {{current.Role}} {{current.Regions}}
+    {{current.Role}} {{current.IdArea}}
   </div>
 
   <div class="accent manager-details-title">
@@ -34,7 +29,7 @@
     Area
   </div>
   <div class="manager-details-value">
-    {{current.Area}}
+    {{current.IdArea}}
   </div>
 
 </div>

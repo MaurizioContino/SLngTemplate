@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, Subject, take, tap } from 'rxjs';
 import { Area } from '../models/Area';
 
 @Injectable({
@@ -9,7 +9,13 @@ import { Area } from '../models/Area';
 export class AreeService {
 
   store = "Aree";
-  Aree: Area[] | null = null;
+  private _Aree: Area[] | null = null;
+  public get Aree(): Area[] | null {
+    return this._Aree;
+  }
+  public set Aree(value: Area[] | null) {
+    this._Aree = value;
+  }
   Aree$: BehaviorSubject<Area[]> = new BehaviorSubject<Area[]>([]);
   constructor(private db: NgSlDbService) {
   }
@@ -24,89 +30,73 @@ export class AreeService {
 
 
 
-  save(area: Area) {
-    if (area.deleted) {
-      return this.delete(area);
-    } else {
-      if (area.isnew) {
-          return this.add(area)
-      } else {
-        if (area.updated!=area.originalupdated) {
-          return this.update(area)
-        }
-        else {
-          return new BehaviorSubject(null);
-        }
-      }
+  save(aree: Area[]):Observable<Area[]> {
+    const ret = new Subject<Area[]>();
+     this.db.Save(this.store, aree).subscribe(v=>{
+      this.db.GetAll<Area>(this.store).subscribe(results=>{
+        this.Aree = v;
+        this.Aree$.next(v);
+        ret.next(results);
+      })
+     })
+     return ret;
+  }
+
+
+  delete(aree: Area[]) {
+    if (aree.length>0) {
+      return this.db.Delete(this.store, aree)
+    } else{
+      return null
+
+    }
+  }
+
+  add(aree: Area[]) {
+    if (aree.length>0) {
+      return this.db.Insert(this.store, aree)
+
+    } else{
+      return null
+
+    }
+
+  }
+
+  update(aree: Area[]) {
+
+    aree.forEach(area => {
+      area.updated = new Date().toISOString();
+      area.originalupdated = area.updated;
+    });
+    if (aree.length>0) {
+      return this.db.Update(this.store, aree)
+    } else{
+      return null
     }
   }
 
 
-  delete(area: Area) {
-    this.db.Delete(this.store, area)
-  }
-
-  add(area: Area) {
-    this.db.Insert(this.store, area)
-  }
-
-  update(area: Area) {
-    this.db.Update(this.store, area)
-  }
+  // beginStore(): Observable<any> {
+  //   const ret = new Subject();
 
 
-  beginStore(): Observable<any> {
-    const ret = new Subject();
-    const data = [
-      new Area('LAZIO', 'BELMONTE'),
-      new Area('TOSCANA', 'BIRELLI'),
-      new Area('TOSCANA', 'BONDI'),
-      new Area('ABRUZZO/UMBRIA/MOLISE', 'ABRUZZO/UMBRIA/MOLISE'),
-      new Area('MARCHE', 'MARCHE'),
-      new Area('VENETO', 'CONTRERAS'),
-      new Area('PUGLIA/BASILICATA', 'PUGLIA/BASILICATA'),
-      new Area('VENETO', 'VENETO'),
-      new Area('EMILIA ROMAGNA', 'EMILIA ROMAGNA'),
-      new Area('LIGURIA', 'LIGURIA'),
-      new Area('LIGURIA', 'DEL NERO'),
-      new Area('SARDEGNA', 'SARDEGNA'),
-      new Area('ABRUZZO/UMBRIA/MOLISE', 'DI VITO'),
-      new Area('TOSCANA', 'GRILLI'),
-      new Area('PIEMONTE', 'PIEMONTE'),
-      new Area('PUGLIA/BASILICATA', 'MANIGRASSO'),
-      new Area('LAZIO', 'MARCHEGIANI'),
-      new Area('VENETO', 'NALIN'),
-      new Area('CALABRIA/SICILIA', 'NISTICO'),
-      new Area('LAZIO', 'LAZIO'),
-      new Area('CAMPANIA', 'PENTANGELO'),
-      new Area('CALABRIA/SICILIA', 'CALABRIA/SICILIA'),
-      new Area('CAMPANIA', 'PETRICCIUOLO C.'),
-      new Area('CAMPANIA', 'PETRICCIUOLO G.'),
-      new Area('TOSCANA', 'TOSCANA'),
-      new Area('LOMBARDIA', 'LOMBARDIA'),
-      new Area('CAMPANIA', 'RUOTOLO'),
-      new Area('LOMBARDIA', 'SIMONE'),
-      new Area('LAZIO', 'SORRENTINO'),
-      new Area('PUGLIA/BASILICATA', 'TRISCIUOGLIO'),
-      new Area('LAZIO', 'VALENTINI'),
-      new Area('LAZIO', 'VITALE')];
-
-    this.db.BulkInsert<Area>(this.store, data).subscribe(
-      {
-        next: (v) => {
-          ret.next(null);
-          console.log("aree store " + v)
-        },
-        error: (e) => {
-          ret.next(null);
-          console.error(e)
-        },
-        complete: () => {
-          ret.next(null);
-          console.info('complete')
-        }
-      }
-    );
-    return ret;
-  }
+  //   this.db.BulkInsert<Area>(this.store, data).subscribe(
+  //     {
+  //       next: (v) => {
+  //         ret.next(null);
+  //         console.log("aree store " + v)
+  //       },
+  //       error: (e) => {
+  //         ret.next(null);
+  //         console.error(e)
+  //       },
+  //       complete: () => {
+  //         ret.next(null);
+  //         console.info('complete')
+  //       }
+  //     }
+  //   );
+  //   return ret;
+  // }
 }

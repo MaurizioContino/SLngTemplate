@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Manager } from '../models/Manager';
 import { dbConfig } from '../ObjectStoreConfig';
 import { AreeService } from './aree.service';
@@ -22,7 +22,7 @@ export class ManagersService {
       this.areeServ.Aree$.subscribe(aree=>{
         this.db.GetAll<Manager>(this.store).subscribe(v=>{
           v.forEach(m=>{
-            const area = aree.find(a=>a.Name == m.Area);
+            const area = aree.find(a=>a.Id == m.IdArea);
             m.Region = area ? area?.Region : "";
           })
           this.Managers = v;
@@ -33,25 +33,25 @@ export class ManagersService {
     this.areeServ.Load();
   }
 
-  beginStore() {
+  save(managers: Manager[]): Observable<Manager[]> {
 
-    const ret = new Subject();
+    const ret = new Subject<Manager[]>();
+    managers.forEach(manager => {
 
-    const data = [
-      new Manager('Maurizio','Contino','Area manager',
-        'BELMONTE','male-04.jpg','14-640x480.jpg'),
-      new Manager('Davide','Contino','Regional manager',
-        'BONDI','male-04.jpg','19-640x480.jpg'),
-      new Manager(
-        'Elena','Masotti','Area manager',
-        'ABRUZZO/UMBRIA/MOLISE','female-06.jpg','34-640x480.jpg',
-      )];
-    this.db.BulkInsert<Manager>(this.store,data).subscribe(
-        v2=>{
-          console.log("Managers store:" + v2)
-          ret.next(null)
-    });
+      manager.updated = new Date().toISOString()
+
+          this.db.Save(this.store, managers).subscribe(v2=>{
+            this.db.GetAll<Manager>(this.store).subscribe(managers=>{
+
+              this.Managers = managers;
+              this.Managers$.next(managers);
+              ret.next(managers)
+            })
+
+          })
+        })
+
     return ret;
-  }
 
+  }
 }

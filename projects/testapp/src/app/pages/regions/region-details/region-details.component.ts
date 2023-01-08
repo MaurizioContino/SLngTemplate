@@ -12,10 +12,10 @@ import { RegionService } from '../../../services/region.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegionDetailsComponent {
-  private _current: Region | null = null;
 
   @Input() EditStatus : "none" | "add" | "edit" | "delete" = "none"
 
+  private _current: Region | null = null;
   @Input()
   public get current(): Region | null{
     return this._current;
@@ -28,7 +28,7 @@ export class RegionDetailsComponent {
 
   form = this.fb.group(
     {
-
+      Id: [null],
       Name: [null, [Validators.required]],
       isnew: [false],
       updated: [new Date()],
@@ -46,20 +46,14 @@ export class RegionDetailsComponent {
   constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private regionservice: RegionService){}
 
 
-  activeAree() {
-    return this._current?.Aree.filter( v=> !v.deleted);
+  get activeAree(): Area[] {
+    return this._current? this._current.Aree.filter( v=> !v.deleted) : [];
   }
 
-  setChanged(area: AbstractControl<any, any>, value: Area) {
-
-    value.updated = new Date().toISOString()
-    area.patchValue(value);
-    //area.controls['updated'].patchValue(new Date().toISOString());
-  }
 
   createArea(v: any = null) {
 
-    const nArea = new Area(this._current!.Name, '');
+    const nArea = new Area(0, this.current?.Id?this.current?.Id:0, this._current!.Name, '');
     this._current?.Aree.push(nArea)
     this.AreeFA.push(this.createAreaFA(nArea));
   }
@@ -67,30 +61,37 @@ export class RegionDetailsComponent {
 
     return this.fb.group(
       {
-
+        Id: [area.Id],
+        IdRegion: [area.IdRegion],
         Name: [area.Name, [Validators.required]],
         Region: [area.Region],
-        isnew: [false],
-        updated: [null],
-        originalupdated: [null],
+        isnew: [area.Id ? false : true],
+        updated: [area.updated],
+        originalupdated: [area.originalupdated],
         deleted: [false],
     });
   }
 
   Save() {
-    this.regionservice.save(this._current!).subscribe(v=>{
+    const s = this.form.value as any as Region;
+    s.Aree = this.form.controls.Aree.controls.filter(v=>v.dirty).map(v=>v.value as Area) ;
+    this.regionservice.save([s]).subscribe(v=>{
+      this.current = v.find(v=>v.Id == this._current?.Id) as Region;
       this.EditStatus = "none"
+      this.cdr.detectChanges();
     })
   }
   Edit() {
     this.EditStatus = "edit"
     this.AreeFA.clear();
-    this._current?.Aree.forEach(a=>{
+    this.activeAree.forEach(a=>{
       this.AreeFA.push(this.createAreaFA(a));
     })
     this.form.setValue(this._current as any);
 
   }
+
+
 
   Cancel() {
     this.EditStatus = "none"
@@ -100,14 +101,23 @@ export class RegionDetailsComponent {
   Delete() {
     this.EditStatus = "delete"
   }
-  DeleteArea(area: Area) {
+  DeleteArea(area: Area, index: number) {
     if (area.isnew) {
-      this._current?.Aree.splice(this._current?.Aree.indexOf(area));
+      this._current?.Aree.splice(index);
+      this.AreeFA.controls.splice(index)
     } else {
       area.deleted = true
-    }
-  }
+      this.AreeFA.controls[index].patchValue(area)
+      this.AreeFA.controls[index].markAsDirty();
 
+      //this.AreeFA.controls
+    }
+    this.cdr.detectChanges()
+  }
+  RestoreArea(area: Area, index: number){
+    area.deleted = false
+    this.cdr.detectChanges()
+  }
   AreaChanged(area: Area) {
     area.updated = new Date().toDateString();
   }

@@ -1,5 +1,5 @@
 export interface IDBModel {
-  //key: string;
+  Id: number;
   isnew: boolean;
   updated: string;
   originalupdated: string;

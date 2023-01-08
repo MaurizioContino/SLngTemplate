@@ -1,44 +1,29 @@
-<div class="region-detail-container">
-  <img
-    alt="backimage"
-    class="region-backimage"
-    [src]="'assets/media/backgrounds/' + current!.BackgroundImage"
-  />
-  <div class="region-avatar-container">
-    <sl-avatar
-      class="avatar-big"
-      [src]="'assets/media/regions/' + current!.Avatar"
-    ></sl-avatar>
-  </div>
-  <div class="region-details-name">
-    {{ current!.Name }}
-  </div>
 
-  <div class="region-details-commands">
-    <ng-container *ngIf="EditStatus=='none'">
-      <sl-rounded-button class="button-primary" (click)="Edit()" [Icon]="'fa-solid fa-pencil'" [Text]="'Edit'"></sl-rounded-button>
-      <div class="region-spacer"></div>
-      <sl-rounded-button class="button-danger" (click)="Delete()" [Icon]="'fa-solid fa-trash'" [Text]="'Delete'"></sl-rounded-button>
-    </ng-container>
-    <ng-container *ngIf="EditStatus=='edit' || EditStatus=='add'">
-      <sl-rounded-button class="button-accent" (click)="Save()" [Disabled]="this.form.invalid" [Icon]="'fa-solid fa-save'" [Text]="'Save'"></sl-rounded-button>
-      <div class="region-spacer"></div>
-      <sl-rounded-button class="button-primary" (click)="Cancel()" [Icon]="'fa-solid fa-undo'" [Text]="'Cancel'"></sl-rounded-button>
-    </ng-container>
-  </div>
+<div class="region-detail-container">
+  <app-details-header
+    [current]="current"
+    [EditStatus]="EditStatus"
+    [cantSave]="this.form.invalid"
+    (Save)="Save()"
+    (Edit)="Edit()"
+    (Cancel)="Cancel()"
+    (Delete)="Delete()"
+    ></app-details-header>
 
   <ng-container *ngIf="EditStatus=='none'">
 
     <div class="accent region-details-title">
       Aree
     </div>
-    <div *ngFor="let area of current!.Aree" class="region-details-value">
+    <ng-scrollbar style="height:calc(100vh - 500px)">
+    <div *ngFor="let area of activeAree" class="region-details-value">
       {{area.Name}}
     </div>
+    </ng-scrollbar>
   </ng-container>
 
   <ng-container *ngIf="EditStatus=='add' || EditStatus=='edit'">
-  <ng-scrollbar style="height:calc(100vh - 240px)">
+  <ng-scrollbar style="height:calc(100vh - 440px)">
 
     <form  [formGroup]="form">
     <div class="region-edit-form">
@@ -51,14 +36,18 @@
     </div>
     <div class="region-edit-form" formArrayName="Aree" >
       <div *ngFor="let areaitemForm of AreeFA.controls; let i=index" class="region-details-value">
-        <div class="region-area-edit"  [formGroupName]="i">
-          <sl-rounded-button class="button-danger" [Icon]="'fa-solid fa-times'" (click)="DeleteArea(areaitemForm.value)"></sl-rounded-button>
+        <div *ngIf="!areaitemForm.value.deleted; else deletedarea" class="region-area-edit"  [formGroupName]="i">
+          <sl-rounded-button class="button-danger" [Icon]="'fa-solid fa-times'" (click)="DeleteArea(areaitemForm.value, i)"></sl-rounded-button>
           <!-- <input  class="region-edit-textbox" id="area-{i}" [(ngModel)]="areaitem.Name" [ngModelOptions]="{standalone: true}"> -->
           <!--<div class="region-edit-label">{{area.Name}}</div>-->
-          <input type="text" title="Areaname" class="region-edit-textbox" id="area-{i}" formControlName="Name" (change)="setChanged(areaitemForm,areaitemForm.value)">
-
+          <input type="text" title="Areaname" class="region-edit-textbox" id="area-{i}" formControlName="Name">
         </div>
-
+        <ng-template #deletedarea>
+        <div class="region-area-edit"  [formGroupName]="i">
+          <sl-rounded-button class="button-primary" [Icon]="'fa-solid fa-undo'" (click)="RestoreArea(areaitemForm.value, i)"></sl-rounded-button>
+          <div class="deleted-text">{{areaitemForm.value.Name}}</div>
+        </div>
+        </ng-template>
       </div>
       <div class="region-button" >
       <sl-rounded-button class="button-accent" [Icon]="'fa-solid fa-plus'" (click)="createArea()" [Text]="'Nuova area'"></sl-rounded-button>

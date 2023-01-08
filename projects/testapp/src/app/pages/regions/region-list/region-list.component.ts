@@ -21,6 +21,6 @@ export class RegionListComponent {
   }
 
   AreeList(row: Region) {
-    return row.Aree.map(v=>v.Name).join(', ');
+    return row.Aree.filter(v=>v.deleted==false).map(v=>v.Name).join(', ');
   }
 }

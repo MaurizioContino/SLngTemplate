@@ -8,17 +8,18 @@ export class Region implements IDBModel {
   updated: string = "";
   originalupdated: string = ""
   deleted: boolean = false;
-
+  Id: number;
   Name: string = "";
   BackgroundImage: string = "";
   Avatar: string = "";
   Aree: Area[] = [];
 
-  constructor(Name: string,BackgroundImage: string, Avatar: string ){
+  constructor(Id: number, Name: string,BackgroundImage: string, Avatar: string, aree: Area[] ){
+    this.Id = Id;
     this.Name = Name;
     this.BackgroundImage = BackgroundImage;
     this.Avatar = Avatar;
-
+    this.Aree = aree
   }
 
 }
