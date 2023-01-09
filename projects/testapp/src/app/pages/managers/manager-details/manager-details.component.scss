@@ -19,13 +19,6 @@
 }
 
 
-.manager-avatar-container {
-
-  width: 100%;
-  background-color: transparent;
-  text-align: center;
-  margin-top:-70px;
-}
 .manager-details-name {
   width: 100%;
   background-color: transparent;
@@ -61,4 +54,23 @@
   font-size: 16px;
   font-family: Inter;
   font-weight: 500;
+}
+
+.manager-edit-form {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.manager-edit-label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 3px;
+  margin-left:5px;
+}
+.manager-edit-textbox {
+  font-size: 14px;
+  width: 200px;
+  padding:4px;
+  margin-bottom:10px
 }

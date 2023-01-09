@@ -51,8 +51,8 @@
 
 </ng-template>
 <ng-template #link let-menu="menu">
-  <div class="sl-menu-item-internal sl-menu-item" (click)="navigate(menu.url)" [ngClass]="{'selected-route':selected==menu.url}">
+  <a class="sl-menu-item-internal sl-menu-item" [routerLink]="[menu.url]" (click)="navigate(menu.url)" [ngClass]="{'selected-route':selected==menu.url}">
     <i [ngClass]="menu.icon ? menu.icon : 'fa-solid fa-list-ul fa-lg'" ></i>
-    <a class="sl-menu-link">{{ menu.title }}</a>
-  </div>
+    {{ menu.title }}
+  </a>
 </ng-template>

@@ -39,29 +39,29 @@ const areas = [
 
 
 const regions = [
-  new Region(1, 'LAZIO', 'Italia.jpg', 'Lazio.png', areas.filter(v=>v.IdRegion===1)),
-  new Region(2, 'TOSCANA', 'Italia.jpg', 'Toscana.png', areas.filter(v=>v.IdRegion===2)),
-  new Region(3, 'ABRUZZO/UMBRIA/MOLISE', 'Italia.jpg', 'AbruzzoUmbriaMolise.png', areas.filter(v=>v.IdRegion===3)),
-  new Region(4, 'MARCHE', 'Italia.jpg', 'Marche.png', areas.filter(v=>v.IdRegion===4)),
-  new Region(5, 'VENETO', 'Italia.jpg', 'Veneto.png', areas.filter(v=>v.IdRegion===5)),
-  new Region(6, 'PUGLIA/BASILICATA', 'Italia.jpg', 'PugliaBasilicata.png', areas.filter(v=>v.IdRegion===6)),
-  new Region(7, 'EMILIA ROMAGNA', 'Italia.jpg', 'EmiliaRomagna.png', areas.filter(v=>v.IdRegion===7)),
-  new Region(8, 'LIGURIA', 'Italia.jpg', 'Liguria.png', areas.filter(v=>v.IdRegion===8)),
-  new Region(9, 'SARDEGNA', 'Italia.jpg', 'Sardegna.png', areas.filter(v=>v.IdRegion===9)),
-  new Region(10, 'PIEMONTE', 'Italia.jpg', 'Piemonte.png', areas.filter(v=>v.IdRegion===10)),
-  new Region(11, 'CALABRIA/SICILIA', 'Italia.jpg', 'CalabriaSicilia.png', areas.filter(v=>v.IdRegion===11)),
-  new Region(12, 'CAMPANIA', 'Italia.jpg', 'Campania.png', areas.filter(v=>v.IdRegion===12)),
-  new Region(13, 'LOMBARDIA', 'Italia.jpg', 'Lombardia.png', areas.filter(v=>v.IdRegion===13))
+  new Region(1, 'LAZIO', 'backgrounds/Italia.jpg', 'regions/Lazio.png', areas.filter(v=>v.IdRegion===1)),
+  new Region(2, 'TOSCANA', 'regions/Italia.jpg', 'regions/Toscana.png', areas.filter(v=>v.IdRegion===2)),
+  new Region(3, 'ABRUZZO/UMBRIA/MOLISE', 'regions/Italia.jpg', 'regions/AbruzzoUmbriaMolise.png', areas.filter(v=>v.IdRegion===3)),
+  new Region(4, 'MARCHE', 'backgrounds/Italia.jpg', 'regions/Marche.png', areas.filter(v=>v.IdRegion===4)),
+  new Region(5, 'VENETO', 'backgrounds/Italia.jpg', 'regions/Veneto.png', areas.filter(v=>v.IdRegion===5)),
+  new Region(6, 'PUGLIA/BASILICATA', 'backgrounds/Italia.jpg', 'regions/PugliaBasilicata.png', areas.filter(v=>v.IdRegion===6)),
+  new Region(7, 'EMILIA ROMAGNA', 'backgrounds/Italia.jpg', 'regions/EmiliaRomagna.png', areas.filter(v=>v.IdRegion===7)),
+  new Region(8, 'LIGURIA', 'backgrounds/Italia.jpg', 'regions/Liguria.png', areas.filter(v=>v.IdRegion===8)),
+  new Region(9, 'SARDEGNA', 'backgrounds/Italia.jpg', 'regions/Sardegna.png', areas.filter(v=>v.IdRegion===9)),
+  new Region(10, 'PIEMONTE', 'backgrounds/Italia.jpg', 'regions/Piemonte.png', areas.filter(v=>v.IdRegion===10)),
+  new Region(11, 'CALABRIA/SICILIA', 'backgrounds/Italia.jpg', 'regions/CalabriaSicilia.png', areas.filter(v=>v.IdRegion===11)),
+  new Region(12, 'CAMPANIA', 'backgrounds/Italia.jpg', 'regions/Campania.png', areas.filter(v=>v.IdRegion===12)),
+  new Region(13, 'LOMBARDIA', 'backgrounds/Italia.jpg', 'regions/Lombardia.png', areas.filter(v=>v.IdRegion===13))
 
 ];
 const managers = [
   new Manager(1, 'Maurizio', 'Contino', 'Area manager',
-    1, 'male-04.jpg', '14-640x480.jpg'),
+    1, 'avatars/male-04.jpg', 'backgrounds/14-640x480.jpg'),
   new Manager(2, 'Davide', 'Contino', 'Regional manager',
-    3, 'male-04.jpg', '19-640x480.jpg'),
+    3, 'avatars/male-04.jpg', 'backgrounds/19-640x480.jpg'),
   new Manager(3,
     'Elena', 'Masotti', 'Area manager',
-    4, 'female-06.jpg', '34-640x480.jpg',
+    4, 'avatars/female-06.jpg', 'backgrounds/34-640x480.jpg',
   )];
 
 export const dbConfig: DBConfig = {

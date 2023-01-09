@@ -1,7 +1,7 @@
 
 <sl-data-list [Items]="items" (SelectedChange)="ItemSelected($event)">
   <ng-template #rowhead let-row>
-    <sl-avatar class="avatar-small" [src]="'assets/media/regions/' + row.Avatar"></sl-avatar>
+    <sl-avatar class="avatar-small" [src]="'assets/media/' + row.Avatar"></sl-avatar>
   </ng-template>
   <ng-template #rowmain let-row>
     <div class="regions-master-col regions-master-info">

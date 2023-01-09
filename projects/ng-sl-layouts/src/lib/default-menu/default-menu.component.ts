@@ -40,7 +40,7 @@ export class DefaultMenuComponent implements OnInit, OnDestroy {
 
   navigate(url: string) {
     this.selected = url;
-    this.router.navigate([url])
+
   }
 
   ngOnDestroy(): void {

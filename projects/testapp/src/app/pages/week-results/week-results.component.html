@@ -1,2 +1,26 @@
-<app-week-result-small *ngIf="small"></app-week-result-small>
-<app-week-result-large *ngIf="!small" [Items]="fakeData()"></app-week-result-large>
+<sl-hmaster-details [SelectedDetail]="DetailItem">
+  <ng-template #hmdmaster>
+    <div class="week-master">
+      <div class="week-master-title">
+        Week work
+      </div>
+      <div class="week-master-top">
+        <div class="week-master-search">
+          <sl-search-bar></sl-search-bar>
+        </div>
+        <div class="week-master-addbutton">
+          <sl-rounded-button class="button-accent" [Icon]="'fa-solid fa-plus'" [Text]="'New'"></sl-rounded-button>
+        </div>
+
+      </div>
+      <app-week-result-list [Items]="fakeData()"  (SelectedChange)="SelectedChange($event)"></app-week-result-list>
+    </div>
+  </ng-template>
+
+
+
+  <ng-template #hmddetails let-row>
+    <app-week-result-details [current]="row"></app-week-result-details>
+  </ng-template>
+
+  </sl-hmaster-details>

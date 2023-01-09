@@ -10,26 +10,63 @@
     ></app-details-header>
 
   <div class="manager-details-role">
-    {{current.Role}} {{current.IdArea}}
+    {{current.Role}} {{areaserv.getAreaName(current.IdArea)}}
   </div>
 
-  <div class="accent manager-details-title">
-    Ruolo
-  </div>
-  <div class="manager-details-value">
-    {{current.Role}}
-  </div>
-  <div class="accent manager-details-title">
-    Region
-  </div>
-  <div class="manager-details-value">
-  {{current.Region}}
-</div>
-  <div class="accent manager-details-title">
-    Area
-  </div>
-  <div class="manager-details-value">
-    {{current.IdArea}}
-  </div>
+
+  <ng-container *ngIf="EditStatus=='none'">
+
+    <ng-scrollbar style="height:calc(100vh - 500px)">
+      <div class="accent manager-details-title">
+        Ruolo
+      </div>
+      <div class="manager-details-value">
+        {{current.Role}}
+      </div>
+      <div class="accent manager-details-title">
+        Region
+      </div>
+      <div class="manager-details-value">
+      {{current.Region}}
+    </div>
+      <div class="accent manager-details-title">
+        Area
+      </div>
+      <div class="manager-details-value">
+        {{areaserv.getAreaName(current.IdArea)}}
+      </div>
+    </ng-scrollbar>
+  </ng-container>
+
+  <ng-container *ngIf="EditStatus=='add' || EditStatus=='edit'">
+    <ng-scrollbar style="height:calc(100vh - 440px)">
+
+      <form  [formGroup]="form">
+      <div class="manager-edit-form">
+        <label  class="manager-edit-label"  for="manager-name">Name</label>
+        <input  class="manager-edit-textbox" id="manager-name" formControlName="Name">
+
+        <label  class="manager-edit-label"  for="manager-surname">Surname</label>
+        <input  class="manager-edit-textbox" id="manager-surname" formControlName="Surname">
+
+        <label  class="manager-edit-label"  for="manager-role">Role</label>
+        <input  class="manager-edit-textbox" id="manager-role" formControlName="Role">
+
+        <label  class="manager-edit-label"  for="manager-region">Region</label>
+        <select name="region" id="manager-region" formControlName="Region" class="manager-edit-textbox" >
+          <option *ngFor="let region of regions" [value]="region">{{region}}</option>
+        </select>
+        <label  class="manager-edit-label"  for="manager-area">Area</label>
+        <select name="cars" id="manager-area" formControlName="IdArea" class="manager-edit-textbox">
+
+          <option *ngFor="let area of filteredAree()" [value]="area.Id">{{area.Name}}</option>
+        </select>
+
+
+      </div>
+
+    </form>
+  </ng-scrollbar>
+    </ng-container>
 
 </div>

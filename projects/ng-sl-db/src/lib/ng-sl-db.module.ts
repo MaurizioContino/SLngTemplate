@@ -2,9 +2,9 @@ import { InjectionToken, ModuleWithProviders, NgModule, Optional, SkipSelf } fro
 //import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 import { HttpClientModule} from '@angular/common/http';
 
-import { DBConfig } from 'dist/ng-sl-db/lib/DBConfig';
+
 import { NgSlDbService } from './ng-sl-db.service';
-import { DB_CONFIG } from './DBConfig';
+import { DBConfig, DB_CONFIG } from './DBConfig';
 
 
 

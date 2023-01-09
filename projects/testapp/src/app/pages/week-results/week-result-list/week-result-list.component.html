@@ -1,0 +1,61 @@
+
+Mese Gennaio
+
+
+<ng-scrollbar style="height:calc(100vh - 100px); width: 100%;">
+
+
+  <sl-data-list [Items]="Items" (SelectedChange)="ItemSelected($event)">
+    <ng-template #rowhead let-row>
+      <div  class="week-value-container">
+        <div class="week-value"> #{{row.week}}</div>
+      </div>
+    </ng-template>
+    <ng-template #rowmain let-row>
+      <div class="weekresult-master-col weekresult-master-info">
+
+        <div class="weekresult-master-row weekresult-master-name">
+          <div>{{row.dtS | date : 'dd-MM-yyyy'}}</div>
+          <div>{{row.dtE | date : 'dd-MM-yyyy'}}</div>
+        </div>
+
+
+            <table>
+              <tr>
+                <td class="week-td-head accent">Aperte</td>
+                <td class="week-td-head accent">ToolBox_Aperte</td>
+                <td class="week-td-head accent">Sepa_aperte</td>
+                <td class="week-td-head accent">Business</td>
+                <td class="week-td-head accent">Sepa_Business</td>
+                <td class="week-td-head accent">NonOperative</td>
+                <td class="week-td-head accent">Sepa_non_operative</td>
+                <td class="week-td-head accent">Pross_apertura</td>
+                <td class="week-td-head accent">Toolbox_pa</td>
+                <td class="week-td-head accent">Sepa_pa</td>
+                <td class="week-td-head accent">Sepa_Attivi</td>
+                <td class="week-td-head accent">Toolbox_Attivi</td>
+
+              </tr>
+              <tr>
+                <td class="week-td-value">{{row.Aperte}}</td>
+                <td class="week-td-value">{{row.ToolBox_Aperte}}</td>
+                <td class="week-td-value">{{row.Sepa_aperte}}</td>
+                <td class="week-td-value">{{row.Business}}</td>
+                <td class="week-td-value">{{row.Sepa_Business}}</td>
+                <td class="week-td-value">{{row.NonOperative}}</td>
+                <td class="week-td-value">{{row.Sepa_non_operative}}</td>
+                <td class="week-td-value">{{row.Pross_apertura}}</td>
+                <td class="week-td-value">{{row.Toolbox_pa}}</td>
+                <td class="week-td-value">{{row.Sepa_pa}}</td>
+                <td class="week-td-value">{{row.Sepa_Attivi}}</td>
+                <td class="week-td-value">{{row.Toolbox_Attivi}}</td>
+              </tr>
+            </table>
+
+
+
+
+      </div>
+    </ng-template>
+  </sl-data-list>
+  </ng-scrollbar>

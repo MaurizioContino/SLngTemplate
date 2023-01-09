@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
-import { dbConfig } from 'projects/testapp/src/app/ObjectStoreConfig';
-import { forkJoin, Observable, Subject } from 'rxjs';
+import {  Observable, Subject } from 'rxjs';
 import { DBConfig, DB_CONFIG } from './DBConfig';
 import { IDBModel } from './IDBModel';
 

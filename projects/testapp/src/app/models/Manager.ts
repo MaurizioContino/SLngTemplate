@@ -1,6 +1,5 @@
 import { IDBModel } from "projects/ng-sl-db/src/public-api";
-import { Area } from "./Area";
-import { Role } from "./Role";
+
 export class Manager implements IDBModel {
 
   isnew: boolean = false;

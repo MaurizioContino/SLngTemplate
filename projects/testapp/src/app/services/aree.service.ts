@@ -19,6 +19,18 @@ export class AreeService {
   Aree$: BehaviorSubject<Area[]> = new BehaviorSubject<Area[]>([]);
   constructor(private db: NgSlDbService) {
   }
+
+
+  getAreaName(Id: number) {
+    if (this._Aree) {
+        return this._Aree.find(v=>v.Id == Id)?.Name;
+      } else
+      {
+        return "Not loaded"
+      }
+  }
+
+
   Load(reload: boolean = false) {
     if (reload || this.Aree == null) {
       this.db.GetAll<Area>(this.store).subscribe(v=>{

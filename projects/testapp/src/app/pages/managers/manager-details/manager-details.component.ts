@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Area } from '../../../models/Area';
 import { Manager } from '../../../models/Manager';
+import { AreeService } from '../../../services/aree.service';
 import { ManagersService } from '../../../services/managers.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { ManagersService } from '../../../services/managers.service';
   styleUrls: ['./manager-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ManagerDetailsComponent {
+export class ManagerDetailsComponent implements OnInit {
   @Input() EditStatus : "none" | "add" | "edit" | "delete" = "none"
   private _current: Manager | null = null;
   @Input()
@@ -22,20 +24,44 @@ export class ManagerDetailsComponent {
     this.cdr.detectChanges();
   }
 
+  aree: Area[]=[];
+
+  get regions():string[] {
+    const ret : string[]= []
+    this.aree.forEach(v=>{
+      if (ret.indexOf(v.Region)==-1) ret.push(v.Region)
+    })
+    return ret;
+  }
+  filteredAree() {
+    return this.aree.filter(v=>v.Region == this.form.controls.Region.value);
+  }
+
   form = this.fb.group(
     {
       Id: [null],
       Name: [null, [Validators.required]],
+      Surname: [null, [Validators.required]],
+      Role: [null, [Validators.required]],
+      IdArea:  [null, [Validators.required]],
+      Region: [null],
       isnew: [false],
       updated: [new Date()],
       originalupdated: [null],
       deleted: [false],
       BackgroundImage: [''],
       Avatar: [''],
-      Aree: this.fb.array([])
+
   });
 
-  constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private managerservice: ManagersService){}
+  constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private managerservice: ManagersService, public areaserv: AreeService){}
+  ngOnInit(): void {
+    this.areaserv.Aree$.subscribe(v=>{
+      this.aree = v;
+    });
+  }
+
+
 
   Save() {
     const s = this.form.value as any as Manager;
