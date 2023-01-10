@@ -16,7 +16,7 @@ export class AreeService {
   public set Aree(value: Area[] | null) {
     this._Aree = value;
   }
-  Aree$: BehaviorSubject<Area[]> = new BehaviorSubject<Area[]>([]);
+  Aree$: Subject<Area[]> = new Subject<Area[]>();
   constructor(private db: NgSlDbService) {
   }
 
@@ -37,6 +37,9 @@ export class AreeService {
         this.Aree = v;
         this.Aree$.next(v);
       })
+    }
+    else {
+      this.Aree$.next(this.Aree);
     }
   }
 
@@ -88,27 +91,4 @@ export class AreeService {
     }
   }
 
-
-  // beginStore(): Observable<any> {
-  //   const ret = new Subject();
-
-
-  //   this.db.BulkInsert<Area>(this.store, data).subscribe(
-  //     {
-  //       next: (v) => {
-  //         ret.next(null);
-  //         console.log("aree store " + v)
-  //       },
-  //       error: (e) => {
-  //         ret.next(null);
-  //         console.error(e)
-  //       },
-  //       complete: () => {
-  //         ret.next(null);
-  //         console.info('complete')
-  //       }
-  //     }
-  //   );
-  //   return ret;
-  // }
 }

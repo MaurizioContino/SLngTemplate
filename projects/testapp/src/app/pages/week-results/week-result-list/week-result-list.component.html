@@ -1,5 +1,5 @@
 
-Mese Gennaio
+
 
 
 <ng-scrollbar style="height:calc(100vh - 100px); width: 100%;">
@@ -8,18 +8,24 @@ Mese Gennaio
   <sl-data-list [Items]="Items" (SelectedChange)="ItemSelected($event)">
     <ng-template #rowhead let-row>
       <div  class="week-value-container">
-        <div class="week-value"> #{{row.week}}</div>
+        <div class="week-value"> #{{row.Week}}</div>
       </div>
     </ng-template>
     <ng-template #rowmain let-row>
       <div class="weekresult-master-col weekresult-master-info">
 
         <div class="weekresult-master-row weekresult-master-name">
-          <div>{{row.dtS | date : 'dd-MM-yyyy'}}</div>
-          <div>{{row.dtE | date : 'dd-MM-yyyy'}}</div>
+          <div>Dal {{row.DateStart | date : 'dd-MM-yyyy'}}</div>
+          <div>al {{row.DateEnd | date : 'dd-MM-yyyy'}}</div>
+        </div>
+        <div class="padding-left-20 padding-top-10" *ngIf="row.Loaded">
+          <i class="fa fa-check fa-lg correct"></i> Dati caricati
+        </div>
+        <div class="padding-left-20 padding-top-10" *ngIf="!row.Loaded">
+          <i class="fa fa-check fa-lg danger"></i> Dati non caricati
         </div>
 
-
+<!--
             <table>
               <tr>
                 <td class="week-td-head accent">Aperte</td>
@@ -50,7 +56,7 @@ Mese Gennaio
                 <td class="week-td-value">{{row.Sepa_Attivi}}</td>
                 <td class="week-td-value">{{row.Toolbox_Attivi}}</td>
               </tr>
-            </table>
+            </table> -->
 
 
 

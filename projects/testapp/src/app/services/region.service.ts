@@ -16,7 +16,7 @@ export class RegionService {
 
   store = "Regions";
   Regions: Region[] | null = null
-  Regions$: BehaviorSubject<Region[]> = new BehaviorSubject<Region[]>([]);
+  Regions$: Subject<Region[]> = new Subject<Region[]>();
 
   constructor(private db: NgSlDbService, private areeServ: AreeService) { }
 
@@ -36,6 +36,9 @@ export class RegionService {
 
 
       this.areeServ.Load();
+    }
+    else {
+      this.Regions$.next(this.Regions);
     }
   }
 

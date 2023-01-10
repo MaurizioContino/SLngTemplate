@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
       {itemtype:"title", title: 'Dashboards', subtitle:'Application dashboards', children:[], url: ''},
       {itemtype:"link", title: 'Dashboard 1', url: 'dashboards/dashboard1'},
       {itemtype:"title", title: 'Dataentry', subtitle:'Insert new data', children:[], url: ''},
-      {itemtype:"link", title: 'Week results', url: 'WeekResults'},
+      {itemtype:"link", title: 'Weekly results', url: 'WeekResults'},
       {itemtype:"title", title: 'Configurations', subtitle:'Application base configuration', children:[], url: ''},
       {itemtype:"link", title: 'Managers', url: 'configs/managers'},
       {itemtype:"link", title: 'Regions', url: 'configs/regions'}

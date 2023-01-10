@@ -12,7 +12,7 @@ export class ManagersService {
 
   store = "Managers";
   Managers: Manager[] | null = null;
-  Managers$: BehaviorSubject<Manager[]> = new BehaviorSubject<Manager[]>([]);
+  Managers$: Subject<Manager[]> = new Subject<Manager[]>();
   constructor(private db: NgSlDbService, private areeServ: AreeService) {
 
   }
@@ -29,6 +29,9 @@ export class ManagersService {
           this.Managers$.next(v);
         })
       });
+    }
+    else {
+      this.Managers$.next(this.Managers);
     }
     this.areeServ.Load();
   }

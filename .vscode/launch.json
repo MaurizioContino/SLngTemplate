@@ -10,7 +10,11 @@
                   "name": "Launch Chrome against localhost",
                   "url": "http://localhost:4200",
                   "webRoot": "${workspaceFolder}",
-                  "sourceMaps": true
+                  "sourceMaps": true,
+                  "resolveSourceMapLocations": [
+                    "${workspaceFolder}/**",
+                    "!**/node_modules/**"
+                  ],
             }
       ]
 }

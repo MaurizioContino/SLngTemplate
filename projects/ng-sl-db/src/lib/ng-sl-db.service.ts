@@ -17,10 +17,9 @@ export class NgSlDbService {
   }
 
   openDatabase() {
-
     const request = window.indexedDB.open(this.config.name, this.config.version);
     request.onerror = (event) => {
-
+      console.log(event)
     };
     request.onsuccess = (event: any) => {
       this.db = event.target.result;
@@ -28,13 +27,16 @@ export class NgSlDbService {
     request.onupgradeneeded = (event: any) => {
       this.db = event.target.result;
       this.config.stores.forEach(store => {
-
         const objectStore = this.db.createObjectStore(store.name, { keyPath: store.key, autoIncrement : false });
         objectStore.createIndex("Id", "Id", { unique: true });
         objectStore.createIndex("data", "data", { unique: false });
         if (this.config.Prefill[store.name]) {
           this.config.Prefill[store.name].forEach((e: any) => {
-            objectStore.add({ Id: e[store.key], data: JSON.stringify(e) });
+            try {
+              objectStore.add({ Id: e[store.key], data: JSON.stringify(e) });
+            } catch(e: any) {
+              console.log(e);
+            }
           });
         }
 

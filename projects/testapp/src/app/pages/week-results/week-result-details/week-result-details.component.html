@@ -1,1 +1,25 @@
-<p>week-result-details works!</p>
+<img
+alt="backimage"
+class="wr-backimage"
+src="assets/media/backgrounds/calendar.png"
+/>
+<div class="wr-avatar-container">
+    <div class="wr-avatar-big">
+      <div class="wr-details-week"> #{{current.Week}}</div>
+    </div>
+</div>
+<div class="wr-details-name">
+
+{{current.DateStart | date : 'dd-MM-yyyy'}}
+<i class="fa fa-arrow-right fa-lg"></i>
+{{current.DateEnd | date : 'dd-MM-yyyy'}}
+</div>
+
+<div class="ws-value-list">
+<div *ngFor="let item of current.Values" class="ws-value-container">
+  <div class="wr-details-title">{{item.Name}}</div>
+  <input class="wr-details-input" title="suka" [(ngModel)]="item.Value">
+
+</div>
+</div>
+

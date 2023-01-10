@@ -1,4 +1,5 @@
 :root {
+  --correct: rgb(75, 187, 75);
   --primary: #1e90ff;
   --accent: orangered;
   --danger: red;
@@ -6,6 +7,10 @@
 .accent {
   color: var(--accent);
 }
+.correct {
+  color: var(--correct);
+}
+
 .primary {
   color: var(--primary);
 }
@@ -15,4 +20,5 @@
 .shadow {
   -webkit-box-shadow: -3px 0px 6px -2px rgb(0 0 0 / 39%);
   box-shadow: -3px 0px 6px -2px rgb(0 0 0 / 39%);
+
 }

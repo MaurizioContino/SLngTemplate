@@ -7,5 +7,13 @@ import { Component, Input } from '@angular/core';
 })
 export class WeekResultDetailsComponent {
 
-  @Input() current: any;
+  private _current: any;
+  @Input()
+  public get current(): any {
+    return this._current;
+  }
+  public set current(value: any) {
+
+    this._current = value;
+  }
 }
