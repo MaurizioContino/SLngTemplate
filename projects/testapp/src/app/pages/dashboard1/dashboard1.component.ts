@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard1.component.scss']
 })
 export class Dashboard1Component {
-
+  listObject = ['uno', 'due', 'ciao 1', 'ciao 2']
 }

@@ -1,6 +1,7 @@
 import { outputAst } from '@angular/compiler';
 import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { SlLayoutsService } from 'projects/ng-sl-layouts/src/public-api';
+import { SlLayoutsService } from 'ngsllayouts';
+
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

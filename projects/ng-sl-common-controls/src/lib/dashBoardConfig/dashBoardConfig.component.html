@@ -1,0 +1,108 @@
+<sl-hmaster-details [SelectedDetail]="currCell">
+  <ng-template #hmdmaster>
+   
+    <div cdkDropListGroup style="overflow-y: auto; overflow-x: hidden; height: calc(100vh - 70px);">
+
+      <button type="button" class="btn btn-outline-primary mr-2 button-edit" (click)="EditMode=!EditMode"
+        *ngIf="!EditMode" style="position: absolute;margin-left: 30px;z-index: 10000;padding: 5px 5px 5px 10px;">
+        <i class="fa-solid fa-pencil mr-1"></i>
+      </button>
+      <button type="button" class="btn btn-outline-primary mr-2  button-edit" (click)="saveConf()" *ngIf="EditMode"
+        style="position: absolute;margin-left: 30px;z-index: 10000;padding: 5px 5px 5px 10px;">
+        <i class="fa-solid fa-floppy-disk mr-1"></i>
+      </button>
+
+      <div *ngFor="let r of GetRows(); let idr = index" class="row" [style.top]="r + '%'">
+        <div *ngFor="let c of GetCols(); let idc = index" cdkDropList class='cell'
+          [id]="'cell_' + r + '_' + c" (cdkDropListDropped)="MoveControl(idr, idc, $event)"
+          style="position: relative; overflow: visible">
+
+          <!-- ne dovrebbe esistere sempre uno solo, il loop mi serve solo x avere il riferimento (esiste un altro modo?)-->
+          <button *ngIf="dashboardItems(idr, idc).length == 0 && EditMode" class="btn btn-addcontrol"
+            (click)="addControl(idr, idc)">
+            <i class="fa-solid fa-plus fa-2x"></i>
+          </button>
+
+          <ng-container *ngFor="let cell of dashboardItems(idr, idc)">
+            <div class="card" cdkDrag [cdkDragDisabled]="!EditMode" (cdkDragEnded)="dragend(cell.IdItem)" [id]="'control_' + cell.IdItem"
+              [style.width]="cell.width * 100 + '%'"
+              [style.height]=" cell.height * 100 + '%'"
+              style="margin: 0px; padding: 0px; background-color: white; z-index: 100;">
+              <div class="card-header p-1" *ngIf="EditMode">
+                <div style="display: flex; flex-direction: column;">
+                  <div style="display: flex; flex-direction: row; width: 100%;">
+                    <!--Drag icon-->
+                    <button class="btn btn-primary" cdkDragHandle (mousedown)="dragstart(cell.IdItem)">
+                      <i class="fa-solid fa-arrows-alt"></i>
+                    </button>
+
+                    <!--Selezione elemento da visualizzare -->
+                    <ng-select bindLabel="name" bindValue="id" style="flex: 1 0 auto" placeholder="Seleziona "
+                      [(ngModel)]="cell.idComponent" appendTo="body">
+                      <ng-option *ngFor="let itm of childrennames; let idx = index" [value]="idx">
+                        {{ childrennames[idx] }}
+                      </ng-option>
+                    </ng-select>
+                    <button class="btn btn-primary" (click)="setupControl(cell)">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <!-- Elimina controllo -->
+                    <button class="btn btn-danger" (click)="removeControl(cell.IdItem)">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+              <div class="card-body p-1" style="width: 100%; height: 100%;">
+                <ng-container *ngIf="children && cell.idComponent > -1 && dragging != 'control_' + cell.IdItem">
+                  <ng-container [ngTemplateOutlet]="children[cell.idComponent]"
+                    [ngTemplateOutletContext]="{$implicit:cell}"></ng-container>
+                </ng-container>
+                <ng-container *ngIf="cell.idComponent == -1"> </ng-container>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+    </div>
+
+
+  </ng-template>
+
+  <ng-template #hmddetails let-currCell>
+    <img
+    alt="backimage"
+    class="header-backimage"
+    [src]="'assets/media/backgrounds/14-640x480.jpg'"
+  />
+  <div class="header-avatar-container">
+    <sl-avatar
+      class="avatar-big"
+      [src]="'assets/media/avatars/male-04.jpg'"
+    ></sl-avatar>
+  </div>
+  <div class="header-details-name">
+    Configurazione widget
+  </div>
+
+    <div *ngIf="ShowConfig && currCell" style="display: flex; flex-direction: row;justify-content: space-around;">
+      <div>
+        <label>Width</label>
+        <input type="number" [(ngModel)]="currCell.width" style="width: 130px;" min="1" max="10">
+      </div>
+      <div>
+        <label>Height</label>
+        <input type="number" [(ngModel)]="currCell.height" style="width: 130px;" min="1" max="10">
+      </div>
+    </div>
+    <div *ngIf="ShowConfig && currCell && currCell.customData && currCell.customData.Parameters">
+      <div *ngFor="let p of currCell.customData.Parameters">
+        <label>{{p.name}}</label>
+
+        <input type="text" class="form-control" [(ngModel)]="p.value">
+      </div>
+    </div>
+  </ng-template>
+</sl-hmaster-details>

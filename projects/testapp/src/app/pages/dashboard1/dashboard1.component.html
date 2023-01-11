@@ -1,1 +1,25 @@
-<p>dashboard1 works!</p>
+ 
+<sl-dashboard-config  [children]="[t0, t1, t2, t3]"
+[childrennames]="listObject"
+dashboardName="Operation">
+</sl-dashboard-config>
+
+
+<!-- -->
+
+<ng-template #t0 let-cell>
+  AAA
+</ng-template>
+
+<ng-template #t1 let-cell>
+  <!-- <lib-dashboard-component [cell]="cell"></lib-dashboard-component> -->
+  BBB
+</ng-template>
+
+<ng-template #t2 let-cell>
+  <h2>Ciao 1</h2>
+</ng-template>
+
+<ng-template #t3 let-cell>
+  <h2>Ciao 2</h2>
+</ng-template>

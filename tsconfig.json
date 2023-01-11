@@ -14,9 +14,11 @@
     "paths": {
       "ng-sl-db": [
         "dist/ng-sl-db"
+        // "projects/ng-sl-db/src/public-api.ts"
       ],
       "ngslcommoncontrols": [
         "dist/ng-sl-common-controls"
+        //"projects/ng-sl-common-controls/src/public-api.ts"
       ],
 
       "ngsllayouts": [

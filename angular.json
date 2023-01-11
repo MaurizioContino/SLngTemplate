@@ -31,7 +31,9 @@
               "projects/testapp/src/manifest.webmanifest"
             ],
             "styles": [
+              "./node_modules/@ng-select/ng-select/themes/default.theme.css",
               "projects/testapp/src/styles.scss"
+
             ],
             "scripts": [],
             "serviceWorker": true,

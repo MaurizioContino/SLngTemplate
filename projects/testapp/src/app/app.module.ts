@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClientModule } from '@angular/common/http';
-import { NgSlLayoutsModule } from 'projects/ng-sl-layouts/src/public-api';
 import { SharedModule } from './shared.module';
 import { dbConfig } from './ObjectStoreConfig';
 import { NgSlDbModule, NgSlDbService } from 'projects/ng-sl-db/src/public-api';

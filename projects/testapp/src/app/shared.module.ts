@@ -16,7 +16,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     FormsModule,
     ReactiveFormsModule,
     NgScrollbarModule,
-
+    NgSlCommonControlsModule
   ],
   exports: [
     CommonModule,
