@@ -1,17 +1,16 @@
 
-<sl-dashboard-config  [children]="[t0, t1, t2, t3]"
-[childrennames]="listObject"
-dashboardName="Operation">
+<sl-dashboard-config
+  [children]="[t0, t1, t2, t3]"
+  [childrennames]="listObject"
+  dashboardName="Operation"
+>
 </sl-dashboard-config>
 
 
 <!-- -->
 
 <ng-template #t0 let-cell>
-  <sl-hbars [data]="dataset" [categories]="labels"
-  [Stacked]="false"
-  [xText]="'X TEXT'"
-  [yText]="'Y TEXT'"
+  <sl-hbars
   ></sl-hbars>
 
 </ng-template>

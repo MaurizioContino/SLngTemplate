@@ -18,7 +18,7 @@
           style="position: relative; overflow: visible">
 
           <!-- ne dovrebbe esistere sempre uno solo, il loop mi serve solo x avere il riferimento (esiste un altro modo?)-->
-          <button *ngIf="dashboardItems(idr, idc).length == 0 && EditMode" class="btn btn-addcontrol"
+          <button title="AddControl" *ngIf="dashboardItems(idr, idc).length == 0 && EditMode" class="btn btn-addcontrol"
             (click)="addControl(idr, idc)">
             <i class="fa-solid fa-plus fa-2x"></i>
           </button>
@@ -32,7 +32,7 @@
                 <div style="display: flex; flex-direction: column;">
                   <div style="display: flex; flex-direction: row; width: 100%;">
                     <!--Drag icon-->
-                    <button class="btn btn-primary" cdkDragHandle (mousedown)="dragstart(cell.IdItem)">
+                    <button title="Drag" class="btn btn-primary" cdkDragHandle (mousedown)="dragstart(cell.IdItem)">
                       <i class="fa-solid fa-arrows-alt"></i>
                     </button>
 
@@ -43,18 +43,18 @@
                         {{ childrennames[idx] }}
                       </ng-option>
                     </ng-select>
-                    <button class="btn btn-primary" (click)="setupControl(cell)">
+                    <button title="SetupControl" class="btn btn-primary" (click)="setupControl(cell)">
                       <i class="fa-solid fa-pencil"></i>
                     </button>
                     <!-- Elimina controllo -->
-                    <button class="btn btn-danger" (click)="removeControl(cell.IdItem)">
+                    <button title="removeControl" class="btn btn-danger" (click)="removeControl(cell.IdItem)">
                       <i class="fa-solid fa-trash"></i>
                     </button>
                   </div>
 
                 </div>
               </div>
-              <div class="card-body p-1" style="width: 100%; height: 100%;">
+              <div class="card-body">
                 <ng-container *ngIf="children && cell.idComponent > -1 && dragging != 'control_' + cell.IdItem">
                   <ng-container [ngTemplateOutlet]="children[cell.idComponent]"
                     [ngTemplateOutletContext]="{$implicit:cell}"></ng-container>
