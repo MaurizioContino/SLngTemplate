@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class Dashboard1Component {
   listObject = ['uno', 'due', 'ciao 1', 'ciao 2']
+
+  dataset = [20, 20, 40, 30, 60]
+  labels = ['uno', 'due', 'tre', 'quattro', 'cinque']
+
 }

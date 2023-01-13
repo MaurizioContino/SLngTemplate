@@ -1,0 +1,14 @@
+::ng-deep .apexcharts-yaxis-title-text   {
+  font-family: 'Roboto','Open Sans', sans-serif !important;
+  font-size:24px !important;
+}
+
+::ng-deep .apexcharts-xaxis-label {
+  font-family: 'Roboto','Open Sans', sans-serif !important;
+  font-size:12px !important;
+}
+
+::ng-deep .apexcharts-legend-text {
+  font-family: 'Roboto','Open Sans', sans-serif !important;
+  font-size:24px !important;
+}

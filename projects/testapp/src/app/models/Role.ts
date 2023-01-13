@@ -1,4 +1,4 @@
-import { IDBModel } from "projects/ng-sl-db/src/public-api";
+import { IDBModel } from "ng-sl-db";
 
 export class Role implements IDBModel {
 

@@ -1,7 +1,8 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
-import { NgSlMenuService } from 'projects/ng-sl-layouts/src/public-api';
+import { NgSlDbService } from 'ng-sl-db';
+import { NgSlMenuService } from 'ngsllayouts';
+
 import { AreeService } from './services/aree.service';
 import { ManagersService } from './services/managers.service';
 import { RegionService } from './services/region.service';
