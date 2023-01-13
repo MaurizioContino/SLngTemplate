@@ -1,4 +1,4 @@
-import { ContentChild } from '@angular/core';
+import { ContentChild, EventEmitter, Output } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { TemplateRef } from '@angular/core';
 import { OnDestroy } from '@angular/core';
@@ -17,6 +17,7 @@ import { SlLayoutsService } from '../../services/ng-sl-layouts.service';
 export class HMasterDetailsComponent implements OnInit, OnDestroy {
 
   @Input() SelectedDetail: any = null;
+  @Output() DetailClosed = new EventEmitter<any>();
   @ContentChild('hmdmaster') master: TemplateRef<any> | null = null;
   @ContentChild('hmddetails') details: TemplateRef<any> | null = null;
 
@@ -41,6 +42,7 @@ export class HMasterDetailsComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
   closedetails() {
+    this.DetailClosed.emit(this.SelectedDetail);
     this.SelectedDetail = null
   }
 }

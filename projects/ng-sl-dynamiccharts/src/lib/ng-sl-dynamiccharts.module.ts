@@ -8,6 +8,7 @@ import { HlinesComponent } from './hlines/hlines.component';
 import { HradialComponent } from './hradial/hradial.component';
 import { NgApexchartsModule } from 'ng-apexcharts'
 import { CommonModule } from '@angular/common';
+import { HbarsConfigComponent } from './hbars-config/hbars-config.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { CommonModule } from '@angular/common';
     HgaugeComponent,
     HlinesComponent,
     HradialComponent,
+    HbarsConfigComponent,
 
   ],
   imports: [
@@ -31,6 +33,7 @@ import { CommonModule } from '@angular/common';
     HgaugeComponent,
     HlinesComponent,
     HradialComponent,
+    HbarsConfigComponent
   ]
 })
 export class NgSlDynamicchartsModule { }

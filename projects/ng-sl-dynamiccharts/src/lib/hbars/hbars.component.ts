@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ApexChart } from 'ng-apexcharts';
 
 import { ChartOptions, chartThemeColors } from '../apexcharts/ChartOptions';
@@ -6,8 +6,7 @@ import { ChartOptions, chartThemeColors } from '../apexcharts/ChartOptions';
 @Component({
   selector: 'sl-hbars',
   templateUrl: './hbars.component.html',
-  styleUrls: ['./hbars.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./hbars.component.css']
 })
 export class HBarsComponent implements OnInit, AfterViewInit {
 
@@ -64,6 +63,10 @@ export class HBarsComponent implements OnInit, AfterViewInit {
   }
   public set data(value: number[]) {
     this._data = value;
+    if (this.barChartOptions) {
+    this.barChartOptions = JSON.parse(JSON.stringify(this.barChartOptions))
+    }
+    this.cdr.detectChanges()
 
   }
   @Input()
@@ -108,7 +111,7 @@ export class HBarsComponent implements OnInit, AfterViewInit {
     ],
     chart: {
       type: "bar",
-      height: 350
+      //height: 100
     } as ApexChart,
     plotOptions: {
       bar: {
@@ -156,14 +159,14 @@ export class HBarsComponent implements OnInit, AfterViewInit {
   };
 
 
-  constructor(private element: ElementRef) { }
+  constructor(private element: ElementRef, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.setup();
   }
   ngAfterViewInit(): void {
 
-
+    this.chartOptions.chart.height = this.element.nativeElement.parentElement.clientHeight;
   }
   setup() {
     this.barChartOptions = {

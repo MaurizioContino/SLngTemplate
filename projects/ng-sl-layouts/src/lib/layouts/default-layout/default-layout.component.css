@@ -1,8 +1,9 @@
 .top-down {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 20px);
+  height: 100vh;
   width: 100%;
+  background-color: transparent
 }
 .left-right {
   display: flex;

@@ -1,26 +1,23 @@
-<sl-hmaster-details [SelectedDetail]="currCell">
+<sl-hmaster-details [SelectedDetail]="currCell" (DetailClosed)="editclose($event)">
   <ng-template #hmdmaster>
 
-    <div cdkDropListGroup style="overflow-y: auto; overflow-x: hidden; height: calc(100vh - 70px);">
+    <div cdkDropListGroup class="drop-list-group">
 
-      <button type="button" class="button button-circle-white button-edit" (click)="EditMode=!EditMode" *ngIf="!EditMode" >
+      <button title="Edit" type="button" class="button button-circle-white button-edit" (click)="EditMode=!EditMode" *ngIf="!EditMode" >
         <i class="fa-solid fa-pencil mr-1"></i>
       </button>
-      <button type="button" class="button button-circle-accent button-edit" (click)="saveConf()" *ngIf="EditMode">
+      <button title="Save" type="button" class="button button-circle-accent button-edit" (click)="saveConf()" *ngIf="EditMode">
         <i class="fa-solid fa-floppy-disk mr-1"></i>
       </button>
 
       <div *ngFor="let r of GetRows(); let idr = index" class="row" [style.top]="r + '%'">
         <div *ngFor="let c of GetCols(); let idc = index" cdkDropList class='cell'
           [id]="'cell_' + r + '_' + c" (cdkDropListDropped)="MoveControl(idr, idc, $event)"
-          style="position: relative; overflow: visible">
+            >
 
           <!-- ne dovrebbe esistere sempre uno solo, il loop mi serve solo x avere il riferimento (esiste un altro modo?)-->
-<<<<<<< HEAD
-          <button title="AddControl" *ngIf="dashboardItems(idr, idc).length == 0 && EditMode" class="btn btn-addcontrol"
-=======
-          <button *ngIf="dashboardItems(idr, idc).length == 0 && EditMode" class="button button-addcontrol"
->>>>>>> 2e01d17ef5d12015343df96d350611ad3f911783
+
+          <button title="add control" *ngIf="dashboardItems(idr, idc).length == 0 && EditMode" class="button button-addcontrol"
             (click)="addControl(idr, idc)">
             <i class="fa-solid fa-plus fa-2x"></i>
           </button>
@@ -29,39 +26,29 @@
             <div class="card" cdkDrag [cdkDragDisabled]="!EditMode" (cdkDragEnded)="dragend(cell.IdItem)" [id]="'control_' + cell.IdItem"
               [style.width]="cell.width * 100 + '%'"
               [style.height]=" cell.height * 100 + '%'"
-              style="margin: 0px; padding: 0px; background-color: white; z-index: 100;">
-              <div class="card-header p-1" *ngIf="EditMode">
-                <div style="display: flex; flex-direction: column;">
-                  <div style="display: flex; flex-direction: row; width: 100%; align-items: center;">
+              >
+              <div class="card-header" *ngIf="EditMode">
+                <div class="card-header-column">
+                  <div class="card-header-row">
                     <!--Drag icon-->
-<<<<<<< HEAD
-                    <button title="Drag" class="btn btn-primary" cdkDragHandle (mousedown)="dragstart(cell.IdItem)">
-=======
-                    <button class="button button-primary" cdkDragHandle (mousedown)="dragstart(cell.IdItem)">
->>>>>>> 2e01d17ef5d12015343df96d350611ad3f911783
+
+                    <button title="drag" class="button button-primary" cdkDragHandle (mousedown)="dragstart(cell.IdItem)">
                       <i class="fa-solid fa-arrows-alt"></i>
                     </button>
 
                     <!--Selezione elemento da visualizzare -->
-                    <ng-select bindLabel="name" bindValue="id" style="flex: 1 0 auto" placeholder="Seleziona "
+                    <ng-select bindLabel="name" bindValue="id" class="flex-stretch" placeholder="Seleziona "
                       [(ngModel)]="cell.idComponent" appendTo="body">
                       <ng-option *ngFor="let itm of childrennames; let idx = index" [value]="idx">
                         {{ childrennames[idx] }}
                       </ng-option>
                     </ng-select>
-<<<<<<< HEAD
-                    <button title="SetupControl" class="btn btn-primary" (click)="setupControl(cell)">
+
+                    <button title="Setup Control" class="button button-primary" (click)="setupControl(cell)">
                       <i class="fa-solid fa-pencil"></i>
                     </button>
                     <!-- Elimina controllo -->
-                    <button title="removeControl" class="btn btn-danger" (click)="removeControl(cell.IdItem)">
-=======
-                    <button class="button button-primary" (click)="setupControl(cell)">
-                      <i class="fa-solid fa-pencil"></i>
-                    </button>
-                    <!-- Elimina controllo -->
-                    <button class="button button-danger" (click)="removeControl(cell.IdItem)">
->>>>>>> 2e01d17ef5d12015343df96d350611ad3f911783
+                    <button title="Remove Control" class="button button-danger" (click)="removeControl(cell.IdItem)">
                       <i class="fa-solid fa-trash"></i>
                     </button>
                   </div>
@@ -69,11 +56,14 @@
                 </div>
               </div>
               <div class="card-body">
-                <ng-container *ngIf="children && cell.idComponent > -1 && dragging != 'control_' + cell.IdItem">
-                  <ng-container [ngTemplateOutlet]="children[cell.idComponent]"
-                    [ngTemplateOutletContext]="{$implicit:cell}"></ng-container>
-                </ng-container>
-                <ng-container *ngIf="cell.idComponent == -1"> </ng-container>
+                {{cell.title}}
+                <div class="card-body-display">
+                  <ng-container *ngIf="children && cell.idComponent > -1 && dragging != 'control_' + cell.IdItem">
+                    <ng-container [ngTemplateOutlet]="children[cell.idComponent]"
+                      [ngTemplateOutletContext]="{$implicit:cell}"></ng-container>
+                  </ng-container>
+                  <ng-container *ngIf="cell.idComponent == -1"> </ng-container>
+                </div>
               </div>
             </div>
           </ng-container>
@@ -85,7 +75,7 @@
 
   </ng-template>
 
-  <ng-template #hmddetails let-currCell>
+  <ng-template #hmddetails>
     <img
     alt="backimage"
     class="header-backimage"
@@ -94,29 +84,39 @@
   <div class="header-avatar-container">
     <sl-avatar
       class="avatar-big"
-      [src]="'assets/media/avatars/' + currCell.icon "
+      [src]="'assets/icons/' + currCell!.icon"
     ></sl-avatar>
   </div>
   <div class="header-details-name">
     Configurazione widget
   </div>
 
-    <div *ngIf="ShowConfig && currCell" style="display: flex; flex-direction: row;justify-content: space-around;">
-      <div>
+    <div class="config-container">
+      <div class="config-values">
+      <div class="size-value">
         <label>Width</label>
-        <input type="number" [(ngModel)]="currCell.width" style="width: 130px;" min="1" max="10">
+        <input title="width" type="number"  class=" border-text" [(ngModel)]="currwidth" min="1" max="10" >
       </div>
-      <div>
+      <div  class="size-value">
         <label>Height</label>
-        <input type="number" [(ngModel)]="currCell.height" style="width: 130px;" min="1" max="10">
+        <input title="height" type="number"  class="border-text" [(ngModel)]="currheight" min="1" max="10">
       </div>
-    </div>
-    <div *ngIf="ShowConfig && currCell && currCell.customData && currCell.customData.Parameters">
-      <div *ngFor="let p of currCell.customData.Parameters">
-        <label>{{p.name}}</label>
+      </div>
 
-        <input type="text" class="form-control" [(ngModel)]="p.value">
+    </div>
+    <div class="config-container">
+      <div class="config-values">
+        <div class="config-title">
+
+          <label>Title</label>
+          <input title="title" type="text"  class="border-text" [(ngModel)]="currtitle">
+
+        </div>
       </div>
     </div>
+    <ng-container *ngIf="children && currCell!.idComponent > -1">
+      <ng-container [ngTemplateOutlet]="children[currCell!.idComponent]"
+        [ngTemplateOutletContext]="{$implicit: currCell}"></ng-container>
+    </ng-container>
   </ng-template>
 </sl-hmaster-details>

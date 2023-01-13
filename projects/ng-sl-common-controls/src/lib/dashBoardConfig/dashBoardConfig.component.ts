@@ -8,7 +8,7 @@ import { DashboardConfigService } from './services/dashboard-config.service'
   selector: 'sl-dashboard-config',
   templateUrl: './dashBoardConfig.component.html',
   styleUrls: ['./dashBoardConfig.component.scss'],
-  //    changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class DashBoardConfigComponent implements OnInit, OnDestroy {
@@ -40,19 +40,60 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
 
    if (value) {
       this._currCell = DashboardItem.fromItem(value)
+      this._currCell.configurator = true
+      this.currCell?.Update
+      this.currwidth = value.width;
+      this.currheight = value.height;
+      this.currtitle = value.title;
 
-      var idx =  this.DashBoardConfig.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
-      this.DashBoardConfig.Items[idx] = this._currCell;
-      this.ItemChangedSub = this._currCell.$ItemChanged.subscribe(v => {
+      this.ItemChangedSub = this._currCell.ItemChanged$.subscribe(v => {
         this.checkFullBoundaries();
         this.changeref.detectChanges();
       })
     }
 
   }
-  ShowConfig = false
+
+  // Proprietà a modifica immediata
+  private _currwidth = 0
+  public get currwidth() {
+    return this._currwidth
+  }
+  public set currwidth(value) {
+    this._currwidth = value
+    var idx =  this.DashBoardConfig.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+    this.DashBoardConfig.Items[idx].width = value;
+    this._currCell!.width = value;
+    this.changeref.detectChanges();
+  }
+  private _currheight = 0
+  public get currheight() {
+    return this._currheight
+  }
+  public set currheight(value) {
+    this._currheight = value
+    var idx =  this.DashBoardConfig.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+    this.DashBoardConfig.Items[idx].height = value;
+    this._currCell!.height = value;
+    this.changeref.detectChanges();
+  }
+
+  private _title = ""
+  public get currtitle() {
+    return this._title
+  }
+  public set currtitle(value) {
+    this._title = value
+    var idx =  this.DashBoardConfig.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+    this.DashBoardConfig.Items[idx].title = value;
+    this._currCell!.title = value;
+    this.changeref.detectChanges();
+  }
+
 
   constructor(private changeref: ChangeDetectorRef, private confPageServ: DashboardConfigService) { }
+
+
 
   ngOnInit(): void {
 
@@ -98,9 +139,14 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
     else return value;
   }
   saveConf() {
-    this.DashBoardConfig
-    debugger;
+
+
     this.checkFullBoundaries();
+    this.DashBoardConfig.updated = new Date().toISOString();
+    for(var idx=0;idx < this.DashBoardConfig.Items.length; idx++){
+      // Semplifico l'elemento che verrà salvato
+      this.DashBoardConfig.Items[idx] = this.DashBoardConfig.Items[idx].toItem()
+    }
     this.confPageServ.save(this.DashBoardConfig).subscribe((v) => {
       if (v) {
         this.EditMode = false
@@ -193,13 +239,17 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   }
 
   setupControl(cell: any) {
-    this.currCell = cell
+    this.currCell = DashboardItem.fromItem(cell);
+    this.currCell.configurator = true;
 
-    if (this.currCell == undefined || this.currCell.ShowCustomSettings == undefined) {
-      this.ShowConfig = true
-    } else {
-      this.currCell.ShowCustomSettings()
-    }
+    this.changeref.detectChanges();
   }
 
+  editclose(currCell: DashboardItem) {
+    var idx =  this.DashBoardConfig.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+    this.DashBoardConfig.Items[idx].Update(currCell);
+    this._currCell = undefined;
+    this.changeref.detectChanges();
+
+  }
 }

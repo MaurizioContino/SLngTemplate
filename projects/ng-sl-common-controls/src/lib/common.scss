@@ -7,6 +7,17 @@
   font-weight: 400;
   font-family: 'Roboto','Open Sans', sans-serif;
 }
+
+.border-text {
+  border: 1px solid silver;
+  border-radius: 5px;
+  width: 100%;
+  padding:10px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Roboto','Open Sans', sans-serif;
+}
+
 .clear-text:focus {outline:none!important;}
 .light-icon {
   color: silver;
@@ -72,53 +83,53 @@
 
 .button-circle-primary {
   border-radius: 50%;
-  
+
   padding: 25px;
   box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
   -webkit-box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
-  
+
   background-color: var(--primary);
-  color: white;  
+  color: white;
   text-align: center;
 }
 
 
 .button-circle-white {
   border-radius: 50%;
-  
+
   padding: 25px;
   box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
   -webkit-box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
   background-color: white;
-  color: black;  
+  color: black;
   text-align: center;
 }
 
 
 .button-circle-accent {
   border-radius: 50%;
-  
+
   padding: 25px;
   box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
   -webkit-box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
-  
+
   background-color: var(--accent);
-  color: white;  
+  color: white;
   text-align: center;
 }
 
 
 .button-circle-danger {
   border-radius: 50%;
-  
+
   padding: 25px;
   box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
   -webkit-box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
-  
+
   background-color: var(--danger);
-  color: white;  
+  color: white;
   text-align: center;
-  
+
 }
 
 .button-circle-primary:hover {

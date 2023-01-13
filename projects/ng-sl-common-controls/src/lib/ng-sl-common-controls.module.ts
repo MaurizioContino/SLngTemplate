@@ -11,6 +11,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import { DashBoardConfigComponent } from './dashBoardConfig/dashBoardConfig.component'
 import { NgSlLayoutsModule } from 'ngsllayouts';
+import { DashboardChartHBarComponent } from './dashboard-controls/dashboard-chart-hbar/dashboard-chart-hbar.component';
+import { NgSlDynamicchartsModule } from 'NgSlDynamiccharts';
+
 
 
 
@@ -20,7 +23,9 @@ import { NgSlLayoutsModule } from 'ngsllayouts';
     RoundedButtonComponent,
     DataListComponent,
     AvatarComponent,
-    DashBoardConfigComponent
+    DashBoardConfigComponent,
+    DashboardChartHBarComponent
+
   ],
   imports: [
     CommonModule,
@@ -28,15 +33,18 @@ import { NgSlLayoutsModule } from 'ngsllayouts';
     NgScrollbarModule,
     DragDropModule,
     NgSelectModule,
-    
-    NgSlLayoutsModule
+    NgSlDynamicchartsModule,
+    NgSlLayoutsModule,
+
   ],
   exports: [
     SearchBarComponent,
     RoundedButtonComponent,
     DataListComponent,
     AvatarComponent,
-    DashBoardConfigComponent
+    DashBoardConfigComponent,
+    DashboardChartHBarComponent
+
   ]
 })
 export class NgSlCommonControlsModule { }

@@ -34,7 +34,7 @@ export class NgSlLayoutsComponent implements OnDestroy {
   constructor(
     breakpointObserver: BreakpointObserver,
     public layoutService: SlLayoutsService,
-    private cdr: ChangeDetectorRef
+
   ) {
     breakpointObserver
       .observe([
