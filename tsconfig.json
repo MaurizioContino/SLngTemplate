@@ -12,6 +12,9 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
+      "NgSlDynamiccharts": [
+        "dist/ng-sl-dynamiccharts"
+      ],
       "ng-sl-db": [
         "dist/ng-sl-db"
       ],

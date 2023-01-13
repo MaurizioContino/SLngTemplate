@@ -4,6 +4,7 @@ import { NgSlLayoutsModule } from 'projects/ng-sl-layouts/src/public-api';
 import { NgSlCommonControlsModule } from 'projects/ng-sl-common-controls/src/public-api';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { NgSlDynamicchartsModule } from 'NgSlDynamiccharts';
 
 
 
@@ -16,7 +17,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     FormsModule,
     ReactiveFormsModule,
     NgScrollbarModule,
-
+    NgSlDynamicchartsModule
   ],
   exports: [
     CommonModule,
@@ -24,7 +25,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     NgSlCommonControlsModule,
     FormsModule,
     ReactiveFormsModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    NgSlDynamicchartsModule
   ]
 
 
