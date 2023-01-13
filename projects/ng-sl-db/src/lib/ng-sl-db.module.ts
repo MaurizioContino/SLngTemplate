@@ -3,8 +3,9 @@ import { InjectionToken, ModuleWithProviders, NgModule, Optional, SkipSelf } fro
 import { HttpClientModule} from '@angular/common/http';
 
 
-import { NgSlDbService } from './ng-sl-db.service';
+
 import { DBConfig, DB_CONFIG } from './DBConfig';
+import { NgSlDbService } from 'ng-sl-db';
 
 
 

@@ -1,6 +1,6 @@
 <sl-hmaster-details [SelectedDetail]="currCell">
   <ng-template #hmdmaster>
-   
+
     <div cdkDropListGroup style="overflow-y: auto; overflow-x: hidden; height: calc(100vh - 70px);">
 
       <button type="button" class="btn btn-outline-primary mr-2 button-edit" (click)="EditMode=!EditMode"
@@ -80,7 +80,7 @@
   <div class="header-avatar-container">
     <sl-avatar
       class="avatar-big"
-      [src]="'assets/media/avatars/male-04.jpg'"
+      [src]="'assets/media/avatars/' + currCell.icon "
     ></sl-avatar>
   </div>
   <div class="header-details-name">

@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, ElementRef, AfterViewInit } from '@angular/core';
+import { ApexChart } from 'ng-apexcharts';
 
 import { ChartOptions, chartThemeColors } from '../apexcharts/ChartOptions';
 
@@ -63,7 +64,7 @@ export class HBarsComponent implements OnInit, AfterViewInit {
   }
   public set data(value: number[]) {
     this._data = value;
-    this.setup();
+
   }
   @Input()
   public get categories(): string[] {
@@ -71,7 +72,7 @@ export class HBarsComponent implements OnInit, AfterViewInit {
   }
   public set categories(value: string[]) {
     this._categories = value;
-    this.setup();
+
   }
   @Input()
   public get xText() {
@@ -79,7 +80,7 @@ export class HBarsComponent implements OnInit, AfterViewInit {
   }
   public set xText(value) {
     this._xText = value;
-    this.setup();
+
   }
   @Input()
   public get yText() {
@@ -87,16 +88,82 @@ export class HBarsComponent implements OnInit, AfterViewInit {
   }
   public set yText(value) {
     this._yText = value;
-    this.setup();
+
   }
+
+  chartOptions = {
+    series: [
+      {
+        name: "Net Profit",
+        data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+      },
+      {
+        name: "Revenue",
+        data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+      },
+      {
+        name: "Free Cash Flow",
+        data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+      }
+    ],
+    chart: {
+      type: "bar",
+      height: 350
+    } as ApexChart,
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: "55%",
+        endingShape: "rounded"
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      colors: ["transparent"]
+    },
+    xaxis: {
+      categories: [
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct"
+      ]
+    },
+    yaxis: {
+      title: {
+        text: "$ (thousands)"
+      }
+    },
+    fill: {
+      opacity: 1
+    },
+    tooltip: {
+      y: {
+        formatter: function(val: any) {
+          return "$ " + val + " thousands";
+        }
+      }
+    }
+  };
+
 
   constructor(private element: ElementRef) { }
 
   ngOnInit(): void {
-
+    this.setup();
   }
   ngAfterViewInit(): void {
-    this.setup();
+
+
   }
   setup() {
     this.barChartOptions = {
@@ -112,7 +179,7 @@ export class HBarsComponent implements OnInit, AfterViewInit {
         onItemClick: {
           toggleDataSeries: true
         },
-      },
+      } ,
       colors: chartThemeColors,
       plotOptions: {
         bar: {
@@ -122,7 +189,7 @@ export class HBarsComponent implements OnInit, AfterViewInit {
       dataLabels: {
         enabled: this.ShowDataLabel
       },
-      series: this.data.map((v: any)=>{return {name: v.label, data: v.data} }),
+      series:  this.data, //this.data.map((v: any)=>{return  }),
       xaxis: {
         categories: this.categories,
         tickAmount: this.categories.length,
@@ -137,6 +204,7 @@ export class HBarsComponent implements OnInit, AfterViewInit {
         }
       }
     }
+
   }
 
 }

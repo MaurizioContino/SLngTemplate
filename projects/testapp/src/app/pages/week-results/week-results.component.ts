@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { SlLayoutsService } from 'projects/ng-sl-layouts/src/public-api';
+
 import { Subject, takeUntil } from 'rxjs';
 import { MonitorItem } from '../../models/Monitoritem';
 import { MonitorResultItem, MonitorResults } from '../../models/MonitorResults';
@@ -54,7 +54,7 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
             res.DateStart = dt1;
             res.DateEnd = dt2;
             res.Loaded = false;
-            
+
             this.FillItemTypes(res);
             values.push(res);
           }

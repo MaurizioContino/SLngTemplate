@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
+import { NgSlDbService } from 'ng-sl-db';
+
 import { BehaviorSubject, forkJoin, Observable, Subject, take, tap } from 'rxjs';
 import { Area } from '../models/Area';
 

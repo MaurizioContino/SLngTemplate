@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { NgSlDbService } from 'ng-sl-db';
+
+import { Observable, Subject } from 'rxjs';
 import { Manager } from '../models/Manager';
-import { dbConfig } from '../ObjectStoreConfig';
+
 import { AreeService } from './aree.service';
 
 @Injectable({

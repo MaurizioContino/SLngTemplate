@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
-import { BehaviorSubject, forkJoin, Observable, Subject, take, tap } from 'rxjs';
+import { NgSlDbService } from 'ng-sl-db';
+
+import { Observable, Subject, take, tap } from 'rxjs';
 import { MonitorResultItem, MonitorResults } from '../models/MonitorResults';
 
 

@@ -1,11 +1,6 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
-import { BehaviorSubject, concat, Observable, Subject, tap } from 'rxjs';
-import { forkJoin } from 'rxjs/internal/observable/forkJoin';
-import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
-import { Observer } from 'rxjs/internal/types';
-import { Area } from '../models/Area';
+import { NgSlDbService } from 'ng-sl-db';
+import { Observable, Subject, tap } from 'rxjs';
 import { Region } from '../models/Region';
 import { AreeService } from './aree.service';
 

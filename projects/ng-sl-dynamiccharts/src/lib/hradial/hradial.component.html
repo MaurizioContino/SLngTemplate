@@ -1,6 +1,6 @@
 
-
-        <apx-chart *ngIf="barChartOptions"
+<div *ngIf="barChartOptions && barChartOptions.series && barChartOptions.series[0]">
+        <apx-chart
         [series]="barChartOptions!.series!"
         [colors]="barChartOptions!.colors!"
         [chart]="barChartOptions!.chart!"
@@ -19,3 +19,4 @@
         [theme]="barChartOptions!.theme!"
         [responsive]="barChartOptions!.responsive!"
       ></apx-chart>
+    </div>

@@ -7,6 +7,7 @@ import { HgaugeComponent } from './hgauge/hgauge.component';
 import { HlinesComponent } from './hlines/hlines.component';
 import { HradialComponent } from './hradial/hradial.component';
 import { NgApexchartsModule } from 'ng-apexcharts'
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { NgApexchartsModule } from 'ng-apexcharts'
 
   ],
   imports: [
+    CommonModule,
     NgApexchartsModule
   ],
   exports: [

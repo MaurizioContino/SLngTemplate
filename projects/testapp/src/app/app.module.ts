@@ -7,7 +7,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared.module';
 import { dbConfig } from './ObjectStoreConfig';
-import { NgSlDbModule, NgSlDbService } from 'projects/ng-sl-db/src/public-api';
+import { NgSlDbModule } from 'ng-sl-db';
+
 
 
 

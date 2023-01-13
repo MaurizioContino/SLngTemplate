@@ -1,4 +1,5 @@
-import { DBConfig } from 'projects/ng-sl-db/src/public-api';
+
+import { DBConfig } from 'ng-sl-db';
 import { Area } from './models/Area';
 import { Manager } from './models/Manager';
 import { MonitorItem } from './models/Monitoritem';
@@ -121,7 +122,7 @@ export const dbConfig: DBConfig = {
       key:  'Id',
       join: 'IdRegion'
     },
-    
+
   ],
 
   },

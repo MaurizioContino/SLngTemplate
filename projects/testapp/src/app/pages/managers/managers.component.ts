@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { SlLayoutsService } from 'projects/ng-sl-layouts/src/public-api';
+
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { Manager } from '../../models/Manager';

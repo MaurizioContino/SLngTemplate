@@ -1,5 +1,5 @@
-import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db';
-import { NgSlDbService } from 'projects/ng-sl-db/src/public-api';
+import { DBConfig } from 'ngx-indexed-db';
+
 import { Area } from './models/Area';
 import { Manager } from './models/Manager';
 import { Region } from './models/Region';
