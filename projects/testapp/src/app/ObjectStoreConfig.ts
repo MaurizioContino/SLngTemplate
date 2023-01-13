@@ -110,6 +110,10 @@ export const dbConfig: DBConfig = {
       key:  'Id',
     },
     {
+      name: 'Dashboards',
+      key:  'Id',
+    },
+    {
     name: 'Regions',
     key:  'Id',
     substores:[{
@@ -117,6 +121,7 @@ export const dbConfig: DBConfig = {
       key:  'Id',
       join: 'IdRegion'
     },
+    
   ],
 
   },

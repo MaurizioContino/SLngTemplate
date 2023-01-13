@@ -78,6 +78,7 @@ export class NgSlDbService {
     this.GetAll<T>(StoreName, true).subscribe(v=>{
 
       let max = Math.max(...v.map(o => (o as any).Id));
+      if (!isFinite(max)) max = 0;
 
       const transaction = this.db.transaction([StoreName], "readwrite");
       const objectStore = transaction.objectStore(StoreName );

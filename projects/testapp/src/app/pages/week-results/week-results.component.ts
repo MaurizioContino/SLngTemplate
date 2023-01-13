@@ -54,6 +54,7 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
             res.DateStart = dt1;
             res.DateEnd = dt2;
             res.Loaded = false;
+            
             this.FillItemTypes(res);
             values.push(res);
           }
@@ -78,7 +79,8 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
     this.ItemTypes.forEach(typ=>{
       if (item.Values.find(itm=>itm.IdMonitorItem == typ.Id)==undefined){
         const v = new MonitorResultItem(0, typ.Id, typ.Name, item.IdManager, item.Week, 0);
-        item.Values.push(v);
+        v.isnew = true;
+          item.Values.push(v);
       }
     })
     item.Values

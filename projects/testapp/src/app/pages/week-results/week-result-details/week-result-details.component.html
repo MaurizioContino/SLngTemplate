@@ -14,12 +14,12 @@ src="assets/media/backgrounds/calendar.png"
 <i class="fa fa-arrow-right fa-lg"></i>
 {{current.DateEnd | date : 'dd-MM-yyyy'}}
 </div>
-
-<div class="ws-value-list">
-<div *ngFor="let item of current.Values" class="ws-value-container">
-  <div class="wr-details-title">{{item.Name}}</div>
-  <input class="wr-details-input" title="suka" [(ngModel)]="item.Value">
-
-</div>
-</div>
+<ng-scrollbar style="height:calc(100vh - 440px)">
+  <div class="ws-value-list">
+    <div *ngFor="let item of current.Values" class="ws-value-container">
+      <div class="wr-details-title">{{item.Name}}</div>
+      <input class="wr-details-input" title="datainput_{{item.Name}}" [(ngModel)]="item.Value" (change)="UpdateValue(item)">
+    </div>
+  </div>
+</ng-scrollbar>
 

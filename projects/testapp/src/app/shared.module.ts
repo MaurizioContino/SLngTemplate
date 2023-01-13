@@ -18,6 +18,7 @@ import { NgSlDynamicchartsModule } from 'NgSlDynamiccharts';
     ReactiveFormsModule,
     NgScrollbarModule,
     NgSlDynamicchartsModule
+    NgSlCommonControlsModule
   ],
   exports: [
     CommonModule,

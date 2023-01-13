@@ -6,7 +6,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from './avatar/avatar.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NgSelectModule } from '@ng-select/ng-select';
 
+import { DashBoardConfigComponent } from './dashBoardConfig/dashBoardConfig.component'
+import { NgSlLayoutsModule } from 'ngsllayouts';
 
 
 
@@ -15,18 +19,24 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     SearchBarComponent,
     RoundedButtonComponent,
     DataListComponent,
-    AvatarComponent
+    AvatarComponent,
+    DashBoardConfigComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    DragDropModule,
+    NgSelectModule,
+    
+    NgSlLayoutsModule
   ],
   exports: [
     SearchBarComponent,
     RoundedButtonComponent,
     DataListComponent,
-    AvatarComponent
+    AvatarComponent,
+    DashBoardConfigComponent
   ]
 })
 export class NgSlCommonControlsModule { }

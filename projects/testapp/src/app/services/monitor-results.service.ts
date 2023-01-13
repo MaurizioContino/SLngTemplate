@@ -66,6 +66,14 @@ export class MonitorResultsService {
     return ret;
   }
 
+  saveItem(item: MonitorResultItem) {
+    item.updated = new Date().toISOString();
+    this.db.Save(this.store, [item]).subscribe(v=>{
+      this.Load(true)
+    })
+  }
+
+
 
   delete(items: MonitorResults[]) {
     if (items.length>0) {
@@ -73,7 +81,6 @@ export class MonitorResultsService {
       //return this.db.Delete(this.store, results)
     } else{
       return null
-
     }
   }
 
@@ -82,8 +89,7 @@ export class MonitorResultsService {
       const ret = new Subject<MonitorResults[]>();
       items.forEach(r=>{
         this.db.Save(this.store, r.Values).subscribe(v=>{
-
-            this.Load(true)
+          this.Load(true)
         })
       })
       return ret;
