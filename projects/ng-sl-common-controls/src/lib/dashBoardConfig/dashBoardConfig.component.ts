@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core'
 import { Subscription } from 'rxjs'
-import { DashboardGrid, DashboardGridItem } from '../models/DashboardGrid'
-import { DashboardConfigService } from '../services/dashboard-config.service'
+import { DashboardGrid } from './models/DashboardGrid'
+import { DashboardItem } from './models/DashboardItem'
+import { DashboardConfigService } from './services/dashboard-config.service'
 
 @Component({
   selector: 'sl-dashboard-config',
@@ -12,7 +13,7 @@ import { DashboardConfigService } from '../services/dashboard-config.service'
 
 export class DashBoardConfigComponent implements OnInit, OnDestroy {
 
-  
+
   @Input() public children: TemplateRef<any>[] | null = null
   @Input() public childrennames: string[] = []
   @Input() public EditableFeature: string = "DASHCONFIG"
@@ -21,24 +22,24 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   @Output() public DraggingChange = new EventEmitter<boolean>()
 
   public EditMode = false
-  
+
   DashBoardConfig = new DashboardGrid()
   appColNum = 0
   showDialog = false
   subs = new Subscription()
-  private _currCell: DashboardGridItem | undefined
+  private _currCell: DashboardItem | undefined
   private ItemChangedSub: Subscription | null = null;
-  public get currCell(): DashboardGridItem | undefined {
+  public get currCell(): DashboardItem | undefined {
     return this._currCell;
   }
-  public set currCell(value: DashboardGridItem | undefined) {
+  public set currCell(value: DashboardItem | undefined) {
     if (this.ItemChangedSub) {
       this.ItemChangedSub.unsubscribe();
     }
 
-    
+
    if (value) {
-      this._currCell = DashboardGridItem.fromItem(value)
+      this._currCell = DashboardItem.fromItem(value)
 
       var idx =  this.DashBoardConfig.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
       this.DashBoardConfig.Items[idx] = this._currCell;
@@ -53,11 +54,11 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
 
   constructor(private changeref: ChangeDetectorRef, private confPageServ: DashboardConfigService) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
 
     this.confPageServ.DashboardGrids$.subscribe((values) => {
       const v = values.find(v=>v.Id == this.dashboardId)
-      
+
 
       if (v) {
         this.DashBoardConfig = new DashboardGrid();
@@ -66,7 +67,7 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
         this.DashBoardConfig.initializeNewDashboard()
         this.DashBoardConfig.isnew = true;
       }
-      
+
       this.checkFullBoundaries();
       this.changeref.detectChanges()
     })
