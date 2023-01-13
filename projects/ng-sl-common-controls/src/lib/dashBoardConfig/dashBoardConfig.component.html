@@ -3,12 +3,10 @@
 
     <div cdkDropListGroup style="overflow-y: auto; overflow-x: hidden; height: calc(100vh - 70px);">
 
-      <button type="button" class="btn btn-outline-primary mr-2 button-edit" (click)="EditMode=!EditMode"
-        *ngIf="!EditMode" style="position: absolute;margin-left: 30px;z-index: 10000;padding: 5px 5px 5px 10px;">
+      <button type="button" class="button button-circle-white button-edit" (click)="EditMode=!EditMode" *ngIf="!EditMode" >
         <i class="fa-solid fa-pencil mr-1"></i>
       </button>
-      <button type="button" class="btn btn-outline-primary mr-2  button-edit" (click)="saveConf()" *ngIf="EditMode"
-        style="position: absolute;margin-left: 30px;z-index: 10000;padding: 5px 5px 5px 10px;">
+      <button type="button" class="button button-circle-accent button-edit" (click)="saveConf()" *ngIf="EditMode">
         <i class="fa-solid fa-floppy-disk mr-1"></i>
       </button>
 
@@ -18,7 +16,11 @@
           style="position: relative; overflow: visible">
 
           <!-- ne dovrebbe esistere sempre uno solo, il loop mi serve solo x avere il riferimento (esiste un altro modo?)-->
+<<<<<<< HEAD
           <button title="AddControl" *ngIf="dashboardItems(idr, idc).length == 0 && EditMode" class="btn btn-addcontrol"
+=======
+          <button *ngIf="dashboardItems(idr, idc).length == 0 && EditMode" class="button button-addcontrol"
+>>>>>>> 2e01d17ef5d12015343df96d350611ad3f911783
             (click)="addControl(idr, idc)">
             <i class="fa-solid fa-plus fa-2x"></i>
           </button>
@@ -30,9 +32,13 @@
               style="margin: 0px; padding: 0px; background-color: white; z-index: 100;">
               <div class="card-header p-1" *ngIf="EditMode">
                 <div style="display: flex; flex-direction: column;">
-                  <div style="display: flex; flex-direction: row; width: 100%;">
+                  <div style="display: flex; flex-direction: row; width: 100%; align-items: center;">
                     <!--Drag icon-->
+<<<<<<< HEAD
                     <button title="Drag" class="btn btn-primary" cdkDragHandle (mousedown)="dragstart(cell.IdItem)">
+=======
+                    <button class="button button-primary" cdkDragHandle (mousedown)="dragstart(cell.IdItem)">
+>>>>>>> 2e01d17ef5d12015343df96d350611ad3f911783
                       <i class="fa-solid fa-arrows-alt"></i>
                     </button>
 
@@ -43,11 +49,19 @@
                         {{ childrennames[idx] }}
                       </ng-option>
                     </ng-select>
+<<<<<<< HEAD
                     <button title="SetupControl" class="btn btn-primary" (click)="setupControl(cell)">
                       <i class="fa-solid fa-pencil"></i>
                     </button>
                     <!-- Elimina controllo -->
                     <button title="removeControl" class="btn btn-danger" (click)="removeControl(cell.IdItem)">
+=======
+                    <button class="button button-primary" (click)="setupControl(cell)">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <!-- Elimina controllo -->
+                    <button class="button button-danger" (click)="removeControl(cell.IdItem)">
+>>>>>>> 2e01d17ef5d12015343df96d350611ad3f911783
                       <i class="fa-solid fa-trash"></i>
                     </button>
                   </div>
