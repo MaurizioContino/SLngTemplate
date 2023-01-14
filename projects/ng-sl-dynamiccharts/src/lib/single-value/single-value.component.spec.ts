@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ValuestripComponent } from './valuestrip.component';
+import { SingleValueComponent } from './single-value.component';
 
-describe('ValuestripComponent', () => {
-  let component: ValuestripComponent;
-  let fixture: ComponentFixture<ValuestripComponent>;
+describe('SingleValueComponent', () => {
+  let component: SingleValueComponent;
+  let fixture: ComponentFixture<SingleValueComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ValuestripComponent ]
+      declarations: [ SingleValueComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ValuestripComponent);
+    fixture = TestBed.createComponent(SingleValueComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

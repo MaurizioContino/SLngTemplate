@@ -1,27 +1,30 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { DashboardItem } from 'ngslcommoncontrols';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-valuestrip',
-  templateUrl: './valuestrip.component.html',
-  styleUrls: ['./valuestrip.component.scss'],
+  selector: 'app-item-value',
+  templateUrl: './item-value.component.html',
+  styleUrls: ['./item-value.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ValuestripComponent  implements OnInit, OnDestroy {
+export class ItemValueComponent {
+
   @Input() config: DashboardItem | undefined
   destroy$ = new Subject();
-  Data : number[]= [1, 2, 4, 8]
-
+  data : number[]= []
   constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit(): void {
     this.config!.icon = "BarChart.png"
-    
-    this.config!.Background = 'transparent'
+
     this.config?.ItemChanged$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
-      
+      this.data = [1]
       this.cdr.detectChanges();
     })
+
+
+    
   }
   ngOnDestroy(): void {
     this.destroy$.next(null);

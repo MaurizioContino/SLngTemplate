@@ -8,8 +8,8 @@ export class DashboardItem {
   configurator = false;
   idComponent: number;
   customData: any = {};
-  private _width: number = 600;
-  private _height: number = 400;
+  private _width: number = 6;
+  private _height: number = 4;
 
   ItemChanged$: Subject<DashboardItem>;
   private _title: string = "";

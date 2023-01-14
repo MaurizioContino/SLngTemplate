@@ -9,7 +9,7 @@ import { HradialComponent } from './hradial/hradial.component';
 import { NgApexchartsModule } from 'ng-apexcharts'
 import { CommonModule } from '@angular/common';
 import { HbarsConfigComponent } from './hbars-config/hbars-config.component';
-import { DataStripComponent } from './data-strip/data-strip.component';
+import { SingleValueComponent } from './single-value/single-value.component';
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import { DataStripComponent } from './data-strip/data-strip.component';
     HlinesComponent,
     HradialComponent,
     HbarsConfigComponent,
-    DataStripComponent,
+    SingleValueComponent,
 
   ],
   imports: [
@@ -37,7 +37,7 @@ import { DataStripComponent } from './data-strip/data-strip.component';
     HradialComponent,
     HbarsConfigComponent,
     NgApexchartsModule,
-    DataStripComponent,
+    SingleValueComponent,
 
   ]
 })

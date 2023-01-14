@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataStripComponent } from './data-strip.component';
+import { ItemValueComponent } from './item-value.component';
 
-describe('DataStripComponent', () => {
-  let component: DataStripComponent;
-  let fixture: ComponentFixture<DataStripComponent>;
+describe('ItemValueComponent', () => {
+  let component: ItemValueComponent;
+  let fixture: ComponentFixture<ItemValueComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DataStripComponent ]
+      declarations: [ ItemValueComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DataStripComponent);
+    fixture = TestBed.createComponent(ItemValueComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

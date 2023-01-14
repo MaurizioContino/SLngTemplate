@@ -6,7 +6,7 @@ import { ItemCountComponent } from './charts/item-count/item-count.component';
 import { ChartFilterComponent } from './charts/chart-filter/chart-filter.component';
 import { NgSlDynamicchartsModule } from 'NgSlDynamiccharts';
 import { DashboardChartHBarComponent } from '../controls/dashboard-chart-hbar/dashboard-chart-hbar.component';
-import { ValuestripComponent } from './valuestrip/valuestrip.component'
+import { ItemValueComponent } from './item-value/item-value.component';
 @NgModule({
 
   declarations: [
@@ -14,7 +14,7 @@ import { ValuestripComponent } from './valuestrip/valuestrip.component'
     ItemCountComponent,
     ChartFilterComponent,
     DashboardChartHBarComponent,
-    ValuestripComponent
+    ItemValueComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +26,7 @@ import { ValuestripComponent } from './valuestrip/valuestrip.component'
     ItemCountComponent,
     ChartFilterComponent,
     DashboardChartHBarComponent,
-    ValuestripComponent
+    ItemValueComponent,
 
   ]
 })
