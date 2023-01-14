@@ -16,8 +16,7 @@ export class ValuestripComponent  implements OnInit, OnDestroy {
   constructor(private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {
     this.config!.icon = "BarChart.png"
-    this.config!.width = 10;
-    this.config!.height = 3;
+    
     this.config!.Background = 'transparent'
     this.config?.ItemChanged$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
       

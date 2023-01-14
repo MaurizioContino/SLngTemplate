@@ -9,7 +9,7 @@ import { TabItemDirective } from './tab-item.directive';
 })
 export class TabHeaderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
-    console.log(this.contentChildren);
+    
   }
   @Input() Data: any;
  

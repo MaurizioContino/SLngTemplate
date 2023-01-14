@@ -8,6 +8,8 @@ export class DashboardItem {
   configurator = false;
   idComponent: number;
   customData: any = {};
+  private _width: number = 600;
+  private _height: number = 400;
 
   ItemChanged$: Subject<DashboardItem>;
   private _title: string = "";
@@ -20,7 +22,6 @@ export class DashboardItem {
     this.ItemChanged$.next(this);
   }
 
-  private _width: number = 0;
   public get width(): number {
     return this._width;
   }
@@ -28,7 +29,6 @@ export class DashboardItem {
     this._width =  value;
     this.ItemChanged$.next(this);
   }
-  private _height: number = 100;
   public get height(): number {
     return this._height;
   }

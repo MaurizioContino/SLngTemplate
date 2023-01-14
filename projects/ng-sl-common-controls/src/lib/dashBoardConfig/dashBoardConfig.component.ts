@@ -172,7 +172,7 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   }
 
   MoveControl(r: number, c: number, e: any) {
-    console.log(e);
+    
     const id = Number.parseInt(e.item.element.nativeElement.id.split('_')[1])
     const itm = this.DashBoardConfig.findById(id) as any
     itm.top = r
