@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DashboardItem } from 'ngslcommoncontrols';
+//import { DashboardItem } from 'ngslcommoncontrols';
 
 @Component({
   selector: 'sl-hbars-config',
@@ -7,5 +7,5 @@ import { DashboardItem } from 'ngslcommoncontrols';
   styleUrls: ['./hbars-config.component.css']
 })
 export class HbarsConfigComponent {
-  @Input() config: DashboardItem | undefined
+  @Input() config: any | undefined
 }

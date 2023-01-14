@@ -1,6 +1,6 @@
 import { IDBModel } from "ng-sl-db";
 
-export class MonitorResultItem implements IDBModel {
+export class  MonitorResultItem implements IDBModel {
 
 
   isnew: boolean = false;
@@ -10,14 +10,16 @@ export class MonitorResultItem implements IDBModel {
 
   Id: number;
   IdMonitorItem: number;
+  year: number;
   Week: number;
   IdManager: number;
   Name: string;
   Value: number;
-  constructor(Id: number, IdMonitorItem: number, Name: string, IdManager: number, week: number, Value: number) {
+  constructor(Id: number, IdMonitorItem: number, Name: string, IdManager: number, year: number, week: number, Value: number) {
     this.Id = Id;
     this.IdMonitorItem = IdMonitorItem;
     this.IdManager = IdManager
+    this.year = year;
     this.Week = week;
     this.Value = Value;
     this.Name = Name

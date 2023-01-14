@@ -1,8 +1,22 @@
+<h1>Viste temporali</h1>
+<sl-tab-header>
+  <sl-tab-item slTabItem>
+    Visualizza i dati per l'anno {{mainfilter.year}}
+    <i class="fa fa-chevron-down" (click)="showYears=!showYears"></i>
+    <sl-panel [visible]="showYears" [Width]="300" [Height]="300">
+      <div class="year-list">
+        <div class="year" *ngFor="let y of years" (click)="mainfilter.year=y;showYears=false">{{y}}</div>
+    </div>
+    </sl-panel>
+  </sl-tab-item>
+  
+</sl-tab-header>
 
 <sl-dashboard-config
   [children]="[t0, t1, t2, t3]"
   [childrennames]="listObject"
   dashboardName="Operation"
+  [Injections]="mainfilter"
 >
 </sl-dashboard-config>
 
@@ -10,13 +24,12 @@
 <!-- -->
 
 <ng-template #t0 let-cell>
- <sl-dashboard-chart-hbar [config]="cell"></sl-dashboard-chart-hbar>
+ <sl-dashboard-chart-hbar [config]="cell"></sl-dashboard-chart-hbar> 
 
 </ng-template>
 
 <ng-template #t1 let-cell>
-  <!-- <lib-dashboard-component [cell]="cell"></lib-dashboard-component> -->
-  BBB
+  <app-valuestrip [config]="cell"></app-valuestrip>
 </ng-template>
 
 <ng-template #t2 let-cell>

@@ -91,12 +91,10 @@
 
 .card {
   position: absolute;
-  border: 1px solid whitesmoke;
   margin: 0px;
   padding: 0px;
-  background-color: white;
   z-index: 100;
-
+  margin-right:10px;
   border-radius: 10px;
     .card-header {
       position: absolute;
@@ -267,24 +265,25 @@
   flex-direction: row;
   justify-content: space-around;
   margin-top: 20px;
+  width: calc(100% - 20px);
+  padding: 0px 10px;
 }
-.config-values {
-  width: 220px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
+
 .size-value {
   width: 60px;
+  input {
+    width: calc(100% - 30px);
+  }
 }
 
 .config-title {
-  width: 600px;
+  
   display: flex;
+  flex: 1 0 auto;
   flex-direction: column;
   text-align: center;
   input {
-    width: 600px;
+    width: calc(100% - 30px);
   }
 }
 
@@ -296,7 +295,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(100vh - 70px);
-  margin-top: 3px;
+  margin-top: 0px;
   background-color: rgb(233, 234, 243);
   padding-top:10px
 }

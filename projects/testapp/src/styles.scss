@@ -16,3 +16,19 @@ body {
   overflow: hidden;
 }
 
+
+.border-text {
+  border: 1px solid silver;
+  border-radius: 5px;
+ 
+  padding:10px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Roboto','Open Sans', sans-serif;
+}
+
+input[type='radio'] {
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+}

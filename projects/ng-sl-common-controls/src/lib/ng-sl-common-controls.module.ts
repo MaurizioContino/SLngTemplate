@@ -11,9 +11,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import { DashBoardConfigComponent } from './dashBoardConfig/dashBoardConfig.component'
 import { NgSlLayoutsModule } from 'ngsllayouts';
-import { DashboardChartHBarComponent } from './dashboard-controls/dashboard-chart-hbar/dashboard-chart-hbar.component';
-import { NgSlDynamicchartsModule } from 'NgSlDynamiccharts';
-
+import { TabHeaderComponent } from './tab-header/tab-header.component';
+import { TabItemComponent } from './tab-header/tab-item/tab-item.component';
+import { TabItemDirective } from './tab-header/tab-item.directive';
+import { PanelComponent } from './panel/panel.component';
 
 
 
@@ -24,7 +25,11 @@ import { NgSlDynamicchartsModule } from 'NgSlDynamiccharts';
     DataListComponent,
     AvatarComponent,
     DashBoardConfigComponent,
-    DashboardChartHBarComponent
+    TabHeaderComponent,
+    TabItemComponent,
+    TabItemDirective,
+    PanelComponent,
+    
 
   ],
   imports: [
@@ -33,9 +38,7 @@ import { NgSlDynamicchartsModule } from 'NgSlDynamiccharts';
     NgScrollbarModule,
     DragDropModule,
     NgSelectModule,
-    NgSlDynamicchartsModule,
     NgSlLayoutsModule,
-
   ],
   exports: [
     SearchBarComponent,
@@ -43,8 +46,11 @@ import { NgSlDynamicchartsModule } from 'NgSlDynamiccharts';
     DataListComponent,
     AvatarComponent,
     DashBoardConfigComponent,
-    DashboardChartHBarComponent
-
+    TabHeaderComponent,
+    TabItemComponent,
+    TabItemDirective,
+    PanelComponent,
+    
   ]
 })
 export class NgSlCommonControlsModule { }

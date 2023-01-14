@@ -20,7 +20,7 @@ import { NgSlLayoutsModule } from 'ngsllayouts';
     ReactiveFormsModule,
     NgScrollbarModule,
     NgSlDynamicchartsModule,
-    NgSlCommonControlsModule
+    NgSlCommonControlsModule,
   ],
   exports: [
     CommonModule,

@@ -244,6 +244,40 @@
           }
         }
       }
+    },
+    
+    "NgSlDashboardComponents": {
+      "projectType": "library",
+      "root": "projects/ng-sl-dashboard-components",
+      "sourceRoot": "projects/ng-sl-dashboard-components/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ng-sl-dashboard-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-sl-dashboard-components/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng-sl-dashboard-components/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ng-sl-dashboard-components/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }

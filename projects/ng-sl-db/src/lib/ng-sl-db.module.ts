@@ -5,7 +5,7 @@ import { HttpClientModule} from '@angular/common/http';
 
 
 import { DBConfig, DB_CONFIG } from './DBConfig';
-import { NgSlDbService } from 'ng-sl-db';
+import { NgSlDbService } from './ng-sl-db.service';
 
 
 

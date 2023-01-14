@@ -1,26 +1,26 @@
-
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { DashboardItem } from 'ngslcommoncontrols';
 import { Subject, takeUntil } from 'rxjs';
-import { DashboardItem } from '../../dashBoardConfig/models/DashboardItem';
 
 @Component({
-  selector: 'sl-dashboard-chart-hbar',
-  templateUrl: './dashboard-chart-hbar.component.html',
-  styleUrls: ['./dashboard-chart-hbar.component.css'],
+  selector: 'app-valuestrip',
+  templateUrl: './valuestrip.component.html',
+  styleUrls: ['./valuestrip.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardChartHBarComponent implements OnInit, OnDestroy {
-
+export class ValuestripComponent  implements OnInit, OnDestroy {
   @Input() config: DashboardItem | undefined
   destroy$ = new Subject();
-  data : number[]= []
-  constructor(private cdr: ChangeDetectorRef) {}
+  Data : number[]= [1, 2, 4, 8]
 
+  constructor(private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {
     this.config!.icon = "BarChart.png"
-
+    this.config!.width = 10;
+    this.config!.height = 3;
+    this.config!.Background = 'transparent'
     this.config?.ItemChanged$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
-      this.data = [1]
+      
       this.cdr.detectChanges();
     })
   }

@@ -80,18 +80,18 @@ const managers = [
   ];
   const results = [
 
-  new MonitorResultItem(1, 1,'Aperte', 1, 1, 12),
-  new MonitorResultItem(2, 2, 'ToolBox_Aperte', 1, 1, 10),
-  new MonitorResultItem(3, 3, 'Sepa_aperte', 1, 1, 10),
-  new MonitorResultItem(4, 4, 'Business', 1, 1, 2),
-  new MonitorResultItem(5, 5, 'Sepa_Business', 1, 1, 1),
-  new MonitorResultItem(6, 6, 'NonOperative', 1, 1, 0),
-  new MonitorResultItem(7, 7, 'Sepa_non_operative', 1, 1, 1),
-  new MonitorResultItem(8, 8, 'Pross_apertura', 1, 1, 4),
-  new MonitorResultItem(9, 9, 'Toolbox_pa', 1, 1, 2),
-  new MonitorResultItem(10, 10, 'Sepa_pa', 1, 1, 0),
-  new MonitorResultItem(11, 11, 'Sepa_Attivi', 1, 1, 14),
-  new MonitorResultItem(12, 12, 'Toolbox_Attivi', 1, 1, 2)
+  new MonitorResultItem(1, 1,'Aperte', 1, 2023, 1, 12),
+  new MonitorResultItem(2, 2, 'ToolBox_Aperte', 1, 2023, 1, 10),
+  new MonitorResultItem(3, 3, 'Sepa_aperte', 1, 2023, 1, 10),
+  new MonitorResultItem(4, 4, 'Business', 1, 2023, 1, 2),
+  new MonitorResultItem(5, 5, 'Sepa_Business', 1, 2023, 1, 1),
+  new MonitorResultItem(6, 6, 'NonOperative', 1, 2023, 1, 0),
+  new MonitorResultItem(7, 7, 'Sepa_non_operative', 1, 2023, 1, 1),
+  new MonitorResultItem(8, 8, 'Pross_apertura', 1, 2023, 1, 4),
+  new MonitorResultItem(9, 9, 'Toolbox_pa', 1, 2023, 1, 2),
+  new MonitorResultItem(10, 10, 'Sepa_pa', 1, 2023, 1, 0),
+  new MonitorResultItem(11, 11, 'Sepa_Attivi', 1, 2023, 1, 14),
+  new MonitorResultItem(12, 12, 'Toolbox_Attivi', 1, 2023, 1, 2)
   ]
 
 export const dbConfig: DBConfig = {

@@ -78,7 +78,7 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
   FillItemTypes(item: MonitorResults ) {
     this.ItemTypes.forEach(typ=>{
       if (item.Values.find(itm=>itm.IdMonitorItem == typ.Id)==undefined){
-        const v = new MonitorResultItem(0, typ.Id, typ.Name, item.IdManager, item.Week, 0);
+        const v = new MonitorResultItem(0, typ.Id, typ.Name, item.IdManager,2023, item.Week, 0);
         v.isnew = true;
           item.Values.push(v);
       }

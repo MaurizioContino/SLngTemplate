@@ -12,6 +12,10 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
+      "NgSlDashboardComponents": [
+        "dist/ng-sl-dashboard-components"
+      ],
+      
       "NgSlDynamiccharts": [
         //"dist/ng-sl-dynamiccharts"
         "projects/ng-sl-dynamiccharts/src/public-api.ts"

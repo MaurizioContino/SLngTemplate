@@ -1,0 +1,11 @@
+<div class="filter-container" *ngIf="filter">
+    <label for="anno">Anno</label>
+    <input id="anno" class="border-text" [(ngModel)]="filter.year" >
+    
+    <input type="radio" id="weekly" name="filterperiod" value="weekly" [(ngModel)]="filter.reportType">
+    <label for="weekly" class="radio">weekly</label>
+    <input type="radio" id="yearly" name="filterperiod" value="yearly" [(ngModel)]="filter.reportType">
+    <label for="yearly" class="radio">yearly</label>
+    <input type="radio" id="period" name="filterperiod" value="period" [(ngModel)]="filter.reportType">
+    <label for="period" class="radio">period</label>
+    </div>

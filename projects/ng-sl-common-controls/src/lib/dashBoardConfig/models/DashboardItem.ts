@@ -6,6 +6,9 @@ export class DashboardItem {
   left: number;
   icon = ''
   configurator = false;
+  idComponent: number;
+  customData: any = {};
+
   ItemChanged$: Subject<DashboardItem>;
   private _title: string = "";
 
@@ -33,10 +36,15 @@ export class DashboardItem {
     this._height = value;
     this.ItemChanged$.next(this);
   }
-  idComponent: number;
-
-  customData: any = {};
-
+  
+  private _Background: string = 'white';
+  public get Background(): string {
+    return this._Background;
+  }
+  public set Background(value: string) {
+    this._Background = value;
+    this.ItemChanged$.next(this);
+  }
 
   constructor(top: number, left: number, height: number, width: number ){
     this.ItemChanged$ = new Subject<DashboardItem>();

@@ -18,7 +18,7 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   @Input() public childrennames: string[] = []
   @Input() public EditableFeature: string = "DASHCONFIG"
   @Input() dashboardId: number = 1;
-
+  @Input() Injections : any = null;
   @Output() public DraggingChange = new EventEmitter<boolean>()
 
   public EditMode = false
@@ -109,10 +109,22 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
         this.DashBoardConfig.isnew = true;
       }
 
+      this.injectParameters(this.DashBoardConfig);
       this.checkFullBoundaries();
       this.changeref.detectChanges()
     })
     this.confPageServ.Load()
+  }
+  injectParameters(v: DashboardGrid){
+    if (this.Injections) {
+      v.Items.forEach(itm=>{
+        if (!itm.customData) itm.customData = {}
+        Object.keys(this.Injections).forEach(key=>{
+          itm.customData[key] = this.Injections[key]
+        })
+        
+      })
+    }
   }
   ngOnDestroy(): void {
     if (this.ItemChangedSub) {

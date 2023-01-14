@@ -1,0 +1,7 @@
+
+<div class="data-strip">
+    <div *ngFor="let itm of Data" class="strip-item">
+
+        <ng-container [ngTemplateOutlet]="childtemplate" [ngTemplateOutletContext]="{$implicit:itm}"></ng-container>
+    </div>
+</div>
