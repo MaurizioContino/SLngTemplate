@@ -1,0 +1,50 @@
+.dashboard-master-icon {
+    border-radius: 50%;
+    background-color: silver;
+    padding: 20px;
+  }
+  
+  
+  .dashboard-master-col {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  
+  }
+  .dashboard-master-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  
+  .dashboard-master-name {
+    padding: 10px 10px 0px 0px;
+    font-weight: bold;
+  }
+  
+  
+  
+  .dashboard-master-info {
+    width: 300px !important;
+    font-family: Inter;
+  }
+  
+  .dashboard-master-commands {
+  
+    padding: 40px 10px;
+  }
+  
+  .dashboard-master-command {
+    cursor: pointer;
+  }
+  
+  .dashboard-master-subtitle {
+    background-color: transparent;
+    padding-top:3px;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 900;
+    opacity: 0.8;
+  }
+  

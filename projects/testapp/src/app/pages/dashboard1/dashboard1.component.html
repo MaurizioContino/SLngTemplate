@@ -1,4 +1,4 @@
-<h1>Viste temporali</h1>
+<h1 *ngIf="current">{{current.Description}}</h1>
 <sl-tab-header>
   <sl-tab-item slTabItem>
     Visualizza i dati per l'anno {{mainfilter.year}}
@@ -15,7 +15,7 @@
 <sl-dashboard-config
   [children]="[t0, t1, t2, t3]"
   [childrennames]="listObject"
-  dashboardName="Operation"
+  [DashBoardConfig]="current"
   [Injections]="mainfilter"
 >
 </sl-dashboard-config>

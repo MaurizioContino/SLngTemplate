@@ -6,7 +6,7 @@ const routes: Routes = [
     path: 'dashboards',
     children: [
       {
-        path: 'dashboard1',
+        path: 'dashboard1/:id',
         loadChildren: () =>
           import('./pages/dashboard1/dashboard1.module').then(
             (m) => m.Dashboard1Module
@@ -29,6 +29,8 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/regions/regions.module').then((m) => m.RegionsModule),
       },
+      { path: 'dashboards', loadChildren: () => import('./pages/dashboards/dashboards.module').then(m => m.DashboardsModule) },
+
     ],
   },
   { path: 'WeekResults', loadChildren: () => import('./pages/week-results/week-results.module').then(m => m.WeekResultsModule) },

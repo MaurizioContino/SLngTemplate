@@ -129,6 +129,10 @@ export const dbConfig: DBConfig = {
   {
     name: 'Managers',
     key:  'Id'
+  },
+  {
+    name: 'Dashboards',
+    key:  'Id'
   }],
   Prefill:{
     Regions: regions,

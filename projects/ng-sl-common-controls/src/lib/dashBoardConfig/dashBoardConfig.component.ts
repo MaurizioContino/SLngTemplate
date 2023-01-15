@@ -23,7 +23,7 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
 
   public EditMode = false
 
-  DashBoardConfig = new DashboardGrid()
+  @Input() DashBoardConfig :DashboardGrid | undefined = new DashboardGrid()
   appColNum = 0
   showDialog = false
   subs = new Subscription()
@@ -61,8 +61,8 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   }
   public set currwidth(value) {
     this._currwidth = value
-    var idx =  this.DashBoardConfig.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
-    this.DashBoardConfig.Items[idx].width = value;
+    var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+    this.DashBoardConfig!.Items[idx].width = value;
     this._currCell!.width = value;
     this.changeref.detectChanges();
   }
@@ -72,8 +72,8 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   }
   public set currheight(value) {
     this._currheight = value
-    var idx =  this.DashBoardConfig.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
-    this.DashBoardConfig.Items[idx].height = value;
+    var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+    this.DashBoardConfig!.Items[idx].height = value;
     this._currCell!.height = value;
     this.changeref.detectChanges();
   }
@@ -84,8 +84,8 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   }
   public set currtitle(value) {
     this._title = value
-    var idx =  this.DashBoardConfig.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
-    this.DashBoardConfig.Items[idx].title = value;
+    var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+    this.DashBoardConfig!.Items[idx].title = value;
     this._currCell!.title = value;
     this.changeref.detectChanges();
   }
@@ -96,28 +96,22 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-
-    this.confPageServ.DashboardGrids$.subscribe((values) => {
-      const v = values.find(v=>v.Id == this.dashboardId)
-
-
-      if (v) {
-        this.DashBoardConfig = new DashboardGrid();
-        this.DashBoardConfig.fromObject(v)
-      } else {
-        this.DashBoardConfig.initializeNewDashboard()
-        this.DashBoardConfig.isnew = true;
-      }
-
-      this.injectParameters(this.DashBoardConfig);
+    debugger
+    if (this.DashBoardConfig) {
+      debugger
+      const tmp = new DashboardGrid();
+      tmp.fromObject(this.DashBoardConfig)
+      this.DashBoardConfig = tmp;
+      this.injectParameters(this.DashBoardConfig!);
       this.checkFullBoundaries();
       this.changeref.detectChanges()
-    })
-    this.confPageServ.Load()
+    }
   }
   injectParameters(v: DashboardGrid){
     if (this.Injections) {
+      if (!v.Items) v.Items = [];
       v.Items.forEach(itm=>{
+
         if (!itm.customData) itm.customData = {}
         Object.keys(this.Injections).forEach(key=>{
           itm.customData[key] = this.Injections[key]
@@ -133,13 +127,13 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   }
 
   addControl(x: number, y: number) {
-    var itm = this.DashBoardConfig.AddControl(x, y, 3, 2)
+    var itm = this.DashBoardConfig!.AddControl(x, y, 3, 2)
     this.checkBoundaries(itm);
     this.changeref.detectChanges()
   }
 
   removeControl(id: number) {
-    this.DashBoardConfig.RemoveControlByID(id)
+    this.DashBoardConfig!.RemoveControlByID(id)
     this.changeref.detectChanges()
   }
 
@@ -154,12 +148,12 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
 
 
     this.checkFullBoundaries();
-    this.DashBoardConfig.updated = new Date().toISOString();
-    for(var idx=0;idx < this.DashBoardConfig.Items.length; idx++){
+    this.DashBoardConfig!.updated = new Date().toISOString();
+    for(var idx=0;idx < this.DashBoardConfig!.Items.length; idx++){
       // Semplifico l'elemento che verrà salvato
-      this.DashBoardConfig.Items[idx] = this.DashBoardConfig.Items[idx].toItem()
+      this.DashBoardConfig!.Items[idx] = this.DashBoardConfig!.Items[idx].toItem()
     }
-    this.confPageServ.save(this.DashBoardConfig).subscribe((v) => {
+    this.confPageServ.save(this.DashBoardConfig!).subscribe((v) => {
       if (v) {
         this.EditMode = false
         this.changeref.detectChanges()
@@ -168,13 +162,13 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   }
 
   dashboardItems(r: any, c: any): any[] {
-    return this.DashBoardConfig.findByPosition(r, c)
+    return this.DashBoardConfig!.findByPosition(r, c)
   }
 
   MoveControl(r: number, c: number, e: any) {
     
     const id = Number.parseInt(e.item.element.nativeElement.id.split('_')[1])
-    const itm = this.DashBoardConfig.findById(id) as any
+    const itm = this.DashBoardConfig!.findById(id) as any
     itm.top = r
     itm.left = c
     this.checkBoundaries(itm);
@@ -182,18 +176,18 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   }
 
   checkBoundaries(itm: any) {
-    // this.DashBoardConfig.rows a volte i valori arrivano come stringa, per evitare errori, forzo un cast to int per ogni situazione
-    const v = parseInt(this.DashBoardConfig.rows.toString())
+    // this.DashBoardConfig!.rows a volte i valori arrivano come stringa, per evitare errori, forzo un cast to int per ogni situazione
+    const v = parseInt(this.DashBoardConfig!.rows.toString())
     const t = parseInt(itm.top.toString())
     const h = parseInt(itm.height.toString())
-    if (t + h > v) this.DashBoardConfig.rows = t + h + 3;
+    if (t + h > v) this.DashBoardConfig!.rows = t + h + 3;
     this.checkFullBoundaries();
 
   }
 
   checkFullBoundaries() {
     var max = 7;
-    this.DashBoardConfig.Items.forEach(i => {
+    this.DashBoardConfig!.Items.forEach(i => {
       if (i) {
         if (!i.height) i.height = 3;
         const t = parseInt(i.top.toString())
@@ -202,16 +196,16 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
       }
     });
 
-    const vn = parseInt(this.DashBoardConfig.rows.toString())
+    const vn = parseInt(this.DashBoardConfig!.rows.toString())
     if (max > 10) {
       if (this.EditMode) {
-        this.DashBoardConfig.rows = max + 3;
+        this.DashBoardConfig!.rows = max + 3;
       } else {
-        this.DashBoardConfig.rows = max;
+        this.DashBoardConfig!.rows = max;
       }
 
     } else {
-      this.DashBoardConfig.rows = 10;
+      this.DashBoardConfig!.rows = 10;
     }
 
 
@@ -220,7 +214,7 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
 
   GetCols() {
     var ret = [];
-    for (var i = 0; i < this.DashBoardConfig.cols; i++) {
+    for (var i = 0; i < this.DashBoardConfig!.cols; i++) {
       ret.push(i * 10);
     }
     return ret;
@@ -228,7 +222,7 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
 
   GetRows() {
     var ret = [];
-    for (var i = 0; i < this.DashBoardConfig.rows; i++) {
+    for (var i = 0; i < this.DashBoardConfig!.rows; i++) {
       ret.push(i * 10);
     }
     return ret;
@@ -244,7 +238,7 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   dragend(idx: number) {
     this.DraggingChange.emit(false)
     this.dragging = ''
-    const itm = this.DashBoardConfig.Items[idx - 1];
+    const itm = this.DashBoardConfig!.Items[idx - 1];
     if (itm) {
       this.checkBoundaries(itm);
     }
@@ -258,8 +252,8 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   }
 
   editclose(currCell: DashboardItem) {
-    var idx =  this.DashBoardConfig.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
-    this.DashBoardConfig.Items[idx].Update(currCell);
+    var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+    this.DashBoardConfig!.Items[idx].Update(currCell);
     this._currCell = undefined;
     this.changeref.detectChanges();
 

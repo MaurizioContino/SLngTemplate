@@ -24,9 +24,9 @@ export class MonitorItemtypesService {
   }
 
   Load(reload: boolean = false) {
-    this.db.Filter(this.store).subscribe(v=>{
-      console.log("AAA")
-    })
+    // this.db.Filter(this.store).subscribe(v=>{
+    //   console.log("AAA")
+    // })
 
     if (reload || this.results == null) {
       

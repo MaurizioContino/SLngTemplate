@@ -13,6 +13,7 @@ export class NgSlDbService {
 
   remotes: any = {};
   db: any;
+  ready$ = new Subject();
   constructor(@Inject(DB_CONFIG) private config: DBConfig, private http: HttpClient) {
     this.openDatabase();
   }
@@ -24,6 +25,7 @@ export class NgSlDbService {
     };
     request.onsuccess = (event: any) => {
       this.db = event.target.result;
+      this.ready$.next(true);
     };
     request.onupgradeneeded = (event: any) => {
       this.db = event.target.result;
@@ -145,9 +147,8 @@ export class NgSlDbService {
   Save<T>(StoreName: string,Items: T[]):Observable<any> {
     const ret = new Subject<any>();
     const waits : Observable<any>[] = [];
-
+    
     this.GetAll<T>(StoreName, true).subscribe(v=>{
-
       let max = Math.max(...v.map(o => (o as any).Id));
       if (!isFinite(max)) max = 0;
 

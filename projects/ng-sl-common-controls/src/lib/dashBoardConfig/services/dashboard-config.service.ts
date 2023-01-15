@@ -36,6 +36,7 @@ export class DashboardConfigService {
 
   save(dashboardGrids: DashboardGrid):Observable<DashboardGrid[]> {
     const ret = new Subject<DashboardGrid[]>();
+    
      this.db.Save(this.store, [dashboardGrids]).subscribe(v=>{
       this.db.GetAll<DashboardGrid>(this.store).subscribe(results=>{
         this.DashboardGrids = results;
