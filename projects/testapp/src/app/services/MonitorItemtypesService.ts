@@ -24,16 +24,16 @@ export class MonitorItemtypesService {
   }
 
   Load(reload: boolean = false) {
-
+    this.db.Filter(this.store).subscribe(v=>{
+      console.log("AAA")
+    })
 
     if (reload || this.results == null) {
+      
       this.db.GetAll<MonitorItem>(this.store).subscribe(items=>{
         this.results = items;
-        
         this.results$.next(items);
-
       })
-
     }
     else {
       this.results$.next(this.results);
@@ -41,6 +41,12 @@ export class MonitorItemtypesService {
 
   }
 
+  Filter() {
+    this.db.GetAll<MonitorItem>(this.store).subscribe(items=>{
+      this.results = items;
+      this.results$.next(items);
+    })
+  }
 
 
   save(items: MonitorItem[]):Observable<MonitorItem[]> {

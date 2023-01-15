@@ -36,8 +36,6 @@ export class ItemValueComponent {
     } else {
       this.ItemValueParameters = this.config!.customData.ItemValueParameters;
     }
-    
-    
 
     this.config?.ItemChanged$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
       this.data = [1]

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
 import {  Observable, Subject } from 'rxjs';
 import { DBConfig, DB_CONFIG } from './DBConfig';
+import { filterItem } from './FilterItem';
 import { IDBModel } from './IDBModel';
 
 
@@ -69,6 +70,76 @@ export class NgSlDbService {
 
 
     return ret;
+  }
+
+  Filter<T>(StoreName: string, filters: filterItem[], getdeleted=false):Observable<T[]> {
+    
+    const ret = new Subject<T[]>();
+    const transaction = this.db.transaction([StoreName]);
+    const objectStore = transaction.objectStore(StoreName);
+    const request = objectStore.openCursor();
+    const retdata = []
+    request.onerror = (event: any) => {
+      ret.error(request);
+    };
+    request.onsuccess = (event: any) => {
+      if (event.srcElement.result) {
+        const itm = JSON.parse(event.srcElement.result.value.data)
+        let ok = true;
+        filters.forEach(f=>{
+          if (itm[f.field]){
+            if (!this.checkFilter(itm, f)){
+              ok = false;
+            }
+          } else {
+            ok = false;
+          }
+        })
+        if (ok) retdata.push(itm);
+        console.log(event.srcElement.result.value);
+      }
+      const cursor = event.target.result;
+      if (cursor) {
+        // cursor.value contains the current record being iterated through
+        // this is where you'd do something with the result
+        cursor.continue();
+      } else {
+        // no more results
+      }
+     
+     
+    };
+
+
+    return ret;
+  }
+
+  checkFilter(value: any, filter: filterItem): boolean {
+    switch(filter.operator) {
+      case '<':
+        if (value[filter.field] < filter.value) return true;
+        break;        
+      case '>':
+        if (value[filter.field] > filter.value) return true;
+        break;        
+      case '>=':
+        if (value[filter.field] >= filter.value) return true;
+        break;        
+      case '<=':
+        if (value[filter.field] <= filter.value) return true;
+        break;        
+      case '!=':
+        if (value[filter.field] != filter.value) return true;
+        break;        
+      case '==':
+        if (value[filter.field] == filter.value) return true;
+        break;        
+      default:
+        return false
+
+
+      }
+      return false
   }
 
   Save<T>(StoreName: string,Items: T[]):Observable<any> {
