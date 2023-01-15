@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { MonitorItem } from '../../models/Monitoritem';
 import { MonitorResultItem, MonitorResults } from '../../models/MonitorResults';
-import { MonitorItemsService } from '../../services/monitor-items.service';
+import { MonitorItemtypesService } from '../../services/MonitorItemtypesService';
 import { MonitorResultsService } from '../../services/monitor-results.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
   DetailItem: any;
   Items: MonitorResults[] = []
   ItemTypes: MonitorItem[] = []
-  constructor(private monitorserv: MonitorResultsService, private itemsrv: MonitorItemsService, private cdr: ChangeDetectorRef) {
+  constructor(private monitorserv: MonitorResultsService, private itemsrv: MonitorItemtypesService, private cdr: ChangeDetectorRef) {
 
   }
 
@@ -26,6 +26,7 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
 
     this.Items = [];
     this.itemsrv.results$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
+      
       this.ItemTypes = v;
       this.monitorserv.results$.pipe(takeUntil(this.destroy$)).subscribe(list=>{
 

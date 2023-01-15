@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { MonitorItem } from '../../../models/Monitoritem';
 import { MonitorResultItem } from '../../../models/MonitorResults';
 import { MonitorResultsService } from '../../../services/monitor-results.service';
 

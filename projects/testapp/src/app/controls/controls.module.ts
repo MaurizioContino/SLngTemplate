@@ -7,6 +7,7 @@ import { ChartFilterComponent } from './charts/chart-filter/chart-filter.compone
 import { NgSlDynamicchartsModule } from 'NgSlDynamiccharts';
 import { DashboardChartHBarComponent } from '../controls/dashboard-chart-hbar/dashboard-chart-hbar.component';
 import { ItemValueComponent } from './item-value/item-value.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
 
   declarations: [
@@ -19,7 +20,8 @@ import { ItemValueComponent } from './item-value/item-value.component';
   imports: [
     CommonModule,
     NgSlDynamicchartsModule,
-    SharedModule
+    SharedModule,
+    NgSelectModule
   ],
   exports:[
     DetailsHeaderComponent,

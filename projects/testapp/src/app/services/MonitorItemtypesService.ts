@@ -1,3 +1,4 @@
+import { Breakpoints } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
 import { NgSlDbService } from 'ng-sl-db';
 
@@ -8,7 +9,7 @@ import { MonitorItem } from '../models/Monitoritem';
 @Injectable({
   providedIn: 'root'
 })
-export class MonitorItemsService {
+export class MonitorItemtypesService {
 
   store = "MonitorResultItem";
   private _results: MonitorItem[] | null = null;
@@ -28,6 +29,7 @@ export class MonitorItemsService {
     if (reload || this.results == null) {
       this.db.GetAll<MonitorItem>(this.store).subscribe(items=>{
         this.results = items;
+        
         this.results$.next(items);
 
       })
