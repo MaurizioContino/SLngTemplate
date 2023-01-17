@@ -1,6 +1,11 @@
 {
   "name": "ng-sl-common-controls",
   "version": "0.0.1",
+  "author": "Maurizio Contino <posta@mauriziocontino.com>",
+  "description": "Common controls",
+  "publishConfig": {
+    "registry": "https://www.npmjs.com/package/@mauicon/commoncontrols"
+  },
   "scripts": {
     "buildcss": "sass src/lib/common.scss assets/styles.css"
 

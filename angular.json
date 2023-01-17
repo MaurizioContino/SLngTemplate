@@ -32,7 +32,7 @@
             ],
             "styles": [
               "./node_modules/@ng-select/ng-select/themes/default.theme.css",
-              "./dist/ng-sl-common-controls/assets/style.css",
+              "./node_modules/ng-sl-common-controls/assets/styles.css",
               "projects/testapp/src/styles.scss"
             ],
             "scripts": [
