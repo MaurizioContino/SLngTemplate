@@ -23,8 +23,14 @@ export class DashboardConfigService {
   Load(reload: boolean = false) {
     if (reload || this.DashboardGrids == null) {
       this.db.GetAll<DashboardGrid>(this.store).subscribe(v=>{
-        this.DashboardGrids = v;
-        this.DashboardGrids$.next(v);
+        this.DashboardGrids = []
+        v.forEach(g=>{
+          const dg = new DashboardGrid();
+          dg.fromObject(g);
+          this.DashboardGrids?.push(dg)
+        })
+
+        this.DashboardGrids$.next(this.DashboardGrids);
       })
     }
     else {
@@ -36,7 +42,7 @@ export class DashboardConfigService {
 
   save(dashboardGrids: DashboardGrid):Observable<DashboardGrid[]> {
     const ret = new Subject<DashboardGrid[]>();
-    
+
      this.db.Save(this.store, [dashboardGrids]).subscribe(v=>{
       this.db.GetAll<DashboardGrid>(this.store).subscribe(results=>{
         this.DashboardGrids = results;

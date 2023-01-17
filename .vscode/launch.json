@@ -5,10 +5,21 @@
       "version": "0.2.0",
       "configurations": [
         {
-          "name": "ng serve",
-          "type": "pwa-chrome",
+          "type": "chrome",
           "request": "launch",
-          "preLaunchTask": "npm: start",
+          "name": "Avvia Chrome con localhost",
+          "url": "http://localhost:4200",
+          "webRoot": "${workspaceFolder}",
+          "resolveSourceMapLocations": [
+            "${workspaceFolder}/projects/**",
+            "!**/node_modules/**"
+          ]
+    },
+        {
+          "name": "ng serve",
+          "type": "chrome",
+          "request": "launch",
+          //"preLaunchTask": "npm: start",
           "url": "http://localhost:4200/",
           "resolveSourceMapLocations": [
             "${workspaceFolder}/**",

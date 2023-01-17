@@ -10,7 +10,7 @@ import { chartfilter } from '../../controls/charts/chart-filter/filterValues';
   styleUrls: ['./dashboard1.component.scss']
 })
 export class Dashboard1Component implements OnInit, OnDestroy  {
-  
+
   id = 0;
   listObject = ['uno', 'due', 'ciao 1', 'ciao 2']
 
@@ -26,18 +26,23 @@ export class Dashboard1Component implements OnInit, OnDestroy  {
   ngOnInit(): void {
 
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
-      this.id = +params['id']; 
-      debugger
+      this.id = +params['id'];
+
       if (!isNaN(this.id)) {
+
         this.dashboard.DashboardGrids$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
-          this.current = v.find(d=>d.Id==this.id)
+          const tmp = v.find(d=>d.Id==this.id)
+          if (tmp) {
+            this.current = new DashboardGrid();
+            this.current.fromObject(tmp)
+          }
         })
         this.dashboard.Load();
       }
     });
     this.years = [];
     this.currentYear = (new Date()).getFullYear();
-    for(var i=0; i < 10; i++) 
+    for(var i=0; i < 10; i++)
     {
       this.years.push(this.currentYear - i);
     }

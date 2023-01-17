@@ -56,9 +56,9 @@
                 </div>
               </div>
               <div class="card-body" >
-                {{cell.title}}
+                <span *ngIf="cell.ShowTitle">{{cell.title}}</span>
                 <div class="card-body-display">
-                  <ng-container *ngIf="children && cell.idComponent > -1 && dragging != 'control_' + cell.IdItem">
+                  <ng-container *ngIf="children && cell.idComponent > -1 && dragging != 'control_' + cell.IdItem && cell.ItemChanged$">
                     <ng-container [ngTemplateOutlet]="children[cell.idComponent]"
                       [ngTemplateOutletContext]="{$implicit:cell}"></ng-container>
                   </ng-container>
@@ -92,7 +92,7 @@
   </div>
 
     <div class="config-container">
-      
+
       <div class="size-value">
         <label>Width</label>
         <input title="width" type="number"  class=" border-text" [(ngModel)]="currwidth" min="1" max="10" >
@@ -106,11 +106,11 @@
         <label>Title</label>
         <input title="title" type="text"  class="border-text" [(ngModel)]="currtitle">
 
-      
+
       </div>
 
     </div>
-   
+
     <ng-container *ngIf="children && currCell!.idComponent > -1">
       <ng-container [ngTemplateOutlet]="children[currCell!.idComponent]"
         [ngTemplateOutletContext]="{$implicit: currCell}"></ng-container>

@@ -15,36 +15,44 @@ export class ItemValueComponent {
   @Input() config: DashboardItem | undefined
   destroy$ = new Subject();
   data : number[]= []
-  operations = ['Ultimo', 'Media', 'Somma'] 
+  operations = ['Ultimo', 'Media', 'Somma']
   ItemTypes: MonitorItem[] = []
   ItemValueParameters: any = null;
 
-  constructor(private cdr: ChangeDetectorRef, public itemtypessrv: MonitorItemtypesService) {}
+  constructor(private cdr: ChangeDetectorRef, public itemtypessrv: MonitorItemtypesService) {
+
+  }
 
   ngOnInit(): void {
-    this.config!.icon = "BarChart.png"
-    if (this.config!.customData == null)
-    {
-      this.config!.customData = {}
-    } 
-    
-    console.log(this.config!.customData)
-    this.ItemValueParameters = null;
-    if (this.config!.customData.ItemValueParameters == null) {
-      this.ItemValueParameters = {itemtype: null}
-      this.config!.customData["ItemValueParameters"] = this.ItemValueParameters
-    } else {
-      this.ItemValueParameters = this.config!.customData.ItemValueParameters;
-    }
+    if (this.config) {
 
-    this.config?.ItemChanged$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
-      this.data = [1]
-      this.cdr.detectChanges();
-    })
+      this.config!.icon = "BarChart.png"
+      this.config.ShowTitle = false;
+
+      if (this.config!.customData == null)
+      {
+        this.config!.customData = {}
+      }
+
+
+      this.ItemValueParameters = null;
+      if (this.config.customData.ItemValueParameters == null) {
+        this.ItemValueParameters = {itemtype: null}
+        this.config!.customData["ItemValueParameters"] = this.ItemValueParameters
+      } else {
+        this.ItemValueParameters = this.config!.customData.ItemValueParameters;
+      }
+
+
+      this.config.ItemChanged$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
+        this.data = [1]
+        this.cdr.detectChanges();
+      })
+    }
     this.itemtypessrv.results$.subscribe(types=>{
       this.ItemTypes = types;
     })
-    
+
     this.itemtypessrv.Load();
   }
   ngOnDestroy(): void {

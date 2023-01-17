@@ -5,13 +5,14 @@ export class DashboardItem {
   top: number;
   left: number;
   icon = ''
+  ShowTitle = true;
   configurator = false;
   idComponent: number;
   customData: any = {};
   private _width: number = 6;
   private _height: number = 4;
 
-  ItemChanged$: Subject<DashboardItem>;
+  ItemChanged$ = new Subject<DashboardItem>;
   private _title: string = "";
 
   public get title(): string {
@@ -36,7 +37,7 @@ export class DashboardItem {
     this._height = value;
     this.ItemChanged$.next(this);
   }
-  
+
   private _Background: string = 'white';
   public get Background(): string {
     return this._Background;
@@ -47,7 +48,7 @@ export class DashboardItem {
   }
 
   constructor(top: number, left: number, height: number, width: number ){
-    this.ItemChanged$ = new Subject<DashboardItem>();
+
     this.height = height;
     this.width = width;
     this.top = top ;

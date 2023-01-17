@@ -39,7 +39,7 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
 
 
    if (value) {
-      this._currCell = DashboardItem.fromItem(value)
+      this._currCell = value; // DashboardItem.fromItem(value)
       this._currCell.configurator = true
       this.currCell?.Update
       this.currwidth = value.width;
@@ -96,12 +96,9 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    debugger
+
     if (this.DashBoardConfig) {
-      debugger
-      const tmp = new DashboardGrid();
-      tmp.fromObject(this.DashBoardConfig)
-      this.DashBoardConfig = tmp;
+
       this.injectParameters(this.DashBoardConfig!);
       this.checkFullBoundaries();
       this.changeref.detectChanges()
@@ -110,14 +107,14 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   injectParameters(v: DashboardGrid){
     if (this.Injections) {
       if (!v.Items) v.Items = [];
-      v.Items.forEach(itm=>{
-
-        if (!itm.customData) itm.customData = {}
+      for(let i = 0; i<v.Items.length; i++)
+      {
+        v.Items[i] = DashboardItem.fromItem(v.Items[i]);
+        if (!v.Items[i].customData) v.Items[i].customData = {}
         Object.keys(this.Injections).forEach(key=>{
-          itm.customData[key] = this.Injections[key]
+          v.Items[i].customData[key] = this.Injections[key]
         })
-
-      })
+      }
     }
   }
   ngOnDestroy(): void {
@@ -162,7 +159,13 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   }
 
   dashboardItems(r: any, c: any): any[] {
-    return this.DashBoardConfig!.findByPosition(r, c)
+    if (this.DashBoardConfig)
+      {
+
+        return this.DashBoardConfig!.findByPosition(r, c)
+      } else {
+        return [];
+      }
   }
 
   MoveControl(r: number, c: number, e: any) {
@@ -214,16 +217,30 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
 
   GetCols() {
     var ret = [];
-    for (var i = 0; i < this.DashBoardConfig!.cols; i++) {
-      ret.push(i * 10);
+    if (this.DashBoardConfig) {
+      for (var i = 0; i < this.DashBoardConfig!.cols; i++) {
+        ret.push(i * 10);
+      }
+    } else {
+      for (var i = 0; i < 10; i++) {
+        ret.push(i * 10);
+      }
     }
+
     return ret;
   }
 
   GetRows() {
     var ret = [];
-    for (var i = 0; i < this.DashBoardConfig!.rows; i++) {
-      ret.push(i * 10);
+    if (this.DashBoardConfig) {
+      for (var i = 0; i < this.DashBoardConfig!.rows; i++) {
+        ret.push(i * 10);
+      }
+
+    } else {
+      for (var i = 0; i < 10; i++) {
+        ret.push(i * 10);
+      }
     }
     return ret;
   }
