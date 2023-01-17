@@ -1,0 +1,6 @@
+.chart-title {
+    height: 20px;
+}
+.chart-container {
+    height: calc(100% - 20px);
+}

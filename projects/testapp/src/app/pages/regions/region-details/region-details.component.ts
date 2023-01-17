@@ -39,7 +39,7 @@ export class RegionDetailsComponent {
       Aree: this.fb.array([])
   });
 
-  get AreeFA():FormArray{
+  get AreeFA(): FormArray {
     return <FormArray> this.form.controls['Aree'] as FormArray;
   }
 

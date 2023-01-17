@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { DashboardConfigService, DashboardGrid } from 'ngslcommoncontrols';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { DashboardConfigService, DashboardFilter, DashboardGrid } from 'ngslcommoncontrols';
 
 @Component({
   selector: 'app-dashboard-details',
@@ -43,14 +43,16 @@ export class DashboardDetailsComponent {
       deleted: [false],
       BackgroundImage: [''],
       Avatar: [''],
-
+      Filters: this.fb.array([])
   });
 
   constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private Dashboardservice: DashboardConfigService){}
   ngOnInit(): void {
    
   }
-
+  get FiltersArray():FormArray{
+    return <FormArray> this.form.controls['Filters'] as FormArray;
+  }
   Save() {
     const s = this.form.value as any as DashboardGrid;
     s.updated = (new Date()).toISOString()
@@ -74,4 +76,42 @@ export class DashboardDetailsComponent {
     this.EditStatus = "delete"
   }
 
+
+  createFilter(v: any = null) {
+    
+    const newfilter = {isnew: true, deleted: false, field: '',  multiSelect: false} as DashboardFilter
+    this._current?.Filters.push(newfilter)
+    this.FiltersArray.push(this.createFilterFA(newfilter));
+  }
+  createFilterFA(filter: DashboardFilter) {
+
+    return this.fb.group(
+      {
+        field: [filter.field, Validators.required],
+        multiSelect: [filter.multiSelect],
+        isnew: [filter.isnew],
+        updated: [filter.updated],
+        originalupdated: [filter.originalupdated],
+        deleted: [false],
+    });
+  }
+
+
+  DeleteFilter(filter: DashboardFilter, index: number) {
+    if (filter.isnew) {
+      this._current?.Filters.splice(index);
+      this.FiltersArray.controls.splice(index)
+    } else {
+      filter.deleted = true
+      this.FiltersArray.controls[index].patchValue(filter)
+      this.FiltersArray.controls[index].markAsDirty();
+
+      //this.AreeFA.controls
+    }
+    this.cdr.detectChanges()
+  }
+  RestoreArea(filter: DashboardFilter, index: number){
+    filter.deleted = false
+    this.cdr.detectChanges()
+  }
 }

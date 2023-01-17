@@ -15,5 +15,7 @@ export * from './lib/dashBoardConfig/services/dashboard-config.service'
 
 export * from './lib/dashBoardConfig/models/DashboardGrid'
 export * from './lib/dashBoardConfig/models/DashboardItem'
+export * from './lib/dashBoardConfig/models/DashboardFilter'
+
 
 export * from './lib/ng-sl-common-controls.module';

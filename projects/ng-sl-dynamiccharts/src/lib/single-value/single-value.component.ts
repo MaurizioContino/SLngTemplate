@@ -7,7 +7,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, TemplateRef } from '@a
 })
 export class SingleValueComponent {
 
-  @Input() Color: string = "red"
+  @Input() Color: string = ""
   @Input() FooterColor: string = ""
   
   @Input() Value: string | number = ""
@@ -27,7 +27,7 @@ export class SingleValueComponent {
 
   getValueStyle() {
     return {
-      'font-size.px': this.fontsize ,
+      'font-size.px': 55 ,
       'color' : this.Color
     }
   }

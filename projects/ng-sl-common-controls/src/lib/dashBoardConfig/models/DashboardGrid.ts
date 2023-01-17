@@ -1,4 +1,5 @@
 import { IDBModel } from "ng-sl-db";
+import { DashboardFilter } from "./DashboardFilter";
 import { DashboardItem } from "./DashboardItem";
 
 export class DashboardGrid implements IDBModel {
@@ -11,6 +12,7 @@ export class DashboardGrid implements IDBModel {
   Name = ""
   Description = ""
   Items: DashboardItem[] = [];
+  Filters: DashboardFilter[] = []
   rows: number = 0;
   cols: number = 0;
   max = 0;

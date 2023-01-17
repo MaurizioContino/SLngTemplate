@@ -4,10 +4,13 @@
   </sl-hbars-config>
 
 </div>
-<div *ngIf="!this.config!.configurator"  style="height: 100%; max-height: 100%;  overflow: hidden;">
-
-  <sl-hbars [data]="data">
-  </sl-hbars>
-
+<div *ngIf="this.config && !this.config!.configurator"  style="height: 100%; max-height: 100%;  overflow: hidden;">
+  <div class="chart-title">
+    {{config.title}}
+  </div>
+  <div class="chart-container">
+    <sl-hbars [data]="data">
+    </sl-hbars>
+  </div>
 
 </div>

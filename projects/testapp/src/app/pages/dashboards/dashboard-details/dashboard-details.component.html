@@ -32,14 +32,31 @@
         <div class="dashboard-edit-form">
           <label  class="dashboard-edit-label"  for="dashboard-name">Name</label>
           <input  class="dashboard-edit-textbox" id="dashboard-name" formControlName="Name">
-  
           <label  class="dashboard-edit-label"  for="dashboard-surname">Description</label>
           <input  class="dashboard-edit-textbox" id="dashboard-surname" formControlName="Description">
-  
-          
-  
         </div>
-  
+        Filters
+        <div class="region-edit-form" formArrayName="Filters" >
+          <div *ngFor="let currFilter of FiltersArray.controls; let i=index" class="region-details-value">
+            <div *ngIf="!currFilter.value.deleted; else deletedarea" class="region-area-edit"  [formGroupName]="i">
+              <sl-rounded-button class="button-danger" [Icon]="'fa-solid fa-times'" (click)="DeleteFilter(currFilter.value, i)"></sl-rounded-button>
+              <label for="field-{i}">Campo filtro</label>
+              <input type="text" title="field" class="region-edit-textbox" id="field-{i}" formControlName="field">
+              <label for="multiselect-{i}">Valori multipli</label>
+              <input type="checkbox" title="multiSelect" class="region-edit-textbox" id="multiselect-{i}" formControlName="multiSelect">
+              
+            </div>
+            <ng-template #deletedarea>
+            <div class="region-area-edit"  [formGroupName]="i">
+              <sl-rounded-button class="button-primary" [Icon]="'fa-solid fa-undo'" (click)="RestoreArea(currFilter.value, i)"></sl-rounded-button>
+              <div class="deleted-text">{{currFilter.value.Name}}</div>
+            </div>
+            </ng-template>
+          </div>
+          <div class="add-filter-container">
+            <sl-rounded-button class="button-accent" [Icon]="'fa-solid fa-plus'" (click)="createFilter()" [Text]="'Nuovo filtro'"></sl-rounded-button>
+          </div>
+        </div>
       </form>
     </ng-scrollbar>
       </ng-container>

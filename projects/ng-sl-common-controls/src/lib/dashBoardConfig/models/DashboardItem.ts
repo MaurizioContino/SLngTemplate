@@ -5,7 +5,6 @@ export class DashboardItem {
   top: number;
   left: number;
   icon = ''
-  ShowTitle = true;
   configurator = false;
   idComponent: number;
   customData: any = {};

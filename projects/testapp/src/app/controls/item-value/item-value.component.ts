@@ -18,7 +18,8 @@ export class ItemValueComponent {
   operations = ['Ultimo', 'Media', 'Somma']
   ItemTypes: MonitorItem[] = []
   ItemValueParameters: any = null;
-
+  footer = ""
+  
   constructor(private cdr: ChangeDetectorRef, public itemtypessrv: MonitorItemtypesService) {
 
   }
@@ -26,9 +27,9 @@ export class ItemValueComponent {
   ngOnInit(): void {
     if (this.config) {
 
-      this.config!.icon = "BarChart.png"
-      this.config.ShowTitle = false;
-
+      this.config.icon = "BarChart.png"
+     
+      this.cdr.detectChanges();
       if (this.config!.customData == null)
       {
         this.config!.customData = {}

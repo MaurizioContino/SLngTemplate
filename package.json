@@ -23,7 +23,7 @@
     "@ng-select/ng-select": "^10.0.3",
     "apexcharts": "^3.36.3",
     "ng-apexcharts": "^1.7.4",
-    "ng-sl-common-controls": "file:dist/ng-sl-common-controls",
+    "ng-sl-common-controls": "^0.0.1",
     "ngx-scrollbar": "^10.0.1",
     "primeicons": "^6.0.1",
     "rxjs": "~7.5.0",
