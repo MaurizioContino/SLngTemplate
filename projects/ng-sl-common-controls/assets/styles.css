@@ -1,24 +1,26 @@
-
 .clear-text {
   border: none;
   width: 100%;
-  padding-left:5px;
+  padding-left: 5px;
   font-size: 16px;
   font-weight: 400;
-  font-family: 'Roboto','Open Sans', sans-serif;
+  font-family: "Roboto", "Open Sans", sans-serif;
 }
 
 .border-text {
   border: 1px solid silver;
   border-radius: 5px;
   width: 100%;
-  padding:10px;
+  padding: 10px;
   font-size: 16px;
   font-weight: 400;
-  font-family: 'Roboto','Open Sans', sans-serif;
+  font-family: "Roboto", "Open Sans", sans-serif;
 }
 
-.clear-text:focus {outline:none!important;}
+.clear-text:focus {
+  outline: none !important;
+}
+
 .light-icon {
   color: silver;
 }
@@ -38,7 +40,7 @@
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .button-primary {
@@ -63,6 +65,7 @@
   border: 4px solid white;
   overflow: hidden;
 }
+
 .avatar-big {
   width: 120px !important;
   border-radius: 120px !important;
@@ -80,11 +83,9 @@
 
 .button-circle-primary {
   border-radius: 50%;
-
   padding: 25px;
-  box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
-  -webkit-box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
-
+  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.39);
+  -webkit-box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.39);
   background-color: var(--primary);
   color: white;
   text-align: center;
@@ -92,10 +93,9 @@
 
 .button-circle-white {
   border-radius: 50%;
-
   padding: 25px;
-  box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
-  -webkit-box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
+  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.39);
+  -webkit-box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.39);
   background-color: white;
   color: black;
   text-align: center;
@@ -103,11 +103,9 @@
 
 .button-circle-accent {
   border-radius: 50%;
-
   padding: 25px;
-  box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
-  -webkit-box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
-
+  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.39);
+  -webkit-box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.39);
   background-color: var(--accent);
   color: white;
   text-align: center;
@@ -116,78 +114,59 @@
 .button-circle-danger {
   border-radius: 50%;
   padding: 25px;
-  box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
-  -webkit-box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 39%);
+  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.39);
+  -webkit-box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.39);
   background-color: var(--danger);
   color: white;
   text-align: center;
 }
 
 .button-circle-primary:hover {
-  box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
-  -webkit-box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
-}
-.button-circle-accent:hover {
-  box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
-  -webkit-box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
-}
-.button-circle-danger:hover {
-  box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
-  -webkit-box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
-}.button-circle-white:hover {
-  box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
-  -webkit-box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39);
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39);
 }
 
-.button-circle-primary  i {
-  position: absolute;
-    /* top: 25%; */
-    margin-top: -15%;
-    margin-left: -15%;
+.button-circle-accent:hover {
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39);
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39);
 }
+
+.button-circle-danger:hover {
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39);
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39);
+}
+
+.button-circle-white:hover {
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39);
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39);
+}
+
+.button-circle-primary i {
+  position: absolute;
+  /* top: 25%; */
+  margin-top: -15%;
+  margin-left: -15%;
+}
+
 .button-circle-white i {
   position: absolute;
+  /* top: 25%; */
   margin-top: -15%;
   margin-left: -15%;
 }
 
 .button-circle-accent i {
   position: absolute;
+  /* top: 25%; */
   margin-top: -15%;
   margin-left: -15%;
 }
 
 .button-circle-danger i {
   position: absolute;
+  /* top: 25%; */
   margin-top: -15%;
   margin-left: -15%;
 }
 
-html {
-  margin: 0px !important;
-  border: 0px !important;
-  padding: 0px !important;
-  font-family: 'Open Sans', sans-serif;
-}
-
-body {
-  margin: 0px !important;
-  border: 0px !important;
-  padding: 0px !important;
-  overflow: hidden;
-}
-
-.border-text {
-  border: 1px solid silver;
-  border-radius: 5px;
-  padding:10px;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: 'Roboto','Open Sans', sans-serif;
-}
-
-input[type='radio'] {
-  height: 20px;
-  width: 20px;
-  vertical-align: middle;
-}
+/*# sourceMappingURL=styles.css.map */

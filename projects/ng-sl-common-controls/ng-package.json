@@ -3,5 +3,6 @@
   "dest": "../../dist/ng-sl-common-controls",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": ["./assets/**/*.*"]
 }

@@ -116,7 +116,7 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
         Object.keys(this.Injections).forEach(key=>{
           itm.customData[key] = this.Injections[key]
         })
-        
+
       })
     }
   }
@@ -166,7 +166,7 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
   }
 
   MoveControl(r: number, c: number, e: any) {
-    
+
     const id = Number.parseInt(e.item.element.nativeElement.id.split('_')[1])
     const itm = this.DashBoardConfig!.findById(id) as any
     itm.top = r
@@ -251,7 +251,7 @@ export class DashBoardConfigComponent implements OnInit, OnDestroy {
     this.changeref.detectChanges();
   }
 
-  editclose(currCell: DashboardItem) {
+  editclose(currCell: any) {
     var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
     this.DashBoardConfig!.Items[idx].Update(currCell);
     this._currCell = undefined;

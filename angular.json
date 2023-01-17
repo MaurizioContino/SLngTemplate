@@ -32,8 +32,8 @@
             ],
             "styles": [
               "./node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "./dist/ng-sl-common-controls/assets/style.css",
               "projects/testapp/src/styles.scss"
-
             ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js"
@@ -245,7 +245,7 @@
         }
       }
     },
-    
+
     "NgSlDashboardComponents": {
       "projectType": "library",
       "root": "projects/ng-sl-dashboard-components",

@@ -1,6 +1,10 @@
 {
   "name": "ng-sl-common-controls",
   "version": "0.0.1",
+  "scripts": {
+    "buildcss": "sass src/lib/common.scss assets/styles.css"
+
+  },
   "peerDependencies": {
     "@angular/common": "^15.0.0",
     "@angular/core": "^15.0.0"
