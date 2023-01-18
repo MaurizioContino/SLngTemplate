@@ -35,19 +35,19 @@
           <label  class="dashboard-edit-label"  for="dashboard-surname">Description</label>
           <input  class="dashboard-edit-textbox" id="dashboard-surname" formControlName="Description">
         </div>
-        Filters
-        <div class="region-edit-form" formArrayName="Filters" >
-          <div *ngFor="let currFilter of FiltersArray.controls; let i=index" class="region-details-value">
-            <div *ngIf="!currFilter.value.deleted; else deletedarea" class="region-area-edit"  [formGroupName]="i">
+        Filtri
+        <div class="dashboard-edit-form" formArrayName="Filters" >
+          <div *ngFor="let currFilter of FiltersArray.controls; let i=index" class="dashboard-details-value">
+            <div *ngIf="!currFilter.value.deleted; else deletedarea" class="dashboard-area-edit"  [formGroupName]="i">
               <sl-rounded-button class="button-danger" [Icon]="'fa-solid fa-times'" (click)="DeleteFilter(currFilter.value, i)"></sl-rounded-button>
               <label for="field-{i}">Campo filtro</label>
-              <input type="text" title="field" class="region-edit-textbox" id="field-{i}" formControlName="field">
+              <input type="text" title="field" class="dashboard-edit-textbox" id="field-{i}" formControlName="field">
               <label for="multiselect-{i}">Valori multipli</label>
-              <input type="checkbox" title="multiSelect" class="region-edit-textbox" id="multiselect-{i}" formControlName="multiSelect">
+              <input type="checkbox" title="multiSelect" class="dashboard-edit-textbox" id="multiselect-{i}" formControlName="multiSelect">
               
             </div>
             <ng-template #deletedarea>
-            <div class="region-area-edit"  [formGroupName]="i">
+            <div class="dashboard-area-edit"  [formGroupName]="i">
               <sl-rounded-button class="button-primary" [Icon]="'fa-solid fa-undo'" (click)="RestoreArea(currFilter.value, i)"></sl-rounded-button>
               <div class="deleted-text">{{currFilter.value.Name}}</div>
             </div>
