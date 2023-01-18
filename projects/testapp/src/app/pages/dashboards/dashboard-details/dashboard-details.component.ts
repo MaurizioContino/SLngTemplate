@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { DashboardConfigService, DashboardFilter, DashboardGrid } from 'ngslcommoncontrols';
+import { DashboardConfigService, DashboardFilter, DashboardGrid, DashboardItem } from 'ngslcommoncontrols';
 
 @Component({
   selector: 'app-dashboard-details',
@@ -21,34 +21,37 @@ export class DashboardDetailsComponent {
   }
   public set current(value: DashboardGrid | null) {
     this._current = value;
-    this.EditStatus = "none"
+    if (value?.isnew) {
+      this.EditStatus = "add"
+      if (value) this.form.setValue(value);
+    } else {
+      this.EditStatus = "none"
+    }
     this.cdr.detectChanges();
   }
 
-  
+
 
 
   form = this.fb.group(
     {
-      Id: [null],
-      Name: [null, [Validators.required]],
-      Description: [null, [Validators.required]],
-      Items: [],
-      rows: [],
-      cols: [],
-      max: [],
+      Id: [0],
+      Name: ['', [Validators.required]],
+      Description: ['', [Validators.required]],
+      rows: [10],
+      cols: [10],
+      max: [0],
       isnew: [false],
-      updated: [new Date()],
-      originalupdated: [null],
+      updated: [new Date().toISOString()],
+      originalupdated: [''],
       deleted: [false],
-      BackgroundImage: [''],
-      Avatar: [''],
-      Filters: this.fb.array([])
+      Items: this.fb.array<DashboardItem>([]),
+      Filters: this.fb.array<DashboardFilter>([])
   });
 
   constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private Dashboardservice: DashboardConfigService){}
   ngOnInit(): void {
-   
+
   }
   get FiltersArray():FormArray{
     return <FormArray> this.form.controls['Filters'] as FormArray;
@@ -78,7 +81,7 @@ export class DashboardDetailsComponent {
 
 
   createFilter(v: any = null) {
-    
+
     const newfilter = {isnew: true, deleted: false, field: '',  multiSelect: false} as DashboardFilter
     this._current?.Filters.push(newfilter)
     this.FiltersArray.push(this.createFilterFA(newfilter));

@@ -8,12 +8,12 @@
       (Cancel)="Cancel()"
       (Delete)="Delete()"
       ></app-details-header>
-  
-   
-  
-  
+
+
+
+
     <ng-container *ngIf="EditStatus=='none'">
-  
+
       <ng-scrollbar style="height:calc(100vh - 500px)">
         <div class="accent dashboard-details-title">
           Name
@@ -21,13 +21,13 @@
         <div class="dashboard-details-value">
           {{current.Name}}
         </div>
-        
+
       </ng-scrollbar>
     </ng-container>
-  
+
     <ng-container *ngIf="EditStatus=='add' || EditStatus=='edit'">
       <ng-scrollbar style="height:calc(100vh - 440px)">
-  
+
         <form  [formGroup]="form">
         <div class="dashboard-edit-form">
           <label  class="dashboard-edit-label"  for="dashboard-name">Name</label>
@@ -44,7 +44,7 @@
               <input type="text" title="field" class="dashboard-edit-textbox" id="field-{i}" formControlName="field">
               <label for="multiselect-{i}">Valori multipli</label>
               <input type="checkbox" title="multiSelect" class="dashboard-edit-textbox" id="multiselect-{i}" formControlName="multiSelect">
-              
+
             </div>
             <ng-template #deletedarea>
             <div class="dashboard-area-edit"  [formGroupName]="i">
@@ -60,6 +60,5 @@
       </form>
     </ng-scrollbar>
       </ng-container>
-  
+
   </div>
-  

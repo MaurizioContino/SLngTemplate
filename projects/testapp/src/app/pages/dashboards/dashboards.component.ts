@@ -34,4 +34,8 @@ export class DashboardsComponent implements OnInit, OnDestroy {
     this.destroy$.next(null);
     this.destroy$.complete();
   }
+  Add() {
+    this.DetailItem = new DashboardGrid();
+    this.DetailItem.isnew = true;
+  }
 }

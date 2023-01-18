@@ -13,8 +13,8 @@ export class DashboardGrid implements IDBModel {
   Description = ""
   Items: DashboardItem[] = [];
   Filters: DashboardFilter[] = []
-  rows: number = 0;
-  cols: number = 0;
+  rows: number = 10;
+  cols: number = 10;
   max = 0;
 
 
@@ -26,7 +26,7 @@ export class DashboardGrid implements IDBModel {
     }
     if (this.Items==undefined || this.Items==null) this.initializeNewDashboard();
     this.max = deserialized.max;
-    this.Items = deserialized.Items ? deserialized.Items : [] 
+    this.Items = deserialized.Items ? deserialized.Items : []
     this.rows = deserialized.rows ? deserialized.rows : 10;
     this.cols = deserialized.cols ? deserialized.cols : 10;
     this.Name = deserialized.Name;
@@ -45,7 +45,7 @@ export class DashboardGrid implements IDBModel {
     this.originalupdated = data.originalupdated
     this.deleted = data.deleted
     this.Id = data.Id
-    this.Items = data.Items ? data.Items : [] 
+    this.Items = data.Items ? data.Items : []
     this.rows = data.rows ? data.rows : 10;
     this.cols = data.cols ? data.cols : 10;
     this.Name = data.Name;
@@ -53,7 +53,7 @@ export class DashboardGrid implements IDBModel {
 
     if (this.rows == 0) this.rows = 10;
     if (this.cols == 0) this.cols = 10;
-    
+
     for (var idx = 0; idx < this.Items.length; idx++) {
       this.Items[idx] = DashboardItem.fromItem(this.Items[idx]);
     }

@@ -75,7 +75,7 @@ export class NgSlDbService {
   }
 
   Filter<T>(StoreName: string, filters: filterItem[], getdeleted=false):Observable<T[]> {
-    
+
     const ret = new Subject<T[]>();
     const transaction = this.db.transaction([StoreName]);
     const objectStore = transaction.objectStore(StoreName);
@@ -108,8 +108,8 @@ export class NgSlDbService {
       } else {
         // no more results
       }
-     
-     
+
+
     };
 
 
@@ -120,22 +120,22 @@ export class NgSlDbService {
     switch(filter.operator) {
       case '<':
         if (value[filter.field] < filter.value) return true;
-        break;        
+        break;
       case '>':
         if (value[filter.field] > filter.value) return true;
-        break;        
+        break;
       case '>=':
         if (value[filter.field] >= filter.value) return true;
-        break;        
+        break;
       case '<=':
         if (value[filter.field] <= filter.value) return true;
-        break;        
+        break;
       case '!=':
         if (value[filter.field] != filter.value) return true;
-        break;        
+        break;
       case '==':
         if (value[filter.field] == filter.value) return true;
-        break;        
+        break;
       default:
         return false
 
@@ -147,7 +147,7 @@ export class NgSlDbService {
   Save<T>(StoreName: string,Items: T[]):Observable<any> {
     const ret = new Subject<any>();
     const waits : Observable<any>[] = [];
-    
+
     this.GetAll<T>(StoreName, true).subscribe(v=>{
       let max = Math.max(...v.map(o => (o as any).Id));
       if (!isFinite(max)) max = 0;
@@ -163,19 +163,28 @@ export class NgSlDbService {
       transaction.onerror = (event: any) => {
         ret.error(event);
       };
-
+      console.log(Items)
       Items.forEach(v=>{
+        console.log('uno')
         const item = (v as IDBModel);
+        console.log('due')
+
         if (item.isnew){
+        console.log('tre')
+        console.log('max: ' + max)
+
           max++;
           item.Id = max;
           item.isnew = false;
-          const request = objectStore.add({ Id: max, data: JSON.stringify(v) });
-        }
-        if (item.deleted || item.updated != item.originalupdated){
 
-          item.originalupdated = item.updated
-          const request = objectStore.put({ Id: item.Id, data: JSON.stringify(v) });
+          const request = objectStore.add({ Id: max, data: JSON.stringify(v) });
+        } else {
+          console.log("Non bene")
+          if (item.deleted || item.updated != item.originalupdated){
+
+            item.originalupdated = item.updated
+            const request = objectStore.put({ Id: item.Id, data: JSON.stringify(v) });
+          }
         }
 
 

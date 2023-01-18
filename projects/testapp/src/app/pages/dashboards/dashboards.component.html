@@ -12,19 +12,18 @@
             <sl-search-bar></sl-search-bar>
           </div>
           <div class="dashboard-master-addbutton">
-            <sl-rounded-button class="button-accent" [Icon]="'fa-solid fa-plus'" [Text]="'New'"></sl-rounded-button>
+            <sl-rounded-button class="button-accent" [Icon]="'fa-solid fa-plus'" [Text]="'New'" (click)="Add()"></sl-rounded-button>
           </div>
-    
+
         </div>
         <app-dashboard-list [items]="items" (SelectedChange)="SelectedChange($event)"></app-dashboard-list>
       </div>
     </ng-template>
-    
-    
-    
+
+
+
     <ng-template #hmddetails let-row>
       <app-dashboard-details [current]="row"></app-dashboard-details>
     </ng-template>
-    
+
     </sl-hmaster-details>
-    

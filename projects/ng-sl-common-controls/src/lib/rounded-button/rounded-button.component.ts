@@ -23,6 +23,7 @@ export class RoundedButtonComponent implements AfterViewInit {
     this.el.nativeElement.classList.forEach((element: any) => {
       this.button.nativeElement.classList.add(element);
     });
+    this.el.nativeElement.classList = []
   }
 
 
