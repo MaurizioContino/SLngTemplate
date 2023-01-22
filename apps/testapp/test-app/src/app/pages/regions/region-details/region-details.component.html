@@ -1,0 +1,85 @@
+<ng-container *ngIf="current">
+  <sl-bigheader
+    [Avatar]="'assets/media/' + current.Avatar"
+    [Background]="'assets/media/backgrounds/Italia.jpg'"
+    [Title]="current.Name"
+    [EditStatus]="EditStatus"
+    [canSave]="form.valid"
+    (Save)="Save()"
+    (Edit)="Edit()"
+    (Cancel)="Cancel()"
+    (Delete)="Delete()"
+  >
+    <ng-template #bigheadcontent>
+      <ng-container *ngIf="EditStatus == 'none'">
+        <div class="accent region-details-title">Aree</div>
+          <div *ngFor="let area of activeAree" class="region-details-value">
+            {{ area.Name }}
+          </div>
+      </ng-container>
+
+      <ng-container *ngIf="EditStatus == 'add' || EditStatus == 'edit'">
+          <form [formGroup]="form">
+            <div class="region-edit-form">
+              <label class="region-edit-label" for="region-name"
+                >Region name</label
+              >
+              <input
+                class="region-edit-textbox"
+                id="region-name"
+                formControlName="Name"
+              />
+            </div>
+            <div class="accent region-details-title">Aree</div>
+            <div class="region-edit-form" formArrayName="Aree">
+              <div
+                *ngFor="let areaitemForm of AreeFA.controls; let i = index"
+                class="region-details-value"
+              >
+                <div
+                  *ngIf="!areaitemForm.value.deleted; else deletedarea"
+                  class="region-area-edit"
+                  [formGroupName]="i"
+                >
+                  <sl-rounded-button
+                    class="button-danger"
+                    [Icon]="'fa-solid fa-times'"
+                    (click)="DeleteArea(areaitemForm.value, i)"
+                  ></sl-rounded-button>
+                  <!-- <input  class="region-edit-textbox" id="area-{i}" [(ngModel)]="areaitem.Name" [ngModelOptions]="{standalone: true}"> -->
+                  <!--<div class="region-edit-label">{{area.Name}}</div>-->
+                  <input
+                    type="text"
+                    title="Areaname"
+                    class="region-edit-textbox"
+                    id="area-{i}"
+                    formControlName="Name"
+                  />
+                </div>
+                <ng-template #deletedarea>
+                  <div class="region-area-edit" [formGroupName]="i">
+                    <sl-rounded-button
+                      class="button-primary"
+                      [Icon]="'fa-solid fa-undo'"
+                      (click)="RestoreArea(areaitemForm.value, i)"
+                    ></sl-rounded-button>
+                    <div class="deleted-text">
+                      {{ areaitemForm.value.Name }}
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+              <div class="region-button">
+                <sl-rounded-button
+                  class="button-accent"
+                  [Icon]="'fa-solid fa-plus'"
+                  (click)="createArea()"
+                  [Text]="'Nuova area'"
+                ></sl-rounded-button>
+              </div>
+            </div>
+          </form>
+      </ng-container>
+    </ng-template>
+  </sl-bigheader>
+</ng-container>

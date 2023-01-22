@@ -1,7 +1,0 @@
-
-<ng-container [ngSwitch]="layoutService.currentLayout$ | async">
-  <sl-empty-layout   [Layout]="Sections" *ngSwitchCase="'empty'"></sl-empty-layout>
-  <sl-default-layout [Layout]="Sections" *ngSwitchCase="'default'"></sl-default-layout>
-  <sl-default-layout [Layout]="Sections" *ngSwitchDefault></sl-default-layout>
-</ng-container>
-

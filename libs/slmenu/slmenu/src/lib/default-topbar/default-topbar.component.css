@@ -1,0 +1,25 @@
+.main-topbar-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+
+}
+.menu-button {
+    padding:5px;
+    margin-left: 10px;
+    color: silver;
+}
+
+
+
+.sl-topbar {
+  color: white;
+  font-size: 14pt;
+
+  margin: 0px;
+  -webkit-box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.39);
+  box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.39);
+}

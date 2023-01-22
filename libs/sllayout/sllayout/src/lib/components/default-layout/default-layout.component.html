@@ -1,0 +1,58 @@
+
+
+    <div class="left-right" *ngIf="!isSmallScreen">
+      <ng-container *ngIf="menu">
+        <ng-container *ngTemplateOutlet="menu"></ng-container>
+      </ng-container>
+      <div class="top-down">
+        <div class="top-bar">
+          <ng-container *ngIf="topbar">
+            <ng-container *ngTemplateOutlet="topbar"></ng-container>
+        </ng-container>
+      </div>
+      <div class="main-container">
+        <ng-container *ngIf="main; else defaultmain">
+          <ng-container *ngTemplateOutlet="main"></ng-container>
+        </ng-container>
+      </div>
+        <ng-container *ngIf="bottom">
+          <ng-container *ngTemplateOutlet="bottom"></ng-container>
+        </ng-container>
+      </div>
+  </div>
+
+  <div class="left-right" *ngIf="isSmallScreen" >
+    <div class="floating-menu left-right" *ngIf="showSmallMenu">
+
+        <ng-container *ngIf="menu" >
+          <ng-container *ngTemplateOutlet="menu"></ng-container>
+        </ng-container>
+        <div class="filler" (click)="hidefloatingMenu()"></div>
+        <ng-container *ngIf="main; else defaultmain">
+          <ng-container *ngTemplateOutlet="main"></ng-container>
+        </ng-container>
+
+    </div>
+
+    <div class="top-down">
+      <ng-container *ngIf="topbar">
+        <ng-container *ngTemplateOutlet="topbar"></ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="main ; else defaultmain">
+        <ng-container *ngTemplateOutlet="main"></ng-container>
+      </ng-container>
+      <ng-container *ngIf="bottom">
+        <ng-container *ngTemplateOutlet="bottom"></ng-container>
+      </ng-container>
+
+    </div>
+
+</div>
+
+
+<ng-template #defaultmain>
+  <router-outlet></router-outlet>
+
+</ng-template>
+

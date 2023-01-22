@@ -1,9 +1,0 @@
-.tab-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    background-color: white;
-}
-.tab-container:first-child {
-    margin-left: 20px;
-}

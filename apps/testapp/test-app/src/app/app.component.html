@@ -1,0 +1,32 @@
+
+<ng-container [ngSwitch]="layoutService.currentLayout$ | async">
+  <sl-empty-layout   *ngSwitchCase="'empty'">
+     <ng-template #menu>
+      <sl-default-menu ></sl-default-menu>
+    </ng-template>
+    <ng-template #topbar>
+      <sl-default-topbar ></sl-default-topbar>
+    </ng-template>
+  </sl-empty-layout>
+
+  <sl-default-layout *ngSwitchCase="'default'">
+     <ng-template #menu>
+      <sl-default-menu ></sl-default-menu>
+    </ng-template>
+    <ng-template #topbar>
+      <sl-default-topbar ></sl-default-topbar>
+    </ng-template>
+  </sl-default-layout>
+
+  <sl-default-layout *ngSwitchDefault>
+     <ng-template #menu>
+      <sl-default-menu ></sl-default-menu>
+    </ng-template>
+    <ng-template #topbar>
+      <sl-default-topbar ></sl-default-topbar>
+    </ng-template>
+  </sl-default-layout>
+
+</ng-container>
+
+
