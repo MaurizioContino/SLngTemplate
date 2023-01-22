@@ -56,7 +56,7 @@
                 </div>
               </div>
               <div class="card-body" >
-                
+
                 <div class="card-body-display">
                   <ng-container *ngIf="children && cell.idComponent > -1 && dragging != 'control_' + cell.IdItem && cell.ItemChanged$">
                     <ng-container [ngTemplateOutlet]="children[cell.idComponent]"
@@ -76,20 +76,7 @@
   </ng-template>
 
   <ng-template #hmddetails>
-    <img
-    alt="backimage"
-    class="header-backimage"
-    [src]="'assets/media/backgrounds/14-640x480.jpg'"
-  />
-  <div class="header-avatar-container">
-    <sl-avatar
-      class="avatar-big"
-      [src]="'assets/icons/' + currCell!.icon"
-    ></sl-avatar>
-  </div>
-  <div class="header-details-name">
-    Configurazione widget
-  </div>
+
 
     <div class="config-container">
 

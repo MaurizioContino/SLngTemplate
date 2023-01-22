@@ -12,10 +12,14 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-     
+
       "NgSlDynamiccharts": [
         //"dist/ng-sl-dynamiccharts"
         "projects/ng-sl-dynamiccharts/src/public-api.ts"
+      ],
+      "SlDashboards": [
+        //"dist/sl-dashboards"
+        "projects/sl-dashboards/src/public-api.ts"
       ],
       "ng-sl-db": [
         //"dist/ng-sl-db"

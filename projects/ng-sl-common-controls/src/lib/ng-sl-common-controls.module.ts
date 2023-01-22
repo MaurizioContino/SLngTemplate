@@ -9,7 +9,6 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { DashBoardConfigComponent } from './dashBoardConfig/dashBoardConfig.component'
 import { NgSlLayoutsModule } from 'ngsllayouts';
 import { TabHeaderComponent } from './tab-header/tab-header.component';
 import { TabItemComponent } from './tab-header/tab-item/tab-item.component';
@@ -24,12 +23,11 @@ import { PanelComponent } from './panel/panel.component';
     RoundedButtonComponent,
     DataListComponent,
     AvatarComponent,
-    DashBoardConfigComponent,
     TabHeaderComponent,
     TabItemComponent,
     TabItemDirective,
     PanelComponent,
-    
+
 
   ],
   imports: [
@@ -45,12 +43,11 @@ import { PanelComponent } from './panel/panel.component';
     RoundedButtonComponent,
     DataListComponent,
     AvatarComponent,
-    DashBoardConfigComponent,
     TabHeaderComponent,
     TabItemComponent,
     TabItemDirective,
     PanelComponent,
-    
+
   ]
 })
 export class NgSlCommonControlsModule { }

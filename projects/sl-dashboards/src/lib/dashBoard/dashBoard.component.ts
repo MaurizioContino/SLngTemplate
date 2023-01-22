@@ -2,16 +2,16 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, In
 import { Subscription } from 'rxjs'
 import { DashboardGrid } from './models/DashboardGrid'
 import { DashboardItem } from './models/DashboardItem'
-import { DashboardConfigService } from './services/dashboard-config.service'
+import { DashboardConfigService } from './services/dashboard.service'
 
 @Component({
   selector: 'sl-dashboard-config',
-  templateUrl: './dashBoardConfig.component.html',
-  styleUrls: ['./dashBoardConfig.component.scss'],
+  templateUrl: './dashBoard.component.html',
+  styleUrls: ['./dashBoard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class DashBoardConfigComponent implements OnInit, OnDestroy {
+export class DashBoardComponent implements OnInit, OnDestroy {
 
 
   @Input() public children: TemplateRef<any>[] | null = null

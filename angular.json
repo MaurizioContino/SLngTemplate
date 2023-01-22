@@ -278,6 +278,39 @@
           }
         }
       }
+    },
+    "SlDashboards": {
+      "projectType": "library",
+      "root": "projects/sl-dashboards",
+      "sourceRoot": "projects/sl-dashboards/src",
+      "prefix": "sl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/sl-dashboards/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/sl-dashboards/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/sl-dashboards/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/sl-dashboards/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }
