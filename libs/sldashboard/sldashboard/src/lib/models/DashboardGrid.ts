@@ -1,20 +1,20 @@
+import { EndpointConfig } from "@soloud/SlDataSource";
 import { IDBModel } from "@soloud/SlDb";
-import { DashboardFilter } from "./DashboardFilter";
 import { DashboardItem } from "./DashboardItem";
 
 export class DashboardGrid implements IDBModel {
 
-  isnew: boolean = false;
-  updated: string = "";
-  originalupdated: string = ""
-  deleted: boolean = false;
-  Id: number = 0;
+  isnew = false;
+  updated = "";
+  originalupdated = ""
+  deleted = false;
+  Id = 0;
   Name = ""
   Description = ""
   Items: DashboardItem[] = [];
-  Filters: DashboardFilter[] = []
-  rows: number = 10;
-  cols: number = 10;
+  Endpoint: EndpointConfig | undefined
+  rows = 10;
+  cols = 10;
   max = 0;
 
 
@@ -54,7 +54,7 @@ export class DashboardGrid implements IDBModel {
     if (this.rows == 0) this.rows = 10;
     if (this.cols == 0) this.cols = 10;
 
-    for (var idx = 0; idx < this.Items.length; idx++) {
+    for (let idx = 0; idx < this.Items.length; idx++) {
       this.Items[idx] = DashboardItem.fromItem(this.Items[idx]);
     }
 

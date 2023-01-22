@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { RegionsRoutingModule } from './regions-routing.module';
 import { RegionsComponent } from './regions.component';
 import { RegionListComponent } from './region-list/region-list.component';
@@ -23,4 +21,5 @@ import { ControlsModule } from '../../controls/controls.module';
     ControlsModule
   ]
 })
-export class RegionsModule { }
+export class RegionsModule {
+}

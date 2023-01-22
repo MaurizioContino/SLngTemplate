@@ -10,7 +10,7 @@ export class SlDbModule {
   constructor(@Optional() @SkipSelf() parentModule?: SlDbModule) {
     if (parentModule) {
       throw new Error(
-        'NgSlDbModule is already loaded. Import it in the AppModule only');
+        'SlDbModule is already loaded. Import it in the AppModule only');
     }
   }
   static forRoot(config?: DBConfig): ModuleWithProviders<SlDbModule> {

@@ -90,7 +90,7 @@ export class SlDbService {
         const itm = JSON.parse(event.srcElement.result.value.data)
         let ok = true;
         filters.forEach(f=>{
-          if (itm[f.field]){
+          if (itm[f.Field]){
             if (!this.checkFilter(itm, f)){
               ok = false;
             }
@@ -118,24 +118,24 @@ export class SlDbService {
   }
 
   checkFilter(value: any, filter: filterItem): boolean {
-    switch(filter.operator) {
+    switch(filter.comparer) {
       case '<':
-        if (value[filter.field] < filter.value) return true;
+        if (value[filter.Field] < filter.value) return true;
         break;
       case '>':
-        if (value[filter.field] > filter.value) return true;
+        if (value[filter.Field] > filter.value) return true;
         break;
       case '>=':
-        if (value[filter.field] >= filter.value) return true;
+        if (value[filter.Field] >= filter.value) return true;
         break;
       case '<=':
-        if (value[filter.field] <= filter.value) return true;
+        if (value[filter.Field] <= filter.value) return true;
         break;
       case '!=':
-        if (value[filter.field] != filter.value) return true;
+        if (value[filter.Field] != filter.value) return true;
         break;
       case '==':
-        if (value[filter.field] == filter.value) return true;
+        if (value[filter.Field] == filter.value) return true;
         break;
       default:
         return false
@@ -146,8 +146,7 @@ export class SlDbService {
   }
 
   Save<T>(StoreName: string,Items: T[]):Observable<any> {
-    const ret = new Subject<any>();
-    const waits : Observable<any>[] = [];
+    const ret = new Subject<unknown>();
 
     this.GetAll<T>(StoreName, true).subscribe(v=>{
       let max = Math.max(...v.map(o => (o as any).Id));
@@ -155,13 +154,13 @@ export class SlDbService {
 
       const transaction = this.db.transaction([StoreName], "readwrite");
       const objectStore = transaction.objectStore(StoreName );
-      transaction.oncomplete = (event: any) => {
+      transaction.oncomplete = () => {
         ret.next(true);
         ret.complete();
 
       };
 
-      transaction.onerror = (event: any) => {
+      transaction.onerror = (event: unknown) => {
         ret.error(event);
       };
       console.log(Items)
@@ -178,13 +177,13 @@ export class SlDbService {
           item.Id = max;
           item.isnew = false;
 
-          const request = objectStore.add({ Id: max, data: JSON.stringify(v) });
+           objectStore.add({ Id: max, data: JSON.stringify(v) });
         } else {
           console.log("Non bene")
           if (item.deleted || item.updated != item.originalupdated){
 
             item.originalupdated = item.updated
-            const request = objectStore.put({ Id: item.Id, data: JSON.stringify(v) });
+            objectStore.put({ Id: item.Id, data: JSON.stringify(v) });
           }
         }
 
@@ -196,27 +195,26 @@ export class SlDbService {
 
   Insert<T>(StoreName: string, Items: T[]): Observable<T[]> {
     const ret = new Subject<T[]>();
-    const waits : Observable<any>[] = [];
     this.GetAll<T>(StoreName).subscribe(v=>{
 
       let max = Math.max(...v.map(o => (o as any).Id));
 
       const transaction = this.db.transaction([StoreName], "readwrite");
       const objectStore = transaction.objectStore(StoreName );
-      transaction.oncomplete = (event: any) => {
+      transaction.oncomplete = () => {
         ret.next(Items);
         ret.complete();
 
       };
 
-      transaction.onerror = (event: any) => {
+      transaction.onerror = () => {
         ret.error(event);
       };
 
       Items.forEach(v=>{
         max++;
         (v as any).Id = max;
-        const request = objectStore.add({ Id: max, data: JSON.stringify(v) });
+        objectStore.add({ Id: max, data: JSON.stringify(v) });
       })
     })
 
@@ -257,22 +255,13 @@ export class SlDbService {
       if (v.status[0] == "dirty")
         Object.keys(this.remotes).forEach(async StoreName => {
           const remote = this.remotes[StoreName];
-          await this.alignStore(StoreName, remote);
+          //await this.alignStore(StoreName, remote);
         })
       this.SetClean();
     })
   }
   public clear(_StoreName: string) {
     //return this.dbService.clear(StoreName);
-  }
-  private async alignStore(StoreName: string, remote: string) {
-
-    return new Promise((_resolve, _reject) => {
-
-
-
-    });
-
   }
   private SetDirty() {
     // this.dbService.clear("DBStatus").subscribe(v=>{

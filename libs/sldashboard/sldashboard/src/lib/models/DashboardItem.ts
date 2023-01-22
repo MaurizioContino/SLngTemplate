@@ -1,18 +1,18 @@
 import { Subject } from "rxjs";
 
 export class DashboardItem {
-  IdItem: number = 0;
+  IdItem = 0;
   top: number;
   left: number;
   icon = ''
   configurator = false;
   idComponent: number;
-  customData: any = {};
-  private _width: number = 6;
-  private _height: number = 4;
+  customData: unknown = {};
+  private _width = 6;
+  private _height = 4;
 
   ItemChanged$ = new Subject<DashboardItem>;
-  private _title: string = "";
+  private _title = "";
 
   public get title(): string {
     return this._title;
@@ -37,7 +37,7 @@ export class DashboardItem {
     this.ItemChanged$.next(this);
   }
 
-  private _Background: string = 'white';
+  private _Background = 'white';
   public get Background(): string {
     return this._Background;
   }
@@ -54,7 +54,7 @@ export class DashboardItem {
     this.left = left;
     this.idComponent = -1;
   }
-  static fromItem(item: any): DashboardItem {
+  static fromItem(item: DashboardItem): DashboardItem {
     const ret =  new DashboardItem(item.top, item.left,
         parseInt(item._height ? item._height.toString() : item.height.toString()),
         parseInt(item._width ? item._width.toString(): item.width.toString()));
@@ -80,7 +80,7 @@ export class DashboardItem {
     this.ItemChanged$.next(this);
   }
 
-  toItem(): any {
+  toItem(): unknown {
 
     return {
       top: this.top,

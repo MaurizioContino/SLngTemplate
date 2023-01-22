@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@soloud/SlDataSource": ["libs/sl-data-source/src/index.ts"],
       "@soloud/SlDb": ["libs/sl-db/src/index.ts"],
       "@soloud/slavatar": ["libs/slavatar/slavatar/src/index.ts"],
       "@soloud/slbutton": ["libs/slbutton/slbutton/src/index.ts"],
