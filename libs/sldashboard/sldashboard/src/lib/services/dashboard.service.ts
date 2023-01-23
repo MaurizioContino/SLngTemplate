@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { SlDbService } from 'libs/sl-db/src/lib/services/sl-db.service';
-
+import { SlDbService } from '@soloud/SlDb';
 import { Observable, Subject, take, tap } from 'rxjs';
 import { DashboardGrid } from '../models/DashboardGrid';
-
-
 
 
 @Injectable({

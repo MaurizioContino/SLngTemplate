@@ -1,6 +1,6 @@
-import { DashboardItem } from "./DashboardItem"
+import { IDashboardItem } from "./DashboardItem"
 
 export interface DashboardItemStatus {
   status: 'view' | 'config' | 'select'
-  config: DashboardItem | undefined
+  config: IDashboardItem | undefined
 }

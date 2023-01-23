@@ -1,6 +1,6 @@
 import { EndpointConfig } from "@soloud/SlDataSource";
 import { IDBModel } from "@soloud/SlDb";
-import { DashboardItem } from "./DashboardItem";
+import { IDashboardItem } from "./DashboardItem";
 
 export class DashboardGrid implements IDBModel {
 
@@ -11,7 +11,7 @@ export class DashboardGrid implements IDBModel {
   Id = 0;
   Name = ""
   Description = ""
-  Items: DashboardItem[] = [];
+  Items: IDashboardItem[] = [];
   Endpoint: EndpointConfig | undefined
   rows = 10;
   cols = 10;
@@ -22,7 +22,7 @@ export class DashboardGrid implements IDBModel {
     const deserialized = JSON.parse(data) as DashboardGrid;
     if (deserialized.Items)
     {
-      this.Items = deserialized.Items.map(v=>  DashboardItem.fromItem(v));
+      //this.Items = deserialized.Items.map(v=>  DashboardItem.fromItem(v));
     }
     if (this.Items==undefined || this.Items==null) this.initializeNewDashboard();
     this.max = deserialized.max;
@@ -55,7 +55,7 @@ export class DashboardGrid implements IDBModel {
     if (this.cols == 0) this.cols = 10;
 
     for (let idx = 0; idx < this.Items.length; idx++) {
-      this.Items[idx] = DashboardItem.fromItem(this.Items[idx]);
+      //this.Items[idx] = DashboardItem.fromItem(this.Items[idx]);
     }
 
   }
@@ -71,50 +71,50 @@ export class DashboardGrid implements IDBModel {
 
 
   public AddControl(top:number, left:number, width: number, height: number ) {
-    this.max = 0;
-    this.Items.forEach(v=>{
-      if (v.IdItem > this.max) this.max = v.IdItem;
-    });
+    // this.max = 0;
+    // this.Items.forEach(v=>{
+    //   if (v.idComponent > this.max) this.max = v.idComponent;
+    // });
 
-    this.max += 1;
+    // this.max += 1;
 
-    const itm = new DashboardItem(top, left, height, width);
-    itm.IdItem = this.max;
-    this.Items.push(itm)
-    return itm;
+    // const itm = new DashboardItem(top, left, height, width);
+    // itm.IdItem = this.max;
+    // this.Items.push(itm)
+    // return itm;
   }
 
   RemoveControlByID(id: number){
-    if (this.Items)  {
-      const v = this.Items.find(v=>v.IdItem == id)
-      if (v) {
-        const idx = this.Items.indexOf(v);
-        this.Items.splice(idx,1);
-      }
-    }
+    // if (this.Items)  {
+    //   const v = this.Items.find(v=>v.IdItem == id)
+    //   if (v) {
+    //     const idx = this.Items.indexOf(v);
+    //     this.Items.splice(idx,1);
+    //   }
+    // }
   }
 
   public findByPosition(row: number, col: number) {
-    if (this.Items && this.Items.length>0) {
-      const res = this.Items.filter(v=>v.top==row && v.left==col);
+    // if (this.Items && this.Items.length>0) {
+    //   const res = this.Items.filter(v=>v.top==row && v.left==col);
 
-      if (res.length>0) {
-        return res
-      } else {
-        return [];
-      }
-    } else {
-      return [];
-    }
+    //   if (res.length>0) {
+    //     return res
+    //   } else {
+    //     return [];
+    //   }
+    // } else {
+    //   return [];
+    // }
 
   }
   public findById(id: number) {
-    const res = this.Items.filter(v=>v.IdItem == id);
-    if (res.length>0) {
-      return res[0]
-    } else {
-      return [];
-    }
+    // const res = this.Items.filter(v=>v.IdItem == id);
+    // if (res.length>0) {
+    //   return res[0]
+    // } else {
+    //   return [];
+    // }
 
   }
 

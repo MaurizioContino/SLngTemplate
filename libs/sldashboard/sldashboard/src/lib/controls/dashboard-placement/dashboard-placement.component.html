@@ -5,7 +5,7 @@
     <div class="container">
       <ng-scrollbar style="height: 100%">
         <div *ngFor="let idr of rows" class="row">
-          <div *ngFor="let idc of cols" class="col" [ngClass]="selectr!=null && selectr==idr && selectc!=null && selectc==idc ? 'selected-cell' : ''">
+          <div *ngFor="let idc of cols" class="col" [ngClass]="selectr!==null && selectr===idr && selectc!==null && selectc===idc ? 'selected-cell' : ''">
               <sl-dashboard-element (click)="showadd(idr, idc)"></sl-dashboard-element>
           </div>
       </div>

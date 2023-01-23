@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { DashboardItem, DashboardItemStatus } from '@soloud/sldashboard';
+import { IDashboardItem, DashboardItemStatus } from '@soloud/sldashboard';
 import { Subject, takeUntil } from 'rxjs';
 import { MonitorItem } from '../../models/Monitoritem';
 import { MonitorItemtypesService } from '../../services/MonitorItemtypesService';
@@ -10,7 +10,7 @@ import { MonitorItemtypesService } from '../../services/MonitorItemtypesService'
   styleUrls: ['./item-value.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ItemValueComponent {
+export class ItemValueComponent implements IDashboardItem {
 
   @Input() view: DashboardItemStatus | undefined;
 
@@ -20,18 +20,23 @@ export class ItemValueComponent {
 
   constructor(private cdr: ChangeDetectorRef) {
   }
-
+  
+  idComponent =  1;
+  icon =  '';
+  customData =  {};
+  
   ngOnInit(): void {
-    if (this.view && this.view.config)
-    {
-      if (this.view.config) {
-        this.cdr.detectChanges();
-        if (this.view.config!.customData == null)
-        {
-          this.view.config!.customData = {}
-        }
-      }
-    }
+    console.log("init")
+    // if (this.view && this.view.config)
+    // {
+    //   if (this.view.config) {
+    //     this.cdr.detectChanges();
+    //     if (this.view.config!.customData == null)
+    //     {
+    //       this.view.config!.customData = {}
+    //     }
+    //   }
+    // }
   }
 
   ngOnDestroy(): void {

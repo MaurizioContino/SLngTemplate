@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { DashboardGrid, DashboardItem } from '@soloud/sldashboard';
-import { DashboardConfigService } from 'libs/sldashboard/sldashboard/src/lib/services/dashboard.service';
+import { DashboardGrid, IDashboardItem } from '@soloud/sldashboard';
+import { DashboardConfigService } from '@soloud/sldashboard';
 
 @Component({
   selector: 'app-dashboard-details',
@@ -42,7 +42,7 @@ export class DashboardDetailsComponent {
       updated: [new Date().toISOString()],
       originalupdated: [''],
       deleted: [false],
-      Items: this.fb.array<DashboardItem>([]),
+      Items: this.fb.array<IDashboardItem>([]),
 
   });
 

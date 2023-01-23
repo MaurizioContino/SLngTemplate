@@ -9,13 +9,15 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { DashboardElementComponent } from './controls/dashboard-element/dashboard-element.component';
 import { DasboardListComponent } from './controls/dasboard-list/dasboard-list.component';
 import { SlDataSourceModule } from '@soloud/SlDataSource';
+import { DasboardItemDirective } from './directives/dasboard-item.directive';
 
 
 @NgModule({
   declarations: [
     DashboardPlacementComponent,
     DashboardElementComponent,
-    DasboardListComponent
+    DasboardListComponent,
+    DasboardItemDirective
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { SlDataSourceModule } from '@soloud/SlDataSource';
   ],
   exports: [
     DashboardPlacementComponent,
-    DashboardElementComponent
+    DashboardElementComponent,
+    DasboardItemDirective
   ]
 })
 export class SldashboardModule {}

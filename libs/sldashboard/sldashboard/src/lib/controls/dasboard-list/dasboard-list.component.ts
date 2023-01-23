@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component,  EventEmitter, Input, Output, QueryList, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'sl-dashboard-item-list',
@@ -8,10 +8,22 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren,
 })
 export class DasboardListComponent {
 
-  private _contents: TemplateRef<any>[]  = [];
+  private _contents: QueryList<TemplateRef<any>> | undefined;
 
-   @Input() contents: TemplateRef<any>[]  = [];
-   @Output() Selected = new EventEmitter<TemplateRef<any>>()
+   @Input()
+  
+  public get contents(): QueryList<TemplateRef<any>> | undefined {
+    return this._contents;
+  }
+  public set contents(value: QueryList<TemplateRef<any>> | undefined) {
+    this._contents = value;
+    if (value) {
+      const dbg = value.toArray()
+      console.log(dbg)
+      console.log(dbg[0])
+    }
+  }
+   @Output() Selected = new EventEmitter<number>()
   constructor(private cdr: ChangeDetectorRef) {
   }
 

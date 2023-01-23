@@ -1,7 +1,8 @@
+/* eslint-disable @angular-eslint/component-selector */
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { DashboardItem } from '@soloud/sldashboard';
-import { Subject, takeUntil } from 'rxjs';
+import { IDashboardItem } from '@soloud/sldashboard';
+import { Subject,  } from 'rxjs';
 
 @Component({
   selector: 'sl-dashboard-chart-hbar',
@@ -11,7 +12,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class DashboardChartHBarComponent implements OnInit, OnDestroy {
 
-  @Input() config: DashboardItem | undefined
+  @Input() config: IDashboardItem | undefined
   destroy$ = new Subject();
   data : number[]= []
   constructor(private cdr: ChangeDetectorRef) {}
@@ -19,12 +20,12 @@ export class DashboardChartHBarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.config) {
       //this.config = DashboardItem.fromItem(this.config);
-      this.config!.icon = "BarChart.png"
+      //this.config!.icon = "BarChart.png"
 
-      this.config?.ItemChanged$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
-        this.data = [1]
-        this.cdr.detectChanges();
-      })
+      // this.config?.ItemChanged$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
+      //   this.data = [1]
+      //   this.cdr.detectChanges();
+      // })
     }
   }
   ngOnDestroy(): void {

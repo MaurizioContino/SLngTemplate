@@ -1,11 +1,11 @@
 <sl-dashboard-placement>
 
-  <ng-template #dashboarditem let-status>
-    {{status}}
+  <ng-template #dashboarditem sl-dasboard-item  [IdItemType]="2" let-status>
+    
     <h2>Ciao 1</h2>
   </ng-template>
 
-  <ng-template #dashboarditem  let-status>
+  <ng-template #dashboarditem sl-dasboard-item [IdItemType]="2" let-status>
     <app-item-value [view]="status"></app-item-value>
   </ng-template>
 </sl-dashboard-placement>

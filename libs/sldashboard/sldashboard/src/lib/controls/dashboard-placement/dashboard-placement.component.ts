@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, TemplateRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, QueryList, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'sl-dashboard-placement',
@@ -16,12 +16,12 @@ export class DashboardPlacementComponent implements AfterViewInit  {
   selectr: number | null= null;
   selectc: number | null= null;
 
-  private _contents: TemplateRef<any>[]  = [];
+  private _contents:  QueryList<TemplateRef<any>> | undefined;
   @ContentChildren('dashboarditem')
-  public get contents(): TemplateRef<any>[] {
+  public get contents():  QueryList<TemplateRef<any>> | undefined {
     return this._contents;
   }
-  public set contents(value: TemplateRef<any>[]) {
+  public set contents(value:  QueryList<TemplateRef<any>> | undefined) {
     this._contents = value;
     this.cdr.detectChanges();
   }
@@ -36,10 +36,10 @@ export class DashboardPlacementComponent implements AfterViewInit  {
     const maxHeight = (this.myElement.nativeElement.offsetWidth -50) / 50;
     const maxwidth = 40;
 
-    for(var i=0;i<maxwidth;i++) {
+    for(let i=0;i<maxwidth;i++) {
       this.rows.push(i);
     }
-    for(var i=0;i<maxHeight;i++) {
+    for(let i=0;i<maxHeight;i++) {
       this.cols.push(i);
     }
   }
