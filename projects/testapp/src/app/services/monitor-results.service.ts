@@ -3,29 +3,30 @@ import { NgSlDbService } from 'ng-sl-db';
 
 import { Observable, Subject, take, tap } from 'rxjs';
 import { MonitorResultItem, MonitorResults } from '../models/MonitorResults';
+import { IDataservice } from './IDataservice';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class MonitorResultsService {
+export class MonitorResultsService  implements IDataservice  {
 
   store = "MonitorResultItem";
-  private _results: MonitorResults[] | null = null;
-  public get results(): MonitorResults[] | null {
+  private _results: MonitorResults[] = [];
+  public get Dataset(): MonitorResults[] {
     return this._results;
   }
-  public set results(value: MonitorResults[] | null) {
+  public set Dataset(value: MonitorResults[]) {
     this._results = value;
   }
-  results$: Subject<MonitorResults[]> = new Subject<MonitorResults[]>();
+  Dataset$: Subject<MonitorResults[]> = new Subject<MonitorResults[]>();
   constructor(private db: NgSlDbService) {
   }
 
   Load(reload: boolean = false) {
 
 
-    if (reload || this.results == null) {
+    if (this.Dataset.length == 0) {
       const retItems: MonitorResults[] = [];
       this.db.GetAll<MonitorResultItem>(this.store).subscribe(items=>{
 
@@ -42,13 +43,13 @@ export class MonitorResultsService {
           }
         });
 
-        this.results = retItems;
-        this.results$.next(retItems);
+        this.Dataset = retItems;
+        this.Dataset$.next(retItems);
 
       })
     } else {
 
-      this.results$.next(this.results);
+      this.Dataset$.next(this.Dataset);
 
     }
 

@@ -56,7 +56,7 @@ export class ManagerDetailsComponent implements OnInit {
 
   constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private managerservice: ManagersService, public areaserv: AreeService){}
   ngOnInit(): void {
-    this.areaserv.Aree$.subscribe(v=>{
+    this.areaserv.Dataset$.subscribe(v=>{
       this.aree = v;
     });
   }

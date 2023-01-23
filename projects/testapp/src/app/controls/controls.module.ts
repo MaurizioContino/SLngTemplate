@@ -8,6 +8,8 @@ import { NgSlDynamicchartsModule } from 'NgSlDynamiccharts';
 import { DashboardChartHBarComponent } from '../controls/dashboard-chart-hbar/dashboard-chart-hbar.component';
 import { ItemValueComponent } from './item-value/item-value.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SourceSelectorComponent } from './source-selector/source-selector.component';
+import { LastVsPrevValueComponent } from './last-vs-prev-value/last-vs-prev-value.component';
 @NgModule({
 
   declarations: [
@@ -16,6 +18,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ChartFilterComponent,
     DashboardChartHBarComponent,
     ItemValueComponent,
+    SourceSelectorComponent,
+    LastVsPrevValueComponent,
   ],
   imports: [
     CommonModule,

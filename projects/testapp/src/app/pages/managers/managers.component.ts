@@ -23,7 +23,7 @@ export class ManagersComponent implements OnInit, OnDestroy  {
 
   }
   ngOnInit(): void {
-    this.managers.Managers$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
+    this.managers.Dataset$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
       this.itemsCount = v.length;
       this.items = v;
       this.cdr.detectChanges();

@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { DashboardItem } from 'ngslcommoncontrols';
 import { Subject, takeUntil } from 'rxjs';
-import { MonitorItem } from '../../models/Monitoritem';
-import { MonitorItemtypesService } from '../../services/MonitorItemtypesService';
+
+import { SelectedStore } from '../../models/SelectedStore';
+import {  StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'app-item-value',
@@ -12,52 +13,49 @@ import { MonitorItemtypesService } from '../../services/MonitorItemtypesService'
 })
 export class ItemValueComponent {
 
-  @Input() config: DashboardItem | undefined
-  destroy$ = new Subject();
-  data : number[]= []
-  operations = ['Ultimo', 'Media', 'Somma']
-  ItemTypes: MonitorItem[] = []
-  ItemValueParameters: any = null;
-  footer = ""
+  private _config: DashboardItem | undefined;
+  public currStore: SelectedStore;
   
-  constructor(private cdr: ChangeDetectorRef, public itemtypessrv: MonitorItemtypesService) {
+  destroy$ = new Subject();
+  operations = ['Ultimo', 'Media', 'Somma']
+  footer = ""
+  localcolumns: string[] = []
+  localdata : any[] = []
+  
+  @Input()
+  public get config(): DashboardItem | undefined {
+    return this._config;
+  }
+  public set config(value: DashboardItem | undefined) {
+    this._config = value;
+    if (this.config && this.config.customData['Store']) {
+      this.currStore.Store = this.config.customData['Store']
+    }
+  }
 
+  constructor(private cdr: ChangeDetectorRef, private storeserv: StoreService ) {
+    this.currStore = new SelectedStore(storeserv);
+    this.currStore.datachanges$.pipe(takeUntil(this.destroy$)).subscribe((v: any)=>{
+      
+      this.localcolumns = v.columns;
+      this.localdata = v.rows;
+      this.cdr.detectChanges();
+    })
   }
 
   ngOnInit(): void {
     if (this.config) {
-
       this.config.icon = "BarChart.png"
-     
-      this.cdr.detectChanges();
-      if (this.config!.customData == null)
-      {
-        this.config!.customData = {}
-      }
-
-
-      this.ItemValueParameters = null;
-      if (this.config.customData.ItemValueParameters == null) {
-        this.ItemValueParameters = {itemtype: null}
-        this.config!.customData["ItemValueParameters"] = this.ItemValueParameters
-      } else {
-        this.ItemValueParameters = this.config!.customData.ItemValueParameters;
-      }
-
-
       this.config.ItemChanged$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
-        this.data = [1]
         this.cdr.detectChanges();
       })
     }
-    this.itemtypessrv.results$.subscribe(types=>{
-      this.ItemTypes = types;
-    })
-
-    this.itemtypessrv.Load();
   }
+
+
   ngOnDestroy(): void {
     this.destroy$.next(null);
     this.destroy$.complete();
+    if(this.currStore) this.currStore.unload();
   }
 }

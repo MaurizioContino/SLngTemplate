@@ -5,34 +5,35 @@ import { Observable, Subject } from 'rxjs';
 import { Manager } from '../models/Manager';
 
 import { AreeService } from './aree.service';
+import { IDataservice } from './IDataservice';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ManagersService {
+export class ManagersService implements IDataservice {
 
   store = "Managers";
-  Managers: Manager[] | null = null;
-  Managers$: Subject<Manager[]> = new Subject<Manager[]>();
+  Dataset: Manager[] = [];
+  Dataset$: Subject<Manager[]> = new Subject<Manager[]>();
   constructor(private db: NgSlDbService, private areeServ: AreeService) {
 
   }
 
   Load(reload: boolean = false) {
-    if (reload || this.Managers == null) {
-      this.areeServ.Aree$.subscribe(aree=>{
+    if (reload || this.Dataset.length == 0) {
+      this.areeServ.Dataset$.subscribe(aree=>{
         this.db.GetAll<Manager>(this.store).subscribe(v=>{
           v.forEach(m=>{
             const area = aree.find(a=>a.Id == m.IdArea);
             m.Region = area ? area?.Region : "";
           })
-          this.Managers = v;
-          this.Managers$.next(v);
+          this.Dataset = v;
+          this.Dataset$.next(v);
         })
       });
     }
     else {
-      this.Managers$.next(this.Managers);
+      this.Dataset$.next(this.Dataset);
     }
     this.areeServ.Load();
   }
@@ -47,8 +48,8 @@ export class ManagersService {
           this.db.Save(this.store, managers).subscribe(v2=>{
             this.db.GetAll<Manager>(this.store).subscribe(managers=>{
 
-              this.Managers = managers;
-              this.Managers$.next(managers);
+              this.Dataset = managers;
+              this.Dataset$.next(managers);
               ret.next(managers)
             })
 

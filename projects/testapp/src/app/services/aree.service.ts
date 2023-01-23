@@ -3,21 +3,22 @@ import { NgSlDbService } from 'ng-sl-db';
 
 import { BehaviorSubject, forkJoin, Observable, Subject, take, tap } from 'rxjs';
 import { Area } from '../models/Area';
+import { IDataservice } from './IDataservice';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AreeService {
+export class AreeService implements IDataservice  {
 
   store = "Aree";
-  private _Aree: Area[] | null = null;
-  public get Aree(): Area[] | null {
+  private _Aree: Area[]  = [];
+  public get Dataset(): Area[] {
     return this._Aree;
   }
-  public set Aree(value: Area[] | null) {
+  public set Dataset(value: Area[]) {
     this._Aree = value;
   }
-  Aree$: Subject<Area[]> = new Subject<Area[]>();
+  Dataset$: Subject<Area[]> = new Subject<Area[]>();
   constructor(private db: NgSlDbService) {
   }
 
@@ -33,14 +34,14 @@ export class AreeService {
 
 
   Load(reload: boolean = false) {
-    if (reload || this.Aree == null) {
+    if (this.Dataset.length == 0) {
       this.db.GetAll<Area>(this.store).subscribe(v=>{
-        this.Aree = v;
-        this.Aree$.next(v);
+        this.Dataset = v;
+        this.Dataset$.next(v);
       })
     }
     else {
-      this.Aree$.next(this.Aree);
+      this.Dataset$.next(this.Dataset);
     }
   }
 
@@ -50,8 +51,8 @@ export class AreeService {
     const ret = new Subject<Area[]>();
      this.db.Save(this.store, aree).subscribe(v=>{
       this.db.GetAll<Area>(this.store).subscribe(results=>{
-        this.Aree = v;
-        this.Aree$.next(v);
+        this.Dataset = v;
+        this.Dataset$.next(v);
         ret.next(results);
       })
      })

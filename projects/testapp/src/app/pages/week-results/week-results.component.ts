@@ -28,7 +28,7 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
     this.itemsrv.results$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
       
       this.ItemTypes = v;
-      this.monitorserv.results$.pipe(takeUntil(this.destroy$)).subscribe(list=>{
+      this.monitorserv.Dataset$.pipe(takeUntil(this.destroy$)).subscribe(list=>{
 
         const lastweek = this.weekFromdate(new Date(2023, 11, 31))
         const values = []

@@ -3,20 +3,21 @@ import { NgSlDbService } from 'ng-sl-db';
 import { Observable, Subject, tap } from 'rxjs';
 import { Region } from '../models/Region';
 import { AreeService } from './aree.service';
+import { IDataservice } from './IDataservice';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegionService {
+export class RegionService implements IDataservice {
 
   store = "Regions";
-  Regions: Region[] | null = null
-  Regions$: Subject<Region[]> = new Subject<Region[]>();
+  Dataset: Region[] = []
+  Dataset$: Subject<Region[]> = new Subject<Region[]>();
 
   constructor(private db: NgSlDbService, private areeServ: AreeService) { }
 
   Load(reload: boolean = false) {
-    if (reload || this.Regions == null) {
+    if (this.Dataset.length == 0) {
 
       this.db.GetAll<Region>(this.store)
         .subscribe(v => {
@@ -25,15 +26,15 @@ export class RegionService {
             r.updated = r.originalupdated;
 
           })
-          this.Regions = v;
-          this.Regions$.next(v);
+          this.Dataset = v;
+          this.Dataset$.next(v);
         })
 
 
       this.areeServ.Load();
     }
     else {
-      this.Regions$.next(this.Regions);
+      this.Dataset$.next(this.Dataset);
     }
   }
 
@@ -50,8 +51,8 @@ export class RegionService {
           this.db.Save(this.store, regions).subscribe(v2=>{
             this.db.GetAll<Region>(this.store).subscribe(regions=>{
 
-              this.Regions = regions;
-              this.Regions$.next(regions);
+              this.Dataset = regions;
+              this.Dataset$.next(regions);
               ret.next(regions)
             })
 

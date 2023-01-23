@@ -19,7 +19,7 @@ export class RegionsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.regions.Regions$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
+    this.regions.Dataset$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
       this.itemsCount = v.length;
       this.items = v;
       this.cdr.detectChanges();
