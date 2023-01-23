@@ -1,0 +1,22 @@
+
+app-dashboard1 {
+  height: 100%;
+}
+
+.year-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.year {
+    padding: 20px;
+    width:100px;
+    font-size: 24;
+    cursor: pointer;
+}
+.year:hover {
+    color: var(--accent);
+}
+h1 {
+    margin-left:50px;
+}

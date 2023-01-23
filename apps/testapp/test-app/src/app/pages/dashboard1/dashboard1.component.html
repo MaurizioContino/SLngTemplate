@@ -1,0 +1,33 @@
+<sl-dashboard-placement>
+
+  <ng-template #dashboarditem let-status>
+    {{status}}
+    <h2>Ciao 1</h2>
+  </ng-template>
+
+  <ng-template #dashboarditem  let-status>
+    <app-item-value [view]="status"></app-item-value>
+  </ng-template>
+</sl-dashboard-placement>
+
+
+<!-- <sl-dashboard>
+
+  <ng-template #dashboarditem let-cell>
+    <sl-dashboard-chart-hbar [config]="cell"></sl-dashboard-chart-hbar>
+
+   </ng-template>
+
+   <ng-template #dashboarditem let-cell>
+     <app-item-value [config]="cell"></app-item-value>
+   </ng-template>
+
+   <ng-template #dashboarditem let-cell>
+     <h2>Ciao 1</h2>
+   </ng-template>
+
+   <ng-template #dashboarditem let-cell>
+     <h2>Ciao 2</h2>
+   </ng-template>
+  -->
+

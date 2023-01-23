@@ -1,0 +1,87 @@
+<ng-container *ngIf="current">
+
+  <sl-bigheader
+    [Avatar]="'assets/media/' + current.Avatar"
+    [Background]="'assets/media/' + current.BackgroundImage"
+    [Title]="current.Name + ' ' + current.Surname"
+    [EditStatus]="EditStatus"
+    [canSave]="form.valid"
+    (Save)="Save()"
+    (Edit)="Edit()"
+    (Cancel)="Cancel()"
+    (Delete)="Delete()"
+  >
+    <ng-template #bigheadcontent>
+      <ng-container *ngIf="EditStatus == 'none'">
+        <ng-scrollbar style="height: calc(100vh - 500px)">
+          <div class="accent manager-details-title">Ruolo</div>
+          <div class="manager-details-value">
+            {{ current.Role }}
+          </div>
+          <div class="accent manager-details-title">Region</div>
+          <div class="manager-details-value">
+            {{ current.Region }}
+          </div>
+          <div class="accent manager-details-title">Area</div>
+          <div class="manager-details-value">
+            {{ areaserv.getAreaName(current.IdArea) }}
+          </div>
+        </ng-scrollbar>
+      </ng-container>
+
+      <ng-container *ngIf="EditStatus == 'add' || EditStatus == 'edit'">
+        <form [formGroup]="form">
+          <div class="manager-edit-form">
+            <label class="manager-edit-label" for="manager-name">Name</label>
+            <input
+              class="manager-edit-textbox"
+              id="manager-name"
+              formControlName="Name"
+            />
+
+            <label class="manager-edit-label" for="manager-surname"
+              >Surname</label
+            >
+            <input
+              class="manager-edit-textbox"
+              id="manager-surname"
+              formControlName="Surname"
+            />
+
+            <label class="manager-edit-label" for="manager-role">Role</label>
+            <input
+              class="manager-edit-textbox"
+              id="manager-role"
+              formControlName="Role"
+            />
+
+            <label class="manager-edit-label" for="manager-region"
+              >Region</label
+            >
+            <ng-select
+              [items]="regions"
+              bindLabel="name"
+              bindValue="id"
+              id="manager-region"
+              [(ngModel)]="currentRegion"
+              [ngModelOptions]="{ standalone: true }"
+              class="manager-select"
+            >
+            </ng-select>
+
+            <label class="manager-edit-label" for="manager-area">Area</label>
+            <ng-select
+              [items]="filteredaree"
+              bindLabel="Name"
+              bindValue="Id"
+              id="manager-area"
+              formControlName="IdArea"
+              class="manager-select"
+            >
+            </ng-select>
+          </div>
+        </form>
+      </ng-container>
+    </ng-template>
+  </sl-bigheader>
+</ng-container>

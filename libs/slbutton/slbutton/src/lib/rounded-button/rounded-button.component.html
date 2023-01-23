@@ -1,0 +1,4 @@
+<button class="button rounded-button" #thebutton (click)="onclick($event)" [disabled]="Disabled" >
+  <i [class]="Icon"></i>
+  <span *ngIf="Text" class="rounded-button-text">{{Text}}</span>
+</button>

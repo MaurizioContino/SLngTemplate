@@ -1,0 +1,57 @@
+<div class="bighead-container">
+  <div class="bighead-top">
+  <img
+    *ngIf="Background"
+    alt="backimage"
+    class="header-backimage"
+    [src]="Background"
+  />
+  <div class="header-avatar-container">
+    <sl-avatar *ngIf="Avatar" class="avatar-big" [src]="Avatar"></sl-avatar>
+  </div>
+  <div class="header-details-name">
+    {{ Title }}
+  </div>
+
+  <div class="header-details-commands">
+    <ng-container *ngIf="EditStatus == 'none'">
+      <sl-rounded-button
+        class="button-primary"
+        (click)="Edit.emit()"
+        [Icon]="'fa-solid fa-pencil'"
+        [Text]="'Edit'"
+      ></sl-rounded-button>
+      <div class="header-spacer"></div>
+      <sl-rounded-button
+        class="button-danger"
+        (click)="Delete.emit()"
+        [Icon]="'fa-solid fa-trash'"
+        [Text]="'Delete'"
+      ></sl-rounded-button>
+    </ng-container>
+    <ng-container *ngIf="EditStatus == 'edit' || EditStatus == 'add'">
+      <sl-rounded-button
+        class="button-accent"
+        (click)="Save.emit()"
+        [Disabled]="!canSave"
+        [Icon]="'fa-solid fa-save'"
+        [Text]="'Save'"
+      ></sl-rounded-button>
+      <div class="header-spacer"></div>
+      <sl-rounded-button
+        class="button-primary"
+        (click)="Cancel.emit()"
+        [Icon]="'fa-solid fa-undo'"
+        [Text]="'Cancel'"
+      ></sl-rounded-button>
+    </ng-container>
+  </div>
+  </div>
+  <div class="bighead-container-extend">
+    <ng-scrollbar style="height:100%">
+    <ng-container>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </ng-container>
+  </ng-scrollbar>
+  </div>
+</div>
