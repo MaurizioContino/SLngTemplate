@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { DashboardGrid } from '@soloud/sldashboard';
+import { Dashboard } from '@soloud/sldashboard';
 import { DashboardConfigService } from 'libs/sldashboard/sldashboard/src/lib/services/dashboard.service';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -10,8 +10,8 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class DashboardsComponent implements OnInit, OnDestroy {
 
-  DetailItem:DashboardGrid | null = null;
-  items: DashboardGrid[] = []
+  DetailItem:Dashboard | null = null;
+  items: Dashboard[] = []
   itemsCount = 0;
   destroy$ = new Subject();
 
@@ -36,7 +36,7 @@ export class DashboardsComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
   Add() {
-    this.DetailItem = new DashboardGrid();
+    this.DetailItem = new Dashboard();
     this.DetailItem.isnew = true;
   }
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IDashboardItem } from '@soloud/sldashboard';
+import { DashboardWidget } from '@soloud/sldashboard';
 import { MonitorResultItem } from '../../../models/MonitorResults';
 import { chartfilter } from '../chart-filter/filterValues';
 
@@ -12,7 +12,7 @@ export class ItemCountComponent  {
 
 
   @Input() data: MonitorResultItem[] = []
-  @Input() config: IDashboardItem | undefined;
+  @Input() config: DashboardWidget | undefined;
   sum = 0
 
   filter: chartfilter | undefined= undefined

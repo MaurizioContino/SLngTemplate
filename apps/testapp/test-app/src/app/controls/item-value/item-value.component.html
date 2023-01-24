@@ -1,9 +1,9 @@
-<div *ngIf="view?.status == 'select'" style="height: 100%; max-height: 100%; ">
+ <div *ngIf="status === selectStatus" style="height: 100%; max-height: 100%; ">
   Select
 </div>
-<div *ngIf="view?.status == 'config'" style="height: 100%; max-height: 100%; ">
+<div *ngIf="status === configStatus" style="height: 100%; max-height: 100%; ">
   config
 </div>
-<div *ngIf="view?.status == 'view'" style="height: 100%; max-height: 100%; ">
+<div *ngIf="status === viewStatus" style="height: 100%; max-height: 100%; ">
   view
 </div>

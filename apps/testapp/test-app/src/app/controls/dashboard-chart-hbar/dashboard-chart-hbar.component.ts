@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { IDashboardItem } from '@soloud/sldashboard';
+import { DashboardWidget } from '@soloud/sldashboard';
 import { Subject,  } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ import { Subject,  } from 'rxjs';
 })
 export class DashboardChartHBarComponent implements OnInit, OnDestroy {
 
-  @Input() config: IDashboardItem | undefined
+  @Input() config: DashboardWidget | undefined
   destroy$ = new Subject();
   data : number[]= []
   constructor(private cdr: ChangeDetectorRef) {}

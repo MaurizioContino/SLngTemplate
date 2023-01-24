@@ -1,8 +1,8 @@
 import { EndpointConfig } from "@soloud/SlDataSource";
 import { IDBModel } from "@soloud/SlDb";
-import { IDashboardItem } from "./DashboardItem";
+import { DashboardWidget } from "./DashboardWidget";
 
-export class DashboardGrid implements IDBModel {
+export class Dashboard implements IDBModel {
 
   isnew = false;
   updated = "";
@@ -11,7 +11,9 @@ export class DashboardGrid implements IDBModel {
   Id = 0;
   Name = ""
   Description = ""
-  Items: IDashboardItem[] = [];
+  
+  Items: DashboardWidget[] = [];
+
   Endpoint: EndpointConfig | undefined
   rows = 10;
   cols = 10;
@@ -19,7 +21,7 @@ export class DashboardGrid implements IDBModel {
 
 
   public fromJson(data: string){
-    const deserialized = JSON.parse(data) as DashboardGrid;
+    const deserialized = JSON.parse(data) as Dashboard;
     if (deserialized.Items)
     {
       //this.Items = deserialized.Items.map(v=>  DashboardItem.fromItem(v));
@@ -39,7 +41,7 @@ export class DashboardGrid implements IDBModel {
   }
 
 
-  public fromObject(data: DashboardGrid){
+  public fromObject(data: Dashboard){
     this.isnew = data.isnew
     this.updated = data.updated
     this.originalupdated = data.originalupdated

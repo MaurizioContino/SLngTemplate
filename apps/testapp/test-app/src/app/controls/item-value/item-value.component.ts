@@ -1,8 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { IDashboardItem, DashboardItemStatus } from '@soloud/sldashboard';
-import { Subject, takeUntil } from 'rxjs';
-import { MonitorItem } from '../../models/Monitoritem';
-import { MonitorItemtypesService } from '../../services/MonitorItemtypesService';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {   DashboardWidget, WidgetStatus } from '@soloud/sldashboard';
+import { WidgetConfig } from '@soloud/sldashboard';
+import { Subject } from 'rxjs';
+
+
+
+
+
 
 @Component({
   selector: 'app-item-value',
@@ -10,33 +14,42 @@ import { MonitorItemtypesService } from '../../services/MonitorItemtypesService'
   styleUrls: ['./item-value.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ItemValueComponent implements IDashboardItem {
+export class ItemValueComponent implements OnInit, OnDestroy {
 
-  @Input() view: DashboardItemStatus | undefined;
-
+  static Definition = new DashboardWidget(ItemValueComponent,
+    1,
+    "xxx",
+    'Valore singolo', 
+    'Mette in evidenza un singolo valore, un titolo e opzionalmente un secondo valore con un sottotitolo',
+    {IdComponent: 1, Top: 0, Left: 0,  width: 5, height: 5, Title: '', CustomData: {}})
+  
+    config: WidgetConfig | undefined;
+  
+  private _status: WidgetStatus = WidgetStatus.view;
+  public get status(): WidgetStatus {
+    return this._status;
+  }
+  public set status(value: WidgetStatus) {
+    this._status = value;
+    this.cdr.detectChanges()
+  }
   destroy$ = new Subject();
-
   footer = ""
+  
+  
+  public  selectStatus: WidgetStatus = WidgetStatus.select
+  public  configStatus: WidgetStatus = WidgetStatus.config
+  public  viewStatus: WidgetStatus = WidgetStatus.view
 
   constructor(private cdr: ChangeDetectorRef) {
+    
+    
   }
-  
-  idComponent =  1;
-  icon =  '';
-  customData =  {};
+ 
   
   ngOnInit(): void {
     console.log("init")
-    // if (this.view && this.view.config)
-    // {
-    //   if (this.view.config) {
-    //     this.cdr.detectChanges();
-    //     if (this.view.config!.customData == null)
-    //     {
-    //       this.view.config!.customData = {}
-    //     }
-    //   }
-    // }
+    
   }
 
   ngOnDestroy(): void {

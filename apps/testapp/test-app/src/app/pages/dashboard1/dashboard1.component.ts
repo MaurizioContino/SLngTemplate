@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DashboardGrid } from '@soloud/sldashboard';
-import { DashboardConfigService } from 'libs/sldashboard/sldashboard/src/lib/services/dashboard.service';
+import { Dashboard } from '@soloud/sldashboard';
+import { DashboardConfigService } from '@soloud/sldashboard';
 import { Subject, takeUntil } from 'rxjs';
 import { chartfilter } from '../../controls/charts/chart-filter/filterValues';
 
@@ -15,7 +15,7 @@ export class Dashboard1Component implements OnInit, OnDestroy  {
   id = 0;
   listObject = ['uno', 'due', 'ciao 1', 'ciao 2']
 
-  current: DashboardGrid | undefined;
+  current: Dashboard | undefined;
 
   showYears = false;
   mainfilter: chartfilter = {fromweek: 1, toweek: 1, year: (new Date()).getFullYear(), reportType: 'weekly'}
@@ -34,7 +34,7 @@ export class Dashboard1Component implements OnInit, OnDestroy  {
         this.dashboard.DashboardGrids$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
           const tmp = v.find(d=>d.Id==this.id)
           if (tmp) {
-            this.current = new DashboardGrid();
+            this.current = new Dashboard();
             this.current.fromObject(tmp)
           }
         })
@@ -43,15 +43,12 @@ export class Dashboard1Component implements OnInit, OnDestroy  {
     });
     this.years = [];
     this.currentYear = (new Date()).getFullYear();
-    for(var i=0; i < 10; i++)
-    {
-      this.years.push(this.currentYear - i);
-    }
+    // for(var i=0; i < 10; i++)
+    // {
+    //   this.years.push(this.currentYear - i);
+    // }
   }
 
-  LoadData() {
-
-  }
   ngOnDestroy(): void {
     this.destroy$.next(null);
     this.destroy$.complete();

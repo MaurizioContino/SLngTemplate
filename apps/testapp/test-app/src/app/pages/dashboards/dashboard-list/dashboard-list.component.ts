@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
-import { DashboardGrid } from '@soloud/sldashboard';
+import { Dashboard } from '@soloud/sldashboard';
 
 @Component({
   selector: 'app-dashboard-list',
@@ -7,12 +7,12 @@ import { DashboardGrid } from '@soloud/sldashboard';
   styleUrls: ['./dashboard-list.component.scss']
 })
 export class DashboardListComponent {
-  @Input() items: DashboardGrid[] = [];
-  @Output() SelectedChange = new EventEmitter<DashboardGrid>();
+  @Input() items: Dashboard[] = [];
+  @Output() SelectedChange = new EventEmitter<Dashboard>();
 
   constructor(private cdr: ChangeDetectorRef) {}
 
-  ItemSelected(row: DashboardGrid){
+  ItemSelected(row: Dashboard){
     this.SelectedChange.emit(row);
   }
 }

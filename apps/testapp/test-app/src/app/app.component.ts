@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+/* eslint-disable @angular-eslint/component-selector */
+import { Component, OnInit } from '@angular/core';
 import { SlLayoutsService } from '@soloud/sllayout';
 import { menuitem, SlMenuService } from '@soloud/slmenu';
-import { SlDbService } from 'libs/sl-db/src/lib/services/sl-db.service';
-import { DashboardConfigService } from 'libs/sldashboard/sldashboard/src/lib/services/dashboard.service';
+import { SlDbService } from '@soloud/SlDb';
+import { DashboardConfigService, DashboardWidget } from '@soloud/sldashboard';
+import { ItemValueComponent } from './controls/item-value/item-value.component';
 
 @Component({
   selector: 'testapp-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'testapp-test-app';
   constructor(public layoutService: SlLayoutsService, private dashserv: DashboardConfigService,
     private db: SlDbService, private mnuServ: SlMenuService) {
@@ -27,6 +29,11 @@ export class AppComponent {
       {itemtype:"link", title: 'Dashboards', url: 'configs/dashboards'}
 
     ] as menuitem[]
+
+    const DashWidgets: DashboardWidget[] = [
+      ItemValueComponent.Definition
+    ]
+
     const top = [{itemtype:"title", title: 'Dashboards', subtitle:'Application dashboards', children:[], url: ''}] as menuitem[]
 
 
@@ -46,5 +53,7 @@ export class AppComponent {
 
       this.dashserv.Load();
      })
+
+     this.dashserv.Widgets = DashWidgets;
   }
 }

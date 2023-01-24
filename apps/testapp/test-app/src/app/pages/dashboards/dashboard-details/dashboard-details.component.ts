@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { DashboardGrid, IDashboardItem } from '@soloud/sldashboard';
+import { Dashboard, DashboardWidget } from '@soloud/sldashboard';
 import { DashboardConfigService } from '@soloud/sldashboard';
 
 @Component({
@@ -10,13 +10,13 @@ import { DashboardConfigService } from '@soloud/sldashboard';
 })
 export class DashboardDetailsComponent {
   @Input() EditStatus : "none" | "add" | "edit" | "delete" = "none"
-  private _current: DashboardGrid | null = null;
+  private _current: Dashboard | null = null;
   @Input()
-  public get current(): DashboardGrid | null{
+  public get current(): Dashboard | null{
 
     return this._current;
   }
-  public set current(value: DashboardGrid | null) {
+  public set current(value: Dashboard | null) {
     this._current = value;
     if (value?.isnew) {
       this.EditStatus = "add"
@@ -42,7 +42,7 @@ export class DashboardDetailsComponent {
       updated: [new Date().toISOString()],
       originalupdated: [''],
       deleted: [false],
-      Items: this.fb.array<IDashboardItem>([]),
+      Items: this.fb.array<DashboardWidget>([]),
 
   });
 
@@ -50,22 +50,22 @@ export class DashboardDetailsComponent {
 
 
   Save() {
-    const s = this.form.value  as DashboardGrid;
+    const s = this.form.value  as Dashboard;
     s.updated = (new Date()).toISOString()
     this.Dashboardservice.save(s).subscribe(v=>{
-      this.current = v.find(v=>v.Id == this._current?.Id) as DashboardGrid;
+      this.current = v.find(v=>v.Id == this._current?.Id) as Dashboard;
       this.EditStatus = "none"
       this.cdr.detectChanges();
     })
   }
   Edit() {
     this.EditStatus = "edit"
-    this.form.setValue(this._current as DashboardGrid);
+    this.form.setValue(this._current as Dashboard);
 
   }
   Cancel() {
     this.EditStatus = "none"
-    this.form.reset(this._current as DashboardGrid);
+    this.form.reset(this._current as Dashboard);
   }
 
   Delete() {

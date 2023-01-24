@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SlDbService } from '@soloud/SlDb';
 import { Observable, Subject, take, tap } from 'rxjs';
-import { DashboardGrid } from '../models/DashboardGrid';
+import { Dashboard } from '../models/Dashboard';
+import { DashboardWidget } from '../models/DashboardWidget';
 
 
 @Injectable({
@@ -10,19 +11,20 @@ import { DashboardGrid } from '../models/DashboardGrid';
 export class DashboardConfigService {
 
   store = "Dashboards";
-  DashboardGrids: DashboardGrid[] | null = null;
-  DashboardGrids$: Subject<DashboardGrid[]> = new Subject<DashboardGrid[]>();
+  DashboardGrids: Dashboard[] | null = null;
+  DashboardGrids$: Subject<Dashboard[]> = new Subject<Dashboard[]>();
+
+  Widgets: DashboardWidget[] = [];
+
   constructor(private db: SlDbService) {
   }
 
-
-
   Load(reload: boolean = false) {
     if (reload || this.DashboardGrids == null) {
-      this.db.GetAll<DashboardGrid>(this.store).subscribe(v=>{
+      this.db.GetAll<Dashboard>(this.store).subscribe(v=>{
         this.DashboardGrids = []
         v.forEach(g=>{
-          const dg = new DashboardGrid();
+          const dg = new Dashboard();
           dg.fromObject(g);
           this.DashboardGrids?.push(dg)
         })
@@ -37,11 +39,11 @@ export class DashboardConfigService {
 
 
 
-  save(dashboardGrids: DashboardGrid):Observable<DashboardGrid[]> {
-    const ret = new Subject<DashboardGrid[]>();
+  save(dashboardGrids: Dashboard):Observable<Dashboard[]> {
+    const ret = new Subject<Dashboard[]>();
 
      this.db.Save(this.store, [dashboardGrids]).subscribe((v: any)=>{
-      this.db.GetAll<DashboardGrid>(this.store).subscribe((results: DashboardGrid[])=>{
+      this.db.GetAll<Dashboard>(this.store).subscribe((results: Dashboard[])=>{
         this.DashboardGrids = results;
         this.DashboardGrids$.next(results);
         ret.next(results);
@@ -51,7 +53,7 @@ export class DashboardConfigService {
   }
 
 
-  delete(dashboardGrids: DashboardGrid[]) {
+  delete(dashboardGrids: Dashboard[]) {
     if (dashboardGrids.length>0) {
       return this.db.Delete(this.store, dashboardGrids)
     } else{
@@ -60,7 +62,7 @@ export class DashboardConfigService {
     }
   }
 
-  add(dashboardGrids: DashboardGrid[]) {
+  add(dashboardGrids: Dashboard[]) {
     if (dashboardGrids.length>0) {
       return this.db.Insert(this.store, dashboardGrids)
 
@@ -71,7 +73,7 @@ export class DashboardConfigService {
 
   }
 
-  update(dashboardGrids: DashboardGrid[]) {
+  update(dashboardGrids: Dashboard[]) {
 
     dashboardGrids.forEach(area => {
       area.updated = new Date().toISOString();
