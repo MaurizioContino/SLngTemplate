@@ -87,54 +87,6 @@
   top: 10px;
 }
 
-.card {
-  position: absolute;
-  margin: 0px;
-  padding: 0px;
-  z-index: 100;
-  margin-right:10px;
-  border-radius: 10px;
-    .card-header {
-      position: absolute;
-      display: none;
-      width: calc(100% - 20px);
-      z-index: 100;
-      background-color: rgba(192, 192, 192, 0.7);
-
-      .card-header-column {
-        display: flex;
-        flex-direction: column;
-        .card-header-row {
-          display: flex;
-          flex-direction: row;
-          width: 100%;
-          align-items: center;
-        }
-
-    }
-  }
-
-  .card-body {
-
-    z-index: 50;
-    width: calc(100% - 30px);
-    height: 100%;
-    padding-left: 18px;
-    padding-top: 12px;
-
-    overflow: hidden;
-
-    .card-body-display {
-      height: calc(100% - 20px);
-
-    }
-  }
-}
-.card:hover {
-  .card-header {
-    display: block;
-  }
-}
 .button-addcontrol {
   color: rgba($color: #f5f3f3, $alpha: 0);
   width: 100%;

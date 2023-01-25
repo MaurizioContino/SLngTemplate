@@ -20,15 +20,12 @@ export class DashboardDetailsComponent {
     this._current = value;
     if (value?.isnew) {
       this.EditStatus = "add"
-      if (value) this.form.setValue(value);
+      //if (value) this.form.setValue(value);
     } else {
       this.EditStatus = "none"
     }
     this.cdr.detectChanges();
   }
-
-
-
 
   form = this.fb.group(
     {
@@ -50,22 +47,22 @@ export class DashboardDetailsComponent {
 
 
   Save() {
-    const s = this.form.value  as Dashboard;
-    s.updated = (new Date()).toISOString()
-    this.Dashboardservice.save(s).subscribe(v=>{
-      this.current = v.find(v=>v.Id == this._current?.Id) as Dashboard;
-      this.EditStatus = "none"
-      this.cdr.detectChanges();
-    })
+    // const s = this.form.value  as Dashboard;
+    // s.updated = (new Date()).toISOString()
+    // this.Dashboardservice.save(s).subscribe(v=>{
+    //   this.current = v.find(v=>v.Id == this._current?.Id) as Dashboard;
+    //   this.EditStatus = "none"
+    //   this.cdr.detectChanges();
+    // })
   }
   Edit() {
     this.EditStatus = "edit"
-    this.form.setValue(this._current as Dashboard);
+    //this.form.setValue(this._current as Dashboard);
 
   }
   Cancel() {
     this.EditStatus = "none"
-    this.form.reset(this._current as Dashboard);
+    //this.form.reset(this._current as Dashboard);
   }
 
   Delete() {

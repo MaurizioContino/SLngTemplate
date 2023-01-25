@@ -1,5 +1,6 @@
 export interface WidgetConfig {
 
+    IdItem: number;
     IdComponent: number;
     Top: number;
     Left: number;
@@ -7,5 +8,6 @@ export interface WidgetConfig {
     height: number;
     Title: string;
     CustomData: any;
+    BackgroundColor: string
 
 }

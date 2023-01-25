@@ -19,12 +19,12 @@ export class ItemValueComponent implements OnInit, OnDestroy {
   static Definition = new DashboardWidget(ItemValueComponent,
     1,
     "xxx",
-    'Valore singolo', 
+    'Valore singolo',
     'Mette in evidenza un singolo valore, un titolo e opzionalmente un secondo valore con un sottotitolo',
-    {IdComponent: 1, Top: 0, Left: 0,  width: 5, height: 5, Title: '', CustomData: {}})
-  
+    {IdItem: 0, BackgroundColor: 'white', IdComponent: 1, Top: 0, Left: 0,  width: 5, height: 5, Title: '', CustomData: {}})
+
     config: WidgetConfig | undefined;
-  
+
   private _status: WidgetStatus = WidgetStatus.view;
   public get status(): WidgetStatus {
     return this._status;
@@ -35,21 +35,22 @@ export class ItemValueComponent implements OnInit, OnDestroy {
   }
   destroy$ = new Subject();
   footer = ""
-  
-  
+
+
   public  selectStatus: WidgetStatus = WidgetStatus.select
   public  configStatus: WidgetStatus = WidgetStatus.config
   public  viewStatus: WidgetStatus = WidgetStatus.view
 
   constructor(private cdr: ChangeDetectorRef) {
-    
-    
+
+
   }
- 
-  
+
+
   ngOnInit(): void {
+
     console.log("init")
-    
+
   }
 
   ngOnDestroy(): void {

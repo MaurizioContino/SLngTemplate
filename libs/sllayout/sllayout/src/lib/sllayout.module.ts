@@ -8,13 +8,17 @@ import { SlBigHeaderComponent } from './components/sl-big-header/sl-big-header.c
 import { SlButtonModule } from '@soloud/slbutton';
 import { SlavatarModule } from '@soloud/slavatar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { SlSmallHeaderComponent } from './components/sl-small-header/sl-small-header.component';
+import { SlCardComponent } from './components/sl-card/sl-card.component';
 
 @NgModule({
   declarations: [
     DefaultLayoutComponent,
     EmptyLayoutComponent,
     HMasterDetailsComponent,
-    SlBigHeaderComponent
+    SlBigHeaderComponent,
+    SlSmallHeaderComponent,
+    SlCardComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +31,9 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     DefaultLayoutComponent,
     EmptyLayoutComponent,
     HMasterDetailsComponent,
-    SlBigHeaderComponent
+    SlBigHeaderComponent,
+    SlSmallHeaderComponent,
+    SlCardComponent
   ]
 })
 export class SllayoutModule {}

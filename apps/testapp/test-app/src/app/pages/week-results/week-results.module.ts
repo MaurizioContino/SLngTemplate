@@ -7,7 +7,7 @@ import { SharedModule } from '../../shared.module';
 import { ControlsModule } from '../../controls/controls.module';
 import { WeekResultListComponent } from './week-result-list/week-result-list.component';
 import { WeekResultDetailsComponent } from './week-result-details/week-result-details.component';
-import { SllayoutModule } from '@soloud/sllayout';
+
 
 
 @NgModule({
