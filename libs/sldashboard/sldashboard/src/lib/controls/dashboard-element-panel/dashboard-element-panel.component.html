@@ -1,0 +1,23 @@
+
+<div class="card" #card [style.width.px]="width" [style.height.px]="height">
+  <div class="card-header">
+    <div class="card-header-row">
+      <button title="drag" class="button button-primary"  cdkDrag (cdkDragMoved)="cdkMoveDragMoved($event)" (cdkDragEnded)="cdkMoveDragEnded($event)">
+        <i class="fa-solid fa-arrows-alt fa-lg ico-margins"></i>
+      </button>
+      <span class="spacer"></span>
+      <button title="Setup Control" class="button button-primary" (click)="setup()">
+        <i class="fa-solid fa-pencil fa-lg ico-margins primary"></i>
+      </button>
+      <button title="Remove Control" class="button button-danger" (click)="remove()">
+        <i class="fa-solid fa-trash fa-lg ico-margins danger"></i>
+      </button>
+    </div>
+
+  </div>
+  <div class="card-body">
+
+    <ng-template sl-dasboard-item></ng-template>
+  </div>
+  <div #resizer class="resizer" cdkDrag (cdkDragMoved)="cdkResizeDragMoved($event)" (cdkDragEnded)="cdkResizeDragEnded($event)"></div>
+</div>

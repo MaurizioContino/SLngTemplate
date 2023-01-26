@@ -52,7 +52,7 @@ export class DashboardElementComponent implements AfterViewInit {
     }
 
     loadComponent() {
-      debugger
+
       if (this.WidgetHost) {
         const viewContainerRef = this.WidgetHost.viewContainerRef;
         viewContainerRef.clear();
