@@ -1,9 +1,34 @@
 import { Injectable } from '@angular/core';
-import { SlDbService } from 'libs/sl-db/src/lib/services/sl-db.service';
+import { DataSourceService, operator, ValueType } from '@soloud/SlDataSource';
+import { SlDbService } from '@soloud/SlDb';
 
 import { Observable, Subject, take, tap } from 'rxjs';
 import { MonitorResultItem, MonitorResults } from '../models/MonitorResults';
 
+
+export const ItemsDataSourceFields = [
+  {Label: 'IdManager', Property: 'Manager', ValueType: ValueType.number},
+  {Label: 'Settimana', Property: 'Week', ValueType: ValueType.number},
+  {Label: 'Aperte', Property: 'Aperte', ValueType: ValueType.number},
+  {Label: 'ToolBox aperte', Property: 'ToolBox_Aperte', ValueType: ValueType.number},
+  {Label: 'Business', Property: 'Business', ValueType: ValueType.number},
+  {Label: 'Sepa business', Property: 'Sepa_Business', ValueType: ValueType.number},
+  {Label: 'Non operative', Property: 'NonOperative', ValueType: ValueType.number},
+  {Label: 'Sepa non operative', Property: 'Sepa_non_operative', ValueType: ValueType.number},
+  {Label: 'Pross apertura', Property: 'Pross_apertura', ValueType: ValueType.number},
+  {Label: 'Toolbox pa', Property: 'Sepa_pa', ValueType: ValueType.number},
+  {Label: 'Sepa attivi', Property: 'Sepa_Attivi', ValueType: ValueType.number},
+  {Label: 'Toolbox attivi', Property: 'Toolbox_Attivi', ValueType: ValueType.number},
+]
+
+export const ItemsDataSourceFilter = [
+  {Property: 'IdManager', Operator:operator["=="], Value: 'Qualunque' },
+  {Property: 'Week', Operator:operator["=="], Value: 'Ultima' }
+
+]
+
+
+export const ItemsDataSource = {Name: "Monitor Data", Fields: ItemsDataSourceFields, Filters: ItemsDataSourceFilter}
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +44,13 @@ export class MonitorResultsService {
     this._results = value;
   }
   results$: Subject<MonitorResults[]> = new Subject<MonitorResults[]>();
-  constructor(private db: SlDbService) {
+  constructor(private db: SlDbService, private dssources: DataSourceService) {
+    this.dssources.registerDatasource("Monitor Data",  ItemsDataSourceFields, ItemsDataSourceFilter)
+    this.dssources.DataRequired$.subscribe(v=>{
+      if (v && v.name==="Monitor Data") {
+        this.Load();
+      }
+    });
   }
 
   Load(reload: boolean = false) {
@@ -41,7 +72,7 @@ export class MonitorResultsService {
 
           }
         });
-
+        this.dssources.pushData("Monitor Data", retItems);
         this.results = retItems;
         this.results$.next(retItems);
 

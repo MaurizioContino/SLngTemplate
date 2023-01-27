@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { SlLayoutsService } from '@soloud/sllayout';
 import { menuitem, SlMenuService } from '@soloud/slmenu';
 import { SlDbService } from '@soloud/SlDb';
-import { DashboardConfigService, DashboardWidget } from '@soloud/sldashboard';
-import { ItemValueComponent } from './controls/item-value/item-value.component';
+import { DashboardConfigService } from '@soloud/sldashboard';
+import { allmenus, top, logo, DashWidgetsConf} from './models/StarupData';
+import { DataSourceService } from '@soloud/SlDataSource';
+import { MonitorResultsService } from './services/monitor-results.service';
 
 @Component({
   selector: 'testapp-root',
@@ -14,30 +16,13 @@ import { ItemValueComponent } from './controls/item-value/item-value.component';
 export class AppComponent implements OnInit{
   title = 'testapp-test-app';
   constructor(public layoutService: SlLayoutsService, private dashserv: DashboardConfigService,
-    private db: SlDbService, private mnuServ: SlMenuService) {
+    private db: SlDbService, private mnuServ: SlMenuService, private dssources: DataSourceService,
+    private itmserv: MonitorResultsService) {
 
   }
 
   ngOnInit(): void {
 
-    const allmenus = [
-      {itemtype:"title", title: 'Dataentry', subtitle:'Insert new data', children:[], url: ''},
-      {itemtype:"link", title: 'Weekly results', url: 'WeekResults'},
-      {itemtype:"title", title: 'Configurations', subtitle:'Application base configuration', children:[], url: ''},
-      {itemtype:"link", title: 'Managers', url: 'configs/managers'},
-      {itemtype:"link", title: 'Regions', url: 'configs/regions'},
-      {itemtype:"link", title: 'Dashboards', url: 'configs/dashboards'}
-
-    ] as menuitem[]
-
-    const DashWidgets: DashboardWidget[] = [
-      ItemValueComponent.Definition
-    ]
-
-    const top = [{itemtype:"title", title: 'Dashboards', subtitle:'Application dashboards', children:[], url: ''}] as menuitem[]
-
-
-    const logo = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/100px-Angular_full_color_logo.svg.png"
 
 
 
@@ -46,14 +31,11 @@ export class AppComponent implements OnInit{
         const dsbd = v.map(m=> {return {itemtype:"link", title: m.Name, url: 'dashboards/dashboard1/' + m.Id}}) as menuitem[]
         const currmenu = top.concat(dsbd);
         const all = currmenu.concat(allmenus);
-
         this.mnuServ.updateMenus("Test application", logo, all)
       })
-
-
       this.dashserv.Load();
      })
 
-     this.dashserv.Widgets = DashWidgets;
+     this.dashserv.Widgets = DashWidgetsConf;
   }
 }

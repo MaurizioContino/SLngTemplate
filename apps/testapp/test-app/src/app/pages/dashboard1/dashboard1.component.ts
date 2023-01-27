@@ -34,11 +34,12 @@ export class Dashboard1Component implements OnInit, OnDestroy  {
         this.dashboard.DashboardGrids$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
           const tmp = v.find(d=>d.Id==this.id)
           if (tmp) {
-            this.current = new Dashboard();
-            this.current.fromObject(tmp)
+            const dashboard =  new Dashboard();
+            dashboard.fromObject(tmp);
+            this.current = dashboard;
           }
         })
-        this.dashboard.Load();
+        this.dashboard.Load(true);
       }
     });
     this.years = [];

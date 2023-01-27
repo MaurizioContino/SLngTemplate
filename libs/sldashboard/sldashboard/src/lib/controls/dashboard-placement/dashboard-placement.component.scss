@@ -42,3 +42,6 @@ sl-dashboard-placement {
   animation: btn-show-in 0.6s linear forwards;
   background-color: silver;
 }
+::ng-deep  .ng-scroll-content  {
+  padding: 5px !important;
+}

@@ -1,16 +1,18 @@
 import { Type } from '@angular/core';
+import { DataSourceField } from '@soloud/SlDataSource';
 import { WidgetConfig } from './WidgetConfig';
 import { WidgetStatus } from './WidgetStatus';
 export class DashboardWidget {
-  
+
   status: WidgetStatus = WidgetStatus.view
-  
+
   IdComponent: number;
   Icon: string;
   Name: string;
   Description: string;
   config: WidgetConfig;
-  
+  Data: any;
+  Fields: DataSourceField[]=[]
 
   component: Type<any>;
 
@@ -21,7 +23,7 @@ export class DashboardWidget {
     this.Name = Name;
     this.Description = Description;
     this.config = Defaultconfig;
-  
+
   }
 }
 

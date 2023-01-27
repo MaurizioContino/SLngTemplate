@@ -13,7 +13,10 @@
             </ng-container>
 
             <ng-template #widget>
-              <sl-dashboard-element-panel [item]="WidgetIn(idr,idc)!" [status]="viewStatus"></sl-dashboard-element-panel>
+              <sl-dashboard-element-panel [item]="WidgetIn(idr,idc)!" [status]="viewStatus"
+              [config]="ConfigIn(idr, idc)!" [Data]="datasource.data" [Fields]="datasource.Fields"
+                (Copy)="copyElement($event)" (Delete)="deleteElement($event)" (Setup)="setupElement($event)"
+              ></sl-dashboard-element-panel>
             </ng-template>
 
           </div>

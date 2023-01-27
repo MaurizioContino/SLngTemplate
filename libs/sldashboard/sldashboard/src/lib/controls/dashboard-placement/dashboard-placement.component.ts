@@ -1,4 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, Input, QueryList, TemplateRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, Input, OnDestroy, OnInit, QueryList, TemplateRef } from '@angular/core';
+import { DataSourceService, DataSource } from '@soloud/SlDataSource';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Dashboard } from '../../models/Dashboard';
 import { DashboardWidget } from '../../models/DashboardWidget';
 import { WidgetConfig } from '../../models/WidgetConfig';
@@ -11,10 +13,23 @@ import { DashboardConfigService } from '../../services/dashboard.service';
     styleUrls: ['./dashboard-placement.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardPlacementComponent implements AfterViewInit {
+export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDestroy {
   private _contents: QueryList<TemplateRef<any>> | undefined;
+  private _dashboard: Dashboard | undefined;
+  @Input()
 
-  @Input() dashboard: Dashboard | undefined;
+  public get dashboard(): Dashboard | undefined {
+    return this._dashboard;
+  }
+  public set dashboard(value: Dashboard | undefined) {
+    this._dashboard = value;
+
+    if (value && value.DataSourceName) {
+
+      this.registerDatasource();
+      this.dsSources.LoadData(value.DataSourceName);
+    }
+  }
 
   @ContentChildren('dashboarditem')
     public get contents(): QueryList<TemplateRef<any>> | undefined {
@@ -24,12 +39,13 @@ export class DashboardPlacementComponent implements AfterViewInit {
         this._contents = value;
         this.cdr.detectChanges();
     }
-
+    destroy$ = new Subject<any>();
     rows: number[] = [];
     cols: number[] = [];
 
     SelectedItem: DashboardWidget | undefined;
     SelectedConfig: WidgetConfig | undefined;
+
     DisplayDetails: true | null = null;
     showSelect = false;
     showConfig = false;
@@ -37,10 +53,39 @@ export class DashboardPlacementComponent implements AfterViewInit {
     viewStatus = WidgetStatus.view;
     selectr: number | null = null;
     selectc: number | null = null;
+    datasource: DataSource = {name: 'none', Fields:[], Filters:[], data:null};
+    dsSubscriber: Subscription | undefined;
+    constructor(private myElement: ElementRef, private cdr: ChangeDetectorRef,
+      public dashserv: DashboardConfigService, private dsSources: DataSourceService) {}
 
+      registerDatasource() {
+        if (this.dashboard) {
+          debugger
+          if (this.dsSubscriber) this.dsSubscriber.unsubscribe();
+          this.dsSubscriber = this.dsSources.Data$.pipe(takeUntil(this.destroy$)).subscribe(ds=>{
+            debugger
+            if (ds && ds.name==this.dashboard?.DataSourceName) {
 
+              this.datasource = ds;
+              this.cdr.detectChanges();
+              if(this.dashboard)
+              {
+                this.dashboard.Items.forEach(v=>{
+                  v.CustomData
+                })
+              }
+            }
+          });
 
-    constructor(private myElement: ElementRef, private cdr: ChangeDetectorRef, public dashserv: DashboardConfigService) {}
+        }
+      }
+      ngOnInit(): void {
+        this.registerDatasource();
+      }
+      ngOnDestroy(): void {
+        this.destroy$.next(null);
+        this.destroy$.complete();
+      }
 
     ngAfterViewInit() {
         this.myElement.nativeElement.style = '100%';
@@ -69,22 +114,23 @@ export class DashboardPlacementComponent implements AfterViewInit {
     }
 
     InitnewWidget(IdComponent: number) {
-        this.SelectedItem = this.dashserv.Widgets.find((v) => v.IdComponent == IdComponent);
-        if (this.SelectedItem) {
-            this.showSelect = false;
-            this.showConfig = true;
-            this.SelectedConfig = JSON.parse(JSON.stringify(this.SelectedItem.config));
-            if (this.SelectedConfig && this.selectr!==null && this.selectc!==null ) {
-              this.SelectedConfig.Top = this.selectr;
-              this.SelectedConfig.Left = this.selectc;
-              this.SelectedConfig.IdComponent = IdComponent;
-              this.dashboard?.Items.push(this.SelectedConfig);
-              this.selectr = null;
-              this.selectc = null
-              this.cdr.detectChanges();
-            }
 
-        }
+      const model = this.dashserv.Widgets.find((v) => v.IdComponent == IdComponent);
+      this.SelectedItem = JSON.parse(JSON.stringify(model));
+      if (this.SelectedItem) {
+          this.showSelect = false;
+          this.showConfig = true;
+          this.SelectedConfig = this.SelectedItem.config;
+          if (this.SelectedConfig && this.selectr!==null && this.selectc!==null) {
+            this.SelectedConfig.Top = this.selectr;
+            this.SelectedConfig.Left = this.selectc;
+            this.SelectedConfig.IdComponent = IdComponent;
+            this.dashboard?.Items.push(this.SelectedConfig);
+            this.selectr = null;
+            this.selectc = null
+            this.cdr.detectChanges();
+          }
+      }
     }
     SaveConfig(){
       //todo
@@ -96,8 +142,10 @@ export class DashboardPlacementComponent implements AfterViewInit {
     WidgetIn(r: number, c: number): DashboardWidget | null {
       if (this.dashboard) {
         const config = this.dashboard.getWidgetByPosition(r,c);
-        const w = this.dashserv.Widgets.find(v=>v.IdComponent==config?.IdComponent);
-        if (w && config) {
+        const model = this.dashserv.Widgets.find(v=>v.IdComponent==config?.IdComponent);
+        if (model && config) {
+          const w =  JSON.parse(JSON.stringify(model)) as DashboardWidget;
+          w.component = model.component;
           w.config = config;
           return w;
         } else {
@@ -106,6 +154,40 @@ export class DashboardPlacementComponent implements AfterViewInit {
 
       } else {
         return null;
+      }
+    }
+    ConfigIn(r: number, c: number): WidgetConfig | null {
+      if (this.dashboard) {
+        return this.dashboard.getWidgetByPosition(r,c);
+      } else {
+        return null;
+      }
+    }
+    copyElement(e: WidgetConfig) {
+      const model = this.dashserv.Widgets.find((v) => v.IdComponent == e.IdComponent);
+      this.SelectedItem = JSON.parse(JSON.stringify(model));
+      if (this.SelectedItem && this.dashboard) {
+          this.showSelect = false;
+          this.showConfig = true;
+          this.SelectedItem.config = JSON.parse(JSON.stringify(e));
+          this.SelectedItem.config.Top++;
+          this.SelectedConfig = this.SelectedItem.config;
+          this.dashboard.Items.push(this.SelectedConfig);
+      }
+    }
+    deleteElement(e: WidgetConfig) {
+      if (this.dashboard) {
+        const idx = this.dashboard.Items.indexOf(e);
+        this.dashboard.Items.splice(idx)
+        this.DisplayDetails = null;
+      }
+    }
+    setupElement(e: WidgetConfig) {
+      if (this.dashboard) {
+        const idx = this.dashboard.Items.indexOf(e);
+        const newItem = JSON.parse(JSON.stringify(this.dashboard.Items[idx]))
+        this.dashboard.Items[this.dashboard?.Items.length - 1].Top++;
+
       }
     }
 }

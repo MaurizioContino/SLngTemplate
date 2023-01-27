@@ -28,6 +28,12 @@
           <div class="dashboard-details-value">
             {{current.Description}}
           </div>
+          <div class="accent dashboard-details-title">
+            Data source
+          </div>
+          <div class="dashboard-details-value">
+            {{current.DataSourceName}}
+          </div>
       </ng-container>
 
       <ng-container *ngIf="EditStatus==='add' || EditStatus==='edit'">
@@ -36,8 +42,11 @@
           <div class="dashboard-edit-form">
             <label  class="dashboard-edit-label"  for="dashboard-name">Name</label>
             <input  class="dashboard-edit-textbox" id="dashboard-name" formControlName="Name">
-            <label  class="dashboard-edit-label"  for="dashboard-surname">Description</label>
-            <input  class="dashboard-edit-textbox" id="dashboard-surname" formControlName="Description">
+            <label  class="dashboard-edit-label"  for="dashboard-description">Description</label>
+            <input  class="dashboard-edit-textbox" id="dashboard-description" formControlName="Description">
+            <label  class="dashboard-edit-label"  for="dsname">Datasource</label>
+            <ng-select [items]="datasources" id="dsname" formControlName="DataSourceName"></ng-select>
+
           </div>
 
         </form>

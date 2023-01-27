@@ -1,6 +1,5 @@
-import { EndpointConfig } from '@soloud/SlDataSource';
+import { DataSource } from '@soloud/SlDataSource';
 import { IDBModel } from '@soloud/SlDb';
-import { DashboardWidget } from './DashboardWidget';
 import { WidgetConfig } from './WidgetConfig';
 
 export class Dashboard implements IDBModel {
@@ -11,13 +10,14 @@ export class Dashboard implements IDBModel {
     Id = 0;
     Name = '';
     Description = '';
+    DataSourceName = '';
 
     Items: WidgetConfig[] = [];
 
-    Endpoint: EndpointConfig | undefined;
+    Endpoint: DataSource | undefined;
 
     getWidgetByPosition(r: number, c: number): WidgetConfig | null {
-        var itm = this.Items.find((w) => w.Top == r && w.Left == c);
+        const itm = this.Items.find((w) => w.Top == r && w.Left == c);
         if (itm) return itm;
         else return null;
     }
@@ -32,6 +32,7 @@ export class Dashboard implements IDBModel {
         this.Items = deserialized.Items ? deserialized.Items : [];
         this.Name = deserialized.Name;
         this.Description = deserialized.Description;
+        this.DataSourceName= deserialized.DataSourceName
     }
 
     public fromObject(data: Dashboard) {
@@ -43,6 +44,7 @@ export class Dashboard implements IDBModel {
         this.Items = data.Items ? data.Items : [];
         this.Name = data.Name;
         this.Description = data.Description;
+        this.DataSourceName= data.DataSourceName
 
         for (let idx = 0; idx < this.Items.length; idx++) {
             //this.Items[idx] = DashboardItem.fromItem(this.Items[idx]);

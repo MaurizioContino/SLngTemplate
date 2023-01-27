@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {   DashboardWidget, WidgetStatus } from '@soloud/sldashboard';
 import { WidgetConfig } from '@soloud/sldashboard';
+import { DataSourceField } from '@soloud/SlDataSource';
 import { Subject } from 'rxjs';
 
 
@@ -35,7 +36,24 @@ export class ItemValueComponent implements OnInit, OnDestroy {
   }
   destroy$ = new Subject();
   footer = ""
+  private _Fields: DataSourceField[] = [];
+  public get Fields(): DataSourceField[] {
+    return this._Fields;
+  }
+  public set Fields(value: DataSourceField[]) {
+    this._Fields = value;
+    this.cdr.detectChanges()
 
+  }
+  private _Data: any;
+  public get Data(): any {
+    return this._Data;
+  }
+  public set Data(value: any) {
+    this._Data = value;
+    this.cdr.detectChanges()
+
+  }
 
   public  selectStatus: WidgetStatus = WidgetStatus.select
   public  configStatus: WidgetStatus = WidgetStatus.config

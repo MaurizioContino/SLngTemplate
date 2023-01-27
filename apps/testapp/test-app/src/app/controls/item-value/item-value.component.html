@@ -1,9 +1,9 @@
- <div *ngIf="status === selectStatus" style="height: 100%; max-height: 100%; ">
+ <div *ngIf="status === selectStatus" style="height: 100%; max-height: 100%;padding:10px ">
   Select
 </div>
-<div *ngIf="status === configStatus" style="height: 100%; max-height: 100%; ">
+<div *ngIf="status === configStatus" style="height: 100%; max-height: 100%;padding:10px ">
   config
 </div>
-<div *ngIf="status === viewStatus" style="height: 100%; max-height: 100%; ">
-  view
+<div *ngIf="status === viewStatus" style="height: 100%; max-height: 100%;padding:10px ">
+  {{Data | json}}
 </div>
