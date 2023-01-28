@@ -1,31 +1,63 @@
 import { Type } from '@angular/core';
-import { DashboardDataSourceField } from './DashboardDataSource';
+import { Subject } from 'rxjs';
+import { DashboardDataSource } from './DashboardDataSource';
 
 import { WidgetConfig } from './WidgetConfig';
-import { WidgetStatus } from './WidgetStatus';
 export class DashboardWidget {
 
-  status: WidgetStatus = WidgetStatus.view
 
   IdComponent: number;
   Icon: string;
   Name: string;
   Description: string;
-  config: WidgetConfig;
+  Config: WidgetConfig;
   Data: any;
-  Fields: DashboardDataSourceField[]=[]
+  DataSource: DashboardDataSource | undefined
 
   component: Type<any>;
-
-  constructor(component: Type<any>, IdComponent: number,  Icon: string,  Name: string,  Description: string,  Defaultconfig: WidgetConfig) { //, idComponent:number, Name: string, Description: string,  data: unknown) {
+  Configcomponent: Type<any>;
+  constructor(component: Type<any>, configcomponent: Type<any>, IdComponent: number,  Icon: string,  Name: string,  Description: string,  Defaultconfig: WidgetConfig) { //, idComponent:number, Name: string, Description: string,  data: unknown) {
     this.component = component;
     this.IdComponent = IdComponent;
     this.Icon = Icon;
     this.Name = Name;
     this.Description = Description;
-    this.config = Defaultconfig;
+    this.Config = Defaultconfig;
+    this.Configcomponent = configcomponent
 
   }
+
+  clone(config:  WidgetConfig): DashboardWidget {
+    return new DashboardWidget(
+      this.component,
+      this.Configcomponent,
+      this.IdComponent,
+      this.Icon,
+      this.Name,
+      this.Description,
+      config
+      )
+
+  }
+  cloneConfig(e: WidgetConfig | null= null): WidgetConfig{
+    if (e)  {
+      if (e.Changed$){
+        e.Changed$?.complete();
+        e.Changed$ = undefined;
+      }
+
+      const ret = JSON.parse(JSON.stringify(e))
+      ret.Changed$ = new Subject<WidgetConfig>();
+      return ret;
+
+    } else {
+      const ret = JSON.parse(JSON.stringify(this.Config))
+      ret.Changed$ = new Subject<WidgetConfig>();
+      return ret;
+
+    }
+  }
+
 }
 
 
