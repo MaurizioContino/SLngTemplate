@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Dashboard, DashboardWidget } from '@soloud/sldashboard';
+import { Dashboard, DashboardDataSourceService, DashboardWidget } from '@soloud/sldashboard';
 import { DashboardConfigService } from '@soloud/sldashboard';
-import { DataSourceService } from '@soloud/SlDataSource';
+
 
 @Component({
   selector: 'app-dashboard-details',
@@ -46,7 +46,7 @@ export class DashboardDetailsComponent implements OnInit {
   });
 
   constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder,
-      private Dashboardservice: DashboardConfigService, private dsource: DataSourceService){}
+      private Dashboardservice: DashboardConfigService, private dsource: DashboardDataSourceService){}
 
   ngOnInit(): void {
     this.datasources = this.dsource.getNames();

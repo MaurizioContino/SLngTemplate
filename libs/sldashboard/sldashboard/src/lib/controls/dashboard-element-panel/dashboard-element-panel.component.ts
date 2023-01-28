@@ -1,8 +1,9 @@
 
 import { CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
 import { AfterViewInit, ChangeDetectionStrategy, Component, TemplateRef, EventEmitter, Input,  Output, ViewChild, ContentChild, ElementRef } from '@angular/core';
-import { DataSourceField } from '@soloud/SlDataSource';
+
 import { DasboardItemDirective } from '../../directives/dasboard-item.directive';
+import { DashboardDataSourceField } from '../../models/DashboardDataSource';
 import { DashboardWidget } from '../../models/DashboardWidget';
 import { WidgetConfig } from '../../models/WidgetConfig';
 import { WidgetStatus } from '../../models/WidgetStatus';
@@ -21,7 +22,7 @@ export class DashboardElementPanelComponent implements AfterViewInit {
     @Input() config: WidgetConfig | undefined;
     @Input() EditMode = 'none'
     @Input() Data: any;
-    @Input() Fields: DataSourceField[] = []
+    @Input() Fields: DashboardDataSourceField[] = []
 
     viewStatus = WidgetStatus.view;
 
@@ -65,7 +66,7 @@ export class DashboardElementPanelComponent implements AfterViewInit {
       if (this.WidgetHost) {
         const viewContainerRef = this.WidgetHost.viewContainerRef;
         viewContainerRef.clear();
-        if (this.item) {
+        if (this.item && this.item.component) {
             const componentRef = viewContainerRef.createComponent<DashboardWidget>(this.item.component);
             if (this.config) componentRef.instance.config = this.config;
             if (this.Data) componentRef.instance.Data = this.Data;

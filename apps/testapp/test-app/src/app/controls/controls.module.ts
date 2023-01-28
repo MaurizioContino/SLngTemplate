@@ -6,26 +6,10 @@ import { DashboardChartHBarComponent } from '../controls/dashboard-chart-hbar/da
 import { ItemValueComponent } from './item-value/item-value.component';
 import { SharedModule } from '../shared.module';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { ItemValueConfigComponent } from './item-value/item-value-config/item-value-config.component';
 @NgModule({
-
-  declarations: [
-    ItemCountComponent,
-    ChartFilterComponent,
-    DashboardChartHBarComponent,
-    ItemValueComponent,
-    SearchBarComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedModule
-
-  ],
-  exports:[
-    ItemCountComponent,
-    ChartFilterComponent,
-    DashboardChartHBarComponent,
-    ItemValueComponent,
-    SearchBarComponent
-  ]
+    declarations: [ItemCountComponent, ChartFilterComponent, DashboardChartHBarComponent, ItemValueComponent, SearchBarComponent, ItemValueConfigComponent],
+    imports: [CommonModule, SharedModule],
+    exports: [ItemCountComponent, ChartFilterComponent, DashboardChartHBarComponent, ItemValueComponent, SearchBarComponent],
 })
-export class ControlsModule { }
+export class ControlsModule {}

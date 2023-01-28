@@ -1,10 +1,12 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, Input, OnDestroy, OnInit, QueryList, TemplateRef } from '@angular/core';
-import { DataSourceService, DataSource } from '@soloud/SlDataSource';
+
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Dashboard } from '../../models/Dashboard';
+import { DashboardDataSource } from '../../models/DashboardDataSource';
 import { DashboardWidget } from '../../models/DashboardWidget';
 import { WidgetConfig } from '../../models/WidgetConfig';
 import { WidgetStatus } from '../../models/WidgetStatus';
+import { DashboardDataSourceService } from '../../services/DashbaoardDataSource.service';
 import { DashboardConfigService } from '../../services/dashboard.service';
 
 @Component({
@@ -53,17 +55,17 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
     viewStatus = WidgetStatus.view;
     selectr: number | null = null;
     selectc: number | null = null;
-    datasource: DataSource = {name: 'none', Fields:[], Filters:[], data:null};
+    datasource: DashboardDataSource = {name: 'none', Fields:[], Filters:[], data:null};
     dsSubscriber: Subscription | undefined;
     constructor(private myElement: ElementRef, private cdr: ChangeDetectorRef,
-      public dashserv: DashboardConfigService, private dsSources: DataSourceService) {}
+      public dashserv: DashboardConfigService, private dsSources: DashboardDataSourceService) {}
 
       registerDatasource() {
         if (this.dashboard) {
-          debugger
+
           if (this.dsSubscriber) this.dsSubscriber.unsubscribe();
           this.dsSubscriber = this.dsSources.Data$.pipe(takeUntil(this.destroy$)).subscribe(ds=>{
-            debugger
+
             if (ds && ds.name==this.dashboard?.DataSourceName) {
 
               this.datasource = ds;

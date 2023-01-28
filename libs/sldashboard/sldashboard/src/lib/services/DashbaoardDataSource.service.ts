@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { DataSource, DataSourceField, DataSourceFilter } from '../models/DataSource';
+import { Subject } from 'rxjs';
+import { DashboardDataSource, DashboardDataSourceField, DashboardDataSourceFilter } from '../models/DashboardDataSource';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataSourceService {
+export class DashboardDataSourceService {
 
-  Data$ = new Subject<DataSource>();
-  DataRequired$ = new Subject<DataSource>();
+  Data$ = new Subject<DashboardDataSource>();
+  DataRequired$ = new Subject<DashboardDataSource>();
 
-  dataSources: DataSource[] = []
+  dataSources: DashboardDataSource[] = []
 
   getNames() {
     return this.dataSources.map(v=>v.name);
   }
-  registerDatasource(Name: string, fields: DataSourceField[], filters: DataSourceFilter[]) {
+  registerDatasource(Name: string, fields: DashboardDataSourceField[], filters: DashboardDataSourceFilter[]) {
     this.dataSources.push(
       {name: Name, data: null, Fields: fields, Filters:filters}
     )

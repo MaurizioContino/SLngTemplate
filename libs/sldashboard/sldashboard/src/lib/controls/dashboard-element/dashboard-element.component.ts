@@ -1,6 +1,8 @@
 
 import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+
 import { DasboardItemDirective } from '../../directives/dasboard-item.directive';
+import { DashboardDataSourceField } from '../../models/DashboardDataSource';
 import { DashboardWidget } from '../../models/DashboardWidget';
 import { WidgetConfig } from '../../models/WidgetConfig';
 import { WidgetStatus } from '../../models/WidgetStatus';
@@ -13,12 +15,14 @@ import { WidgetStatus } from '../../models/WidgetStatus';
 })
 export class DashboardElementComponent implements AfterViewInit {
 
-    @Input()
-    item: DashboardWidget | undefined;
+    @Input() item: DashboardWidget | undefined;
+
 
     @Input() status: WidgetStatus = WidgetStatus.view
     @Input() config: WidgetConfig | undefined;
     @Input() EditMode = 'none'
+    @Input() Data: any;
+    @Input() Fields: DashboardDataSourceField[] = []
 
     viewStatus = WidgetStatus.view;
 
@@ -56,9 +60,12 @@ export class DashboardElementComponent implements AfterViewInit {
       if (this.WidgetHost) {
         const viewContainerRef = this.WidgetHost.viewContainerRef;
         viewContainerRef.clear();
-        if (this.item) {
+        if (this.item && this.item.component) {
             const componentRef = viewContainerRef.createComponent<DashboardWidget>(this.item.component);
+            componentRef.instance.status = this.status;
             if (this.config) componentRef.instance.config = this.config;
+            if (this.Data) componentRef.instance.Data = this.Data;
+            if (this.Fields) componentRef.instance.Fields = this.Fields;
             componentRef.instance.status = this.status;
 
         }

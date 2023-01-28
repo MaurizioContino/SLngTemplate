@@ -1,5 +1,5 @@
 import { DashboardWidget } from "@soloud/sldashboard"
-import { operator, ValueType } from "@soloud/SlDataSource"
+
 import { menuitem } from "@soloud/slmenu"
 import { ItemValueComponent } from "../controls/item-value/item-value.component"
 

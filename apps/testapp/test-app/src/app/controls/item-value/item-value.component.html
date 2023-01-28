@@ -2,7 +2,7 @@
   Select
 </div>
 <div *ngIf="status === configStatus" style="height: 100%; max-height: 100%;padding:10px ">
-  config
+  <app-item-value-config [Fields]="Fields" [Config]="config"></app-item-value-config>
 </div>
 <div *ngIf="status === viewStatus" style="height: 100%; max-height: 100%;padding:10px ">
   {{Data | json}}

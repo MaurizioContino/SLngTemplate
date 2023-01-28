@@ -1,5 +1,6 @@
 import { Type } from '@angular/core';
-import { DataSourceField } from '@soloud/SlDataSource';
+import { DashboardDataSourceField } from './DashboardDataSource';
+
 import { WidgetConfig } from './WidgetConfig';
 import { WidgetStatus } from './WidgetStatus';
 export class DashboardWidget {
@@ -12,7 +13,7 @@ export class DashboardWidget {
   Description: string;
   config: WidgetConfig;
   Data: any;
-  Fields: DataSourceField[]=[]
+  Fields: DashboardDataSourceField[]=[]
 
   component: Type<any>;
 

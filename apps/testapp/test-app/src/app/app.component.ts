@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { SlLayoutsService } from '@soloud/sllayout';
 import { menuitem, SlMenuService } from '@soloud/slmenu';
 import { SlDbService } from '@soloud/SlDb';
-import { DashboardConfigService } from '@soloud/sldashboard';
+import { DashboardConfigService, DashboardDataSourceService } from '@soloud/sldashboard';
 import { allmenus, top, logo, DashWidgetsConf} from './models/StarupData';
-import { DataSourceService } from '@soloud/SlDataSource';
+
 import { MonitorResultsService } from './services/monitor-results.service';
 
 @Component({
@@ -16,7 +16,7 @@ import { MonitorResultsService } from './services/monitor-results.service';
 export class AppComponent implements OnInit{
   title = 'testapp-test-app';
   constructor(public layoutService: SlLayoutsService, private dashserv: DashboardConfigService,
-    private db: SlDbService, private mnuServ: SlMenuService, private dssources: DataSourceService,
+    private db: SlDbService, private mnuServ: SlMenuService, private dssources: DashboardDataSourceService,
     private itmserv: MonitorResultsService) {
 
   }

@@ -1,5 +1,6 @@
-import { DataSource } from '@soloud/SlDataSource';
+
 import { IDBModel } from '@soloud/SlDb';
+import { DashboardDataSource } from './DashboardDataSource';
 import { WidgetConfig } from './WidgetConfig';
 
 export class Dashboard implements IDBModel {
@@ -14,7 +15,7 @@ export class Dashboard implements IDBModel {
 
     Items: WidgetConfig[] = [];
 
-    Endpoint: DataSource | undefined;
+    Endpoint: DashboardDataSource | undefined;
 
     getWidgetByPosition(r: number, c: number): WidgetConfig | null {
         const itm = this.Items.find((w) => w.Top == r && w.Left == c);

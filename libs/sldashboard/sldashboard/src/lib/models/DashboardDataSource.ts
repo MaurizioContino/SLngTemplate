@@ -15,22 +15,23 @@ export enum ValueType {
 }
 
 
-export interface DataSourceField {
+export interface DashboardDataSourceField {
   Label: string;
   Property: string;
   ValueType: ValueType;
+  CustomType?: string;
 }
 
-export interface DataSourceFilter {
+export interface DashboardDataSourceFilter {
   Property: string;
   Operator: operator;
   Value: string;
 }
 
 
-export interface DataSource {
+export interface DashboardDataSource {
   name: string;
   data: any;
-  Fields: DataSourceField[];
-  Filters: DataSourceFilter[];
+  Fields: DashboardDataSourceField[];
+  Filters: DashboardDataSourceFilter[];
 }
