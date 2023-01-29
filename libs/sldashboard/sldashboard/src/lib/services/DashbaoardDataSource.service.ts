@@ -18,11 +18,11 @@ export class DashboardDataSourceService {
   }
   registerDatasource(Name: string, fields: DashboardDataSourceField[], filters: DashboardDataSourceFilter[]) {
     this.dataSources.push(
-      {name: Name, data: null, Fields: fields, Filters:filters}
+      {name: Name, data: [], Fields: fields, Filters:filters}
     )
   }
 
-  pushData(name: string, data: any) {
+  pushData(name: string, data: any[]) {
     const ds = this.dataSources.find(v=>v.name == name);
     if (ds){
       ds.data = data;

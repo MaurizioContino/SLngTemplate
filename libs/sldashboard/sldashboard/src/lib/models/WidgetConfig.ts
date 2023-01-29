@@ -1,3 +1,5 @@
+import { Subject } from "rxjs";
+
 export interface WidgetConfig {
 
     IdItem: number;
@@ -8,6 +10,7 @@ export interface WidgetConfig {
     height: number;
     Title: string;
     CustomData: any;
-    BackgroundColor: string
+    BackgroundColor: string;
+    Changed$?: Subject<WidgetConfig>;
 
 }

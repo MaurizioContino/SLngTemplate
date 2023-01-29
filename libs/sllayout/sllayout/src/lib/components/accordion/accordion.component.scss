@@ -1,0 +1,15 @@
+.accordion {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 10px;
+    border-bottom: 1px solid silver;
+    overflow: hidden;
+    .accordionitem {
+        flex: 1 0 auto;
+        .accrdion-title {
+            background-color: silver;
+            color: white;
+        }
+    }
+}

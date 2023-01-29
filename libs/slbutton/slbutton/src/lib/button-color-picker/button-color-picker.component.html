@@ -1,0 +1,29 @@
+<div class="colorcircle"  [style.background-color]="Color" (click)="viewconfig = true">
+  <div *ngIf="isFormula" class="fx" [style.color]="frontColor">fX</div>
+</div>
+<div class="picker-config" *ngIf="viewconfig">
+    <div class="row"><input type="radio" name="type" value="direct" [(ngModel)]="tipo" /> Colore <input type="radio" name="type" value="formula" [(ngModel)]="tipo" /> Formula</div>
+    <div class="main">
+    <div *ngIf="tipo === 'direct'" class="direct-color">
+      <input type="color" [(ngModel)]="SelectedColor" />
+    </div>
+    <div *ngIf="tipo === 'formula'" class="direct-color">
+        <input type="color" [(ngModel)]="SelectedColor" />
+        <div class="row">
+            <label>When</label>
+            <label>{{Field}}</label>
+            <div class="col-100">
+                <ng-select [items]="Comparers" [clearable]="false" [(ngModel)]="Comparer"></ng-select>
+            </div>
+            <div class="col-200">
+                <ng-select [items]="RightFields" [clearable]="false" [(ngModel)]="SelectedField"></ng-select>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+      <sl-rounded-button Text="OK" (click)="selected()"></sl-rounded-button>
+      <sl-rounded-button Text="Cancel" (click)="cancel()"></sl-rounded-button>
+
+    </div>
+</div>

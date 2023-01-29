@@ -1,12 +1,12 @@
 
 import { CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
-import { AfterViewInit, ChangeDetectionStrategy, Component, TemplateRef, EventEmitter, Input,  Output, ViewChild, ContentChild, ElementRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, TemplateRef, EventEmitter, Input,  Output, ViewChild, ContentChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 
 import { DasboardItemDirective } from '../../directives/dasboard-item.directive';
-import { DashboardDataSourceField } from '../../models/DashboardDataSource';
+import { DashboardDataSource } from '../../models/DashboardDataSource';
 import { DashboardWidget } from '../../models/DashboardWidget';
 import { WidgetConfig } from '../../models/WidgetConfig';
-import { WidgetStatus } from '../../models/WidgetStatus';
+import { DashboardConfigService } from '../../services/dashboard.service';
 
 @Component({
     selector: 'sl-dashboard-element-panel',
@@ -16,15 +16,11 @@ import { WidgetStatus } from '../../models/WidgetStatus';
 })
 export class DashboardElementPanelComponent implements AfterViewInit {
 
-    @Input() item: DashboardWidget | undefined;
 
-    @Input() status: WidgetStatus = WidgetStatus.view
-    @Input() config: WidgetConfig | undefined;
+    @Input() Config: WidgetConfig | undefined;
     @Input() EditMode = 'none'
-    @Input() Data: any;
-    @Input() Fields: DashboardDataSourceField[] = []
+    @Input() DataSource: DashboardDataSource | undefined;
 
-    viewStatus = WidgetStatus.view;
 
     @ViewChild(DasboardItemDirective, { static: true }) WidgetHost!: DasboardItemDirective;
     @ViewChild('card') card!: ElementRef<any>;
@@ -41,22 +37,24 @@ export class DashboardElementPanelComponent implements AfterViewInit {
 
 
     get width(): number {
-      if (this.item) {
-        const w = this.item.config.width > 0 ? this.item.config.width : 1;
-        return (w * 50) + this.DragDeltaWidth
+      if (this.Config) {
+        const w = this.Config.width > 0 ? this.Config.width : 1;
+        return (w * 50) + this.DragDeltaWidth - 20; //20 padding
       } else {
         return 100;
       }
     }
     get height(): number {
-      if (this.item) {
-        const h = this.item.config.height > 0 ? this.item.config.height : 1;
-        return (h * 50) + this.DragDeltaHeight
+      if (this.Config) {
+        const h = this.Config.height > 0 ? this.Config.height : 1;
+        return (h * 50) + this.DragDeltaHeight - 20; //20 padding
       } else {
         return 100;
       }
 
     }
+    constructor(private cdr: ChangeDetectorRef, private dashserv: DashboardConfigService) {}
+
 
     ngAfterViewInit(): void {
       this.loadComponent();
@@ -66,27 +64,28 @@ export class DashboardElementPanelComponent implements AfterViewInit {
       if (this.WidgetHost) {
         const viewContainerRef = this.WidgetHost.viewContainerRef;
         viewContainerRef.clear();
-        if (this.item && this.item.component) {
-            const componentRef = viewContainerRef.createComponent<DashboardWidget>(this.item.component);
-            if (this.config) componentRef.instance.config = this.config;
-            if (this.Data) componentRef.instance.Data = this.Data;
-            if (this.Fields) componentRef.instance.Fields = this.Fields;
-            componentRef.instance.status = this.status;
-
+        if (this.Config) {
+          const model = this.dashserv.Widgets.find((v) => v.IdComponent == this.Config?.IdComponent);
+          if (model) {
+            const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.component);
+            if (this.Config) componentRef.instance.Config = this.Config;
+            if (this.DataSource) componentRef.instance.DataSource = this.DataSource;
+            this.cdr.detectChanges()
+          }
         }
       }
     }
 
 
    remove() {
-    if (this.item) this.Delete.emit(this.item.config)
+    if (this.Config) this.Delete.emit(this.Config)
    }
    setup() {
-    if (this.item) this.Setup.emit(this.item.config);
+    if (this.Config) this.Setup.emit(this.Config);
    }
 
    copy() {
-    if (this.item) this.Copy.emit(this.item.config);
+    if (this.Config) this.Copy.emit(this.Config);
    }
 
    cdkResizeDragMoved(e: CdkDragMove<any>) {
@@ -98,11 +97,11 @@ export class DashboardElementPanelComponent implements AfterViewInit {
 
    }
    cdkResizeDragEnded(e: CdkDragEnd){
-    if (this.item && this.item.config){
+    if (this.Config){
       const deltax = Math.round(e.distance.x / 50);
       const deltay = Math.round(e.distance.y / 50);
-      this.item.config.height += deltay;
-      this.item.config.width += deltax;
+      this.Config.height += deltay;
+      this.Config.width += deltax;
       this.DragDeltaWidth = 0;
       this.DragDeltaHeight = 0;
 
@@ -115,12 +114,12 @@ export class DashboardElementPanelComponent implements AfterViewInit {
     e.source.element.nativeElement.style.transform="translate3d(0px,0px," + "0px)"
    }
    cdkMoveDragEnded(e: CdkDragEnd){
-    if (this.item && this.item.config){
+    if (this.Config){
       const deltax = Math.round(e.distance.x / 50);
       const deltay = Math.round(e.distance.y / 50);
 
-      this.item.config.Top += deltay;
-      this.item.config.Left += deltax;
+      this.Config.Top += deltay;
+      this.Config.Left += deltax;
       this.card.nativeElement.style.transform = "translate3d(0px,0px," + "0px)"
     }
    }

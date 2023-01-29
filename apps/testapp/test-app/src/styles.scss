@@ -203,8 +203,25 @@ textarea {
   /* 2 */
   padding: 0;
   /* 3 */
-}
 
+  border: 1px solid silver;
+  border-radius: 4px;
+
+}
+input {
+  border: 1px solid;
+  padding-left: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+ }
+
+input:active {
+  border: 1px solid;
+  padding-left: 10px;
+  padding-top: 3;
+  padding-bottom: 3;
+
+}
 /*
 Remove the inheritance of text transform in Edge and Firefox.
 */

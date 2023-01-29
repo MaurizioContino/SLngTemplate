@@ -12,12 +12,15 @@
   animation: btn-show-in 0.6s linear forwards;
   background-color: silver;
 }
-
-.card {
+.spacer {
+  padding:5px;
   position: absolute;
   margin: 0px;
   padding: 0px;
   z-index: 100;
+}
+.card {
+
   margin-right:10px;
   border-radius: 10px;
   -webkit-box-shadow:0px 2px 5px -1px rgb(0 0 0 / 40%);
@@ -25,7 +28,7 @@
     .card-header {
       position: absolute;
       display: none;
-      width: calc(100% - 0px);
+      width: calc(100% - 10px);
       z-index: 100;
       padding: 10px;
       background-color: white;
@@ -59,7 +62,7 @@
   border-bottom: 2px solid orangered;
   position: absolute;
   bottom: 5px;
-  right: 5px;
+  right: 15px;
   width: 20px;
   height: 20px;
   cursor: se-resize;

@@ -4,8 +4,7 @@
     <div class="container">
       <ng-scrollbar style="height: 100%">
         <div *ngFor="let idr of rows" class="row">
-          <div *ngFor="let idc of cols" class="col"
-            [ngClass]="selectr!==null && selectr===idr && selectc!==null && selectc===idc ? 'selected-cell' : ''">
+          <div *ngFor="let idc of cols" class="col">
             <ng-container *ngIf="WidgetIn(idr,idc)===null; else widget">
               <button title="add control" class="button-addcontrol" (click)="showadd(idr, idc)">
                 <i class="fa-solid fa-plus fa-2x"></i>
@@ -13,8 +12,8 @@
             </ng-container>
 
             <ng-template #widget>
-              <sl-dashboard-element-panel [item]="WidgetIn(idr,idc)!" [status]="viewStatus"
-              [config]="ConfigIn(idr, idc)!" [Data]="datasource.data" [Fields]="datasource.Fields"
+              <sl-dashboard-element-panel
+              [Config]="ConfigIn(idr, idc)!" [DataSource]="datasource"
                 (Copy)="copyElement($event)" (Delete)="deleteElement($event)" (Setup)="setupElement($event)"
               ></sl-dashboard-element-panel>
             </ng-template>
@@ -39,7 +38,8 @@
         </ng-container>
 
         <ng-container *ngIf="showConfig">
-          <sl-dashboard-element [item]="SelectedItem" [status]="configStatus"></sl-dashboard-element>
+          <sl-dashboard-element
+          [Config]="SelectedConfig" [DataSource]="datasource" ></sl-dashboard-element>
         </ng-container>
 
 

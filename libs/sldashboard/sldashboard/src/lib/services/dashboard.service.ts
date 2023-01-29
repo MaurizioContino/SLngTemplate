@@ -86,4 +86,57 @@ export class DashboardConfigService {
     }
   }
 
+  calculateColor(colorfuncs: string[], value: number, rightvalues: any): string {
+    let ret = "black";
+    colorfuncs.forEach(cf => {
+      const slices = cf.split(':')
+      if (slices[0]=='direct' || slices[0]=='formula') {
+        if (slices[0]=='direct') {
+          ret = slices[1];
+        } else {
+          if (this.colorFormula(value, slices[2], slices[3], rightvalues))
+          {
+            ret = slices[1]
+          }
+
+        }
+      } else {
+        ret = slices[0]
+      }
+    });
+    return ret;
+  }
+
+  colorFormula(value: number, comparer: string, rightvalue: string, rightvalues: any): boolean {
+    switch(comparer) {
+      case "=": {
+        if (value == rightvalues[rightvalue]) return true;
+        break;
+      }
+      case ">": {
+        if (value > rightvalues[rightvalue]) return true;
+        break;
+      }
+      case "<": {
+        if (value < rightvalues[rightvalue]) return true;
+        break;
+      }
+      case ">=": {
+        if (value >= rightvalues[rightvalue]) return true;
+        break;
+      }
+      case "<=": {
+        if (value <= rightvalues[rightvalue]) return true;
+        break;
+      }
+      case "<>": {
+        if (value != rightvalues[rightvalue]) return true;
+        break;
+      }
+      default:
+        return false;
+    }
+    return false
+  }
+
 }

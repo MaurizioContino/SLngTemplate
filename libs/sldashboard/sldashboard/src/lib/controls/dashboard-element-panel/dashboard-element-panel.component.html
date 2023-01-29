@@ -1,4 +1,4 @@
-
+<div class="spacer">
 <div class="card" #card [style.width.px]="width" [style.height.px]="height">
   <div class="card-header">
     <div class="card-header-row">
@@ -23,4 +23,5 @@
     <ng-template sl-dasboard-item></ng-template>
   </div>
   <div #resizer class="resizer" cdkDrag (cdkDragMoved)="cdkResizeDragMoved($event)" (cdkDragEnded)="cdkResizeDragEnded($event)"></div>
+</div>
 </div>

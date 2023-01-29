@@ -49,7 +49,21 @@ export class MonitorResultsService {
     this.dssources.registerDatasource("Monitor Data",  ItemsDataSourceFields, ItemsDataSourceFilter)
     this.dssources.DataRequired$.subscribe(v=>{
       if (v && v.name==="Monitor Data") {
-        this.Load();
+
+        this.db.GetAll<MonitorResultItem>(this.store).subscribe(items=>{
+          const ret: any[] = [];
+          items.forEach(itm => {
+            const rec = ret.find(r => r.IdManager == itm.IdManager && r.Week == itm.Week && r.year == itm.year)
+            if (rec) {
+              rec[itm.Name] = itm.Value;
+            } else {
+              const tmp = {IdManager: itm.IdManager, Week: itm.Week, year: itm.year} as any
+              tmp[itm.Name] = itm.Value;
+              ret.push(tmp);
+            }
+          })
+          this.dssources.pushData(v.name, ret)
+        });
       }
     });
   }

@@ -1,0 +1,34 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.width150 {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  margin-right: 10px;
+  label {
+    width: 100%;
+  }
+  input {
+    width: 100%;
+  }
+  ng-select {
+    width: 100%;
+  }
+}
+
+
+.width300 {
+  width: 300px;
+  margin-right: 10px;
+  label {
+    width: 100%;
+  }
+  ng-select {
+    width: 100%;
+  }
+}

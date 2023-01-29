@@ -31,7 +31,7 @@ export interface DashboardDataSourceFilter {
 
 export interface DashboardDataSource {
   name: string;
-  data: any;
+  data: any[];
   Fields: DashboardDataSourceField[];
   Filters: DashboardDataSourceFilter[];
 }

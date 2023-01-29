@@ -4,7 +4,11 @@ export * from './lib/components/hmaster-details/hmaster-details.component';
 export * from './lib/components/sl-big-header/sl-big-header.component';
 export * from './lib/components/sl-card/sl-card.component';
 
-
 export * from './lib/services/sl-layouts.service';
 
 export * from './lib/sllayout.module';
+
+export * from './lib/components/accordion/accordion.component';
+export * from './lib/components/accordion/accordionitem.directive';
+
+export * from './lib/components/accordion/accordion-item/accordion-item.component';

@@ -10,30 +10,19 @@ import { SlavatarModule } from '@soloud/slavatar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { SlSmallHeaderComponent } from './components/sl-small-header/sl-small-header.component';
 import { SlCardComponent } from './components/sl-card/sl-card.component';
+import { AccordionComponent } from './components/accordion/accordion.component';
+import { AccordionItemDirective } from './components/accordion/accordionitem.directive';
+import { AccordionItemComponent } from './components/accordion/accordion-item/accordion-item.component';
+import { AccordionBodyDirective } from './components/accordion/accordionbody.directive';
+import { AccordionTitleDirective } from './components/accordion/accordiontitle.directive';
 
 @NgModule({
-  declarations: [
-    DefaultLayoutComponent,
-    EmptyLayoutComponent,
-    HMasterDetailsComponent,
-    SlBigHeaderComponent,
-    SlSmallHeaderComponent,
-    SlCardComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    SlButtonModule,
-    SlavatarModule,
-    NgScrollbarModule
-  ],
-  exports: [
-    DefaultLayoutComponent,
-    EmptyLayoutComponent,
-    HMasterDetailsComponent,
-    SlBigHeaderComponent,
-    SlSmallHeaderComponent,
-    SlCardComponent
-  ]
+    declarations: [DefaultLayoutComponent, EmptyLayoutComponent, HMasterDetailsComponent,
+      SlBigHeaderComponent, SlSmallHeaderComponent, SlCardComponent, AccordionComponent, AccordionItemComponent,
+       AccordionItemDirective, AccordionBodyDirective, AccordionTitleDirective],
+    imports: [CommonModule, RouterModule, SlButtonModule, SlavatarModule, NgScrollbarModule],
+    exports: [DefaultLayoutComponent, EmptyLayoutComponent, HMasterDetailsComponent, SlBigHeaderComponent,
+      SlSmallHeaderComponent, SlCardComponent, AccordionComponent, AccordionItemComponent,
+      AccordionItemDirective, AccordionBodyDirective, AccordionTitleDirective ],
 })
 export class SllayoutModule {}

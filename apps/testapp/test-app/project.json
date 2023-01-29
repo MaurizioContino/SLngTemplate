@@ -23,7 +23,10 @@
           "apps/testapp/test-app/src/styles.scss",
           "apps/testapp/test-app/src/fonts.scss",
           "apps/testapp/test-app/src/colors.scss",
-          "apps/testapp/test-app/src/ngselect.theme.css"
+          "apps/testapp/test-app/src/ngselect.theme.css",
+          "node_modules/primeicons/primeicons.css",
+          "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+          "node_modules/primeng/resources/primeng.min.css"
         ],
         "scripts": []
       },

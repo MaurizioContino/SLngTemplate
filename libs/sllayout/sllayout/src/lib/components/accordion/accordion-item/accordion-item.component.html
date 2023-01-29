@@ -1,0 +1,6 @@
+<div class="accordion-item-title" (click)="SelectItem()">
+<ng-template [ngTemplateOutlet]="title.template"></ng-template>
+</div>
+<div class="accordion-item-body" *ngIf="show">
+<ng-template [ngTemplateOutlet]="body.template"></ng-template>
+</div>
