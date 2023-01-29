@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, Input, OnDestroy, OnInit, QueryList, TemplateRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, Input, OnDestroy, OnInit, QueryList, TemplateRef, ViewChild } from '@angular/core';
 
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Dashboard } from '../../models/Dashboard';
@@ -31,6 +31,8 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       this.dsSources.LoadData(value.DataSourceName);
     }
   }
+
+  @ViewChild('filterbox') filterbox!: any;
 
   @ContentChildren('dashboarditem')
     public get contents(): QueryList<TemplateRef<any>> | undefined {
@@ -190,5 +192,19 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         this.DisplayDetails = true;
       }
       this.cdr.detectChanges();
+    }
+
+    toggleFilters() {
+      if (this.filterbox.nativeElement.classList.contains("filter-box-open")) {
+        this.filterbox.nativeElement.classList.remove("filter-box-open");
+        this.filterbox.nativeElement.classList.add("filter-box-close");
+      } else {
+        this.filterbox.nativeElement.classList.remove("filter-box-close");
+        this.filterbox.nativeElement.classList.add("filter-box-open");
+
+      }
+      console.log(
+      this.filterbox
+      );
     }
 }

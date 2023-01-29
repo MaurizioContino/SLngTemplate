@@ -41,7 +41,10 @@ export class DashboardWidget {
   }
   cloneConfig(e: WidgetConfig | null= null): WidgetConfig{
     if (e)  {
+      const w = e.widget;
+      e.widget = undefined;
       const ret = JSON.parse(JSON.stringify(e))
+      e.widget = w;
       return ret;
 
     } else {

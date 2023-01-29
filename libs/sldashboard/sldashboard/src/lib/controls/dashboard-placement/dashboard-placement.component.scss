@@ -1,10 +1,50 @@
 sl-dashboard-placement {
   height: 100%;
 }
+.container-back {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(245, 244, 244);
+}
+
+.top-buttons {
+  position: absolute;
+  top:10px;
+  right:10px
+}
+.filter-box-open {
+  height: 200px;
+  display: block;
+  animation-name: filterbox-open;
+  animation-duration: 1s;
+
+}
+.filter-box-close {
+  height: 0px;
+
+  animation-name: filterbox-close;
+  animation-duration: 1s;
+}
+
+@keyframes filterbox-close {
+  from {height: 200px;}
+  to {height: 0px;}
+}
+@keyframes filterbox-open {
+  from {height: 0px;}
+  to {height: 200px;}
+}
+
+
 .container {
+
   width: 100%;
   height: 100%;
   padding: 10px;
+  background-color: white;
+  border-top-left-radius: 30px;
+  box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
+  -webkit-box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
 }
 .row {
   display: flex;
