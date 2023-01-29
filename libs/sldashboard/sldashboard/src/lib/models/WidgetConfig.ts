@@ -1,4 +1,5 @@
 import { Subject } from "rxjs";
+import { WidgetElement } from "./widgetElement";
 
 export interface WidgetConfig {
 
@@ -11,6 +12,6 @@ export interface WidgetConfig {
     Title: string;
     CustomData: any;
     BackgroundColor: string;
-    Changed$?: Subject<WidgetConfig>;
+    widget?: WidgetElement;
 
 }

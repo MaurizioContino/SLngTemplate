@@ -3,6 +3,7 @@ import { DashboardConfigService, DashboardDataSource, DashboardDataSourceField, 
 import { WidgetConfig } from '@soloud/sldashboard';
 
 import { Subject } from 'rxjs';
+import { WidgetElement } from '../../models/widgetElement';
 import { DashboardItemValueConfigComponent } from './dashboard-item-value-config/dashboard-item-value-config.component';
 
 @Component({
@@ -11,12 +12,23 @@ import { DashboardItemValueConfigComponent } from './dashboard-item-value-config
     styleUrls: ['./dashboard-item-value.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardItemValueComponent implements OnInit, OnDestroy {
+export class DashboardItemValueComponent implements OnInit, OnDestroy, WidgetElement {
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     static Definition = new DashboardWidget(DashboardItemValueComponent, DashboardItemValueConfigComponent, 1, 'xxx', 'Valore singolo', 'Mette in evidenza un singolo valore, un titolo e opzionalmente un secondo valore con un sottotitolo', { IdItem: 0, BackgroundColor: 'white', IdComponent: 1, Top: 0, Left: 0, width: 5, height: 5, Title: '', CustomData: {} });
+    private _Config: WidgetConfig | undefined;
 
-    @Input() Config: WidgetConfig | undefined;
+    @Input()
+  public get Config(): WidgetConfig | undefined {
+    return this._Config;
+  }
+  public set Config(value: WidgetConfig | undefined) {
+    this._Config = value;
+    if (this._Config){
+
+      this._Config.widget = this as WidgetElement;
+    }
+  }
     @Input() DataSource: DashboardDataSource | undefined
     ShowLeft = false
     ShowRight = false
@@ -30,12 +42,7 @@ export class DashboardItemValueComponent implements OnInit, OnDestroy {
     constructor(private cdr: ChangeDetectorRef, private dashserv: DashboardConfigService) {}
 
     ngOnInit(): void {
-      if (this.Config && this.Config.Changed$) {
-        this.Config.Changed$.subscribe(v=>{
-
-          this.Calculate();
-        })
-      }
+      this.Calculate();
     }
 
 

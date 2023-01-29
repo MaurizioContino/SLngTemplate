@@ -41,23 +41,14 @@ export class DashboardWidget {
   }
   cloneConfig(e: WidgetConfig | null= null): WidgetConfig{
     if (e)  {
-      if (e.Changed$){
-        e.Changed$?.complete();
-        e.Changed$ = undefined;
-      }
-
       const ret = JSON.parse(JSON.stringify(e))
-      ret.Changed$ = new Subject<WidgetConfig>();
       return ret;
 
     } else {
       const ret = JSON.parse(JSON.stringify(this.Config))
-      ret.Changed$ = new Subject<WidgetConfig>();
       return ret;
-
     }
   }
-
 }
 
 

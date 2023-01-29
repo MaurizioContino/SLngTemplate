@@ -17,7 +17,7 @@ import { DashboardConfigService } from '../../services/dashboard.service';
 export class DashboardElementPanelComponent implements AfterViewInit {
 
 
-    @Input() Config: WidgetConfig | undefined;
+    @Input() Config!: WidgetConfig;
     @Input() EditMode = 'none'
     @Input() DataSource: DashboardDataSource | undefined;
 

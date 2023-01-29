@@ -129,8 +129,8 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       }
     }
     SaveConfig(){
-      if (this.SelectedConfig && this.SelectedConfig.Changed$)
-        this.SelectedConfig.Changed$.next(this.SelectedConfig);
+      if (this.SelectedConfig && this.SelectedConfig.widget)
+        this.SelectedConfig.widget.Calculate()
     }
     CancelConfig(){
       //todo
