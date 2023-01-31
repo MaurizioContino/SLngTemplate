@@ -17,7 +17,7 @@ import { DashboardConfigService } from '../../services/dashboard.service';
 export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDestroy {
   private _contents: QueryList<TemplateRef<any>> | undefined;
   private _dashboard: Dashboard | undefined;
-
+  showFilters = false;
   @Input()
   public get dashboard(): Dashboard | undefined {
     return this._dashboard;
@@ -194,8 +194,10 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       this.cdr.detectChanges();
     }
 
+
     toggleFilters() {
-      if (this.filterbox.nativeElement.classList.contains("filter-box-open")) {
+      this.showFilters = !this.showFilters
+      if (!this.showFilters) {
         this.filterbox.nativeElement.classList.remove("filter-box-open");
         this.filterbox.nativeElement.classList.add("filter-box-close");
       } else {
@@ -203,8 +205,9 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         this.filterbox.nativeElement.classList.add("filter-box-open");
 
       }
-      console.log(
-      this.filterbox
-      );
+
+    }
+    datasourceChanged(e: DashboardDataSource) {
+      this.dsSources.LoadData(e.name);
     }
 }

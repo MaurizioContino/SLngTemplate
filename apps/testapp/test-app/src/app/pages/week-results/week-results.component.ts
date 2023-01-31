@@ -26,7 +26,7 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
 
     this.Items = [];
     this.itemsrv.results$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
-      
+
       this.ItemTypes = v;
       this.monitorserv.results$.pipe(takeUntil(this.destroy$)).subscribe(list=>{
 
@@ -100,7 +100,7 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
   }
 
   weekFromdate(date : Date) {
-    {
+
 
       date.setHours(0, 0, 0, 0);
       // Thursday in current week decides the year.
@@ -111,5 +111,5 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
       return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
                             - 3 + (week1.getDay() + 6) % 7) / 7);
     }
-  }
+
 }

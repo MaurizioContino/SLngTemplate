@@ -1,45 +1,42 @@
 {
-  "name": "slbutton-slbutton",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "library",
-  "sourceRoot": "libs/slbutton/slbutton/src",
-  "prefix": "sl",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
-      "options": {
-        "project": "libs/slbutton/slbutton/ng-package.json",
-        "tailwindConfig": "libs/slbutton/slbutton/tailwind.config.js"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/slbutton/slbutton/tsconfig.lib.prod.json"
+    "name": "slbutton-slbutton",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/slbutton/slbutton/src",
+    "prefix": "sl",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "options": {
+                "project": "libs/slbutton/slbutton/ng-package.json",
+                "tailwindConfig": "libs/slbutton/slbutton/tailwind.config.js"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/slbutton/slbutton/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/slbutton/slbutton/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
         },
-        "development": {
-          "tsConfig": "libs/slbutton/slbutton/tsconfig.lib.json"
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/slbutton/slbutton/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["libs/slbutton/slbutton/**/*.ts", "libs/slbutton/slbutton/**/*.html"]
+            }
         }
-      },
-      "defaultConfiguration": "production"
     },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "libs/slbutton/slbutton/jest.config.ts",
-        "passWithNoTests": true
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/slbutton/slbutton/**/*.ts",
-          "libs/slbutton/slbutton/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": []
+    "tags": []
 }

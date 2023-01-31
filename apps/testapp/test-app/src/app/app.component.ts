@@ -3,10 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { SlLayoutsService } from '@soloud/sllayout';
 import { menuitem, SlMenuService } from '@soloud/slmenu';
 import { SlDbService } from '@soloud/SlDb';
-import { DashboardConfigService, DashboardDataSourceService } from '@soloud/sldashboard';
+import { DashboardConfigService, DashboardDataSourceService, DashboardFiltersService } from '@soloud/sldashboard';
 import { allmenus, top, logo, DashWidgetsConf} from './models/StarupData';
 
 import { MonitorResultsService } from './services/monitor-results.service';
+import { ManagerSelectComponent } from './controls/manager-select/manager-select.component';
 
 @Component({
   selector: 'testapp-root',
@@ -17,15 +18,11 @@ export class AppComponent implements OnInit{
   title = 'testapp-test-app';
   constructor(public layoutService: SlLayoutsService, private dashserv: DashboardConfigService,
     private db: SlDbService, private mnuServ: SlMenuService, private dssources: DashboardDataSourceService,
-    private itmserv: MonitorResultsService) {
+    private itmserv: MonitorResultsService, private fserv: DashboardFiltersService) {
 
   }
 
   ngOnInit(): void {
-
-
-
-
     this.db.ready$.subscribe(dbready=>{
       this.dashserv.DashboardGrids$.subscribe(v=>{
         const dsbd = v.map(m=> {return {itemtype:"link", title: m.Name, url: 'dashboards/dashboard1/' + m.Id}}) as menuitem[]
@@ -37,5 +34,7 @@ export class AppComponent implements OnInit{
      })
 
      this.dashserv.Widgets = DashWidgetsConf;
+
+     this.fserv.registerFilter("IdManager", ManagerSelectComponent)
   }
 }

@@ -1,0 +1,14 @@
+<div class="col-12 md:col-4">
+  <div class="p-inputgroup"  (click)="op.toggle($event)">
+      <span class="p-inputgroup-addon">W{{currentweek}}</span>
+      <input type="text" [ngModel]="text" pInputText placeholder="Week" class="display">
+
+      <button title="calendaicon" type="button" pButton pRipple icon="fa fa-calendar" styleClass="p-button-danger"></button>
+  </div>
+</div>
+
+<p-overlayPanel #op>
+  <ng-template pTemplate>
+    <p-calendar [(ngModel)]="date" [inline]="true" [showWeek]="true" (click)="op.toggle($event)"></p-calendar>
+  </ng-template>
+</p-overlayPanel>

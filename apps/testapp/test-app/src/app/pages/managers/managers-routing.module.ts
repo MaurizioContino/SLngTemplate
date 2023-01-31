@@ -10,7 +10,5 @@ const routes: Routes = [{ path: '', component: ManagersComponent }];
 })
 export class ManagersRoutingModule {
 
-  constructor() {
-    console.log("");
-  }
+
 }

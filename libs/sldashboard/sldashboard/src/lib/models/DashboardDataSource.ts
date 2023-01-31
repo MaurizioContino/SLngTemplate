@@ -5,13 +5,15 @@ export enum operator {
   '<=',
   '>=',
   'startwith',
-  'endwith'
+  'endwith',
+  'between'
 }
 
 export enum ValueType {
   'number',
   'string',
-  'date'
+  'date',
+  'week'
 }
 
 
@@ -25,7 +27,7 @@ export interface DashboardDataSourceField {
 export interface DashboardDataSourceFilter {
   Property: string;
   Operator: operator;
-  Value: string;
+  Value: any;
 }
 
 

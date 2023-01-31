@@ -1,0 +1,72 @@
+<div class="container">
+<ng-container *ngFor="let f of filters">
+  <!-- F {{f.Property}}
+  Type: {{getType(f.Property)}} -->
+
+  <ng-container [ngSwitch]="getType(f.Property)">
+
+    <ng-container *ngSwitchCase="numbertype">
+      <ng-container *ngTemplateOutlet="existsModel(f.Property) ? custom : defaultnumber; context: { $implicit: f }"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="stringtype">
+      <ng-container *ngTemplateOutlet="existsModel(f.Property) ? custom : defaultstring; context: { $implicit: f }"></ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="datetype">
+
+      <ng-container *ngTemplateOutlet="existsModel(f.Property) ? custom : defaultdate; context: { $implicit: f }"></ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="weektype">
+      <ng-container *ngTemplateOutlet="existsModel(f.Property) ? custom : defaultweek; context: { $implicit: f }"></ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      <ng-container *ngTemplateOutlet="existsModel(f.Property) ? custom : defaultstring; context: { $implicit: f }"></ng-container>
+    </ng-container>
+
+
+  </ng-container>
+</ng-container>
+<button p-button (click)="dofilter()">OK</button>
+</div>
+
+
+<ng-template #custom let-f>
+  <div class="item">
+
+    <label>{{getLabel(f.Property)}}</label>
+    <sl-dashboard-filter-element [Filter]="f" [Field]="getField(f.Property)!" [(Value)]="f.Value"></sl-dashboard-filter-element>
+  </div>
+</ng-template>
+
+<ng-template #defaultnumber let-f>
+  <div class="item">
+    <label>{{getLabel(f.Property)}}</label>
+    <p-inputNumber  type="number" [(ngModel)]="f.Value" title="{{f.Property}}"></p-inputNumber>
+  </div>
+</ng-template>
+
+<ng-template #defaultstring let-f>
+  <div class="item">
+    <label>{{getLabel(f.Property)}}</label>
+    <input pInputText  [(ngModel)]="f.Value" title="{{f.Property}}">
+  </div>
+</ng-template>
+
+<ng-template #defaultdate let-f>
+  <div class="item">
+  <label>{{getLabel(f.Property)}}</label>
+  <p-calendar [(ngModel)]="f.Value" [showIcon]="true" inputId="icon" dateFormat="mm-dd-yy">
+    <ng-template pTemplate="date" let-date>
+  </ng-template>
+  </p-calendar>
+  </div>
+</ng-template>
+
+<ng-template #defaultweek let-f>
+  <div class="item">
+  <label>{{getLabel(f.Property)}}</label>
+  <sl-week-picker></sl-week-picker>
+  </div>
+</ng-template>

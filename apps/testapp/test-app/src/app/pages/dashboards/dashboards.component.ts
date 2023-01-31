@@ -23,7 +23,6 @@ export class DashboardsComponent implements OnInit, OnDestroy {
       this.itemsCount = v.length;
       this.items = v;
       this.cdr.detectChanges();
-      console.log(v)
     })
     this.dashboardconfServ.Load();
   }

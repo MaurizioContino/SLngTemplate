@@ -3,8 +3,10 @@
     <div class="top-buttons">
       <button (click)="toggleFilters()">X</button>
     </div>
-    <div class="container-back">
-     <div #filterbox class="filter-box-close"> Qui vanno i filtri</div>
+    <div *ngIf="dashboard" class="container-back">
+     <div #filterbox class="filter-box-close">
+      <sl-dashboar-filter *ngIf="showFilters" [dashboard]="dashboard" (DataSourceChange)="datasourceChanged($event)"></sl-dashboar-filter>
+    </div>
     <div class="container">
       <ng-scrollbar style="height: 100%">
         <div *ngFor="let idr of rows" class="row">

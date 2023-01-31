@@ -1,6 +1,7 @@
-import { DashboardItemValueComponent, DashboardWidget } from "@soloud/sldashboard"
+import { DashboardItemValueComponent, DashboardWidget, DashboardGridComponent } from "@soloud/sldashboard"
 
 import { menuitem } from "@soloud/slmenu"
+
 
 export const allmenus = [
   {itemtype:"title", title: 'Dataentry', subtitle:'Insert new data', children:[], url: ''},
@@ -15,5 +16,6 @@ export const top = [{itemtype:"title", title: 'Dashboards', subtitle:'Applicatio
 export const logo = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/100px-Angular_full_color_logo.svg.png"
 
 export const DashWidgetsConf: DashboardWidget[] = [
-  DashboardItemValueComponent.Definition
+  DashboardItemValueComponent.Definition,
+  DashboardGridComponent.Definition
 ]

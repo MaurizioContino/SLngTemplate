@@ -8,8 +8,8 @@ import { MonitorResultItem, MonitorResults } from '../models/MonitorResults';
 
 
 export const ItemsDataSourceFields = [
-  {Label: 'IdManager', Property: 'Manager', ValueType: ValueType.number},
-  {Label: 'Settimana', Property: 'Week', ValueType: ValueType.number},
+  {Label: 'Manager', Property: 'IdManager', ValueType: ValueType.number, CustomType: 'IdManager'},
+  {Label: 'Settimana', Property: 'Week', ValueType: ValueType.week},
   {Label: 'Aperte', Property: 'Aperte', ValueType: ValueType.number},
   {Label: 'ToolBox aperte', Property: 'ToolBox_Aperte', ValueType: ValueType.number},
   {Label: 'Business', Property: 'Business', ValueType: ValueType.number},
@@ -23,8 +23,9 @@ export const ItemsDataSourceFields = [
 ]
 
 export const ItemsDataSourceFilter = [
-  {Property: 'IdManager', Operator:operator["=="], Value: 'Qualunque' },
-  {Property: 'Week', Operator:operator["=="], Value: 'Ultima' }
+  {Property: 'IdManager', Operator:operator["=="], Value: '@any' },
+  {Property: 'Week', Operator:operator["between"], Value: {from:'@latest', to: '@latest'} }
+
 
 ]
 
