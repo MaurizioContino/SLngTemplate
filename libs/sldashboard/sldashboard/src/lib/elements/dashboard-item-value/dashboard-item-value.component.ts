@@ -15,7 +15,7 @@ import { DashboardItemValueConfigComponent } from './dashboard-item-value-config
 export class DashboardItemValueComponent implements OnInit, OnDestroy, WidgetElement {
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    static Definition = new DashboardWidget(DashboardItemValueComponent, DashboardItemValueConfigComponent, 1, 'xxx', 'Valore singolo', 'Mette in evidenza un singolo valore, un titolo e opzionalmente un secondo valore con un sottotitolo', { IdItem: 0, BackgroundColor: 'white', IdComponent: 1, Top: 0, Left: 0, width: 5, height: 5, Title: '', CustomData: {} });
+    static Definition = new DashboardWidget(DashboardItemValueComponent, DashboardItemValueConfigComponent, 1, 'xxx', 'Valore singolo', 'Mette in evidenza un singolo valore, un titolo e opzionalmente un secondo valore con un sottotitolo', { IdItem: 0, BackgroundColor: 'white', IdComponent: 1, Top: 0, Left: 0, width: 5, height: 4, Title: '', CustomData: {} });
     private _Config: WidgetConfig | undefined;
 
     @Input()
@@ -161,7 +161,7 @@ export class DashboardItemValueComponent implements OnInit, OnDestroy, WidgetEle
           }
           case "Penultimo":
           {
-            if (recs.length>1) return recs[recs.length-1]
+            if (recs.length>1) return recs[recs.length-2]
             return 0;
           }
           case "Media":

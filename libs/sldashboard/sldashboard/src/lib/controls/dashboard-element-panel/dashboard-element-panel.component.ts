@@ -18,7 +18,7 @@ export class DashboardElementPanelComponent implements AfterViewInit {
 
 
     @Input() Config!: WidgetConfig;
-    @Input() EditMode = 'none'
+    @Input() EditMode = false
     @Input() DataSource: DashboardDataSource | undefined;
 
 

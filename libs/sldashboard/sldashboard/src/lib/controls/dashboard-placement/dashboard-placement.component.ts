@@ -18,6 +18,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
   private _contents: QueryList<TemplateRef<any>> | undefined;
   private _dashboard: Dashboard | undefined;
   showFilters = false;
+  editMode = false;
   @Input()
   public get dashboard(): Dashboard | undefined {
     return this._dashboard;
@@ -207,6 +208,9 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       }
 
     }
+
+
+
     datasourceChanged(e: DashboardDataSource) {
       this.dsSources.LoadData(e.name);
     }

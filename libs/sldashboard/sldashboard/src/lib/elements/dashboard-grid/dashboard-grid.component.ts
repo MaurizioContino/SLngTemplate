@@ -6,7 +6,7 @@ import { NoConfigComponent } from '../no-config/no-config.component';
 @Component({
     selector: 'sl-dashboard-grid',
     templateUrl: './dashboard-grid.component.html',
-    styleUrls: ['./dashboard-grid.component.css'],
+    styleUrls: ['./dashboard-grid.component.scss'],
 })
 export class DashboardGridComponent implements OnInit {
 

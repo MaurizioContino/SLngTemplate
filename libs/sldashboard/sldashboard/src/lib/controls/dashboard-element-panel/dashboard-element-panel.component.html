@@ -1,6 +1,6 @@
 <div class="spacer">
-<div class="card" #card [style.width.px]="width" [style.height.px]="height">
-  <div class="card-header">
+<div class="card" #card [style.width.px]="width" [style.height.px]="height" [style.background]="Config.BackgroundColor">
+  <div class="card-header" *ngIf="EditMode">
     <div class="card-header-row">
       <button title="drag" class="button button-primary"  cdkDrag (cdkDragMoved)="cdkMoveDragMoved($event)" (cdkDragEnded)="cdkMoveDragEnded($event)">
         <i class="fa-solid fa-arrows-alt fa-lg ico-margins"></i>
@@ -22,6 +22,6 @@
 
     <ng-template sl-dasboard-item></ng-template>
   </div>
-  <div #resizer class="resizer" cdkDrag (cdkDragMoved)="cdkResizeDragMoved($event)" (cdkDragEnded)="cdkResizeDragEnded($event)"></div>
+  <div #resizer class="resizer" *ngIf="EditMode" cdkDrag (cdkDragMoved)="cdkResizeDragMoved($event)" (cdkDragEnded)="cdkResizeDragEnded($event)"></div>
 </div>
 </div>
