@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { DashboardDataSourceService, operator, ValueType } from '@soloud/sldashboard';
+import { DashboardDataSourceService } from '@soloud/sldashboard';
 
-import { SlDbService } from '@soloud/SlDb';
+import { filterItem, operator, SlDbService, ValueType } from '@soloud/SlDb';
 
-import { Observable, Subject, take, tap } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { MonitorResultItem, MonitorResults } from '../models/MonitorResults';
 
 
@@ -22,11 +22,10 @@ export const ItemsDataSourceFields = [
   {Label: 'Toolbox attivi', Property: 'Toolbox_Attivi', ValueType: ValueType.number},
 ]
 
-export const ItemsDataSourceFilter = [
-  {Property: 'IdManager', Operator:operator["=="], Value: '@any' },
-  {Property: 'Week', Operator:operator["between"], Value: {from:'@latest', to: '@latest'} }
-
-
+export const ItemsDataSourceFilter: filterItem[] = [
+  new filterItem("Manager", "IdManager", operator["=="], "IdManager", '@any' ),
+  new filterItem("Settinama da - a", "Week", operator.between, ValueType.date, {from:'@latest', to: '@latest'}  ),
+  
 ]
 
 
@@ -48,10 +47,12 @@ export class MonitorResultsService {
   results$: Subject<MonitorResults[]> = new Subject<MonitorResults[]>();
   constructor(private db: SlDbService, private dssources: DashboardDataSourceService) {
     this.dssources.registerDatasource("Monitor Data",  ItemsDataSourceFields, ItemsDataSourceFilter)
-    this.dssources.DataRequired$.subscribe(v=>{
-      if (v && v.name==="Monitor Data") {
+    this.dssources.DataRequired$.subscribe(ds=>{
+      if (ds && ds.name==="Monitor Data") {
 
-        this.db.GetAll<MonitorResultItem>(this.store).subscribe(items=>{
+
+
+        this.db.Filter<MonitorResultItem>(this.store, ds.Filters, false).subscribe(items=>{
           const ret: any[] = [];
           items.forEach(itm => {
             const rec = ret.find(r => r.IdManager == itm.IdManager && r.Week == itm.Week && r.year == itm.year)
@@ -63,7 +64,7 @@ export class MonitorResultsService {
               ret.push(tmp);
             }
           })
-          this.dssources.pushData(v.name, ret)
+          this.dssources.pushData(ds.name, ret)
         });
       }
     });

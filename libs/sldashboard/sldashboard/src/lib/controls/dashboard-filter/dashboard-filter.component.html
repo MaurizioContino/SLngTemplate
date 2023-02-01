@@ -1,28 +1,28 @@
 <div class="container">
 <ng-container *ngFor="let f of filters">
-  <!-- F {{f.Property}}
-  Type: {{getType(f.Property)}} -->
+  <!-- F {{f.Field}}
+  Type: {{getType(f.Field)}} -->
 
-  <ng-container [ngSwitch]="getType(f.Property)">
+  <ng-container [ngSwitch]="f.Type">
 
     <ng-container *ngSwitchCase="numbertype">
-      <ng-container *ngTemplateOutlet="existsModel(f.Property) ? custom : defaultnumber; context: { $implicit: f }"></ng-container>
+      <ng-container *ngTemplateOutlet="existsModel(f.Field) ? custom : defaultnumber; context: { $implicit: f }"></ng-container>
     </ng-container>
     <ng-container *ngSwitchCase="stringtype">
-      <ng-container *ngTemplateOutlet="existsModel(f.Property) ? custom : defaultstring; context: { $implicit: f }"></ng-container>
+      <ng-container *ngTemplateOutlet="existsModel(f.Field) ? custom : defaultstring; context: { $implicit: f }"></ng-container>
     </ng-container>
 
     <ng-container *ngSwitchCase="datetype">
 
-      <ng-container *ngTemplateOutlet="existsModel(f.Property) ? custom : defaultdate; context: { $implicit: f }"></ng-container>
+      <ng-container *ngTemplateOutlet="existsModel(f.Field) ? custom : defaultdate; context: { $implicit: f }"></ng-container>
     </ng-container>
 
     <ng-container *ngSwitchCase="weektype">
-      <ng-container *ngTemplateOutlet="existsModel(f.Property) ? custom : defaultweek; context: { $implicit: f }"></ng-container>
+      <ng-container *ngTemplateOutlet="existsModel(f.Field) ? custom : defaultweek; context: { $implicit: f }"></ng-container>
     </ng-container>
 
     <ng-container *ngSwitchDefault>
-      <ng-container *ngTemplateOutlet="existsModel(f.Property) ? custom : defaultstring; context: { $implicit: f }"></ng-container>
+      <ng-container *ngTemplateOutlet="existsModel(f.Field) ? custom : defaultstring; context: { $implicit: f }"></ng-container>
     </ng-container>
 
 
@@ -35,28 +35,28 @@
 <ng-template #custom let-f>
   <div class="item">
 
-    <label>{{getLabel(f.Property)}}</label>
-    <sl-dashboard-filter-element [Filter]="f" [Field]="getField(f.Property)!" [(Value)]="f.Value"></sl-dashboard-filter-element>
+    <label>{{f.Label}}</label>
+    <sl-dashboard-filter-element [Filter]="f"  [(Value)]="f.Value"></sl-dashboard-filter-element>
   </div>
 </ng-template>
 
 <ng-template #defaultnumber let-f>
   <div class="item">
-    <label>{{getLabel(f.Property)}}</label>
-    <p-inputNumber  type="number" [(ngModel)]="f.Value" title="{{f.Property}}"></p-inputNumber>
+    <label>{{f.Label}}</label>
+    <p-inputNumber  type="number" [(ngModel)]="f.Value" title="{{f.Field}}"></p-inputNumber>
   </div>
 </ng-template>
 
 <ng-template #defaultstring let-f>
   <div class="item">
-    <label>{{getLabel(f.Property)}}</label>
-    <input pInputText  [(ngModel)]="f.Value" title="{{f.Property}}">
+    <label>{{f.Label}}</label>
+    <input pInputText  [(ngModel)]="f.Value" title="{{f.Field}}">
   </div>
 </ng-template>
 
 <ng-template #defaultdate let-f>
   <div class="item">
-  <label>{{getLabel(f.Property)}}</label>
+  <label>{{f.Label}}</label>
   <p-calendar [(ngModel)]="f.Value" [showIcon]="true" inputId="icon" dateFormat="mm-dd-yy">
     <ng-template pTemplate="date" let-date>
   </ng-template>
@@ -66,7 +66,7 @@
 
 <ng-template #defaultweek let-f>
   <div class="item">
-  <label>{{getLabel(f.Property)}}</label>
+  <label>{{f.Label}}</label>
   <sl-week-picker></sl-week-picker>
   </div>
 </ng-template>

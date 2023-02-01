@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { filterItem } from '@soloud/SlDb';
 import { Subject } from 'rxjs';
-import { DashboardDataSource, DashboardDataSourceField, DashboardDataSourceFilter } from '../models/DashboardDataSource';
+import { DashboardDataSource, DashboardDataSourceField } from '../models/DashboardDataSource';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class DashboardDataSourceService {
   getNames() {
     return this.dataSources.map(v=>v.name);
   }
-  registerDatasource(Name: string, fields: DashboardDataSourceField[], filters: DashboardDataSourceFilter[]) {
+  registerDatasource(Name: string, fields: DashboardDataSourceField[], filters: filterItem[]) {
     this.dataSources.push(
       {name: Name, data: [], Fields: fields, Filters:filters}
     )

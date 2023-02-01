@@ -1,8 +1,9 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { filterItem, ValueType } from '@soloud/SlDb';
 import { Subject, takeUntil } from 'rxjs';
 
 import { DasboardItemDirective } from '../../directives/dasboard-item.directive';
-import { DashboardDataSourceField, DashboardDataSourceFilter } from '../../models/DashboardDataSource';
+import { DashboardDataSourceField } from '../../models/DashboardDataSource';
 import { DashboardFiltersService } from '../../services/dashboard-filters.service';
 
 
@@ -14,8 +15,8 @@ import { DashboardFiltersService } from '../../services/dashboard-filters.servic
 })
 export class DashboardFilterElementComponent implements AfterViewInit {
 
-  @Input() Filter!: DashboardDataSourceFilter;
-  @Input() Field!: DashboardDataSourceField
+  @Input() Filter!: filterItem;
+  
 
   @Input() Value: any
   @Output() ValueChange = new EventEmitter()
@@ -36,9 +37,9 @@ export class DashboardFilterElementComponent implements AfterViewInit {
 
           const viewContainerRef = this.WidgetHost.viewContainerRef;
           viewContainerRef.clear();
-          if (this.Filter && this.Field.CustomType) {
+          if (this.Filter ) {
 
-              const model = this.dashfilterserv.Filters[this.Field.CustomType];
+              const model = this.dashfilterserv.Filters[this.Filter.Type];
               if (model) {
                   const componentRef = viewContainerRef.createComponent<any>(model);
                   (componentRef as any).instance.Filter = this.Filter;

@@ -1,8 +1,7 @@
-import { outputAst } from '@angular/compiler';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { retry } from 'rxjs';
+import { filterItem, ValueType } from '@soloud/SlDb';
 import { Dashboard } from '../../models/Dashboard';
-import { DashboardDataSource, DashboardDataSourceField, DashboardDataSourceFilter, ValueType } from '../../models/DashboardDataSource';
+import { DashboardDataSource, DashboardDataSourceField } from '../../models/DashboardDataSource';
 import { DashboardDataSourceService } from '../../services/DashbaoardDataSource.service';
 import { DashboardFiltersService } from '../../services/dashboard-filters.service';
 
@@ -18,7 +17,7 @@ export class DashboardFilterComponent implements OnInit {
   @Output() DataSourceChange = new EventEmitter()
 
   ds!: DashboardDataSource | undefined;
-  filters: DashboardDataSourceFilter[] = [];
+  filters: filterItem[] = [];
   fields: DashboardDataSourceField[] = []
 
 

@@ -1,6 +1,6 @@
 import { Breakpoints } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
-import { SlDbService } from 'libs/sl-db/src/lib/services/sl-db.service';
+import { SlDbService } from '@soloud/SlDb';
 
 import { Observable, Subject } from 'rxjs';
 
