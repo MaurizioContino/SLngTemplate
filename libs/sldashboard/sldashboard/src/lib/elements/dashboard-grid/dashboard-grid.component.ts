@@ -11,7 +11,9 @@ import { NoConfigComponent } from '../no-config/no-config.component';
 })
 export class DashboardGridComponent implements OnDestroy {
 
-  static Definition = new DashboardWidget(DashboardGridComponent, NoConfigComponent, 2, 'xxx', 'Griglia dati', 'Visualizza tutti i dati della dashboard in una griglia', { IdItem: 0, BackgroundColor: 'white', IdComponent: 2, Top: 0, Left: 0, width: 20, height: 5, Title: '', CustomData: {} });
+  static Definition = new DashboardWidget(DashboardGridComponent, NoConfigComponent, 2, 'xxx', 'Griglia dati', 'Visualizza tutti i dati della dashboard in una griglia',
+        { IdItem: 0, BackgroundColor: 'white', IdComponent: 2, Top: 0, Left: 0, width: 20, height: 5, Title: '', CustomData: {} }
+    );
 
     data: any[] = [];
     Fields: string[] = [];
