@@ -1,11 +1,10 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, Input, OnDestroy, OnInit, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, Input, OnDestroy, OnInit, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { SlLayoutsService } from '@soloud/sllayout';
 
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Dashboard } from '../../models/Dashboard';
-import { DashboardDataSource } from '../../models/DashboardDataSource';
 import { DashboardWidget } from '../../models/DashboardWidget';
 import { WidgetConfig } from '../../models/WidgetConfig';
-import { DashboardDataSourceService } from '../../services/DashbaoardDataSource.service';
 import { DashboardConfigService } from '../../services/dashboard.service';
 
 @Component({
@@ -16,26 +15,12 @@ import { DashboardConfigService } from '../../services/dashboard.service';
 })
 export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDestroy {
   private _contents: QueryList<TemplateRef<any>> | undefined;
-  private _dashboard: Dashboard | undefined;
-  showFilters = false;
+
   editMode = false;
-  @Input()
-  public get dashboard(): Dashboard | undefined {
-    return this._dashboard;
-  }
-  public set dashboard(value: Dashboard | undefined) {
-    this._dashboard = value;
+  @Input() dashboard!: Dashboard;
 
-    if (value && value.DataSourceName) {
-
-      this.registerDatasource();
-      this.dsSources.LoadData(value.DataSourceName);
-    }
-  }
   @Input() Editable = true;
-  @Input() Filterable = true;
 
-  @ViewChild('filterbox') filterbox!: any;
 
   @ContentChildren('dashboarditem')
     public get contents(): QueryList<TemplateRef<any>> | undefined {
@@ -60,34 +45,19 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
     showConfig = false;
     selectr: number | null = null;
     selectc: number | null = null;
-    datasource: DashboardDataSource = {name: 'none', Fields:[], Filters:[], data:[]};
     dsSubscriber: Subscription | undefined;
-    constructor(private myElement: ElementRef, private cdr: ChangeDetectorRef,
-      private dashserv: DashboardConfigService, private dsSources: DashboardDataSourceService) {}
+    constructor(private myElement: ElementRef,
+      private cdr: ChangeDetectorRef,private layout: SlLayoutsService,
+      private dashserv: DashboardConfigService) {
 
-      registerDatasource() {
-        if (this.dashboard) {
-
-          if (this.dsSubscriber) this.dsSubscriber.unsubscribe();
-          this.dsSubscriber = this.dsSources.Data$.pipe(takeUntil(this.destroy$)).subscribe(ds=>{
-
-            if (ds && ds.name==this.dashboard?.DataSourceName) {
-
-              this.datasource = ds;
-              this.cdr.detectChanges();
-              if(this.dashboard)
-              {
-                this.dashboard.Items.forEach(v=>{
-                  v.CustomData
-                })
-              }
-            }
-          });
-
-        }
+        layout.currentScreenSize$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
+          this.ngAfterViewInit();
+        });
       }
+
+
       ngOnInit(): void {
-        this.registerDatasource();
+        console.log("begin dashboard")
       }
       ngOnDestroy(): void {
         this.destroy$.next(null);
@@ -98,7 +68,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         this.myElement.nativeElement.style = '100%';
         const maxHeight = (this.myElement.nativeElement.offsetWidth - 50) / 50;
         const maxwidth = 40;
-
+        this.dashserv.Size$.next({width: maxwidth, height: maxHeight, item: 50})
         for (let i = 0; i < maxwidth; i++) {
             this.rows.push(i);
         }
@@ -120,7 +90,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         this.selectr = null;
     }
 
-    InitnewWidget(IdComponent: number, x:number=-1, y:number=-1, datasource: Subject<any>, customdata: any = null) {
+    InitnewWidget(IdComponent: number, x:number=-1, y:number=-1, datasource: Subject<any> | null, customdata: any | null = null) {
 
       if (x > -1) this.selectc = x;
       if (y > -1) this.selectr = y;
@@ -205,22 +175,5 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
     }
 
 
-    toggleFilters() {
-      this.showFilters = !this.showFilters
-      if (!this.showFilters) {
-        this.filterbox.nativeElement.classList.remove("filter-box-open");
-        this.filterbox.nativeElement.classList.add("filter-box-close");
-      } else {
-        this.filterbox.nativeElement.classList.remove("filter-box-close");
-        this.filterbox.nativeElement.classList.add("filter-box-open");
 
-      }
-
-    }
-
-
-
-    datasourceChanged(e: DashboardDataSource) {
-      this.dsSources.LoadData(e.name);
-    }
 }

@@ -11,7 +11,7 @@ export interface WidgetConfig {
     height: number;
     Title: string;
     CustomData: any;
-    DataSource: Subject<any>;
+    DataSource?: Subject<any>;
     BackgroundColor: string;
     widget?: WidgetElement;
 

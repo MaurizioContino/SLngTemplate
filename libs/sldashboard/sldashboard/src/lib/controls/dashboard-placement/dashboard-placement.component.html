@@ -1,8 +1,7 @@
 <sl-hmaster-details [SelectedDetail]="DisplayDetails" (DetailClosed)="closeDetails()">
   <ng-template #hmdmaster>
-    <div class="top-buttons" *ngIf="Filterable || Editable">
-      <button pButton pRipple type="button" icon="fa fa-filter" *ngIf="Filterable" class="p-button-rounded"
-      (click)="toggleFilters()"></button>
+    <div class="top-buttons" *ngIf="Editable">
+
       <button pButton pRipple type="button" icon="fa fa-pencil" class="p-button-rounded" *ngIf="Editable && !editMode"
       (click)="editMode=true"></button>
       <button pButton pRipple type="button" icon="fa fa-save" class="p-button-rounded" *ngIf="editMode"
@@ -13,9 +12,7 @@
 
     </div>
     <div *ngIf="dashboard" class="container-back">
-     <div #filterbox class="filter-box-close">
-      <sl-dashboar-filter *ngIf="showFilters" [dashboard]="dashboard" (DataSourceChange)="datasourceChanged($event)"></sl-dashboar-filter>
-    </div>
+
     <div class="container">
       <ng-scrollbar style="height: 100%">
         <div *ngFor="let idr of rows" class="row">
@@ -28,7 +25,7 @@
 
             <ng-template #widget>
               <sl-dashboard-element-panel [id]="'Cell_' + idr + '-' + idc"
-              [Config]="ConfigIn(idr, idc)!" [DataSource]="datasource" [EditMode]="editMode"
+              [Config]="ConfigIn(idr, idc)!" [EditMode]="editMode"
                 (Copy)="copyElement($event)" (Delete)="deleteElement($event)" (Setup)="setupElement($event)"
               ></sl-dashboard-element-panel>
             </ng-template>
@@ -50,12 +47,12 @@
 
         <ng-container *ngIf="showSelect">
 
-          <sl-dashboard-item-list (Selected)="InitnewWidget($event)"></sl-dashboard-item-list>
+          <sl-dashboard-item-list (Selected)="InitnewWidget($event,-1,-1,null,null)"></sl-dashboard-item-list>
         </ng-container>
 
         <ng-container *ngIf="showConfig">
-          <sl-dashboard-element
-          [Config]="SelectedConfig" [DataSource]="datasource" ></sl-dashboard-element>
+          <sl-dashboard-element *ngIf="SelectedConfig"
+          [Config]="SelectedConfig" ></sl-dashboard-element>
         </ng-container>
 
 

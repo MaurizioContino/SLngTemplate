@@ -1,4 +1,4 @@
-<div class="container" *ngIf="DataSource && DataSource.Fields">
+<div class="container" >
 
   <div class="row">
     <div class="col width150">
@@ -10,7 +10,7 @@
     <div class="col width300">
 
       <label for="field">Campo principale</label>
-      <ng-select id="field" [items]="DataSource.Fields"
+      <ng-select id="field" [items]="Fields"
       [(ngModel)]="MainField"
       [bindLabel]="'Label'" [bindValue]="'Property'"></ng-select>
 
@@ -26,7 +26,7 @@
     <div class="col width300">
 
       <label for="field">Campo secondario sinistra</label>
-      <ng-select id="field" [items]="DataSource.Fields" [(ngModel)]="SecondaryLeftField"
+      <ng-select id="field" [items]="Fields" [(ngModel)]="SecondaryLeftField"
       [bindLabel]="'Label'" [bindValue]="'Property'"></ng-select>
 
     </div>
@@ -46,7 +46,7 @@
     <div class="col width300">
 
       <label for="field">Campo secondario destro</label>
-      <ng-select id="field" [items]="DataSource.Fields" [(ngModel)]="SecondaryRightField"
+      <ng-select id="field" [items]="Fields" [(ngModel)]="SecondaryRightField"
       [bindLabel]="'Label'" [bindValue]="'Property'"></ng-select>
 
     </div>

@@ -1,7 +1,5 @@
 import { Type } from '@angular/core';
 import { Subject } from 'rxjs';
-import { DashboardDataSource } from './DashboardDataSource';
-
 import { WidgetConfig } from './WidgetConfig';
 export class DashboardWidget {
 
@@ -12,10 +10,10 @@ export class DashboardWidget {
   Description: string;
   Config: WidgetConfig;
   Data: any;
-  DataSource: DashboardDataSource | undefined
-
+  DataSource?: Subject<any>
   component: Type<any>;
   Configcomponent: Type<any>;
+
   constructor(component: Type<any>, configcomponent: Type<any>, IdComponent: number,  Icon: string,  Name: string,  Description: string,  Defaultconfig: WidgetConfig) { //, idComponent:number, Name: string, Description: string,  data: unknown) {
     this.component = component;
     this.IdComponent = IdComponent;

@@ -3,7 +3,6 @@ import { CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
 import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input,  Output, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 
 import { DasboardItemDirective } from '../../directives/dasboard-item.directive';
-import { DashboardDataSource } from '../../models/DashboardDataSource';
 import { DashboardWidget } from '../../models/DashboardWidget';
 import { WidgetConfig } from '../../models/WidgetConfig';
 import { DashboardConfigService } from '../../services/dashboard.service';
@@ -19,18 +18,13 @@ export class DashboardElementPanelComponent implements AfterViewInit {
 
     @Input() Config!: WidgetConfig;
     @Input() EditMode = false
-    @Input() DataSource: DashboardDataSource | undefined;
-
 
     @ViewChild(DasboardItemDirective, { static: true }) WidgetHost!: DasboardItemDirective;
     @ViewChild('card') card!: ElementRef<any>;
 
-
-
     @Output() Delete = new EventEmitter<WidgetConfig>()
     @Output() Setup = new EventEmitter<WidgetConfig>()
     @Output() Copy = new EventEmitter<WidgetConfig>()
-
 
     DragDeltaWidth = 0;
     DragDeltaHeight = 0;
@@ -70,13 +64,14 @@ export class DashboardElementPanelComponent implements AfterViewInit {
             const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.component);
             if (this.Config){
               componentRef.instance.Config = this.Config;
+              componentRef.instance.DataSource = this.Config.DataSource;
               if (this.Config.CustomData) {
                 Object.keys(this.Config.CustomData).forEach(prop => {
                   (componentRef.instance as any)[prop] = this.Config.CustomData[prop];
                 });
               }
             }
-            if (this.DataSource) componentRef.instance.DataSource = this.DataSource;
+
             this.cdr.detectChanges()
           }
         }

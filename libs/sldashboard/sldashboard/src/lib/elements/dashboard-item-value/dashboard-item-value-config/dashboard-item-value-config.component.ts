@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { DashboardDataSource, DashboardDataSourceField } from '../../../models/DashboardDataSource';
 import { WidgetConfig } from '../../../models/WidgetConfig';
 
 @Component({
@@ -9,16 +8,16 @@ import { WidgetConfig } from '../../../models/WidgetConfig';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardItemValueConfigComponent {
-    @Input() DataSource: DashboardDataSource | undefined;
     @Input() Config: WidgetConfig | undefined;
 
+    @Input() Fields: string[] = []
     methods = ['Primo', 'Ultimo', 'Penultimo', 'Media', 'Massimo', 'Minimo', 'Somma'];
 
-    public get MainField(): DashboardDataSourceField | undefined {
+    public get MainField(): string {
         if (this.Config) return this.Config.CustomData['MainField'];
-        else return undefined;
+        else return "";
     }
-    public set MainField(value: DashboardDataSourceField | undefined) {
+    public set MainField(value: string) {
         if (this.Config) {
             this.Config.CustomData['MainField'] = value;
             this.SecondaryLeftField = value;
@@ -26,57 +25,57 @@ export class DashboardItemValueConfigComponent {
         }
     }
 
-    public get SecondaryLeftField(): DashboardDataSourceField | undefined {
+    public get SecondaryLeftField(): string  {
         if (this.Config) return this.Config.CustomData['SecondaryLeftField'];
-        else return undefined;
+        else return "";
     }
-    public set SecondaryLeftField(value: DashboardDataSourceField | undefined) {
+    public set SecondaryLeftField(value: string ) {
         if (this.Config) this.Config.CustomData['SecondaryLeftField'] = value;
     }
 
-    public get SecondaryRightField(): DashboardDataSourceField | undefined {
+    public get SecondaryRightField(): string {
         if (this.Config) return this.Config.CustomData['SecondaryRightField'];
-        else return undefined;
+        else return "";
     }
-    public set SecondaryRightField(value: DashboardDataSourceField | undefined) {
+    public set SecondaryRightField(value: string) {
         if (this.Config) this.Config.CustomData['SecondaryRightField'] = value;
     }
 
-    public get MainSelect(): DashboardDataSourceField | undefined {
+    public get MainSelect(): string {
         if (this.Config) return this.Config.CustomData['MainSelect'];
-        else return undefined;
+        else return "";
     }
-    public set MainSelect(value: DashboardDataSourceField | undefined) {
+    public set MainSelect(value: string) {
         if (this.Config) this.Config.CustomData['MainSelect'] = value;
     }
 
-    public get SecondaryLeftSelect(): DashboardDataSourceField | undefined {
+    public get SecondaryLeftSelect(): string {
         if (this.Config) return this.Config.CustomData['SecondaryLeftSelect'];
-        else return undefined;
+        else return "";
     }
-    public set SecondaryLeftSelect(value: DashboardDataSourceField | undefined) {
+    public set SecondaryLeftSelect(value: string) {
         if (this.Config) this.Config.CustomData['SecondaryLeftSelect'] = value;
     }
 
-    public get SecondaryRightSelect(): DashboardDataSourceField | undefined {
+    public get SecondaryRightSelect(): string {
         if (this.Config) return this.Config.CustomData['SecondaryRightSelect'];
-        else return undefined;
+        else return "";
     }
-    public set SecondaryRightSelect(value: DashboardDataSourceField | undefined) {
+    public set SecondaryRightSelect(value: string) {
         if (this.Config) this.Config.CustomData['SecondaryRightSelect'] = value;
     }
 
-    public set SecondaryLeftTitle(value: DashboardDataSourceField | undefined) {
+    public set SecondaryLeftTitle(value: string) {
         if (this.Config) this.Config.CustomData['SecondaryLeftTitle'] = value;
     }
 
-    public set SecondaryRightTitle(value: DashboardDataSourceField | undefined) {
+    public set SecondaryRightTitle(value: string) {
         if (this.Config) this.Config.CustomData['SecondaryRightTitle'] = value;
     }
 
     public get MainStyle(): any | undefined {
       if (this.Config) return this.Config.CustomData['MainStyle'];
-      else return undefined;
+      else return "";
     }
     public set MainStyle(value: any | undefined) {
         if (this.Config) this.Config.CustomData['MainStyle'] = value;
@@ -84,7 +83,7 @@ export class DashboardItemValueConfigComponent {
 
     public get LeftStyle(): any | undefined {
       if (this.Config) return this.Config.CustomData['LeftStyle'];
-      else return undefined;
+      else return "";
     }
     public set LeftStyle(value: any | undefined) {
         if (this.Config) this.Config.CustomData['LeftStyle'] = value;
@@ -92,7 +91,7 @@ export class DashboardItemValueConfigComponent {
 
     public get RightStyle(): any | undefined {
       if (this.Config) return this.Config.CustomData['RightStyle'];
-      else return undefined;
+      else return "";
     }
     public set RightStyle(value: any | undefined) {
         if (this.Config) this.Config.CustomData['RightStyle'] = value;

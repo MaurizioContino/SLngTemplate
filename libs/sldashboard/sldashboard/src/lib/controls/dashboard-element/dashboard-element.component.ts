@@ -1,8 +1,6 @@
-
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 import { DasboardItemDirective } from '../../directives/dasboard-item.directive';
-import { DashboardDataSource } from '../../models/DashboardDataSource';
 import { DashboardWidget } from '../../models/DashboardWidget';
 import { WidgetConfig } from '../../models/WidgetConfig';
 import { DashboardConfigService } from '../../services/dashboard.service';
@@ -14,18 +12,17 @@ import { DashboardConfigService } from '../../services/dashboard.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardElementComponent implements AfterViewInit {
-    private _Config: WidgetConfig | undefined;
+    private _Config!: WidgetConfig;
 
     @Input()
-    public get Config(): WidgetConfig | undefined {
+    public get Config(): WidgetConfig {
         return this._Config;
     }
-    public set Config(value: WidgetConfig | undefined) {
+    public set Config(value: WidgetConfig) {
         this._Config = value;
         this.loadComponent();
     }
     @Input() EditMode = 'none';
-    @Input() DataSource: DashboardDataSource | undefined;
 
     @ViewChild(DasboardItemDirective, { static: true }) WidgetHost!: DasboardItemDirective;
 
@@ -58,14 +55,18 @@ export class DashboardElementComponent implements AfterViewInit {
         if (this.WidgetHost) {
             const viewContainerRef = this.WidgetHost.viewContainerRef;
             viewContainerRef.clear();
-            if (this.Config) {
-                const model = this.dashserv.Widgets.find((v) => v.IdComponent == this.Config?.IdComponent);
-                if (model) {
-                    const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.Configcomponent);
-                    if (this.Config) componentRef.instance.Config = this.Config;
-                    if (this.DataSource) componentRef.instance.DataSource = this.DataSource;
-                    this.cdr.detectChanges();
+
+            const model = this.dashserv.Widgets.find((v) => v.IdComponent == this.Config?.IdComponent);
+            if (model) {
+                const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.Configcomponent);
+                componentRef.instance.Config = this.Config;
+                componentRef.instance.DataSource = this.Config.DataSource;
+                if (this.Config.CustomData) {
+                    Object.keys(this.Config.CustomData).forEach((prop) => {
+                        (componentRef.instance as any)[prop] = this.Config.CustomData[prop];
+                    });
                 }
+                this.cdr.detectChanges();
             }
         }
     }

@@ -1,5 +1,4 @@
 
-import { DashboardDataSource } from './DashboardDataSource';
 import { WidgetConfig } from './WidgetConfig';
 
 export class Dashboard  {
@@ -10,11 +9,11 @@ export class Dashboard  {
     Id = 0;
     Name = '';
     Description = '';
-    DataSourceName = '';
+
 
     Items: WidgetConfig[] = [];
 
-    Endpoint: DashboardDataSource | undefined;
+
 
     getWidgetByPosition(r: number, c: number): WidgetConfig | null {
         const itm = this.Items.find((w) => w.Top == r && w.Left == c);
@@ -32,7 +31,6 @@ export class Dashboard  {
         this.Items = deserialized.Items ? deserialized.Items : [];
         this.Name = deserialized.Name;
         this.Description = deserialized.Description;
-        this.DataSourceName= deserialized.DataSourceName
     }
 
     public fromObject(data: Dashboard) {
@@ -44,7 +42,6 @@ export class Dashboard  {
         this.Items = data.Items ? data.Items : [];
         this.Name = data.Name;
         this.Description = data.Description;
-        this.DataSourceName= data.DataSourceName
 
         for (let idx = 0; idx < this.Items.length; idx++) {
             //this.Items[idx] = DashboardItem.fromItem(this.Items[idx]);

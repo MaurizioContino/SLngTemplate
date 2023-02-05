@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Dashboard } from '@soloud/sldashboard';
-import { DashboardConfigService } from '@soloud/sldashboard';
 import { Subject, takeUntil } from 'rxjs';
 import { chartfilter } from '../../controls/charts/chart-filter/filterValues';
 import { DashboardService } from '../../services/dashboard.service';
@@ -15,7 +14,7 @@ export class Dashboard1Component implements OnInit, OnDestroy  {
 
   id = 0;
 
-  current: Dashboard | undefined;
+  current!: Dashboard;
 
   showYears = false;
   mainfilter: chartfilter = {fromweek: 1, toweek: 1, year: (new Date()).getFullYear(), reportType: 'weekly'}

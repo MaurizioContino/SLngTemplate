@@ -15,8 +15,6 @@ import { DashboardItemValueComponent } from './elements/dashboard-item-value/das
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DashboardItemValueConfigComponent } from './elements/dashboard-item-value/dashboard-item-value-config/dashboard-item-value-config.component';
 import { DashboardItemValueStyleComponent } from './elements/dashboard-item-value/dashboard-item-value-style/dashboard-item-value-style.component';
-import { DashboardFilterComponent } from './controls/dashboard-filter/dashboard-filter.component';
-import { DashboardFilterElementComponent } from './controls/dashboard-filter-element/dashboard-filter-element.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
@@ -35,8 +33,6 @@ import { NoConfigComponent } from './elements/no-config/no-config.component';
         DashboardItemValueConfigComponent,
         DashboardItemValueStyleComponent,
         DashboardItemValueStyleComponent,
-        DashboardFilterComponent,
-        DashboardFilterElementComponent,
         DashboardGridComponent,
         NoConfigComponent,
     ],

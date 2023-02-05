@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SlLayoutsService } from '@soloud/sllayout';
 import { menuitem, SlMenuService } from '@soloud/slmenu';
 import { sldbService } from '@soloud/sldb';
-import { DashboardConfigService, DashboardDataSourceService, DashboardFiltersService } from '@soloud/sldashboard';
+import { DashboardConfigService } from '@soloud/sldashboard';
 import { allmenus, top, logo, DashWidgetsConf} from './models/StarupData';
 
 import { MonitorResultsService } from './services/monitor-results.service';
@@ -18,8 +18,8 @@ import { DashboardService } from './services/dashboard.service';
 export class AppComponent implements OnInit{
   title = 'testapp-test-app';
   constructor(public layoutService: SlLayoutsService, private dashserv: DashboardService, private dashConfigserv: DashboardConfigService,
-    private db: sldbService, private mnuServ: SlMenuService, private dssources: DashboardDataSourceService,
-    private itmserv: MonitorResultsService, private fserv: DashboardFiltersService) {
+    private db: sldbService, private mnuServ: SlMenuService,
+    private itmserv: MonitorResultsService) {
 
   }
 
@@ -37,6 +37,5 @@ export class AppComponent implements OnInit{
 
      this.dashConfigserv.Widgets = DashWidgetsConf;
 
-     this.fserv.registerFilter("IdManager", ManagerSelectComponent)
   }
 }
