@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SlDbService } from 'libs/sl-db/src/lib/services/sl-db.service';
+import { sldbService } from 'libs/sl-db/src/lib/services/sl-db.service';
 import { Observable, Subject, tap } from 'rxjs';
 import { Region } from '../models/Region';
 import { AreeService } from './aree.service';
@@ -13,7 +13,7 @@ export class RegionService {
   Regions: Region[] | null = null
   Regions$: Subject<Region[]> = new Subject<Region[]>();
 
-  constructor(private db: SlDbService, private areeServ: AreeService) { }
+  constructor(private db: sldbService, private areeServ: AreeService) { }
 
   Load(reload: boolean = false) {
     if (reload || this.Regions == null) {

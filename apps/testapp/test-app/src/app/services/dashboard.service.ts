@@ -1,37 +1,38 @@
 import { Injectable } from '@angular/core';
+import { Dashboard } from '@soloud/sldashboard';
+import { sldbService } from '@soloud/sldb';
 import { Subject } from 'rxjs';
-import { Dashboard } from '../models/Dashboard';
-import { DashboardWidget } from '../models/DashboardWidget';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class DashboardConfigService {
+export class DashboardService {
 
   store = "Dashboards";
   DashboardGrids: Dashboard[] | null = null;
   DashboardGrids$: Subject<Dashboard[]> = new Subject<Dashboard[]>();
 
-  Widgets: DashboardWidget[] = [];
+  constructor(private db: sldbService) {
+  }
 
-  // Load(reload: boolean = false) {
-  //   if (reload || this.DashboardGrids == null) {
-  //     this.db.GetAll<Dashboard>(this.store).subscribe(v=>{
-  //       this.DashboardGrids = []
-  //       v.forEach(g=>{
-  //         const dg = new Dashboard();
-  //         dg.fromObject(g);
-  //         this.DashboardGrids?.push(dg)
-  //       })
+  Load(reload: boolean = false) {
+    if (reload || this.DashboardGrids == null) {
+      this.db.GetAll<Dashboard>(this.store).subscribe(v=>{
+        this.DashboardGrids = []
+        v.forEach(g=>{
+          const dg = new Dashboard();
+          dg.fromObject(g);
+          this.DashboardGrids?.push(dg)
+        })
 
-  //       this.DashboardGrids$.next(this.DashboardGrids);
-  //     })
-  //   }
-  //   else {
-  //     this.DashboardGrids$.next(this.DashboardGrids);
-  //   }
-  // }
+        this.DashboardGrids$.next(this.DashboardGrids);
+      })
+    }
+    else {
+      this.DashboardGrids$.next(this.DashboardGrids);
+    }
+  }
 
 
 

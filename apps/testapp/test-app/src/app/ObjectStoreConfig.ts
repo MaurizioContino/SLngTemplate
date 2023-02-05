@@ -1,5 +1,5 @@
 
-import { DBConfig } from '@soloud/SlDb';
+import { DBConfig } from '@soloud/sldb';
 import { Area } from './models/Area';
 import { Manager } from './models/Manager';
 import { MonitorItem } from './models/Monitoritem';

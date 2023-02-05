@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component,  Input, OnDestroy, OnInit } from '@angular/core';
-import { DashboardConfigService, DashboardDataSource, DashboardDataSourceField, DashboardWidget } from '@soloud/sldashboard';
-import { WidgetConfig } from '@soloud/sldashboard';
 
 import { Subject } from 'rxjs';
+import { DashboardDataSource, DashboardDataSourceField } from '../../models/DashboardDataSource';
+import { DashboardWidget } from '../../models/DashboardWidget';
+import { WidgetConfig } from '../../models/WidgetConfig';
 import { WidgetElement } from '../../models/widgetElement';
+import { DashboardConfigService } from '../../services/dashboard.service';
 import { DashboardItemValueConfigComponent } from './dashboard-item-value-config/dashboard-item-value-config.component';
 
 @Component({

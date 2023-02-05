@@ -1,4 +1,4 @@
-import { IDBModel } from "@soloud/SlDb";
+import { IDBModel } from "@soloud/sldb";
 import { Area } from "./Area";
 
 export class Region implements IDBModel {

@@ -41,6 +41,11 @@ import { NoConfigComponent } from './elements/no-config/no-config.component';
         NoConfigComponent,
     ],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, SlButtonModule, DragDropModule, SllayoutModule, NgScrollbarModule, NgSelectModule, InputTextModule, InputNumberModule, CalendarModule, SlCommonControlsModule, TableModule],
-    exports: [DashboardPlacementComponent, DashboardElementComponent, DashboardElementPanelComponent, DasboardItemDirective, DashboardItemValueComponent, DashboardItemValueConfigComponent, AccordionComponent, DashboardItemValueStyleComponent, DashboardGridComponent],
+    exports: [
+      DashboardPlacementComponent, DashboardElementComponent,
+      DashboardElementPanelComponent, DasboardItemDirective,
+      DashboardItemValueComponent, DashboardItemValueConfigComponent,
+      AccordionComponent, DashboardItemValueStyleComponent,
+      DashboardGridComponent, NoConfigComponent],
 })
 export class SldashboardModule {}

@@ -9,7 +9,7 @@ import { SlmenuModule } from '@soloud/slmenu';
 import { SharedModule } from './shared.module';
 import { dbConfig } from './ObjectStoreConfig';
 import { HttpClientModule } from '@angular/common/http';
-import { SlDbModule } from '@soloud/SlDb';
+import { sldbModule } from '@soloud/sldb';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
@@ -26,7 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SlmenuModule,
     SharedModule,
     HttpClientModule,
-    SlDbModule.forRoot(dbConfig),
+    sldbModule.forRoot(dbConfig),
   ],
   providers: [],
   bootstrap: [AppComponent],

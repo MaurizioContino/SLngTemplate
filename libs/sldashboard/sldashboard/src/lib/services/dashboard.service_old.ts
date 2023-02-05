@@ -1,6 +1,6 @@
 // import { HttpClient } from '@angular/common/http';
 // import { Injectable } from '@angular/core';
-// import { NgSlDbService } from 'ng-sl-db';
+// import { NgsldbService } from 'ng-sl-db';
 // import { Observable, Subject } from 'rxjs';
 // import { DashboardDataSource } from '../models/DashboardItem';
 
@@ -12,7 +12,7 @@
 
 //   DataSources: DashboardDataSource[] = [];
 //   confServ : any = {}
-//   constructor(  private http: HttpClient, private db: NgSlDbService) {}
+//   constructor(  private http: HttpClient, private db: NgsldbService) {}
 
 //   GetListDashBoard(): Observable<any[]> {
 

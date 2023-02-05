@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SlDbService } from 'libs/sl-db/src/lib/services/sl-db.service';
+import { sldbService } from 'libs/sl-db/src/lib/services/sl-db.service';
 
 import { BehaviorSubject, forkJoin, Observable, Subject, take, tap } from 'rxjs';
 import { Area } from '../models/Area';
@@ -18,7 +18,7 @@ export class AreeService {
     this._Aree = value;
   }
   Aree$: BehaviorSubject<Area[]> = new BehaviorSubject<Area[]>([]);
-  constructor(private db: SlDbService) {
+  constructor(private db: sldbService) {
   }
 
 

@@ -1,6 +1,6 @@
 import { Breakpoints } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
-import { SlDbService } from 'libs/sl-db/src/lib/services/sl-db.service';
+import { sldbService } from 'libs/sl-db/src/lib/services/sl-db.service';
 
 import { Observable, Subject } from 'rxjs';
 
@@ -20,7 +20,7 @@ export class MonitorItemtypesService {
     this._results = value;
   }
   results$: Subject<MonitorItem[]> = new Subject<MonitorItem[]>();
-  constructor(private db: SlDbService) {
+  constructor(private db: sldbService) {
   }
 
   Load(reload: boolean = false) {

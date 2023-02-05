@@ -4,6 +4,7 @@ import { Dashboard } from '@soloud/sldashboard';
 import { DashboardConfigService } from '@soloud/sldashboard';
 import { Subject, takeUntil } from 'rxjs';
 import { chartfilter } from '../../controls/charts/chart-filter/filterValues';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard1',
@@ -13,7 +14,6 @@ import { chartfilter } from '../../controls/charts/chart-filter/filterValues';
 export class Dashboard1Component implements OnInit, OnDestroy  {
 
   id = 0;
-  listObject = ['uno', 'due', 'ciao 1', 'ciao 2']
 
   current: Dashboard | undefined;
 
@@ -23,7 +23,7 @@ export class Dashboard1Component implements OnInit, OnDestroy  {
   currentYear = 0;
   destroy$ = new Subject();
 
-  constructor(private dashboard: DashboardConfigService, private route: ActivatedRoute){}
+  constructor(private dashboard: DashboardService, private route: ActivatedRoute){}
   ngOnInit(): void {
 
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
@@ -39,7 +39,7 @@ export class Dashboard1Component implements OnInit, OnDestroy  {
             this.current = dashboard;
           }
         })
-        this.dashboard.Load(true);
+        //this.dashboard.Load(true);
       }
     });
     this.years = [];

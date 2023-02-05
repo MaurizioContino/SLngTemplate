@@ -24,7 +24,7 @@ export class DashboardsComponent implements OnInit, OnDestroy {
       this.items = v;
       this.cdr.detectChanges();
     })
-    this.dashboardconfServ.Load();
+    //this.dashboardconfServ.Load();
   }
 
   SelectedChange(row: any){

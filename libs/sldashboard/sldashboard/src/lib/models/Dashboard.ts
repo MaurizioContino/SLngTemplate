@@ -1,9 +1,8 @@
 
-import { IDBModel } from '@soloud/SlDb';
 import { DashboardDataSource } from './DashboardDataSource';
 import { WidgetConfig } from './WidgetConfig';
 
-export class Dashboard implements IDBModel {
+export class Dashboard  {
     isnew = false;
     updated = '';
     originalupdated = '';

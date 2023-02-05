@@ -1,4 +1,4 @@
-import { IDBModel } from "@soloud/SlDb";
+import { IDBModel } from "@soloud/sldb";
 
 export class  MonitorResultItem implements IDBModel {
 

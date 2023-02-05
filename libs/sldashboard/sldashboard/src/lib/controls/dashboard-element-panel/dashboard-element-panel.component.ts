@@ -1,6 +1,6 @@
 
 import { CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
-import { AfterViewInit, ChangeDetectionStrategy, Component, TemplateRef, EventEmitter, Input,  Output, ViewChild, ContentChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input,  Output, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 
 import { DasboardItemDirective } from '../../directives/dasboard-item.directive';
 import { DashboardDataSource } from '../../models/DashboardDataSource';
@@ -68,7 +68,14 @@ export class DashboardElementPanelComponent implements AfterViewInit {
           const model = this.dashserv.Widgets.find((v) => v.IdComponent == this.Config?.IdComponent);
           if (model) {
             const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.component);
-            if (this.Config) componentRef.instance.Config = this.Config;
+            if (this.Config){
+              componentRef.instance.Config = this.Config;
+              if (this.Config.CustomData) {
+                Object.keys(this.Config.CustomData).forEach(prop => {
+                  (componentRef.instance as any)[prop] = this.Config.CustomData[prop];
+                });
+              }
+            }
             if (this.DataSource) componentRef.instance.DataSource = this.DataSource;
             this.cdr.detectChanges()
           }

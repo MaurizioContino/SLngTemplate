@@ -1,8 +1,9 @@
 <sl-hmaster-details [SelectedDetail]="DisplayDetails" (DetailClosed)="closeDetails()">
   <ng-template #hmdmaster>
-    <div class="top-buttons">
-      <button pButton pRipple type="button" icon="fa fa-filter" class="p-button-rounded" (click)="toggleFilters()"></button>
-      <button pButton pRipple type="button" icon="fa fa-pencil" class="p-button-rounded" *ngIf="!editMode"
+    <div class="top-buttons" *ngIf="Filterable || Editable">
+      <button pButton pRipple type="button" icon="fa fa-filter" *ngIf="Filterable" class="p-button-rounded"
+      (click)="toggleFilters()"></button>
+      <button pButton pRipple type="button" icon="fa fa-pencil" class="p-button-rounded" *ngIf="Editable && !editMode"
       (click)="editMode=true"></button>
       <button pButton pRipple type="button" icon="fa fa-save" class="p-button-rounded" *ngIf="editMode"
       (click)="editMode=true"></button>

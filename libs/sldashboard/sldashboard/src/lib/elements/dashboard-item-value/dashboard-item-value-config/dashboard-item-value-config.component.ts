@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { DashboardDataSource, DashboardDataSourceField, WidgetConfig } from '@soloud/sldashboard';
+import { DashboardDataSource, DashboardDataSourceField } from '../../../models/DashboardDataSource';
+import { WidgetConfig } from '../../../models/WidgetConfig';
 
 @Component({
     selector: 'sl-dashboard-item-value-config',

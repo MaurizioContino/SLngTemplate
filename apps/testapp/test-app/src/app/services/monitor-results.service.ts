@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DashboardDataSourceService, operator, ValueType } from '@soloud/sldashboard';
 
-import { SlDbService } from '@soloud/SlDb';
+import { sldbService } from '@soloud/sldb';
 
 import { Observable, Subject, take, tap } from 'rxjs';
 import { MonitorResultItem, MonitorResults } from '../models/MonitorResults';
@@ -46,7 +46,7 @@ export class MonitorResultsService {
     this._results = value;
   }
   results$: Subject<MonitorResults[]> = new Subject<MonitorResults[]>();
-  constructor(private db: SlDbService, private dssources: DashboardDataSourceService) {
+  constructor(private db: sldbService, private dssources: DashboardDataSourceService) {
     this.dssources.registerDatasource("Monitor Data",  ItemsDataSourceFields, ItemsDataSourceFilter)
     this.dssources.DataRequired$.subscribe(v=>{
       if (v && v.name==="Monitor Data") {

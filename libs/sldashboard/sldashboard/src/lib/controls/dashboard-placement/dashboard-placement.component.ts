@@ -32,6 +32,8 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       this.dsSources.LoadData(value.DataSourceName);
     }
   }
+  @Input() Editable = true;
+  @Input() Filterable = true;
 
   @ViewChild('filterbox') filterbox!: any;
 
@@ -118,15 +120,22 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         this.selectr = null;
     }
 
-    InitnewWidget(IdComponent: number) {
+    InitnewWidget(IdComponent: number, x:number=-1, y:number=-1, datasource: Subject<any>, customdata: any = null) {
+
+      if (x > -1) this.selectc = x;
+      if (y > -1) this.selectr = y;
 
       const model = this.dashserv.Widgets.find((v) => v.IdComponent == IdComponent);
+
       if (this.dashboard && model && model.component && this.selectr!==null && this.selectc!==null) {
           this.showSelect = false;
           this.showConfig = true;
           const conf = model.cloneConfig();
           conf.Top = this.selectr;
           conf.Left = this.selectc;
+          if (customdata!=null) conf.CustomData = customdata;
+          if (datasource!=null) conf.DataSource = datasource;
+
           this.dashboard.Items.push(conf);
           this.cdr.detectChanges();
       }

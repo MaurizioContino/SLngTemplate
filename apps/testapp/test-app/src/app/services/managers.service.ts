@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SlDbService } from 'libs/sl-db/src/lib/services/sl-db.service';
+import { sldbService } from 'libs/sl-db/src/lib/services/sl-db.service';
 
 import { Observable, Subject } from 'rxjs';
 import { Manager } from '../models/Manager';
@@ -14,7 +14,7 @@ export class ManagersService {
   store = "Managers";
   Managers: Manager[] | null = null;
   Managers$: Subject<Manager[]> = new Subject<Manager[]>();
-  constructor(private db: SlDbService, private areeServ: AreeService) {
+  constructor(private db: sldbService, private areeServ: AreeService) {
 
   }
 

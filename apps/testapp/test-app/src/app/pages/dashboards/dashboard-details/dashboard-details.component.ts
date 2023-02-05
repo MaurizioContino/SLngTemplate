@@ -54,11 +54,11 @@ export class DashboardDetailsComponent implements OnInit {
   Save() {
     const s = this.form.value  as Dashboard;
     s.updated = (new Date()).toISOString()
-    this.Dashboardservice.save(s).subscribe(v=>{
-      this.current = v.find(v=>v.Id == this._current?.Id) as Dashboard;
-      this.EditStatus = "none"
-      this.cdr.detectChanges();
-    })
+    // this.Dashboardservice.save(s).subscribe(v=>{
+    //   this.current = v.find(v=>v.Id == this._current?.Id) as Dashboard;
+    //   this.EditStatus = "none"
+    //   this.cdr.detectChanges();
+    // })
   }
   Edit() {
     this.EditStatus = "edit"
