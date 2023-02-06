@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { WidgetConfig } from './WidgetConfig';
 export class DashboardWidget {
 
@@ -10,7 +10,7 @@ export class DashboardWidget {
   Description: string;
   Config: WidgetConfig;
   Data: any;
-  DataSource?: Subject<any>
+  DataSource?: BehaviorSubject<any>
   component: Type<any>;
   Configcomponent: Type<any>;
 

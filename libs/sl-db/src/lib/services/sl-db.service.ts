@@ -8,7 +8,7 @@ import { IDBModel } from '../models/IDBModel';
 @Injectable({
     providedIn: 'root',
 })
-export class SlDbService {
+export class sldbService {
     remotes: any = {};
     db: any;
     ready$ = new Subject();

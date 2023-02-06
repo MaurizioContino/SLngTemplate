@@ -1,4 +1,4 @@
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { WidgetElement } from "./widgetElement";
 
 export interface WidgetConfig {
@@ -11,7 +11,7 @@ export interface WidgetConfig {
     height: number;
     Title: string;
     CustomData: any;
-    DataSource?: Subject<any>;
+    DataSource?: BehaviorSubject<any>;
     BackgroundColor: string;
     widget?: WidgetElement;
 

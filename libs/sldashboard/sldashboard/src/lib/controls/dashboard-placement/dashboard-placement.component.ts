@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, Input, OnDestroy, OnInit, QueryList, TemplateRef, ViewChild } from '@angular/core';
 import { SlLayoutsService } from '@soloud/sllayout';
 
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription, takeUntil } from 'rxjs';
 import { Dashboard } from '../../models/Dashboard';
 import { DashboardWidget } from '../../models/DashboardWidget';
 import { WidgetConfig } from '../../models/WidgetConfig';
@@ -90,7 +90,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         this.selectr = null;
     }
 
-    InitnewWidget(IdComponent: number, x:number=-1, y:number=-1, datasource: Subject<any> | null, customdata: any | null = null) {
+    InitnewWidget(IdComponent: number, x:number=-1, y:number=-1, datasource: BehaviorSubject<any> | null, customdata: any | null = null) {
 
       if (x > -1) this.selectc = x;
       if (y > -1) this.selectr = y;
