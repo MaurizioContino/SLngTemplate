@@ -60,7 +60,7 @@ export class sldbService {
             const data = request.result.map((v: any) => {
                 return JSON.parse(v.data) as T;
             }) as T[];
-            ret.next((data as any[]).filter((v) => v.deleted == false || getdeleted));
+            ret.next((data as any[]).filter((v) => v.deleted===false || getdeleted));
         };
 
         return ret;
@@ -108,7 +108,7 @@ export class sldbService {
 
     setDefaultValues(src: filterItem, data: []): filterItem {
         const f = JSON.parse(JSON.stringify(src));
-        if (f.Operator == operator.between) {
+        if (f.Operator===operator.between) {
           f.Value.from = this.getFilterValue(f.Value.from, src.Type, data);
           f.Value.from = this.getFilterValue(f.Value.to, src.Type, data);
         } else {
@@ -158,7 +158,7 @@ export class sldbService {
                 if (filter.Value=="@ANY" ||value[filter.Field] != filter.Value) return true;
                 break;
             case operator['==']:
-                if (filter.Value=="@ANY" ||value[filter.Field] == filter.Value) return true;
+                if (filter.Value=="@ANY" ||value[filter.Field]===filter.Value) return true;
                 break;
             case operator["between"]:
                 if ((filter.Value.from =="@ANY" || value[filter.Field] >= filter.Value.from) && (filter.Value.to =="@ANY" ||  value[filter.Field] <= filter.Value.to)) return true;
@@ -266,7 +266,7 @@ export class sldbService {
 
     Align(_StoreName: string) {
         this.GetDBStatus().subscribe((v) => {
-            if (v.status[0] == 'dirty')
+            if (v.status[0]==='dirty')
                 Object.keys(this.remotes).forEach(async (StoreName) => {
                     const remote = this.remotes[StoreName];
                     //await this.alignStore(StoreName, remote);

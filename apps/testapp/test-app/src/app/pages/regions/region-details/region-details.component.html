@@ -11,14 +11,14 @@
     (Delete)="Delete()"
   >
     <ng-template #bigheadcontent>
-      <ng-container *ngIf="EditStatus == 'none'">
+      <ng-container *ngIf="EditStatus === 'none'">
         <div class="accent region-details-title">Aree</div>
           <div *ngFor="let area of activeAree" class="region-details-value">
             {{ area.Name }}
           </div>
       </ng-container>
 
-      <ng-container *ngIf="EditStatus == 'add' || EditStatus == 'edit'">
+      <ng-container *ngIf="EditStatus === 'add' || EditStatus==='edit'">
           <form [formGroup]="form">
             <div class="region-edit-form">
               <label class="region-edit-label" for="region-name"
@@ -41,11 +41,8 @@
                   class="region-area-edit"
                   [formGroupName]="i"
                 >
-                  <sl-rounded-button
-                    class="button-danger"
-                    [Icon]="'fa-solid fa-times'"
-                    (click)="DeleteArea(areaitemForm.value, i)"
-                  ></sl-rounded-button>
+                <button pButton pRipple type="button" icon="fa-solid fa-times" title="delete area" class=" p-button-text" (click)="DeleteArea(areaitemForm.value, i)"></button>
+
                   <!-- <input  class="region-edit-textbox" id="area-{i}" [(ngModel)]="areaitem.Name" [ngModelOptions]="{standalone: true}"> -->
                   <!--<div class="region-edit-label">{{area.Name}}</div>-->
                   <input
@@ -58,11 +55,7 @@
                 </div>
                 <ng-template #deletedarea>
                   <div class="region-area-edit" [formGroupName]="i">
-                    <sl-rounded-button
-                      class="button-primary"
-                      [Icon]="'fa-solid fa-undo'"
-                      (click)="RestoreArea(areaitemForm.value, i)"
-                    ></sl-rounded-button>
+                    <button pButton pRipple type="button" icon="'fa-solid fa-undo" title="delete area" class=" p-button-text" (click)="RestoreArea(areaitemForm.value, i)"></button>
                     <div class="deleted-text">
                       {{ areaitemForm.value.Name }}
                     </div>
@@ -70,12 +63,7 @@
                 </ng-template>
               </div>
               <div class="region-button">
-                <sl-rounded-button
-                  class="button-accent"
-                  [Icon]="'fa-solid fa-plus'"
-                  (click)="createArea()"
-                  [Text]="'Nuova area'"
-                ></sl-rounded-button>
+                <button pButton pRipple type="button" icon="fa-solid fa-plus" label="Nuova area" title="Nuova area" class=" p-button-text" (click)="createArea()"></button>
               </div>
             </div>
           </form>

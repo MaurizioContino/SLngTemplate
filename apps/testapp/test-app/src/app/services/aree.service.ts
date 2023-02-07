@@ -24,7 +24,7 @@ export class AreeService {
 
   getAreaName(Id: number) {
     if (this._Aree) {
-        return this._Aree.find(v=>v.Id == Id)?.Name;
+        return this._Aree.find(v=>v.Id===Id)?.Name;
       } else
       {
         return "Not loaded"
@@ -33,7 +33,7 @@ export class AreeService {
 
 
   Load(reload: boolean = false) {
-    if (reload || this.Aree == null) {
+    if (reload || this.Aree===null) {
       this.db.GetAll<Area>(this.store).subscribe(v=>{
         this.Aree = v;
         this.Aree$.next(v);

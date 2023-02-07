@@ -16,7 +16,7 @@ export class Dashboard  {
 
 
     getWidgetByPosition(r: number, c: number): WidgetConfig | null {
-        const itm = this.Items.find((w) => w.Top == r && w.Left == c);
+        const itm = this.Items.find((w) => w.Top===r && w.Left===c);
         if (itm) return itm;
         else return null;
     }
@@ -26,7 +26,7 @@ export class Dashboard  {
         if (deserialized.Items) {
             //this.Items = deserialized.Items.map(v=>  DashboardItem.fromItem(v));
         }
-        if (this.Items == undefined || this.Items == null) this.initializeNewDashboard();
+        if (this.Items===undefined || this.Items===null) this.initializeNewDashboard();
 
         this.Items = deserialized.Items ? deserialized.Items : [];
         this.Name = deserialized.Name;
@@ -67,7 +67,7 @@ export class Dashboard  {
 
     RemoveControlByID(id: number) {
         // if (this.Items)  {
-        //   const v = this.Items.find(v=>v.IdItem == id)
+        //   const v = this.Items.find(v=>v.IdItem===id)
         //   if (v) {
         //     const idx = this.Items.indexOf(v);
         //     this.Items.splice(idx,1);
@@ -88,7 +88,7 @@ export class Dashboard  {
         // }
     }
     public findById(id: number) {
-        // const res = this.Items.filter(v=>v.IdItem == id);
+        // const res = this.Items.filter(v=>v.IdItem===id);
         // if (res.length>0) {
         //   return res[0]
         // } else {

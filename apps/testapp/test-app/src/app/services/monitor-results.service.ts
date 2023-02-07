@@ -25,13 +25,13 @@ export class MonitorResultsService {
   Load(reload: boolean = false) {
 
 
-    if (reload || this.results == null) {
+    if (reload || this.results===null) {
       const retItems: MonitorResults[] = [];
       this.db.GetAll<MonitorResultItem>(this.store).subscribe(items=>{
 
         let curr: MonitorResults | undefined = undefined;
         items.forEach(itm => {
-          curr = retItems.find(v=>v.IdManager == itm.IdManager && v.Week == itm.Week);
+          curr = retItems.find(v=>v.IdManager===itm.IdManager && v.Week===itm.Week);
           if (curr){
             curr.Values.push(itm)
           } else {

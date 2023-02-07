@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AccordionComponent, SllayoutModule } from '@soloud/sllayout';
-import { SlButtonModule } from '@soloud/slbutton';
+
 import { DashboardPlacementComponent } from './controls/dashboard-placement/dashboard-placement.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { DashboardElementComponent } from './controls/dashboard-element/dashboard-element.component';
@@ -22,6 +22,7 @@ import { SlCommonControlsModule } from '@soloud/commoncontrols';
 import { DashboardGridComponent } from './elements/dashboard-grid/dashboard-grid.component';
 import { TableModule } from 'primeng/table';
 import { NoConfigComponent } from './elements/no-config/no-config.component';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
     declarations: [
         DashboardPlacementComponent,
@@ -36,7 +37,11 @@ import { NoConfigComponent } from './elements/no-config/no-config.component';
         DashboardGridComponent,
         NoConfigComponent,
     ],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, SlButtonModule, DragDropModule, SllayoutModule, NgScrollbarModule, NgSelectModule, InputTextModule, InputNumberModule, CalendarModule, SlCommonControlsModule, TableModule],
+    imports: [
+      CommonModule, FormsModule, ReactiveFormsModule, DragDropModule,
+      SllayoutModule, NgScrollbarModule, NgSelectModule, InputTextModule,
+      InputNumberModule, CalendarModule, SlCommonControlsModule, TableModule,
+      ButtonModule],
     exports: [
       DashboardPlacementComponent, DashboardElementComponent,
       DashboardElementPanelComponent, DasboardItemDirective,

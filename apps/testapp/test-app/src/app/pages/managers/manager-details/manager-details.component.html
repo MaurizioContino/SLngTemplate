@@ -12,7 +12,7 @@
     (Delete)="Delete()"
   >
     <ng-template #bigheadcontent>
-      <ng-container *ngIf="EditStatus == 'none'">
+      <ng-container *ngIf="EditStatus==='none'">
         <ng-scrollbar style="height: calc(100vh - 500px)">
           <div class="accent manager-details-title">Ruolo</div>
           <div class="manager-details-value">
@@ -29,7 +29,7 @@
         </ng-scrollbar>
       </ng-container>
 
-      <ng-container *ngIf="EditStatus == 'add' || EditStatus == 'edit'">
+      <ng-container *ngIf="EditStatus==='add' || EditStatus==='edit'">
         <form [formGroup]="form">
           <div class="manager-edit-form">
             <label class="manager-edit-label" for="manager-name">Name</label>

@@ -37,7 +37,7 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
           let dt2 = new Date(dt1);
           dt2.setDate(dt2. getDate() + 6);
 
-          const onWeek = list.filter(itm=>itm.Week == i);
+          const onWeek = list.filter(itm=>itm.Week===i);
           // Dovrebbe esserci un solo elemento ma per ora evitiamo di nascondere eventuali errori
           if (onWeek.length>0)
           {
@@ -78,7 +78,7 @@ export class WeekResultsComponent implements OnInit, OnDestroy {
   }
   FillItemTypes(item: MonitorResults ) {
     this.ItemTypes.forEach(typ=>{
-      if (item.Values.find(itm=>itm.IdMonitorItem == typ.Id)==undefined){
+      if (item.Values.find(itm=>itm.IdMonitorItem===typ.Id)==undefined){
         const v = new MonitorResultItem(0, typ.Id, typ.Name, item.IdManager,2023, item.Week, 0);
         v.isnew = true;
           item.Values.push(v);

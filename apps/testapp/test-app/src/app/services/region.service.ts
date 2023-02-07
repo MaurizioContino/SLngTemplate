@@ -16,7 +16,7 @@ export class RegionService {
   constructor(private db: sldbService, private areeServ: AreeService) { }
 
   Load(reload: boolean = false) {
-    if (reload || this.Regions == null) {
+    if (reload || this.Regions===null) {
 
       this.db.GetAll<Region>(this.store)
         .subscribe((v: Region[]) => {

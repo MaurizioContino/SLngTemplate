@@ -69,7 +69,7 @@
 //   }
 //   public set currwidth(value) {
 //     this._currwidth = value
-//     var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+//     var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem===this._currCell?.IdItem);
 //     this.DashBoardConfig!.Items[idx].width = value;
 //     this._currCell!.width = value;
 //     this.cdr.detectChanges();
@@ -80,7 +80,7 @@
 //   }
 //   public set currheight(value) {
 //     this._currheight = value
-//     var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+//     var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem===this._currCell?.IdItem);
 //     this.DashBoardConfig!.Items[idx].height = value;
 //     this._currCell!.height = value;
 //     this.cdr.detectChanges();
@@ -92,7 +92,7 @@
 //   }
 //   public set currtitle(value) {
 //     this._title = value
-//     var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+//     var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem===this._currCell?.IdItem);
 //     this.DashBoardConfig!.Items[idx].title = value;
 //     this._currCell!.title = value;
 //     this.cdr.detectChanges();
@@ -144,9 +144,9 @@
 
 //   clearAll() { }
 //   replacer(key: string, value: any) {
-//     if (key == "http") return undefined;
-//     else if (key == "cfg") return undefined;
-//     else if (key == "ShowCustomSettings") return undefined;
+//     if (key==="http") return undefined;
+//     else if (key==="cfg") return undefined;
+//     else if (key==="ShowCustomSettings") return undefined;
 //     else return value;
 //   }
 //   saveConf() {
@@ -277,7 +277,7 @@
 //   }
 
 //   editclose(currCell: any) {
-//     var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem == this._currCell?.IdItem);
+//     var idx =  this.DashBoardConfig!.Items.findIndex(v=>v.IdItem===this._currCell?.IdItem);
 //     this.DashBoardConfig!.Items[idx].Update(currCell);
 //     this._currCell = undefined;
 //     this.cdr.detectChanges();

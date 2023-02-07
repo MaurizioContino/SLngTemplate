@@ -40,7 +40,7 @@ export class DashboardConfigService {
   colorFormula(value: number, comparer: string, rightvalue: string, rightvalues: any): boolean {
     switch(comparer) {
       case "=": {
-        if (value == rightvalues[rightvalue]) return true;
+        if (value===rightvalues[rightvalue]) return true;
         break;
       }
       case ">": {

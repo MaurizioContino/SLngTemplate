@@ -15,7 +15,7 @@
           [id]="'cell_' + r + '_' + c" (cdkDropListDropped)="MoveControl(idr, idc, $event)"
             >
 
-          <button title="add control" *ngIf="dashboardItems(idr, idc).length == 0 && EditMode" class="button button-addcontrol"
+          <button title="add control" *ngIf="dashboardItems(idr, idc).length===0 && EditMode" class="button button-addcontrol"
             (click)="addControl(idr, idc)">
             <i class="fa-solid fa-plus fa-2x"></i>
           </button>
@@ -53,7 +53,7 @@
                     <ng-container [ngTemplateOutlet]="contents[cell.idComponent]"
                       [ngTemplateOutletContext]="{$implicit:cell}"></ng-container>
                   </ng-container>
-                  <ng-container *ngIf="cell.idComponent == -1"> </ng-container>
+                  <ng-container *ngIf="cell.idComponent===-1"> </ng-container>
                 </div>
               </div>
             </div>

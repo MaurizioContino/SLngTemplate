@@ -19,12 +19,12 @@ export class ManagersService {
   }
 
   Load(reload: boolean = false) {
-    if (reload || this.Managers == null) {
+    if (reload || this.Managers===null) {
       this.areeServ.Aree$.subscribe(aree=>{
         if(aree.length>0) {
           this.db.GetAll<Manager>(this.store).subscribe((v: Manager[])=>{
             v.forEach(m=>{
-              const area = aree.find(a=>a.Id == m.IdArea);
+              const area = aree.find(a=>a.Id===m.IdArea);
               m.Region = area ? area?.Region : "";
             })
             this.Managers = v;

@@ -25,7 +25,7 @@ export class MonitorItemtypesService {
 
   Load(reload: boolean = false) {
 
-    if (reload || this.results == null) {
+    if (reload || this.results===null) {
 
       this.db.GetAll<MonitorItem>(this.store).subscribe(items=>{
         this.results = items;

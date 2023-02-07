@@ -37,7 +37,7 @@ export class ManagerDetailsComponent implements OnInit {
     if (this._currentRegion != value) {
       this._currentRegion = value;
       this.form.controls.Region.patchValue(value);
-      this.filteredaree = this.aree.filter(v=>v.Region == this.form.controls.Region.value);
+      this.filteredaree = this.aree.filter(v=>v.Region===this.form.controls.Region.value);
       this.form.controls.IdArea.patchValue(-1);
 
 
@@ -83,7 +83,7 @@ export class ManagerDetailsComponent implements OnInit {
 
     const s = this.form.value as any as Manager;
     this.managerservice.save([s]).subscribe(v=>{
-      this.current = v.find(v=>v.Id == this._current?.Id) as Manager;
+      this.current = v.find(v=>v.Id===this._current?.Id) as Manager;
       this.EditStatus = "none"
       this.cdr.detectChanges();
     })

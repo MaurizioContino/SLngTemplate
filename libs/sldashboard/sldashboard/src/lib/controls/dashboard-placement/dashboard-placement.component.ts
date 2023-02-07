@@ -95,7 +95,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       if (x > -1) this.selectc = x;
       if (y > -1) this.selectr = y;
 
-      const model = this.dashserv.Widgets.find((v) => v.IdComponent == IdComponent);
+      const model = this.dashserv.Widgets.find((v) => v.IdComponent===IdComponent);
 
       if (this.dashboard && model && model.component && this.selectr!==null && this.selectc!==null) {
           this.showSelect = false;
@@ -141,7 +141,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       }
     }
     copyElement(e: WidgetConfig) {
-      const model = this.dashserv.Widgets.find((v) => v.IdComponent == e.IdComponent);
+      const model = this.dashserv.Widgets.find((v) => v.IdComponent===e.IdComponent);
 
       if (model && this.dashboard) {
           this.showSelect = false;

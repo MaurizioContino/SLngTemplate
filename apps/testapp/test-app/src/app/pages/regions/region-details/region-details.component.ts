@@ -76,7 +76,7 @@ export class RegionDetailsComponent {
     const s = this.form.value as any as Region;
     s.Aree = this.form.controls.Aree.controls.filter(v=>v.dirty).map(v=>v.value as Area) ;
     this.regionservice.save([s]).subscribe(v=>{
-      this.current = v.find(v=>v.Id == this._current?.Id) as Region;
+      this.current = v.find(v=>v.Id===this._current?.Id) as Region;
       this.EditStatus = "none"
       this.cdr.detectChanges();
     })

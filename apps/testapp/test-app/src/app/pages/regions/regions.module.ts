@@ -8,6 +8,7 @@ import { ControlsModule } from '../../controls/controls.module';
 
 
 
+
 @NgModule({
   declarations: [
     RegionsComponent,
@@ -18,7 +19,8 @@ import { ControlsModule } from '../../controls/controls.module';
   imports: [
     SharedModule,
     RegionsRoutingModule,
-    ControlsModule
+    ControlsModule,
+
   ]
 })
 export class RegionsModule {

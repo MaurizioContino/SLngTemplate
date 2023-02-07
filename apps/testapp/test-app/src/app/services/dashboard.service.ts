@@ -17,7 +17,7 @@ export class DashboardService {
   }
 
   Load(reload: boolean = false) {
-    if (reload || this.DashboardGrids == null) {
+    if (reload || this.DashboardGrids===null) {
       this.db.GetAll<Dashboard>(this.store).subscribe(v=>{
         this.DashboardGrids = []
         v.forEach(g=>{
@@ -107,7 +107,7 @@ export class DashboardService {
   colorFormula(value: number, comparer: string, rightvalue: string, rightvalues: any): boolean {
     switch(comparer) {
       case "=": {
-        if (value == rightvalues[rightvalue]) return true;
+        if (value===rightvalues[rightvalue]) return true;
         break;
       }
       case ">": {

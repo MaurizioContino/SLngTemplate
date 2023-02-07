@@ -59,7 +59,7 @@ export class DashboardElementPanelComponent implements AfterViewInit {
         const viewContainerRef = this.WidgetHost.viewContainerRef;
         viewContainerRef.clear();
         if (this.Config) {
-          const model = this.dashserv.Widgets.find((v) => v.IdComponent == this.Config?.IdComponent);
+          const model = this.dashserv.Widgets.find((v) => v.IdComponent===this.Config?.IdComponent);
           if (model) {
             const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.component);
             if (this.Config){
