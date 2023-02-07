@@ -2,11 +2,11 @@
   <ng-template #hmdmaster>
     <div class="top-buttons" *ngIf="Editable">
 
-      <button pButton pRipple type="button" icon="fa fa-pencil" class="p-button-rounded" title="edit" *ngIf="Editable && !editMode"
+      <button pButton pRipple type="button" icon="fa fa-pencil" class="p-button-rounded p-button-secondary" title="edit" *ngIf="Editable && !editMode"
       (click)="editMode=true"></button>
-      <button pButton pRipple type="button" icon="fa fa-save" class="p-button-rounded" title="save" *ngIf="editMode"
+      <button pButton pRipple type="button" icon="fa fa-save" class="p-button-rounded p-button-danger" title="save" *ngIf="editMode"
       (click)="editMode=true"></button>
-      <button pButton pRipple type="button" icon="fa fa-times" class="p-button-rounded"  title="cancel" *ngIf="editMode"
+      <button pButton pRipple type="button" icon="fa fa-times" class="p-button-rounded p-button-secondary"  title="cancel" *ngIf="editMode"
       (click)="editMode=false"></button>
 
 
