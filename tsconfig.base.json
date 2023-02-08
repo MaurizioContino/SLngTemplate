@@ -15,12 +15,12 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@soloud/sldb": ["libs/sl-db/src/index.ts"],
             "@soloud/commoncontrols": ["libs/sl-common-controls/src/index.ts"],
             "@soloud/slavatar": ["libs/slavatar/slavatar/src/index.ts"],
             "@soloud/slbutton": ["libs/slbutton/slbutton/src/index.ts"],
             "@soloud/sldashboard": ["libs/sldashboard/sldashboard/src/index.ts"],
             "@soloud/sldatalist": ["libs/sldatalist/sldatalist/src/index.ts"],
+            "@soloud/sldb": ["libs/sl-db/src/index.ts"],
             "@soloud/sllayout": ["libs/sllayout/sllayout/src/index.ts"],
             "@soloud/slmenu": ["libs/slmenu/slmenu/src/index.ts"]
         }
