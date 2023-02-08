@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.9](https://github.com/MaurizioContino/SLngTemplate/compare/sldashboard-sldashboard-0.0.8...sldashboard-sldashboard-0.0.9) (2023-02-08)
+
+
+
 ## [0.0.8](https://github.com/MaurizioContino/SLngTemplate/compare/sldashboard-sldashboard-0.0.7...sldashboard-sldashboard-0.0.8) (2023-02-08)
 
 
