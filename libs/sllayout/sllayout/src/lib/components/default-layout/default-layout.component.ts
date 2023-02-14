@@ -1,5 +1,5 @@
-import { ContentChild, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import { ContentChild, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { SlLayoutsService } from '../../services/sl-layouts.service';
 
@@ -79,7 +79,5 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     this.destroy$.next(null);
     this.destroy$.complete();
   }
-  hidefloatingMenu() {
 
-  }
 }

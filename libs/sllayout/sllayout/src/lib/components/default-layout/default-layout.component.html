@@ -27,7 +27,7 @@
         <ng-container *ngIf="menu" >
           <ng-container *ngTemplateOutlet="menu"></ng-container>
         </ng-container>
-        <div class="filler" (click)="hidefloatingMenu()"></div>
+        <div class="filler"></div>
         <ng-container *ngIf="main; else defaultmain">
           <ng-container *ngTemplateOutlet="main"></ng-container>
         </ng-container>

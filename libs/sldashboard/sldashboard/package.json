@@ -1,6 +1,6 @@
 {
   "name": "@soloud/sldashboard",
-  "version": "0.0.17",
+  "version": "0.0.23",
   "scripts": {
     "prebuild": "npm --no-git-tag-version version patch"
   },

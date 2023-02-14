@@ -7,7 +7,8 @@
     [src]="Background"
   />
   <div class="header-avatar-container">
-    <sl-avatar *ngIf="Avatar" class="avatar-big" [src]="Avatar"></sl-avatar>
+    
+    <p-avatar [image]="Avatar" size="xlarge" shape="circle"></p-avatar>
   </div>
   <div class="header-details-name">
     {{ Title }}
