@@ -1,3 +1,5 @@
+import { Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, Input, OnDestroy, OnInit, QueryList, TemplateRef, ViewChild } from '@angular/core';
 import { SlLayoutsService } from '@soloud/sllayout';
 
@@ -18,8 +20,8 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
 
   editMode = false;
   @Input() dashboard!: Dashboard;
-
   @Input() Editable = true;
+  @Output() ItemClicked =new EventEmitter<any>();
 
 
   @ContentChildren('dashboarditem')
@@ -174,6 +176,9 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       this.cdr.detectChanges();
     }
 
+    emitClick(originalEvent: any, source: WidgetConfig | null){
+      this.ItemClicked.emit({source: source, event: originalEvent})
+    }
 
 
 }

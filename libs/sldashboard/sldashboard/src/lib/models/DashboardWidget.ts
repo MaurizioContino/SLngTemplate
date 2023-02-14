@@ -1,3 +1,4 @@
+import { EventEmitter } from '@angular/core';
 import { Type } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { WidgetConfig } from './WidgetConfig';
@@ -13,6 +14,7 @@ export class DashboardWidget {
   DataSource?: BehaviorSubject<any>
   component: Type<any>;
   Configcomponent: Type<any>;
+  ItemClick?: EventEmitter<any>;
 
   constructor(component: Type<any>, configcomponent: Type<any>, IdComponent: number,  Icon: string,  Name: string,  Description: string,  Defaultconfig: WidgetConfig) { //, idComponent:number, Name: string, Description: string,  data: unknown) {
     this.component = component;

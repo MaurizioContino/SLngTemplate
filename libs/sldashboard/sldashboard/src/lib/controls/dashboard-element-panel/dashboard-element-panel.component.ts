@@ -25,6 +25,7 @@ export class DashboardElementPanelComponent implements AfterViewInit {
     @Output() Delete = new EventEmitter<WidgetConfig>()
     @Output() Setup = new EventEmitter<WidgetConfig>()
     @Output() Copy = new EventEmitter<WidgetConfig>()
+    @Output() ItemClick = new EventEmitter<any>()
 
     DragDeltaWidth = 0;
     DragDeltaHeight = 0;
@@ -65,6 +66,11 @@ export class DashboardElementPanelComponent implements AfterViewInit {
             if (this.Config){
               componentRef.instance.Config = this.Config;
               componentRef.instance.DataSource = this.Config.DataSource;
+              if (componentRef.instance.ItemClick) {
+                componentRef.instance.ItemClick.subscribe(v=>{
+                  this.ItemClick.emit(v);
+                })
+              }
               if (this.Config.CustomData) {
                 Object.keys(this.Config.CustomData).forEach(prop => {
                   (componentRef.instance as any)[prop] = this.Config.CustomData[prop];

@@ -6,7 +6,7 @@ import { HMasterDetailsComponent } from './components/hmaster-details/hmaster-de
 import { RouterModule } from '@angular/router';
 import { SlBigHeaderComponent } from './components/sl-big-header/sl-big-header.component';
 
-import { SlavatarModule } from '@soloud/slavatar';
+
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { SlSmallHeaderComponent } from './components/sl-small-header/sl-small-header.component';
 import { SlCardComponent } from './components/sl-card/sl-card.component';
@@ -16,12 +16,13 @@ import { AccordionItemComponent } from './components/accordion/accordion-item/ac
 import { AccordionBodyDirective } from './components/accordion/accordionbody.directive';
 import { AccordionTitleDirective } from './components/accordion/accordiontitle.directive';
 import { ButtonModule } from 'primeng/button';
+import {AvatarModule} from 'primeng/avatar';
 
 @NgModule({
     declarations: [DefaultLayoutComponent, EmptyLayoutComponent, HMasterDetailsComponent,
       SlBigHeaderComponent, SlSmallHeaderComponent, SlCardComponent, AccordionComponent, AccordionItemComponent,
        AccordionItemDirective, AccordionBodyDirective, AccordionTitleDirective],
-    imports: [CommonModule, RouterModule, SlavatarModule, NgScrollbarModule, ButtonModule],
+    imports: [CommonModule, RouterModule,  NgScrollbarModule, ButtonModule,AvatarModule],
     exports: [DefaultLayoutComponent, EmptyLayoutComponent, HMasterDetailsComponent, SlBigHeaderComponent,
       SlSmallHeaderComponent, SlCardComponent, AccordionComponent, AccordionItemComponent,
       AccordionItemDirective, AccordionBodyDirective, AccordionTitleDirective ],
