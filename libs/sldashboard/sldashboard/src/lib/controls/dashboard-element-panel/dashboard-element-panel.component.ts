@@ -64,12 +64,13 @@ export class DashboardElementPanelComponent implements AfterViewInit {
             const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.component);
             if (this.Config){
               componentRef.instance.Config = this.Config;
-              componentRef.instance.DataSource = this.Config.DataSource;
               if (this.Config.CustomData) {
                 Object.keys(this.Config.CustomData).forEach(prop => {
                   (componentRef.instance as any)[prop] = this.Config.CustomData[prop];
                 });
               }
+              componentRef.instance.DataSource = this.Config.DataSource;
+
             }
 
             this.cdr.detectChanges()
