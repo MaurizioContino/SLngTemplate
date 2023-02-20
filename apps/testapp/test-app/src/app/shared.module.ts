@@ -5,7 +5,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { SllayoutModule } from '@soloud/sllayout';
 import { SldatalistModule } from '@soloud/sldatalist';
-import { SlavatarModule } from '@soloud/slavatar';
+
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SldashboardModule } from '@soloud/sldashboard';
 import { ButtonModule } from 'primeng/button';
@@ -20,7 +20,7 @@ import { ButtonModule } from 'primeng/button';
     NgScrollbarModule,
     SllayoutModule,
     SldatalistModule,
-    SlavatarModule,
+
     NgSelectModule,
     ButtonModule
   ],
@@ -32,7 +32,7 @@ import { ButtonModule } from 'primeng/button';
     NgScrollbarModule,
     SllayoutModule,
     SldatalistModule,
-    SlavatarModule,
+
     NgSelectModule,
     SldashboardModule,
     ButtonModule
