@@ -76,6 +76,8 @@ export class DashboardElementPanelComponent implements AfterViewInit {
                   (componentRef.instance as any)[prop] = this.Config.CustomData[prop];
                 });
               }
+              componentRef.instance.DataSource = this.Config.DataSource;
+
             }
 
             this.cdr.detectChanges()

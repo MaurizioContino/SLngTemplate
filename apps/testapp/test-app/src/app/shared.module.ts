@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { AvatarModule } from 'primeng/avatar';
 
 import { SllayoutModule } from '@soloud/sllayout';
 import { SldatalistModule } from '@soloud/sldatalist';
@@ -20,7 +21,6 @@ import { ButtonModule } from 'primeng/button';
     NgScrollbarModule,
     SllayoutModule,
     SldatalistModule,
-
     NgSelectModule,
     ButtonModule
   ],
@@ -32,7 +32,7 @@ import { ButtonModule } from 'primeng/button';
     NgScrollbarModule,
     SllayoutModule,
     SldatalistModule,
-
+    AvatarModule,
     NgSelectModule,
     SldashboardModule,
     ButtonModule

@@ -36,6 +36,19 @@
             "options": {
                 "lintFilePatterns": ["libs/sl-common-controls/**/*.ts", "libs/sl-common-controls/**/*.html"]
             }
+        },
+        "deploy": {
+            "executor": "ngx-deploy-npm:deploy",
+            "options": {
+                "access": "public",
+                "buildTarget": "production"
+            }
+        },
+        "version": {
+            "executor": "@jscutlery/semver:version",
+            "options": {
+                "preset": "angular"
+            }
         }
     },
     "tags": []

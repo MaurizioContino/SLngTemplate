@@ -33,7 +33,7 @@
                         {
                             "type": "initial",
                             "maximumWarning": "500kb",
-                            "maximumError": "1mb"
+                            "maximumError": "1.2mb"
                         },
                         {
                             "type": "anyComponentStyle",
@@ -85,6 +85,12 @@
             "options": {
                 "jestConfig": "apps/testapp/test-app/jest.config.ts",
                 "passWithNoTests": true
+            }
+        },
+        "version": {
+            "executor": "@jscutlery/semver:version",
+            "options": {
+                "preset": "angular"
             }
         }
     },

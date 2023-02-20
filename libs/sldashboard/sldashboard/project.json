@@ -36,6 +36,19 @@
             "options": {
                 "lintFilePatterns": ["libs/sldashboard/sldashboard/**/*.ts", "libs/sldashboard/sldashboard/**/*.html"]
             }
+        },
+        "deploy": {
+            "executor": "ngx-deploy-npm:deploy",
+            "options": {
+                "access": "public",
+                "buildTarget": "production"
+            }
+        },
+        "version": {
+            "executor": "@jscutlery/semver:version",
+            "options": {
+                "preset": "angular"
+            }
         }
     },
     "tags": []

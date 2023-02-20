@@ -5,8 +5,6 @@ import { EmptyLayoutComponent } from './components/empty-layout/empty-layout.com
 import { HMasterDetailsComponent } from './components/hmaster-details/hmaster-details.component';
 import { RouterModule } from '@angular/router';
 import { SlBigHeaderComponent } from './components/sl-big-header/sl-big-header.component';
-
-
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { SlSmallHeaderComponent } from './components/sl-small-header/sl-small-header.component';
 import { SlCardComponent } from './components/sl-card/sl-card.component';

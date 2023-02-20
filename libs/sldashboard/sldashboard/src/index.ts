@@ -3,6 +3,7 @@ import { Dashboard } from './lib/models/Dashboard';
 export * from './lib/models/Dashboard';
 export * from './lib/models/DashboardWidget';
 export * from './lib/models/WidgetConfig';
+export * from './lib/models/DashboardSize';
 
 export * from './lib/services/dashboard.service';
 

@@ -2,6 +2,7 @@
 <sl-data-list [Items]="items" (SelectedChange)="ItemSelected($event)">
   <ng-template #rowhead let-row>
 
+    <p-avatar [image]="'assets/media/' + row.Avatar" shape="circle"></p-avatar>
   </ng-template>
   <ng-template #rowmain let-row>
     <div class="regions-master-col regions-master-info">

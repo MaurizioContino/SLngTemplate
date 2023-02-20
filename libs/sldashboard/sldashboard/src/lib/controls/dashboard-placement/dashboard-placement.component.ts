@@ -1,10 +1,10 @@
-import { Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, Input, OnDestroy, OnInit, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, QueryList, TemplateRef } from '@angular/core';
 import { SlLayoutsService } from '@soloud/sllayout';
 
 import { BehaviorSubject, Subject, Subscription, takeUntil } from 'rxjs';
+
 import { Dashboard } from '../../models/Dashboard';
+import { DashboardSize } from '../../models/DashboardSize';
 import { DashboardWidget } from '../../models/DashboardWidget';
 import { WidgetConfig } from '../../models/WidgetConfig';
 import { DashboardConfigService } from '../../services/dashboard.service';
@@ -22,6 +22,8 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
   @Input() dashboard!: Dashboard;
   @Input() Editable = true;
   @Output() ItemClicked =new EventEmitter<any>();
+
+  @Output() DashboardSizeChanged = new EventEmitter<DashboardSize>()
 
 
   @ContentChildren('dashboarditem')
@@ -77,6 +79,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         for (let i = 0; i < maxHeight; i++) {
             this.cols.push(i);
         }
+        this.DashboardSizeChanged.emit({ElementHeight: 50, ElementWidth: 50, MaxHElement: maxwidth, MaxVElement: maxHeight} as DashboardSize)
     }
     showadd(idr: number, idc: number) {
         this.DisplayDetails = true;
@@ -92,7 +95,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         this.selectr = null;
     }
 
-    InitnewWidget(IdComponent: number, x:number=-1, y:number=-1, datasource: BehaviorSubject<any> | null, customdata: any | null = null) {
+    InitnewWidget(IdComponent: number, x:number=-1, y:number=-1, width: number | null, height: number | null,  datasource: BehaviorSubject<any> | null, customdata: any | null = null) {
 
       if (x > -1) this.selectc = x;
       if (y > -1) this.selectr = y;
@@ -105,6 +108,8 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
           const conf = model.cloneConfig();
           conf.Top = this.selectr;
           conf.Left = this.selectc;
+          if (width) conf.width = width;
+          if (height) conf.height = height;
           if (customdata!=null) conf.CustomData = customdata;
           if (datasource!=null) conf.DataSource = datasource;
 
