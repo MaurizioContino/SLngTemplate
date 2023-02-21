@@ -68,7 +68,7 @@ export class DashboardElementPanelComponent implements AfterViewInit {
               componentRef.instance.DataSource = this.Config.DataSource;
               if (componentRef.instance.ItemClick) {
                 componentRef.instance.ItemClick.subscribe(v=>{
-                  this.ItemClick.emit(v);
+                  this.ItemClick.emit({source:this.Config, value: v});
                 })
               }
               if (this.Config.CustomData) {
