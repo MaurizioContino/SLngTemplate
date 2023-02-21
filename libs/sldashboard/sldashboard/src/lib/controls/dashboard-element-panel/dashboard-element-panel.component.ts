@@ -1,6 +1,7 @@
 
 import { CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
-import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input,  Output, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input,  Output, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
 import { DasboardItemDirective } from '../../directives/dasboard-item.directive';
 import { DashboardWidget } from '../../models/DashboardWidget';
@@ -13,7 +14,7 @@ import { DashboardConfigService } from '../../services/dashboard.service';
     styleUrls: ['./dashboard-element-panel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardElementPanelComponent implements AfterViewInit {
+export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy {
 
 
     @Input() Config!: WidgetConfig;
@@ -26,6 +27,9 @@ export class DashboardElementPanelComponent implements AfterViewInit {
     @Output() Setup = new EventEmitter<WidgetConfig>()
     @Output() Copy = new EventEmitter<WidgetConfig>()
     @Output() ItemClick = new EventEmitter<any>()
+
+    destroy$ = new Subject<any>();
+    InternalDataSource = new BehaviorSubject<any>(null);
 
     DragDeltaWidth = 0;
     DragDeltaHeight = 0;
@@ -51,12 +55,19 @@ export class DashboardElementPanelComponent implements AfterViewInit {
     constructor(private cdr: ChangeDetectorRef, private dashserv: DashboardConfigService) {}
 
 
+
     ngAfterViewInit(): void {
       this.loadComponent();
     }
+    ngOnDestroy(): void {
+      this.destroy$.next(null);
+      this.destroy$.complete();
+      this.InternalDataSource.complete();
+
+    }
 
     loadComponent() {
-      if (this.WidgetHost) {
+      if (this.WidgetHost && this.WidgetHost.viewContainerRef.length==0) {
         const viewContainerRef = this.WidgetHost.viewContainerRef;
         viewContainerRef.clear();
         if (this.Config) {
@@ -65,9 +76,9 @@ export class DashboardElementPanelComponent implements AfterViewInit {
             const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.component);
             if (this.Config){
               componentRef.instance.Config = this.Config;
-              componentRef.instance.DataSource = this.Config.DataSource;
+
               if (componentRef.instance.ItemClick) {
-                componentRef.instance.ItemClick.subscribe(v=>{
+                componentRef.instance.ItemClick.pipe(takeUntil(this.destroy$)).subscribe(v=>{
                   this.ItemClick.emit(v);
                 })
               }
@@ -76,7 +87,13 @@ export class DashboardElementPanelComponent implements AfterViewInit {
                   (componentRef.instance as any)[prop] = this.Config.CustomData[prop];
                 });
               }
-              componentRef.instance.DataSource = this.Config.DataSource;
+              if (this.Config.DataSource) {
+                this.Config.DataSource.pipe(takeUntil(this.destroy$)).subscribe(v=>{
+                  this.InternalDataSource.next(v);
+                });
+                componentRef.instance.DataSource = this.InternalDataSource;
+              }
+
 
             }
 
